@@ -27,3 +27,6 @@ venv/
 
 # Original handoff bundle (internal history; un-ignore if you want it public)
 files.zip
+
+# Staged for deletion (sandbox could not unlink; remove this folder manually)
+_ARCHIVE_DELETE_ME/
