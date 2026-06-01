@@ -1,0 +1,22 @@
+[
+  {"id": 1,  "query": "i need to end up with a blog post that ranks for 'best espresso machines under 500' but honestly idk how to even ask the AI for it", "should_trigger": true},
+  {"id": 2,  "query": "can you make this prompt better? 'write me a business plan'", "should_trigger": true},
+  {"id": 3,  "query": "i want to use claude to plan my wedding seating chart but i keep getting garbage back, how do i actually do this right", "should_trigger": true},
+  {"id": 4,  "query": "ok here's my goal: get a spreadsheet that tells me which of my 200 SKUs to discontinue. not even sure that's an AI job tbh", "should_trigger": true},
+  {"id": 5,  "query": "help me get the most out of AI for researching grad programs without wasting a ton of back-and-forth", "should_trigger": true},
+  {"id": 6,  "query": "i just want a really good cold email to investors, where do i even start", "should_trigger": true},
+  {"id": 7,  "query": "turn this rough idea into a proper prompt: summarize legal contracts and flag risky clauses", "should_trigger": true},
+  {"id": 8,  "query": "is AI the right tool to figure out my monthly burn rate from my bank csv, or should i just use excel for that", "should_trigger": true},
+  {"id": 9,  "query": "my goal is a 10-slide deck that convinces my boss to approve remote work. how should i prompt for that", "should_trigger": true},
+  {"id": 10, "query": "i wanna automate replying to support tickets but i don't trust myself to write the prompt properly", "should_trigger": true},
+  {"id": 11, "query": "run this prompt for me exactly as written: 'List the 7 wonders of the ancient world with one sentence each.'", "should_trigger": false},
+  {"id": 12, "query": "what does API stand for", "should_trigger": false},
+  {"id": 13, "query": "translate this paragraph to Spanish: 'The meeting is at noon and lunch is provided.'", "should_trigger": false},
+  {"id": 14, "query": "my python script throws a KeyError on line 42, here's the traceback, fix it", "should_trigger": false},
+  {"id": 15, "query": "can you proofread this prompt for typos? i like it as is, just the spelling", "should_trigger": false},
+  {"id": 16, "query": "write a haiku about autumn leaves", "should_trigger": false},
+  {"id": 17, "query": "what's the weather in denver tomorrow", "should_trigger": false},
+  {"id": 18, "query": "i already wrote this prompt and i'm happy with it — just run it and give me the output", "should_trigger": false},
+  {"id": 19, "query": "explain how prompt engineering works in general, i'm just curious about the theory", "should_trigger": false},
+  {"id": 20, "query": "summarize the PDF i uploaded into 3 paragraphs", "should_trigger": false}
+]
