@@ -6,6 +6,8 @@ Part of the **FHSkillz** (Fuller Horizons Skill Directory) collection.
 
 > Version 0.9.0 · feature-complete, two validation paths pending (see [Status](#status)).
 
+> **Just want to use it on Claude.ai? No coding required.** [Download `jail-prompt.zip`](dist/jail-prompt.zip) and follow the [3-minute install guide](../../wiki/Install-on-Claude-ai).
+
 ## What it's for
 
 Most prompting fails before a single token is written — the task is a bad fit for an LLM, the goal is misframed, or the prompt is vague, unverifiable, or bloated. JAIL-PROMPT runs a short pre-flight that catches those failures early and engineers the rest.
