@@ -1,0 +1,29 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Python (from re-running the skill-creator eval loop)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated eval artifacts — regenerate from evals/ when needed
+*-eval-viewer*.html
+**/jail-prompt-workspace/
+**/review-*/
+**/iteration-*/
+**/benchmark.json
+**/benchmark.md
+**/feedback.json
+
+# Build artifact — attach to GitHub Releases instead of committing
+# (remove this line if you'd rather ship the .skill in the repo)
+*.skill
+
+# Original handoff bundle (internal history; un-ignore if you want it public)
+files.zip
