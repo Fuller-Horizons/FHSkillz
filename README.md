@@ -66,4 +66,11 @@ The **description is the product** — a weak description means a skill that nev
 
 ## Conventions
 
-- One skill = one folder 
+- One skill = one folder under `skills/` containing a `SKILL.md`. Folder name == frontmatter `name`, lowercase-hyphenated (`[a-z0-9-]` only).
+- `SKILL.md` frontmatter requires `name` and `description`. Keep `SKILL.md` lean; push long material into `references/` and link it.
+- Bump `plugins[0].version` (semver) in `marketplace.json` on any release that changes skills.
+- Keep the repo **public** so `/plugin marketplace add` and the raw `install.sh` URL resolve.
+
+## License
+
+[MIT](LICENSE) © Fuller Horizons.

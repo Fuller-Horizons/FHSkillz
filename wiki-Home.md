@@ -88,4 +88,17 @@ FHSkillz/
 ./scripts/new-skill.sh my-skill        # scaffold + auto-register
 # edit skills/my-skill/SKILL.md  (write a strong description — it's the trigger)
 ./scripts/sync-marketplace.sh          # ensure manifest matches folders
-git add -A && git commit -m "add my-skil
+git add -A && git commit -m "add my-skill skill" && git push
+# then in Claude Code:  /plugin marketplace update fh-skillz
+```
+
+The **description is the product** — a weak description means a skill that never triggers. Write it as a router: concrete task verbs, file/input types, and trigger keywords.
+
+---
+
+## Conventions
+
+- Folder name == frontmatter `name`, lowercase-hyphenated (`[a-z0-9-]` only).
+- Keep `SKILL.md` lean; push long material into `references/` and link it.
+- Bump `plugins[0].version` (semver) on any release that changes skills.
+- Keep the repo **public** so `/plugin marketplace add` and the raw `install.sh` URL resolve.

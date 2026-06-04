@@ -34,4 +34,14 @@ First public release candidate. Feature-complete; two validation paths pending b
 ### Validation
 - 10 behavioral evals, independently graded → **100%** after fixes; key cases run 3× for variance.
 - Triggering proxy: **20/20** unanimous across 3 judges.
-- Two regressions caught by the loop and fi
+- Two regressions caught by the loop and fixed before release:
+  - **Metric-anchoring** — a vague "convert better" goal was reframed as a copy-quality audit instead of a measurable outcome.
+  - **Least-privilege drift** — the restricted read-only key recommendation appeared in only 2/3 runs; the gate instruction was strengthened to force it into the prompt's constraints (now 3/3).
+  - **Decompose vs. "one prompt"** — an oversized task was shipped as a single sectioned prompt; the branch was strengthened to override a literal "one prompt" request (1/4 → 4/4).
+
+### Known gaps
+- Triggering measured via a subagent proxy, not the real `claude -p` harness (blocked by environment auth at build time).
+- Multi-turn interactive path is implemented but never exercised live — all evals were single-turn simulations.
+
+### Origin
+- Built from the handoff `prompt-preflight` draft (rubric ~7.5/10); rebranded to `jail-prompt` and iterated with the skill-creator eval loop to ~9.4/10.
