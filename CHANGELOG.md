@@ -2,6 +2,24 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.5.0] — 2026-06-03
+
+### jail-prompt → 1.2.0
+- **Connector-aware gate** — Phase 2's "Right tool?" now has a second part: if an LLM *is* right, name the capability it needs to succeed (live web search, a specific connector/MCP, a code sandbox, file access, extended thinking) and route the prompt to it, carried into PROCESS/SOURCES. A prompt that needs current data but isn't told to search, or a system it isn't given access to, fails regardless of wording.
+- **Lite-lane worked example** added to `references/examples.md`, doubling as a connector-routing demo (open-PRs → GitHub connector, read-only, one-reply assumptions + verdict + draft).
+
+### Evals
+- **Repaired `evals.json`** — the committed file was truncated mid-case and was invalid JSON; rebuilt to valid JSON, completed the `discernment-bad-premise` case, and added two cases: `lite-lane-one-reply` and `connector-routing-live-data` (9 → 11 behavioral cases).
+- `evals/README.md` updated; flagged the live `claude -p` triggering-harness run + multi-turn test as the still-open validation item (not yet executed — not claimed as done).
+- **Ran a proxy validation** (independent judge/grader subagents) and recorded it in `evals/RESULTS.md`: **20/20 triggering** (two judges, unanimous) and **4/4 behavioral** cases incl. both new behaviors, all assertions PASS. Still a proxy, not the live CLI harness — labeled as such.
+
+## [plugin 0.4.0] — 2026-06-03
+
+### jail-prompt → 1.1.0
+- **Stakes triage** replaces the old single fast-path: every task routes to **Instant** (clear/low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (all three phases with a pause). The three phases still underlie every lane; the lane only sets how much ceremony each gets. Speed comes from doing less on easy tasks, never from weakening judgment on hard ones.
+- **Merged gate for Instant/Lite** — no separate question round; the verdict and draft prompt land in a single reply, cutting a round-trip on the median task.
+- **Kill-fast gate ordering** — Phase 2 now splits into short-circuiting *disqualifiers* (right tool? / groundable? / payoff?) checked first, and *quality checks* (enhancement / security) only once the task clears. A wrong-tool task STOPs before any effort is spent on enhancing or securing it.
+
 ## [plugin 0.3.0] — 2026-06-03
 
 ### jail-prompt → 1.0.0

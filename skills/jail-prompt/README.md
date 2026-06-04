@@ -57,8 +57,8 @@ The behavioral and triggering eval suites live at the repo root in [`evals/`](..
 
 | Dimension | State |
 |---|---|
-| Behavioral evals | 10 cases, independently graded, **100%** after fixes; key cases run 3× for variance |
-| Triggering | 20-case proxy: **20/20** — *real `claude -p` harness run still pending* |
-| Multi-turn interactive | logic in place; **not yet exercised live** (evals were single-turn) |
+| Behavioral evals | 11 cases; v1.2.0 spot-check **4/4** (incl. both new behaviors), independently graded, all assertions pass — see [`evals/RESULTS.md`](../../evals/RESULTS.md) |
+| Triggering | 20-case proxy, refreshed at v1.2.0: **20/20**, two independent judges unanimous — *real `claude -p` harness run still pending* |
+| Multi-turn interactive | logic in place; **not yet exercised live** (runs were single-turn) |
 
-Content is finalized at 1.0.0. Two honest validation gaps remain: a real triggering-harness run and a live multi-turn test. See the [CHANGELOG](../../CHANGELOG.md).
+Content is at 1.2.0. Two honest validation gaps remain: a live `claude -p` triggering-harness run and a true multi-turn test (current evidence is a strong subagent proxy). See [`evals/RESULTS.md`](../../evals/RESULTS.md) and the [CHANGELOG](../../CHANGELOG.md).

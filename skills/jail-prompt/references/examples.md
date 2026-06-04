@@ -1,6 +1,6 @@
 # Worked examples
 
-These teach the four behaviors better than rules do: **STOP**, **fast path**, **GO** (full three-phase), and the **output-format choice + multi-turn resume**. Read whichever matches the situation in front of you.
+These teach the core behaviors better than rules do: **STOP**, **Instant / fast path**, **Lite lane** (one-reply assumptions + verdict + draft, with connector routing), **GO** (full three-phase), and the **output-format choice + multi-turn resume**. Read whichever matches the situation in front of you.
 
 ## STOP — wrong tool
 
@@ -19,6 +19,23 @@ These teach the four behaviors better than rules do: **STOP**, **fast path**, **
 > CONSTRAINTS: no hashtags/emojis. BEFORE RETURNING: verify each is ≤280 chars and stands alone.
 > ```
 > No phases, no ceremony — that would be the skill failing its own efficiency premise.
+
+## Lite lane — assumptions + verdict + draft in one reply
+
+Shows the **Lite** lane (mild ambiguity, modest stakes → no separate question round) *and* **connector routing** (the gate names the tool the prompt needs).
+
+> **User:** "summarize the open PRs in our main repo into a status update for my manager."
+>
+> Mild ambiguity (which repo, how much detail, what format) but low-stakes and reversible → **Lite**: don't open a question round; state assumptions, give the verdict, and hand over the prompt in the *same* reply.
+>
+> *Assuming the default repo, a manager-level summary (no code detail), grouped by status, as a short bulleted update — correct any of these.* **Right tool?** Yes, but it needs live repo data → route through the **GitHub connector (read-only)**, not the model's memory. **GO.**
+> ```
+> OBJECTIVE: Summarize the open PRs in <repo> into a manager-ready status update.
+> PROCESS: 1) Pull open PRs via the GitHub connector (read-only). 2) Group by state: needs-review / changes-requested / approved-awaiting-merge / stale (>14d). 3) One line each: title, author, age, blocker.
+> CONSTRAINTS: manager-level — no code detail; ≤1 page; flag only the PRs needing a decision.
+> BEFORE RETURNING: confirm every PR is currently open (not cached); note any the connector couldn't read.
+> ```
+> One round-trip, not two — the assumptions are visible to correct, the connector routing is explicit, and the prompt is ready to run. (Had the stakes been higher — say, posting the summary somewhere irreversible — this would escalate to **Full** and wait for confirmation first.)
 
 ## GO — full three-phase
 

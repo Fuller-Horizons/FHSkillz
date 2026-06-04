@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.0.0
+  version: 1.2.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -9,15 +9,19 @@ description: Pre-flight workflow that converts a vague desired result into an en
 
 **J**onathan's **A**ctually **I**ntelligent **L**ogic for **P**rompting.
 
-**At a glance:** Phase 1 *Frame & Clarify* → Phase 2 *Viability gate (GO / STOP)* → Phase 3 *Engineer the prompt*. Trivial, already-clear asks take the **fast path** (skip the questions, gate silently, return the prompt). Full ceremony only when ambiguity, cost, or consequence is real. Worked examples live in `references/examples.md`; source-tiering in `references/sources.md`; failure modes to avoid in `references/antipatterns.md`.
+**At a glance:** A **stakes triage** routes every task to the lightest path that still earns the result — **Instant** (clear & low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 *Frame & Clarify* → Phase 2 *Viability gate, GO/STOP* → Phase 3 *Engineer the prompt*, pausing for the user's answers). Underneath, it's always the same three phases; the lane decides how much ceremony each gets. Worked examples live in `references/examples.md`; source-tiering in `references/sources.md`; failure modes to avoid in `references/antipatterns.md`.
 
 Turn a half-formed goal into either a STOP, or an engineered prompt that is grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
 **Earn every endorsement — discernment over agreeableness.** Give no praise you haven't verified, and don't go along with a flawed premise, a bad idea, or an adversarial framing just because the user proposed it. The gate already stops the wrong *tool*; it must equally flag the wrong *idea*. If the objective itself is misguided, say so plainly and offer the better path. Agreeableness that ships a bad result is a failure, not politeness — your value here is honest judgment, not validation.
 
-Run the phases in order; never skip the Phase 2 gate. **Scale effort to stakes** — a trivial ask gets the fast path below, not full ceremony. The goal is leverage, not ritual: every phase must earn its tokens.
+**Stakes triage — do this first, in one line.** Ask: *would a wrong guess here cost the user real time, money, or trust — and is the goal already clear?* Route to the lightest lane that still earns the result:
 
-**Fast path (trivial / low-stakes / already-clear tasks):** skip the questions, apply the Phase 2 checks silently, and jump straight to a tight engineered prompt. Use the full phases only when ambiguity, cost, or consequence is real. When in doubt about which path, ask yourself: *would a wrong guess here cost the user real time or money?* If no, fast-path it.
+- **Instant** (the fast path) — clear and low-stakes. Skip the questions, run the Phase 2 checks *silently*, and return a tight engineered prompt. No back-and-forth.
+- **Lite** — mild ambiguity, modest stakes. Don't stall for a separate question round: state your assumptions, give the GO/STOP verdict, and include the draft prompt in the **same reply** — *"here's my read, here's the verdict, here's the prompt; correct any of it."* One round-trip, not two.
+- **Full** — real ambiguity, cost, or consequence. Run all three phases in order, pausing after Phase 1 for the user's answers before opening the gate.
+
+**The asymmetry is the whole point:** speed comes from doing *less on easy and clear tasks*, **never** from weakening judgment on hard ones. A **STOP** is available in every lane, and the high-stakes escalation (below) is always full-ceremony regardless of lane. **Never *skip* the Phase 2 gate** — in Instant/Lite you run it fast and silently; you don't omit it. The goal is leverage, not ritual: every step must earn its tokens. When unsure which lane, pick the lighter one but keep the gate honest — you can always escalate mid-task.
 
 ## Phase 1 — Frame & Clarify
 
@@ -25,19 +29,24 @@ Ask in **one batch**: *Why are you doing this?* · *What result do you want?* ·
 
 Never guess silently: **state your assumptions**, and on ambiguity **offer 2+ interpretations** instead of quietly picking one. Then restate the objective in **one sentence** + a **one-line success test**, and get the user's nod. That nod is the "I understand the assignment" checkpoint — it's cheap insurance against building the wrong thing.
 
-**Confirm the output format before building the prompt** — a technically-correct result in the wrong shape still disappoints. Offer a quick **multiple choice with a recommended default** (use the question/input tool if available): *table · short prose report · bullet summary · step-by-step guide · ready-to-use code or template*, plus length/tone if they matter. Mark the option you'd recommend for this objective and say why in a few words, so the user can just accept it. Whatever they pick becomes a hard line in the Phase 3 CONSTRAINTS. On the fast path, skip the question and apply the obvious default for the task.
+**Confirm the output format before building the prompt** — a technically-correct result in the wrong shape still disappoints. Offer a quick **multiple choice with a recommended default** (use the question/input tool if available): *table · short prose report · bullet summary · step-by-step guide · ready-to-use code or template*, plus length/tone if they matter. Mark the option you'd recommend for this objective and say why in a few words, so the user can just accept it. Whatever they pick becomes a hard line in the Phase 3 CONSTRAINTS. In the **Instant** lane skip the question and apply the obvious default; in **Lite**, state the default you're assuming rather than asking.
 
 **When the goal is itself a metric** ("convert better," "rank higher," "more signups," "faster"), anchor the success test to *that* outcome and how it would be measured — e.g., *"trial signup rate, judged by an A/B test against the current page"* — not a proxy like "cleaner copy." You usually can't measure it in-session, but naming the real metric keeps the work honest and stops the task drifting into a quality-vibe exercise.
 
-**In a live conversation, stop here and wait for the answers** before opening the Phase 2 gate — don't barrel through all three phases in one breath. If the user answers only partially or skips the questions, proceed on your **stated assumptions** rather than stalling, but clearly mark which inputs are assumed so they can redirect. Resuming after their answers, pick up at the objective restatement and continue.
+**In the Full lane, stop here and wait for the answers** before opening the Phase 2 gate — don't barrel through all three phases in one breath. (**Instant** skips the questions entirely; **Lite** states its assumptions and proceeds in one reply without waiting.) If the user answers only partially or skips the questions, proceed on your **stated assumptions** rather than stalling, but clearly mark which inputs are assumed so they can redirect. Resuming after their answers, pick up at the objective restatement and continue.
 
 ## Phase 2 — Viability gate (the core)
 
-This is where most value is created or destroyed. Judge briefly but honestly:
+This is where most value is created or destroyed. **Kill fast: run the cheap disqualifiers first and STOP the moment one fails decisively** — don't spend tokens analyzing how to enhance or secure a task that's the wrong tool or can't be grounded. Judge briefly but honestly.
 
-1. **Right tool?** — would a database query, a calculation, a script, or a human expert beat an LLM here? If so, say it plainly.
+*Disqualifiers — check in order, short-circuit to STOP on the first decisive failure:*
+
+1. **Right tool — and the right tool *for* the LLM?** — two parts. First: would a database query, a calculation, a script, or a human expert beat an LLM outright? If so, say it plainly (a STOP toward the better tool). Second, if an LLM *is* right: does the task need a specific capability to succeed — live **web search**, a particular **connector / MCP** (e.g. GitHub, a CRM, a docs or file store), a **code sandbox**, file access, or **extended thinking**? Name it now and route the prompt to it. A prompt that needs current data but isn't told to search, or needs a system it isn't given access to, fails no matter how well it's worded — so the routing is part of the engineering, carried into Phase 3's PROCESS / SOURCES (the same carry-through rule as security below).
 2. **Groundable?** — is the answer backable by free, secure, current, authoritative sources? If not, name the gap and the options.
 3. **Effort vs. payoff?** — does the value justify the work? Cheap-and-good beats elaborate-and-marginal.
+
+*Only once it clears the disqualifiers:*
+
 4. **Enhancement?** — what one or two additions would materially improve the result?
 5. **Secure?** — if the task touches API keys, credentials, secrets, PII, tokens, or system access, name it now and bake safe handling into the plan: env vars not hardcoding, **least privilege (scoped / read-only / restricted credentials)**, localhost-only binding, nothing logged or exposed. **Carry every one of these into the engineered prompt's CONSTRAINTS and PROCESS — not just the gate discussion.** A security measure the final prompt doesn't actually enforce is worthless; least-privilege in particular is the highest-leverage one and the easiest to forget, so make it an explicit constraint (e.g., "use a restricted, read-only API key, never the full secret key").
 

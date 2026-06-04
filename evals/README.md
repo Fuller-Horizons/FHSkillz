@@ -4,8 +4,12 @@ This folder holds the test sets used to validate JAIL-PROMPT. Re-run them whenev
 
 ## Files
 
-- `evals.json` — 10 behavioral cases. Each has a `prompt`, an `expected_output`, and (in the workspace copies) an `assertions` list the grader checks.
+- `evals.json` — 11 behavioral cases (as of v1.2.0, repaired from a truncated file and extended with **Lite-lane** and **connector-routing** coverage). Each has a `prompt`, an `expected_output`, and (in the workspace copies) an `assertions` list the grader checks.
 - `trigger_evals.json` — 20 triggering cases (10 should-trigger, 10 tricky near-misses) for description tuning.
+
+> **Latest run:** see [`RESULTS.md`](RESULTS.md) — v1.2.0 proxy run scored **20/20 triggering** (two independent judges, unanimous) and **4/4 behavioral** cases (incl. both new behaviors), all assertions PASS.
+>
+> **Open validation item (carried since 0.9.0):** results so far are **subagent-proxy**, not the live `claude -p` harness, and the behavioral runs were single-turn. The live CLI harness run and a true multi-turn exercise still need an authenticated environment (see the triggering loop below). Don't upgrade "proxy" to "harness-verified" until that run lands.
 
 ## Behavioral loop (the main one)
 
