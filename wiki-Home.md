@@ -58,9 +58,10 @@ Uploaded skills are private to your account. On Team/Enterprise plans, share the
 
 ## Available skills
 
-| Skill | What it does |
-|---|---|
-| [`jail-prompt`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-prompt) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt that succeeds on the first run. |
+| Skill | What it does | Claude.ai ZIP |
+|---|---|---|
+| [`jail-prompt`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-prompt) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt that succeeds on the first run. | [download](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/jail-prompt.zip) |
+| [`company-prospect-research`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/company-prospect-research) | Researches a US private company as a sell-side brokerage / consulting prospect using only free, authoritative sources — produces a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity score, red flags, an outreach hook, and a cited source appendix. | [download](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/company-prospect-research.zip) |
 
 ---
 
@@ -87,17 +88,4 @@ FHSkillz/
 ./scripts/new-skill.sh my-skill        # scaffold + auto-register
 # edit skills/my-skill/SKILL.md  (write a strong description — it's the trigger)
 ./scripts/sync-marketplace.sh          # ensure manifest matches folders
-git add -A && git commit -m "add my-skill skill" && git push
-# then in Claude Code:  /plugin marketplace update fh-skillz
-```
-
-The **description is the product** — a weak description means a skill that never triggers. Write it as a router: concrete task verbs, file/input types, and trigger keywords.
-
----
-
-## Conventions
-
-- Folder name == frontmatter `name`, lowercase-hyphenated (`[a-z0-9-]` only).
-- Keep `SKILL.md` lean; push long material into `references/` and link it.
-- Bump `plugins[0].version` (semver) on any release that changes skills.
-- Keep the repo **public** so `/plugin marketplace add` and the raw `install.sh` URL resolve.
+git add -A && git commit -m "add my-skil

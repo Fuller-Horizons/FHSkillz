@@ -30,3 +30,6 @@ files.zip
 
 # Staged for deletion (sandbox could not unlink; remove this folder manually)
 _ARCHIVE_DELETE_ME/
+
+# WIP — not part of the plugin (no SKILL.md); un-ignore when ready to publish
+systems/

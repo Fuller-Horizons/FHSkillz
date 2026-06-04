@@ -1,68 +1,69 @@
-# JAIL-PROMPT
+# FHSkillz
 
-**J**onathan's **A**ctually **I**ntelligent **L**ogic for **P**rompting — a Claude skill that turns a half-formed goal into either a **STOP** (when AI is the wrong tool, or the idea itself is flawed) or an **engineered, verifiable, token-efficient prompt** that succeeds on the first run.
+**Fuller Horizons' Claude skills — bundled as one installable plugin and loadable in a single command.**
 
-Part of the **FHSkillz** (Fuller Horizons Skill Directory) collection.
+FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz`) and registers this repo as a Claude Code **plugin marketplace**. One command loads every skill at once; a clone-and-symlink script covers any IDE that reads `~/.claude/skills/`; and each skill is also downloadable as a ZIP for Claude.ai (no coding required).
 
-> Version 0.9.0 · feature-complete, two validation paths pending (see [Status](#status)).
+> **Just want to use a skill on Claude.ai?** No git, no terminal. See the **[3-minute install guide](https://github.com/Fuller-Horizons/FHSkillz/wiki/Install-on-Claude-ai)**.
 
-> **Just want to use it on Claude.ai? No coding required.** [Download `jail-prompt.zip`](dist/jail-prompt.zip) and follow the [3-minute install guide](../../wiki/Install-on-Claude-ai).
+## Available skills
 
-## What it's for
-
-Most prompting fails before a single token is written — the task is a bad fit for an LLM, the goal is misframed, or the prompt is vague, unverifiable, or bloated. JAIL-PROMPT runs a short pre-flight that catches those failures early and engineers the rest.
-
-It triggers when you:
-
-- state an outcome but haven't written a real prompt ("I just want my landing page to convert better"),
-- ask to "make this prompt better,"
-- want to know whether AI is even the right tool,
-- or paste a rough goal and want it done *correctly* without wasting time or tokens.
-
-It deliberately does **not** trigger for a finished prompt you just want run verbatim, or for plain conversation.
-
-## How it works
-
-Three phases, scaled to stakes:
-
-1. **Frame & Clarify** — one batched round of questions, stated assumptions, a one-sentence objective + a one-line success test, and a recommended-default choice of output format. Trivial asks skip this via the **fast path**.
-2. **Viability gate (the core)** — Right tool? Groundable? Effort vs. payoff? Enhancement? Secure? Plus a readiness check that the *goal itself is sound*. Outcome is **GO** or **STOP** (with a multiple-choice next step). A flawed premise is a STOP no matter how good a prompt you could write.
-3. **Engineer the prompt** — a copyable `ROLE / CONTEXT / OBJECTIVE / SUCCESS TEST / PROCESS / SOURCES / CONSTRAINTS / BEFORE RETURNING` skeleton, decomposed into a **chain** when one prompt can't do the job, then offered to run with a one-pass tighten loop.
-
-A guiding stance runs through all three: **discernment over agreeableness** — no unverified praise, no building a bad idea just because it was asked for.
-
-## Contents
-
-```
-jail-prompt/
-├── SKILL.md                    # the skill (always loaded)
-├── references/
-│   ├── examples.md             # 5 worked examples (STOP, fast-path, GO, format/multi-turn, adversarial)
-│   ├── sources.md              # source tiering, recency, cross-checking, honesty rules
-│   └── antipatterns.md         # 13 named prompt-engineering failure modes (tell + fix)
-└── evals/
-    ├── evals.json              # 10-case behavioral eval suite
-    ├── trigger_evals.json      # 20-case triggering eval set
-    └── README.md               # how to re-run the validation loop
-```
-
-The references use progressive disclosure — they load only when relevant, keeping the always-on SKILL.md lean.
+| Skill | What it does |
+|---|---|
+| [`jail-prompt`](skills/jail-prompt/) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt that succeeds on the first run. |
+| [`company-prospect-research`](skills/company-prospect-research/) | Researches a US private company as a sell-side brokerage / consulting prospect using only free, authoritative sources. Produces a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity score, red flags, an outreach hook, and a cited source appendix. |
 
 ## Install
 
-**Cowork:** open the `jail-prompt.skill` file and click **Save skill**.
+**Claude Code (loads every skill):**
 
-**Claude Code / manual:** copy the `jail-prompt/` folder into your skills directory (e.g. `~/.claude/skills/jail-prompt/`). The skill auto-triggers from its description; no command needed.
+```
+/plugin marketplace add Fuller-Horizons/FHSkillz
+/plugin install fh-skillz@fh-skillz
+```
 
-## Status
+Restart Claude Code. Skills activate automatically based on their `description` — nothing to load by hand. Refresh after an update with `/plugin marketplace update fh-skillz`.
 
-| Dimension | State |
-|---|---|
-| Behavioral evals | 10 cases, independently graded, **100%** after fixes; key cases run 3× for variance |
-| Triggering | 20-case proxy: **20/20** — *real `claude -p` harness run still pending* |
-| Multi-turn interactive | logic in place; **not yet exercised live** (evals were single-turn) |
-| Overall (weighted rubric) | ~9.4 / 10 |
+**Any IDE / Cursor / Codex CLI (skills-directory fallback):**
 
-Two honest gaps remain before a 1.0 tag: a real triggering-harness run and a live multi-turn test. See [CHANGELOG](CHANGELOG.md).
+```
+curl -fsSL https://raw.githubusercontent.com/Fuller-Horizons/FHSkillz/main/scripts/install.sh | bash
+```
 
-## L
+Scope to a single project instead: clone, then `./scripts/install.sh .claude/skills`. Re-run anytime to pull latest and re-link.
+
+**Claude.ai (web & desktop, no coding):** download the skill's ZIP from [`dist/`](dist/) and upload it under **Settings → Customize → Skills**. Full walkthrough in the [wiki](https://github.com/Fuller-Horizons/FHSkillz/wiki/Install-on-Claude-ai).
+
+## How it works
+
+Each skill lives in `skills/<name>/` with a `SKILL.md`. Skills are **model-invoked** — Claude fires them based on the `description` field, not by being installed. `.claude-plugin/marketplace.json` lists every skill and is the single source of truth for what loads.
+
+```
+FHSkillz/
+├── .claude-plugin/marketplace.json   # install manifest (lists every skill)
+├── skills/<name>/
+│   ├── SKILL.md                      # required — the skill + its trigger description
+│   └── references/                   # optional reference docs (progressive disclosure)
+├── scripts/                          # new-skill / sync-marketplace / build-zips / install
+├── dist/                             # per-skill ZIPs for Claude.ai upload
+└── CLAUDE.md                         # repo guidance for Claude when maintaining this repo
+```
+
+The marketplace entry uses `strict: false` with an explicit `skills[]` array, so each skill ships as a raw `SKILL.md` folder with **no per-skill `plugin.json`** required.
+
+## Add a skill
+
+```
+./scripts/new-skill.sh my-skill        # scaffold skills/my-skill/SKILL.md + auto-register
+# edit skills/my-skill/SKILL.md  — write a strong description; it's the trigger
+./scripts/sync-marketplace.sh          # ensure the manifest matches the folders
+./scripts/build-zips.sh                # refresh dist/ ZIPs for Claude.ai
+git add -A && git commit -m "add my-skill skill" && git push
+# then in Claude Code:  /plugin marketplace update fh-skillz
+```
+
+The **description is the product** — a weak description means a skill that never triggers. Write it as a router: concrete task verbs, file/input types, and trigger keywords.
+
+## Conventions
+
+- One skill = one folder 

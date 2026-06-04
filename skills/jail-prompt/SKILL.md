@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 0.9.0
+  version: 1.0.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -72,4 +72,4 @@ BEFORE RETURNING: self-check against SUCCESS TEST; give a 1–5 self-score on ea
 ```
 Then sanity-check the prompt against `references/antipatterns.md` (catch over-constraining, fake precision, leading-the-witness, unverifiable tests, etc.). Then **offer to run it**. If accepted, execute using the tools Phase 2 identified. If declined, stop cleanly.
 
-**Post-run tighten loop (one pass, not endless polishing).** After executing, grade the *actual* output against its own SUCCESS TEST. If it falls short, name the single highest-impact c
+**Post-run tighten loop (one pass, not endless polishing).** After executing, grade the *actual* output against its own SUCCESS TEST. If it falls short, name the single highest-impact change, apply it, and re-grade once. Stop there — ship the result with its self-score and any flagged gaps. Do not enter an open-ended polish cycle: one targeted fix beats five cosmetic ones, and a good-enough result delivered now beats a marginally-better one the user is still waiting on.

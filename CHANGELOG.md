@@ -1,6 +1,18 @@
 # Changelog
 
-All notable changes to JAIL-PROMPT. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/).
+All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
+
+## [plugin 0.3.0] — 2026-06-03
+
+### jail-prompt → 1.0.0
+- Completed the truncated **Post-run tighten loop** instruction (the skill previously ended mid-sentence): one highest-impact change, re-grade once, then ship — no open-ended polishing.
+- Bumped skill version 0.9.0 → **1.0.0** (content-complete).
+
+### Repo
+- Restructured docs to repo level: root `README.md` is now an FHSkillz overview covering both skills; jail-prompt detail moved to `skills/jail-prompt/README.md` (corrected file tree, version, and Claude.ai ZIP link).
+- Added **company-prospect-research** to the plugin manifest, wiki skill table, and Claude.ai install guide.
+- Held WIP `systems/company-intelligence/` out of this release via `.gitignore` (not a skill; no `SKILL.md`).
+- Rebuilt `dist/` ZIPs so Claude.ai downloads carry the current `SKILL.md`.
 
 ## [0.9.0] — 2026-06-01
 
@@ -22,14 +34,4 @@ First public release candidate. Feature-complete; two validation paths pending b
 ### Validation
 - 10 behavioral evals, independently graded → **100%** after fixes; key cases run 3× for variance.
 - Triggering proxy: **20/20** unanimous across 3 judges.
-- Two regressions caught by the loop and fixed before release:
-  - **Metric-anchoring** — a vague "convert better" goal was reframed as a copy-quality audit instead of a measurable outcome.
-  - **Least-privilege drift** — the restricted read-only key recommendation appeared in only 2/3 runs; the gate instruction was strengthened to force it into the prompt's constraints (now 3/3).
-  - **Decompose vs. "one prompt"** — an oversized task was shipped as a single sectioned prompt; the branch was strengthened to override a literal "one prompt" request (1/4 → 4/4).
-
-### Known gaps
-- Triggering measured via a subagent proxy, not the real `claude -p` harness (blocked by environment auth at build time).
-- Multi-turn interactive path is implemented but never exercised live — all evals were single-turn simulations.
-
-### Origin
-- Built from the handoff `prompt-preflight` draft (rubric ~7.5/10); rebranded to `jail-prompt` and iterated with the skill-creator eval loop to ~9.4/10.
+- Two regressions caught by the loop and fi

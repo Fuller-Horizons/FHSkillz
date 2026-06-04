@@ -14,6 +14,8 @@ Click the link below. It downloads one file called **`jail-prompt.zip`** — lea
 
 (If the link opens a page instead of downloading, click the **Download** button / the download icon on that page.)
 
+> **Want a different skill?** The same steps work for any skill ZIP in [`dist/`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/dist) — for example [company-prospect-research.zip](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/company-prospect-research.zip). Download it instead and follow the rest of this guide unchanged.
+
 ---
 
 ## Step 2 — Turn on the setting that lets skills run
@@ -41,12 +43,4 @@ Start a normal chat and type something like:
 
 > *I want my landing page to convert better — help me prompt this the right way.*
 
-The skill should kick in automatically and walk you through it. That's it.
-
----
-
-## Notes
-
-- Skills you upload are **private to your account**. On Team/Enterprise plans, an admin can share them with everyone through organization settings.
-- To **update** later: download the latest `jail-prompt.zip` and upload it again the same way.
-- Only install skills from people you trust — skills can contain code.
+The skill should kick in automatically and walk you through it
