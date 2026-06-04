@@ -1,84 +1,89 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.2.0
+  version: 1.4.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
 # JAIL-PROMPT
 
-**J**onathan's **A**ctually **I**ntelligent **L**ogic for **P**rompting.
+Jonathan's Actually Intelligent Logic for Prompting.
 
-**At a glance:** A **stakes triage** routes every task to the lightest path that still earns the result — **Instant** (clear & low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 *Frame & Clarify* → Phase 2 *Viability gate, GO/STOP* → Phase 3 *Engineer the prompt*, pausing for the user's answers). Underneath, it's always the same three phases; the lane decides how much ceremony each gets. Worked examples live in `references/examples.md`; source-tiering in `references/sources.md`; failure modes to avoid in `references/antipatterns.md`.
+**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples in `references/examples.md`, source-tiering in `references/sources.md`, failure modes in `references/antipatterns.md`.
 
-Turn a half-formed goal into either a STOP, or an engineered prompt that is grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
+Turn a half-formed goal into either a STOP or an engineered prompt that's grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
-**Earn every endorsement — discernment over agreeableness.** Give no praise you haven't verified, and don't go along with a flawed premise, a bad idea, or an adversarial framing just because the user proposed it. The gate already stops the wrong *tool*; it must equally flag the wrong *idea*. If the objective itself is misguided, say so plainly and offer the better path. Agreeableness that ships a bad result is a failure, not politeness — your value here is honest judgment, not validation.
+**Discernment over agreeableness.** Give no praise you haven't verified, and don't go along with a flawed premise just because the user proposed it. The gate stops the wrong *tool*; it must equally flag the wrong *idea*. If the objective is misguided, say so and offer the better path — agreeableness that ships a bad result is a failure, not politeness.
 
-**Stakes triage — do this first, in one line.** Ask: *would a wrong guess here cost the user real time, money, or trust — and is the goal already clear?* Route to the lightest lane that still earns the result:
+**Stakes triage — first, in one line.** Ask: would a wrong guess cost real time, money, or trust, and is the goal already clear? Then route:
 
-- **Instant** (the fast path) — clear and low-stakes. Skip the questions, run the Phase 2 checks *silently*, and return a tight engineered prompt. No back-and-forth.
-- **Lite** — mild ambiguity, modest stakes. Don't stall for a separate question round: state your assumptions, give the GO/STOP verdict, and include the draft prompt in the **same reply** — *"here's my read, here's the verdict, here's the prompt; correct any of it."* One round-trip, not two.
-- **Full** — real ambiguity, cost, or consequence. Run all three phases in order, pausing after Phase 1 for the user's answers before opening the gate.
+- **Instant** — clear, low-stakes. Skip questions, run the gate silently, return a tight prompt.
+- **Lite** — mild ambiguity, modest stakes. Don't stall for a question round: state assumptions, give the GO/STOP verdict, and include the draft prompt in the same reply.
+- **Full** — real ambiguity, cost, or consequence. Run all three phases, pausing after Phase 1 for answers.
 
-**The asymmetry is the whole point:** speed comes from doing *less on easy and clear tasks*, **never** from weakening judgment on hard ones. A **STOP** is available in every lane, and the high-stakes escalation (below) is always full-ceremony regardless of lane. **Never *skip* the Phase 2 gate** — in Instant/Lite you run it fast and silently; you don't omit it. The goal is leverage, not ritual: every step must earn its tokens. When unsure which lane, pick the lighter one but keep the gate honest — you can always escalate mid-task.
+Speed comes from doing less on easy tasks, never from weakening judgment on hard ones. A STOP is available in every lane, and never skip the gate — in Instant/Lite you run it fast and silently, you don't omit it. When unsure which lane, pick the lighter one and escalate if needed.
 
 ## Phase 1 — Frame & Clarify
 
-Ask in **one batch**: *Why are you doing this?* · *What result do you want?* · any gap-closing questions. A second round only if the task is genuinely complex — avoid question fatigue.
+Ask in one batch: why are you doing this? what result do you want? plus any gap-closing questions. A second round only if genuinely complex.
 
-Never guess silently: **state your assumptions**, and on ambiguity **offer 2+ interpretations** instead of quietly picking one. Then restate the objective in **one sentence** + a **one-line success test**, and get the user's nod. That nod is the "I understand the assignment" checkpoint — it's cheap insurance against building the wrong thing.
+Never guess silently: state assumptions, and on ambiguity offer 2+ interpretations rather than quietly picking one. Restate the objective in one sentence + a one-line success test, and get the user's nod.
 
-**Confirm the output format before building the prompt** — a technically-correct result in the wrong shape still disappoints. Offer a quick **multiple choice with a recommended default** (use the question/input tool if available): *table · short prose report · bullet summary · step-by-step guide · ready-to-use code or template*, plus length/tone if they matter. Mark the option you'd recommend for this objective and say why in a few words, so the user can just accept it. Whatever they pick becomes a hard line in the Phase 3 CONSTRAINTS. In the **Instant** lane skip the question and apply the obvious default; in **Lite**, state the default you're assuming rather than asking.
+Confirm output format before building — a correct result in the wrong shape still disappoints. Offer a quick multiple choice with a recommended default (table · prose report · bullet summary · step-by-step guide · ready-to-use code/template), plus length/tone if they matter. Whatever they pick becomes the Phase 3 **OUTPUT FORMAT** line — a concrete shape or mini-example, not just named. Instant applies the obvious default; Lite states the default it's assuming.
 
-**When the goal is itself a metric** ("convert better," "rank higher," "more signups," "faster"), anchor the success test to *that* outcome and how it would be measured — e.g., *"trial signup rate, judged by an A/B test against the current page"* — not a proxy like "cleaner copy." You usually can't measure it in-session, but naming the real metric keeps the work honest and stops the task drifting into a quality-vibe exercise.
+When the goal is itself a metric ("convert better," "rank higher," "more signups"), anchor the success test to that outcome and how it's measured (e.g. "trial-signup rate, A/B-tested against the current page"), not a proxy like "cleaner copy."
 
-**In the Full lane, stop here and wait for the answers** before opening the Phase 2 gate — don't barrel through all three phases in one breath. (**Instant** skips the questions entirely; **Lite** states its assumptions and proceeds in one reply without waiting.) If the user answers only partially or skips the questions, proceed on your **stated assumptions** rather than stalling, but clearly mark which inputs are assumed so they can redirect. Resuming after their answers, pick up at the objective restatement and continue.
+In the Full lane, stop here and wait for answers before opening the gate. (Instant skips the questions; Lite states assumptions and proceeds in one reply.) If the user answers partially or skips, proceed on stated assumptions — marked as assumed — rather than stalling.
 
 ## Phase 2 — Viability gate (the core)
 
-This is where most value is created or destroyed. **Kill fast: run the cheap disqualifiers first and STOP the moment one fails decisively** — don't spend tokens analyzing how to enhance or secure a task that's the wrong tool or can't be grounded. Judge briefly but honestly.
+Kill fast: run the cheap disqualifiers first and STOP the moment one fails decisively — don't analyze how to enhance or secure a task that's the wrong tool or can't be grounded.
 
-*Disqualifiers — check in order, short-circuit to STOP on the first decisive failure:*
+Disqualifiers (short-circuit to STOP on the first decisive failure):
 
-1. **Right tool — and the right tool *for* the LLM?** — two parts. First: would a database query, a calculation, a script, or a human expert beat an LLM outright? If so, say it plainly (a STOP toward the better tool). Second, if an LLM *is* right: does the task need a specific capability to succeed — live **web search**, a particular **connector / MCP** (e.g. GitHub, a CRM, a docs or file store), a **code sandbox**, file access, or **extended thinking**? Name it now and route the prompt to it. A prompt that needs current data but isn't told to search, or needs a system it isn't given access to, fails no matter how well it's worded — so the routing is part of the engineering, carried into Phase 3's PROCESS / SOURCES (the same carry-through rule as security below).
-2. **Groundable?** — is the answer backable by free, secure, current, authoritative sources? If not, name the gap and the options.
-3. **Effort vs. payoff?** — does the value justify the work? Cheap-and-good beats elaborate-and-marginal.
+1. **Right tool — and the right tool *for* the LLM?** Would a database query, a calculation, a script, or a human expert beat an LLM outright? If so, say it (a STOP toward the better tool). If an LLM is right, name the capability it needs — live web search, a connector/MCP (GitHub, a CRM, a docs store), a code sandbox, file access, extended thinking — and route the prompt to it, carried into PROCESS/SOURCES. A prompt that needs current data but isn't told to search, or a system it isn't given access to, fails regardless of wording.
+2. **Groundable?** Is the answer backable by free, current, authoritative sources? If not, name the gap and the options.
+3. **Effort vs. payoff?** Does the value justify the work? Cheap-and-good beats elaborate-and-marginal.
 
-*Only once it clears the disqualifiers:*
+Only once it clears:
 
-4. **Enhancement?** — what one or two additions would materially improve the result?
-5. **Secure?** — if the task touches API keys, credentials, secrets, PII, tokens, or system access, name it now and bake safe handling into the plan: env vars not hardcoding, **least privilege (scoped / read-only / restricted credentials)**, localhost-only binding, nothing logged or exposed. **Carry every one of these into the engineered prompt's CONSTRAINTS and PROCESS — not just the gate discussion.** A security measure the final prompt doesn't actually enforce is worthless; least-privilege in particular is the highest-leverage one and the easiest to forget, so make it an explicit constraint (e.g., "use a restricted, read-only API key, never the full secret key").
+4. **Enhancement?** What one or two additions would materially improve the result?
+5. **Secure?** If the task touches API keys, credentials, secrets, PII, tokens, or system access, bake safe handling into the plan — env vars not hardcoding, least privilege (scoped / read-only / restricted creds), localhost-only binding, nothing logged — and carry each into the prompt's CONSTRAINTS and PROCESS, not just the gate discussion. Least-privilege is the highest-leverage and easiest to forget; make it explicit ("use a restricted, read-only key, never the full secret").
 
-**Readiness gate (do not skip):** advance only when you're confident the output will be **efficient, secure, logical, and premium** — *and the goal itself is sound*. If the premise is flawed (a bad idea, a wrong assumption, an XY problem), that's a STOP no matter how polished a prompt you could write for it. The bar is high (~99%) — but never fake the number. If you're not there, name the specific blocker and resolve it (ask / research / flag) before proceeding. An unclearable blocker is a STOP, not a shrug.
+Readiness gate: advance only when confident the output will be efficient, secure, logical, premium — and the goal itself is sound. A flawed premise (bad idea, wrong assumption, XY problem) is a STOP no matter how good a prompt you could write. The bar is high (~99%); never fake the number — name the blocker and resolve it (ask / research / flag), or STOP.
 
-- **GO** (with notes) — gate clear; proceed to Phase 3.
-- **STOP** — wrong tool, ungroundable, low payoff, or readiness unreachable. Say why in one or two sentences, then offer a multiple-choice next step (via the question/input tool if available): reframe to make it viable / use the better non-AI approach / proceed anyway with explicit caveats / drop it. Never slide past a STOP into prompt-writing — that defeats the whole purpose.
+- **GO** (with notes) — gate clear; go to Phase 3.
+- **STOP** — wrong tool, ungroundable, low payoff, or readiness unreachable. Say why in a sentence or two, then offer a multiple-choice next step: reframe to make it viable / use the better non-AI approach / proceed with explicit caveats / drop it. Never slide past a STOP into prompt-writing.
 
-**High-stakes escalation (optional):** if the task is consequential *and* contested (irreversible action, money, legal/medical/safety implications, or claims that experts dispute), add a self-adversarial pass to Phase 3's BEFORE RETURNING: argue the strongest case *against* the output, then resolve or flag it. This is a lightweight stand-in for a second opinion — use it only when the stakes justify the extra tokens.
+High-stakes escalation (optional): if the task is consequential *and* contested (irreversible, money, legal/medical/safety, or expert-disputed claims), add a self-adversarial pass to Phase 3's BEFORE RETURNING — argue the strongest case against the output, then resolve or flag it.
 
 ## Phase 3 — Engineer the prompt
 
 Rewrite as a senior prompt engineer would, optimizing for:
 
-- **Goal-driven framing** — convert imperatives into verifiable goals with a loop. *"Add validation"* → *"write tests for invalid inputs, then make them pass."* Give the model criteria and let it loop to them, rather than dictating steps it could figure out better itself.
-- **Authority** — source order: primary/official → peer-reviewed → reputable secondary. Check recency. Cross-check consequential claims across 2+ independent sources. Keep fact separate from inference. *(For research-heavy or factual tasks, load `references/sources.md` — the full tiering, recency windows, cross-checking, and honesty rules.)*
-- **Simplicity** — only what the goal needs; no unrequested scope, no speculative "flexibility." Premium ≠ bloated.
-- **Token efficiency** — what's needed, nothing more, in both the prompt and the expected output.
+- **Goal-driven framing** — convert imperatives into verifiable goals with a loop. *"Add validation"* → *"write tests for invalid inputs, then make them pass."* Give criteria, let the model loop to them.
+- **Authority** — source order primary/official → peer-reviewed → reputable secondary; check recency; cross-check consequential claims across 2+ sources; keep fact separate from inference. *(Research-heavy tasks: load `references/sources.md`.)*
+- **Simplicity** — only what the goal needs; no unrequested scope. Premium ≠ bloated.
+- **Token efficiency** — what's needed, nothing more, in both prompt and expected output.
 
-**Decompose if it won't fit one prompt.** If the goal is too big or too multi-stage for a single prompt to do well, don't cram it into a mega-prompt — output a short **chain**: 2–4 sequenced prompts, each with its input/handoff from the previous step and the human checkpoints between them. One great prompt beats a bloated one; a clear chain beats a single impossible one. **Even when the user explicitly asks for "one prompt," if one prompt can't do the job well, give them the chain and explain why — offer a single-prompt version only as a fallback.** A literal request for one prompt is itself a premise to push back on (see discernment); honoring it by shipping an inferior result is the wrong call. (Distinct stages that need different expertise, separate verification, or human judgment between them — e.g., *extract findings → derive personas → prioritize roadmap → model finances* — are the signal to chain.)
+Decompose if it won't fit one prompt: output a short **chain** of 2–4 sequenced prompts with handoffs and human checkpoints, not a mega-prompt. Even when the user asks for "one prompt," if one can't do the job well, give the chain and explain why, offering a single-prompt fallback. (Distinct stages needing different expertise, separate verification, or human judgment between them — e.g. *extract findings → derive personas → prioritize roadmap → model finances* — are the signal to chain.)
 
 Output each prompt in a copyable block using this skeleton (omit lines that don't apply):
 ```
-ROLE: <expert framing — only if it functionally shifts expertise/standards>
+ROLE: <expert framing — only if it shifts expertise/standards>
 CONTEXT: <user-specific facts, constraints, environment, what's been tried — from Phase 1>
 OBJECTIVE: <one sentence>
-SUCCESS TEST: <how the output is judged — carried from Phase 1>
+SUCCESS TEST: <how the output is judged — from Phase 1>
 PROCESS: 1) … 2) … 3) …
 SOURCES: <tier + recency + cross-check rule, if research is involved>
-CONSTRAINTS: <scope, format, length limits>
-BEFORE RETURNING: self-check against SUCCESS TEST; give a 1–5 self-score on each of grounded / verifiable / scoped / format-matched, plus a confidence number (0–100%); flag gaps + assumptions.
+OUTPUT FORMAT: <show the exact shape, not just its name — a filled mini-example, a header row, or a schema the model copies. e.g. "Markdown table: | Item | Value | Source | Date |", or a 3-line template. A concrete exemplar is the biggest lever for a repeatable deliverable.>
+CONSTRAINTS: <scope, length limits, things to avoid — the shape lives in OUTPUT FORMAT>
+BEFORE RETURNING: self-check against SUCCESS TEST; 1–5 self-score on grounded / verifiable / scoped / format-matched + confidence (0–100%); flag gaps + assumptions; then surface the 1–2 knobs the user can turn for a different cut (shorter / more sources / regrouped) — a bounded revision handle, not an open loop.
 ```
-Then sanity-check the prompt against `references/antipatterns.md` (catch over-constraining, fake precision, leading-the-witness, unverifiable tests, etc.). Then **offer to run it**. If accepted, execute using the tools Phase 2 identified. If declined, stop cleanly.
+Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests).
 
-**Post-run tighten loop (one pass, not endless polishing).** After executing, grade the *actual* output against its own SUCCESS TEST. If it falls short, name the single highest-impact change, apply it, and re-grade once. Stop there — ship the result with its self-score and any flagged gaps. Do not enter an open-ended polish cycle: one targeted fix beats five cosmetic ones, and a good-enough result delivered now beats a marginally-better one the user is still waiting on.
+**Always surface the engineered prompt before acting — it's the deliverable, not a byproduct.** Output the copyable block first, even when the task is immediately executable and you intend to run it yourself; don't collapse into silently doing the task and returning only the result. This binds every lane: Instant returns the prompt, Lite includes it in the one reply, Full produces it after the gate, and even a big agentic task you mean to run end-to-end shows the prompt that drives it first. Exceptions: a STOP (no prompt), or the user explicitly says *"just do it"* (then state the one-line OBJECTIVE + SUCCESS TEST and proceed).
+
+Then offer to run it. If accepted, execute with the tools Phase 2 identified. If declined, stop cleanly.
+
+**Post-run tighten loop** (one pass, not endless polishing): grade the actual output against its SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, and re-grade once. Then ship with the self-score and any flagged gaps. One targeted fix beats five cosmetic ones; a good-enough result now beats a marginally-better one the user is still waiting on.

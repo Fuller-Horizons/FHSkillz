@@ -2,6 +2,11 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.6.0] — 2026-06-03
+
+### jail-prompt → 1.3.0
+- **Always-surface-the-prompt rule (Phase 3).** Field review of real usage showed the skill's most common shortfall: it gives the gate verdict and then silently *executes* the task, skipping its signature artifact. v1.3.0 makes the engineered prompt a mandatory, always-surfaced deliverable — output the copyable block *first* in every lane, even on big agentic tasks the model intends to run end-to-end. Exceptions: a STOP (no prompt), or the user explicitly says "just do it" (then state the one-line objective + success test and proceed). Targets the Deliverable-Consistency gap (rated 6.5 in field evaluation).
+
 ## [plugin 0.5.0] — 2026-06-03
 
 ### jail-prompt → 1.2.0
