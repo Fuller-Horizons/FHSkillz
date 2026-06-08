@@ -12,7 +12,7 @@
       "name": "fh-skillz",
       "source": "./",
       "description": "Every Fuller Horizons skill. Installs all skills in one command.",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "strict": false,
       "skills": [
         "./skills/company-prospect-research",
