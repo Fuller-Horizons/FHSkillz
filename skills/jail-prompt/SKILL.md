@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.4.0
+  version: 1.6.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -9,12 +9,16 @@ description: Pre-flight workflow that converts a vague desired result into an en
 
 Jonathan's Actually Intelligent Logic for Prompting.
 
-**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), and failure modes in [antipatterns.md](references/antipatterns.md).
+**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), and failure modes in [antipatterns.md](references/antipatterns.md). Bundled checks live in `scripts/` (`secret-scan.py`, `prompt-lint.py`, `dry-run.py` — see [scripts/README.md](scripts/README.md)).
 
 Turn a half-formed goal into either a STOP or an engineered prompt that's grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
 
-**Discernment over agreeableness.** Give no praise you haven't verified, and don't go along with a flawed premise just because the user proposed it. The gate stops the wrong *tool*; it must equally flag the wrong *idea*. If the objective is misguided, say so and offer the better path — agreeableness that ships a bad result is a failure, not politeness.
+**Discernment over agreeableness — challenge four biases.** Give no praise you haven't verified, and don't go along with a flawed premise just because the user proposed it. On every request, actively pressure-test:
+- **Tool/model bias** — the tool, model, or "use AI" assumption may be wrong; the gate's right-tool check overrides the user's assumed approach.
+- **Fact bias** — facts the user states as given may be wrong or stale; verify load-bearing claims, don't inherit them.
+- **Effort bias** — the user may assume the hard/expensive path is required; if a cheaper path reaches ≥99% of the goal, say so.
+- **Proceed bias** — the user assumes this should be done at all; the most valuable answer is sometimes "don't, and here's why." A misguided objective is a STOP no matter how good a prompt you could write.
 
 **Stakes triage — first, in one line.** Ask: would a wrong guess cost real time, money, or trust, and is the goal already clear? Then route:
 
@@ -24,17 +28,25 @@ Turn a half-formed goal into either a STOP or an engineered prompt that's ground
 
 Speed comes from doing less on easy tasks, never from weakening judgment on hard ones. A STOP is available in every lane, and never skip the gate — in Instant/Lite you run it fast and silently, you don't omit it. When unsure which lane, pick the lighter one and escalate if needed.
 
+**Lane note:** Instant/Lite still apply the comprehension gate silently — they just don't surface a question round unless the ≥97% bar isn't met, at which point they escalate to Full.
+
 ## Phase 1 — Frame & Clarify
 
-Ask in one batch: why are you doing this? what result do you want? plus any gap-closing questions. A second round only if genuinely complex. If the user's intent is ambiguous, use interactive multiple-choice questions to guide them and resolve design options before proceeding.
+**Comprehension gate — do not pass until ≥97% sure.** First, restate in your own words exactly what the user wants to accomplish *and why*. Ask in one batch: why are you doing this? what result do you want? plus any gap-closing questions. Never guess silently — state assumptions, and on ambiguity offer 2+ interpretations rather than quietly picking one. Do not advance to Phase 2 until you can honestly say you're **≥97% sure** you understand the real objective — the underlying need, not the literal words (watch for the XY problem). Below that bar, ask again or surface interpretations; never proceed on a hunch, and never fake the number.
 
+**Decompose into task types — route each separately.** Once the goal is clear, split it into its constituent work types; each may need a different model, tool, or skill to be correct:
+- **Build / code** → code sandbox + language-appropriate handling.
+- **Research — real-time** (prices, news, current status, versions, "latest") → MUST route to live web search / a connector; model memory is stale and will fabricate.
+- **Research — historical / settled** (definitions, mechanisms, established facts) → model knowledge, cross-checked; archives where needed.
+- **Creative writing** → no live grounding; optimize for voice/constraints.
+- **Image / file generation** → the dedicated image or document tool/skill, not prose describing it.
+- **Analysis / synthesis over supplied data** → file access + structured output.
 
-Never guess silently: state assumptions, and on ambiguity offer 2+ interpretations rather than quietly picking one. Restate the objective in one sentence + a one-line success test, and get the user's nod.
+Most requests are a *combination*. Name each part and handle each with the right tool — one prompt doing live research + code + image generation at once usually does all three poorly. This feeds the Phase 2 right-tool check and becomes the Phase 3 chain.
 
-Confirm output format before building — a correct result in the wrong shape still disappoints. Offer a quick multiple choice with a recommended default (table · prose report · bullet summary · step-by-step guide · ready-to-use code/template), referencing [templates.md](references/templates.md) for standard formats. Whatever they pick becomes the Phase 3 **OUTPUT FORMAT** line — a concrete shape or mini-example, not just named. Instant applies the obvious default; Lite states the default it's assuming.
+Restate the objective in one sentence + a one-line success test, and get the user's nod. When the goal is itself a metric ("convert better," "rank higher"), anchor the success test to that measured outcome, not a proxy.
 
-
-When the goal is itself a metric ("convert better," "rank higher," "more signups"), anchor the success test to that outcome and how it's measured (e.g. "trial-signup rate, A/B-tested against the current page"), not a proxy like "cleaner copy."
+Confirm output format before building — offer a quick multiple choice with a recommended default (table · prose report · bullet summary · step-by-step guide · ready-to-use code/template), referencing [templates.md](references/templates.md). Whatever they pick becomes the Phase 3 **OUTPUT FORMAT** line. Instant applies the obvious default; Lite states the default it's assuming.
 
 In the Full lane, stop here and wait for answers before opening the gate. (Instant skips the questions; Lite states assumptions and proceeds in one reply.) If the user answers partially or skips, proceed on stated assumptions — marked as assumed — rather than stalling.
 
@@ -48,14 +60,14 @@ Disqualifiers (short-circuit to STOP on the first decisive failure):
 
 
 2. **Groundable?** Is the answer backable by free, current, authoritative sources? If not, name the gap and the options.
-3. **Effort vs. payoff (Build vs. Buy)?** Does the value justify the work? Cheap-and-good beats elaborate-and-marginal. Make sure the user is not spending time building or designing something that is already available for free on the internet (e.g., existing tools, open-source libraries). If the level of effort to build it is high, evaluate and present paid/commercial options in the market that the user could purchase to accomplish their goal. Run a quick online search across repositories (like GitHub) and extension marketplaces (like VS Code Marketplace, npm, or PyPI) to check for existing pre-built registries before suggesting a custom build.
+3. **Effort vs. payoff (Build vs. Buy)?** Does the value justify the work? Cheap-and-good beats elaborate-and-marginal. Make sure the user is not spending time building or designing something that is already available for free on the internet (e.g., existing tools, open-source libraries). If the level of effort to build it is high, evaluate and present paid/commercial options in the market that the user could purchase to accomplish their goal. Run a quick online search across repositories (like GitHub) and extension marketplaces (like VS Code Marketplace, npm, or PyPI) to check for existing pre-built registries before suggesting a custom build. Weigh effort in BOTH tokens and the user's own effort. If a far cheaper path reaches ≥99% of what the user wants, recommend it over the elaborate one — even if that means a smaller prompt, a non-AI tool, or an off-the-shelf product.
 
 
 
 Only once it clears:
 
 4. **Enhancement?** What one or two additions would materially improve the result?
-5. **Secure?** If the task touches API keys, credentials, secrets, PII, tokens, or system access, bake safe handling into the plan — env vars not hardcoding, least privilege (scoped / read-only / restricted creds), localhost-only binding, nothing logged — and carry each into the prompt's CONSTRAINTS and PROCESS, not just the gate discussion. Least-privilege is the highest-leverage and easiest to forget; make it explicit ("use a restricted, read-only key, never the full secret"). Perform a static scan on user inputs to detect potential high-entropy API keys or hardcoded secrets, warning the user to replace them with environment variables before generating the prompt. If the generated prompt processes untrusted user/external input, include explicit **Prompt Injection Defense** (e.g., encapsulating inputs in distinct XML/Markdown tags, strictly prohibiting the execution of payload-contained commands, and sanitizing outputs).
+5. **Secure?** If the task touches API keys, credentials, secrets, PII, tokens, or system access, bake safe handling into the plan — env vars not hardcoding, least privilege (scoped / read-only / restricted creds), localhost-only binding, nothing logged — and carry each into the prompt's CONSTRAINTS and PROCESS, not just the gate discussion. Least-privilege is the highest-leverage and easiest to forget; make it explicit ("use a restricted, read-only key, never the full secret"). Run `scripts/secret-scan.py` on supplied inputs/files (it flags high-entropy keys and hardcoded secrets and exits non-zero); replace anything it finds with environment variables before generating the prompt. If the generated prompt processes untrusted user/external input, include explicit **Prompt Injection Defense** (e.g., encapsulating inputs in distinct XML/Markdown tags, strictly prohibiting the execution of payload-contained commands, and sanitizing outputs).
 
 
 
@@ -90,7 +102,7 @@ OUTPUT FORMAT: <show the exact shape, not just its name — a filled mini-exampl
 CONSTRAINTS: <scope, length limits (include explicit token-budgets or character limits to prevent context bloat), client-portability requirements (must remain plaintext/markdown, avoiding proprietary IDE commands), things to avoid>
 BEFORE RETURNING: self-check against SUCCESS TEST; 1–5 self-score on grounded / verifiable / scoped / format-matched + confidence (0–100%); flag gaps + assumptions; then surface the 1–2 knobs the user can turn for a different cut (shorter / more sources / regrouped) — a bounded revision handle, not an open loop.
 ```
-Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests).
+Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests), then lint it with `scripts/prompt-lint.py` — it enforces the skeleton, fails a SUCCESS TEST with no machine-verifiable check, flags an OUTPUT FORMAT that only names a shape, and confirms any embedded JSON parses.
 
 **Always surface the engineered prompt before acting — it's the deliverable, not a byproduct.** Output the copyable block first, even when the task is immediately executable and you intend to run it yourself; don't collapse into silently doing the task and returning only the result. This binds every lane: Instant returns the prompt, Lite includes it in the one reply, Full produces it after the gate, and even a big agentic task you mean to run end-to-end shows the prompt that drives it first. Exceptions: a STOP (no prompt), or the user explicitly says *"just do it"* (then state the one-line OBJECTIVE + SUCCESS TEST and proceed). 
 
@@ -101,7 +113,7 @@ Then offer to run it. If accepted, execute with the tools Phase 2 identified. If
 
 **Post-run tighten loop** (one pass, not endless polishing): grade the actual output against its SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, and re-grade once. Then ship with the self-score and any flagged gaps. One targeted fix beats five cosmetic ones; a good-enough result now beats a marginally-better one the user is still waiting on.
 
-**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock execution script/file in the workspace's `scratch/` folder with mock data or test inputs. Run a dry execution of the prompt using local sandbox tools to ensure formatting schemas (e.g. JSON schemas, tables) parse correctly and security guardrails hold, before presenting the finalized prompt to the user.
+**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock output to the workspace's `scratch/` folder and run `scripts/dry-run.py <prompt-file> --mock <scratch/mock>` — it confirms the declared OUTPUT FORMAT (JSON schema, JSON example, or markdown table) parses and that the mock conforms, before you present the finalized prompt. Catches a broken schema or mismatched table here, not in production.
 
 ## Gotchas
 Failure modes seen in practice — check against these before returning:

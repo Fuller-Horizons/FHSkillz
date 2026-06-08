@@ -2,6 +2,23 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.10.0] — 2026-06-08
+
+### jail-prompt → 1.6.0
+- **Bundled, runnable guardrails (was: instructions-only).** Three stdlib scripts now back the behaviors the skill used to merely describe, lifting Execution Reliability / Safety / Machine-Verifiable from "told to" to "does":
+  - `scripts/secret-scan.py` — Phase 2 "Secure?" now runs a real secret/high-entropy scanner (AWS, OpenAI, GitHub, Google, Slack, Stripe, JWT, PEM, secret-assignments, entropy) that exits non-zero on findings.
+  - `scripts/prompt-lint.py` — Phase 3 sanity-check now lints the prompt block: required skeleton, a machine-verifiable SUCCESS TEST, a concrete OUTPUT FORMAT, and that embedded JSON parses.
+  - `scripts/dry-run.py` — Phase 3 Dry-Run now validates the declared OUTPUT FORMAT (JSON schema / example / table) and conforms a `--mock` output against it.
+- Added `scripts/README.md`; wired all three into SKILL.md by relative path; noted them in "At a glance". Self-tested (clean/dirty, pass/fail, conform/non-conform) before shipping.
+
+## [plugin 0.9.0] — 2026-06-08
+
+### jail-prompt → 1.5.0
+- **Four-bias discernment.** The single "discernment over agreeableness" line is now an explicit four-bias pressure-test run on every request: tool/model bias, fact bias, effort bias, and proceed bias. Makes "challenge the premise, not just the wording" concrete and checkable.
+- **Comprehension gate (Phase 1).** Phase 1 now opens with a hard ≥97%-understanding gate: restate the objective *and why* in your own words before advancing, watch for the XY problem, never fake the number. Applies in every lane — Instant/Lite run it silently and escalate to Full if the bar isn't met.
+- **Task decomposition (Phase 1).** Added an explicit "decompose into task types and route each separately" step (build/code, real-time research, settled research, creative, image/file generation, analysis), since most requests are a combination and one prompt doing all of it does each poorly. Feeds the Phase 2 right-tool check and the Phase 3 chain.
+- **Sharper effort-vs-payoff (Phase 2 #3).** The Build-vs-Buy disqualifier now weighs effort in BOTH tokens and the user's own effort, and recommends a far cheaper path when it reaches ≥99% of the goal — even if that means a smaller prompt, a non-AI tool, or an off-the-shelf product.
+
 ## [plugin 0.6.0] — 2026-06-03
 
 ### jail-prompt → 1.3.0
