@@ -1,0 +1,8 @@
+{
+  "ide_targets": ["Antigravity", "VS Code", "Cursor"],
+  "cli_targets": ["Claude Code", "Codex CLI", "OpenCode", "Gemini CLI"],
+  "output": {
+    "emit_json": true,
+    "save_history": true
+  }
+}

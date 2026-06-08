@@ -103,3 +103,12 @@ Then offer to run it. If accepted, execute with the tools Phase 2 identified. If
 
 **Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock execution script/file in the workspace's `scratch/` folder with mock data or test inputs. Run a dry execution of the prompt using local sandbox tools to ensure formatting schemas (e.g. JSON schemas, tables) parse correctly and security guardrails hold, before presenting the finalized prompt to the user.
 
+## Gotchas
+Failure modes seen in practice — check against these before returning:
+- **Collapsing into the task.** Silently doing the work and returning only the result. The engineered prompt is the deliverable; surface the copyable block *first*, then offer to run it.
+- **Praising a flawed premise.** Going along with a bad idea to seem helpful. A flawed premise is a **STOP** no matter how good a prompt you could write — discernment over agreeableness.
+- **Re-engineering a finished prompt.** If the user pasted a complete, runnable prompt and wants it executed verbatim, run it — don't trigger the workflow.
+- **Lane inflation.** Running Full ceremony (multi-question gate) on a trivially clear, low-stakes ask. Match the lane to the stakes; default to the lightest lane that still earns the result.
+- **Fake SUCCESS TEST.** A subjective-only test that can't fail. Require at least one programmatic/machine-verifiable check.
+- **Reference link rot.** Keep `references/*.md` links **relative**. Absolute machine-specific paths (e.g. `file:///C:/Users/...`) break the moment the skill is installed elsewhere.
+
