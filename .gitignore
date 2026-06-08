@@ -25,6 +25,11 @@ venv/
 # (remove this line if you'd rather ship the .skill in the repo)
 *.skill
 
+# Per-skill Claude.ai upload zips — regenerate with scripts/build-zips.sh and
+# attach to GitHub Releases. Must NOT be committed: Cowork's GitHub plugin
+# installer zips the whole repo and rejects nested .zip files.
+dist/
+
 # Original handoff bundle (internal history; un-ignore if you want it public)
 files.zip
 
