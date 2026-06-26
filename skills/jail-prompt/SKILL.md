@@ -109,4 +109,27 @@ Sanity-check the prompt against `references/antipatterns.md` (over-constraining,
 
 **Self-critique pass (one round, before surfacing) — prefer an external check.** Read the prompt back adversarially: argue the single strongest case that it will produce the wrong or weak result — a leading SUCCESS TEST, a missing capability, an ambiguous OBJECTIVE, an unenforced constraint — then apply that one highest-impact fix. **Where a second model or a retrieval/grounding tool is available, route the critique and any citation check to it rather than the answering model** — a model "verifying" its own citation just re-describes its own hallucination. Same-model critique is the fallback, not the default. This is a single pass, not an open loop. Where this skill can't run (another model, a bare chat), hand the user the install-free [meta-prompt.md](references/meta-prompt.md), which folds this whole workflow into one pasteable block.
 
-**Always surface the engineered prompt before acting — it's
+**Always surface the engineered prompt before acting — it's the deliverable, not a byproduct.** Output the copyable block first, even when the task is immediately executable and you intend to run it yourself; don't collapse into silently doing the task and returning only the result. This binds every lane: Instant returns the prompt, Lite includes it in the one reply, Full produces it after the gate, and even a big agentic task you mean to run end-to-end shows the prompt that drives it first. Exceptions: a STOP (no prompt), or the user explicitly says *"just do it"* (then state the one-line OBJECTIVE + SUCCESS TEST and proceed). 
+
+Offer the option to automatically save the approved prompt directly to a project-local `prompts.json` configuration file or to a dedicated file in the workspace's `prompts/` directory for one-click reuse.
+
+
+Then offer to run it. If accepted, execute with the tools Phase 2 identified. If declined, stop cleanly.
+
+**Post-run tighten loop** (one pass, not endless polishing): grade the actual output against its SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, and re-grade once. Then ship with the self-score and any flagged gaps. One targeted fix beats five cosmetic ones; a good-enough result now beats a marginally-better one the user is still waiting on.
+
+**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock output to the workspace's `scratch/` folder and run `scripts/dry-run.py <prompt-file> --mock <scratch/mock>` — it confirms the declared OUTPUT FORMAT (JSON schema, JSON example, or markdown table) parses and that the mock conforms, before you present the finalized prompt. Catches a broken schema or mismatched table here, not in production. **Determinism self-test:** for prompts that declare `temperature: 0.0` and a strict schema, run `dry-run.py` (or the prompt itself) twice against the same mock and diff the structures — identical structure confirms the idempotency the METADATA promises; a diff means the schema isn't actually pinning the output.
+
+## Gotchas
+Failure modes seen in practice — check against these before returning:
+- **Collapsing into the task.** Silently doing the work and returning only the result. The engineered prompt is the deliverable; surface the copyable block *first*, then offer to run it.
+- **Praising a flawed premise.** Going along with a bad idea to seem helpful. A flawed premise is a **STOP** no matter how good a prompt you could write — discernment over agreeableness.
+- **Re-engineering a finished prompt.** If the user pasted a complete, runnable prompt and wants it executed verbatim, run it — don't trigger the workflow.
+- **Lane inflation.** Running Full ceremony (multi-question gate) on a trivially clear, low-stakes ask. Match the lane to the stakes; default to the lightest lane that still earns the result.
+- **Fake SUCCESS TEST.** A subjective-only test that can't fail. Require at least one programmatic/machine-verifiable check.
+- **Reference link rot.** Keep `references/*.md` links **relative**. Absolute machine-specific paths (e.g. `file:///C:/Users/...`) break the moment the skill is installed elsewhere.
+- **Broken chain handoff.** A chain step that consumes a key no earlier step produces, or per-step tests that pass while the chain goal is missed. Emit a manifest, run `scripts/chain-lint.py`, and grade the chain-level SUCCESS TEST — not just the per-step ones.
+- **Chaining the trivial.** Splitting a task one good prompt could handle into a multi-step chain. Chain only when stages need different expertise, separate verification, or human judgment between them; otherwise one prompt wins.
+- **Self-graded verification.** Asking the answering model to check its own citations or critique its own answer — it re-describes its own errors. Route verification to a different model or a retrieval tool; same-model is the fallback.
+- **Truth tags as theater.** Prose `✓Known` labels the model assigns to itself. Require the schema form (status + evidence ids) and run `scripts/truth-lint.py`; an unevidenced `✓Known` triggers re-query, not acceptance.
+

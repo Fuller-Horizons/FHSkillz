@@ -2,6 +2,11 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.11.0] — 2026-06-14
+
+### jail-rate → 1.0.0 (new)
+- **New skill.** Rates software products on a disciplined 0.0–10.0 scale across five weighted dimensions — software quality 25%, features 20%, usability 20%, security 20%, marketability 15%. Includes named calibration bands (anti-inflation), a critical-flaw cap (a blocking issue caps its dimension ≤4.0), prioritized impact×effort recommendations, and a projected **post-improvement** rating (current → potential) shown as a scorecard.
+
 ## [plugin 0.10.0] — 2026-06-08
 
 ### jail-prompt → 1.6.0
