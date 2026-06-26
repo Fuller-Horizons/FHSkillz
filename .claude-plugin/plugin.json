@@ -1,0 +1,11 @@
+{
+  "name": "fh-skillz",
+  "version": "0.16.0",
+  "description": "Every Fuller Horizons skill. Installs all skills in one command.",
+  "author": {
+    "name": "Fuller Horizons",
+    "url": "https://github.com/Fuller-Horizons"
+  },
+  "homepage": "https://github.com/Fuller-Horizons/FHSkillz",
+  "license": "see LICENSE"
+}

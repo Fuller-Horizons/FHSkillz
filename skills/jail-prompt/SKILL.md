@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.9.0
+  version: 1.9.1
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -127,9 +127,8 @@ Failure modes seen in practice — check against these before returning:
 - **Re-engineering a finished prompt.** If the user pasted a complete, runnable prompt and wants it executed verbatim, run it — don't trigger the workflow.
 - **Lane inflation.** Running Full ceremony (multi-question gate) on a trivially clear, low-stakes ask. Match the lane to the stakes; default to the lightest lane that still earns the result.
 - **Fake SUCCESS TEST.** A subjective-only test that can't fail. Require at least one programmatic/machine-verifiable check.
-- **Reference link rot.** Keep `references/*.md` links **relative**. Absolute machine-specific paths (e.g. `file:///C:/Users/...`) break the moment the skill is installed elsewhere.
+- **Reference link rot.** Keep `references/*.md` links **relative**. Absolute machine-specific paths (e.g. `file:///absolute/path/...`) break the moment the skill is installed elsewhere.
 - **Broken chain handoff.** A chain step that consumes a key no earlier step produces, or per-step tests that pass while the chain goal is missed. Emit a manifest, run `scripts/chain-lint.py`, and grade the chain-level SUCCESS TEST — not just the per-step ones.
 - **Chaining the trivial.** Splitting a task one good prompt could handle into a multi-step chain. Chain only when stages need different expertise, separate verification, or human judgment between them; otherwise one prompt wins.
 - **Self-graded verification.** Asking the answering model to check its own citations or critique its own answer — it re-describes its own errors. Route verification to a different model or a retrieval tool; same-model is the fallback.
-- **Truth tags as theater.** Prose `✓Known` labels the model assigns to itself. Require the schema form (status + evidence ids) and run `scripts/truth-lint.py`; an unevidenced `✓Known` triggers re-query, not acceptance.
-
+- **Truth tags as theater.** Prose `✓Known` labels the model assigns to itself. Require the schema form (status + evidence ids) and run `scripts/truth-lint.py`; an unevidenced `✓Known` triggers re-query, not acceptan
