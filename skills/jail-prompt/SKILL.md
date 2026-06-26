@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.8.0
+  version: 1.9.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -9,7 +9,7 @@ description: Pre-flight workflow that converts a vague desired result into an en
 
 Jonathan's Actually Intelligent Logic for Prompting.
 
-**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), failure modes in [antipatterns.md](references/antipatterns.md), multi-prompt chaining in [chaining.md](references/chaining.md), and a portable, install-free version in [meta-prompt.md](references/meta-prompt.md). Bundled checks live in `scripts/` (`secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `chain-lint.py` — see [scripts/README.md](scripts/README.md)).
+**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), failure modes in [antipatterns.md](references/antipatterns.md), multi-prompt chaining in [chaining.md](references/chaining.md), epistemic truth-tagging in [truth-tagging.md](references/truth-tagging.md), per-mode inference settings in [generation-settings.md](references/generation-settings.md), and a portable, install-free version in [meta-prompt.md](references/meta-prompt.md). Bundled checks live in `scripts/` (`secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `chain-lint.py`, `truth-lint.py` — see [scripts/README.md](scripts/README.md)).
 
 Turn a half-formed goal into either a STOP or an engineered prompt that's grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
@@ -44,6 +44,8 @@ Speed comes from doing less on easy tasks, never from weakening judgment on hard
 
 Most requests are a *combination*. Name each part and handle each with the right tool — one prompt doing live research + code + image generation at once usually does all three poorly. This feeds the Phase 2 right-tool check and becomes the Phase 3 chain.
 
+**Declare the epistemic mode and hold it.** Tag the work Factual / Research / Brainstorm / Critique and don't let it drift — Factual/Research demand grounded, tagged claims; only Brainstorm permits ungrounded speculation, and even then each speculative claim is marked. The mode sets the bar for the SUCCESS TEST and the generation settings (Phase 3, [generation-settings.md](references/generation-settings.md)).
+
 Restate the objective in one sentence + a one-line success test, and get the user's nod. When the goal is itself a metric ("convert better," "rank higher"), anchor the success test to that measured outcome, not a proxy.
 
 Confirm output format before building — offer a quick multiple choice with a recommended default (table · prose report · bullet summary · step-by-step guide · ready-to-use code/template), referencing [templates.md](references/templates.md). Whatever they pick becomes the Phase 3 **OUTPUT FORMAT** line. Instant applies the obvious default; Lite states the default it's assuming.
@@ -76,7 +78,7 @@ Readiness gate: advance only when confident the output will be efficient, secure
 - **GO** (with notes) — gate clear; go to Phase 3.
 - **STOP** — wrong tool, ungroundable, low payoff, or readiness unreachable. Say why in a sentence or two, then offer a multiple-choice next step: reframe to make it viable / use the better non-AI approach / proceed with explicit caveats / drop it. Never slide past a STOP into prompt-writing.
 
-High-stakes escalation (optional): if the task is consequential *and* contested (irreversible, money, legal/medical/safety, or expert-disputed claims), add a self-adversarial pass to Phase 3's BEFORE RETURNING — argue the strongest case against the output, then resolve or flag it.
+High-stakes escalation (optional): if the task is consequential *and* contested (irreversible, money, legal/medical/safety, or expert-disputed claims), add a self-adversarial pass to Phase 3's BEFORE RETURNING — argue the strongest case against the output, then resolve or flag it. Route it to a different model/critic where possible, require it to cite different sources or principles than the main answer, and for consequential calls replace open prose with a standardized **impact × likelihood × reversibility** risk rating.
 
 ## Phase 3 — Engineer the prompt
 
@@ -98,21 +100,13 @@ OBJECTIVE: <one sentence>
 SUCCESS TEST: <how the output is judged — from Phase 1. Must include at least one programmatic/machine-verifiable check (e.g. test suite execution or script run) rather than relying solely on subjective review>
 PROCESS: 1) … 2) … 3) …
 SOURCES: <tier + recency + cross-check rule, if research is involved>
-OUTPUT FORMAT: <show the exact shape, not just its name — a filled mini-example, a header row, or a schema the model copies. Refer to [templates.md](references/templates.md) for pre-engineered output schemas. When structural predictability is required, mandate strict machine-readable schemas like JSON Schema to enforce idempotency.>
+OUTPUT FORMAT: <show the exact shape, not just its name — a filled mini-example, a header row, or a schema the model copies. Refer to [templates.md](references/templates.md) for pre-engineered output schemas. When structural predictability is required, mandate strict machine-readable schemas like JSON Schema to enforce idempotency. For factual/research output, tag each material claim ✓Known / ~Infer / ?Unknown as structured fields (status, evidence_count, source_ids) — not prose — so a linter can reject a ✓Known with zero evidence; prefer ?Unknown to a confident guess. See [truth-tagging.md](references/truth-tagging.md).>
 CONSTRAINTS: <scope, length limits (include explicit token-budgets or character limits to prevent context bloat), client-portability requirements (must remain plaintext/markdown, avoiding proprietary IDE commands), things to avoid>
+VERIFICATION PLAN: <what to check next; mark each step [AUTO] (a tool or second model runs it) or [HUMAN]; lead with the check most likely to FALSIFY the output, not the easiest confirmation. If [AUTO] checks disagree, mark the result provisional.>
 BEFORE RETURNING: self-check against SUCCESS TEST; 1–5 self-score on grounded / verifiable / scoped / format-matched + confidence (0–100%); flag gaps + assumptions; then surface the 1–2 knobs the user can turn for a different cut (shorter / more sources / regrouped) — a bounded revision handle, not an open loop.
 ```
-Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests), then lint it with `scripts/prompt-lint.py` — it enforces the skeleton, fails a SUCCESS TEST with no machine-verifiable check, flags an OUTPUT FORMAT that only names a shape, and confirms any embedded JSON parses.
+Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests), then lint it with `scripts/prompt-lint.py` — it enforces the skeleton, fails a SUCCESS TEST with no machine-verifiable check, flags an OUTPUT FORMAT that only names a shape, and confirms any embedded JSON parses. For a factual/research prompt that carries tagged claims, also validate the claim block with `scripts/truth-lint.py` (add `--require-evidence` when SOURCES declares a retrieval capability).
 
-**Self-critique pass (one round, before surfacing).** Read the prompt back adversarially: argue the single strongest case that it will produce the wrong or weak result — a leading SUCCESS TEST, a missing capability, an ambiguous OBJECTIVE, an unenforced constraint — then apply that one highest-impact fix. This is the model-driven complement to the script lints (which catch structure, not intent); it's a single pass, not an open loop. Where this skill can't run (another model, a bare chat), hand the user the install-free [meta-prompt.md](references/meta-prompt.md), which folds this whole workflow into one pasteable block.
+**Self-critique pass (one round, before surfacing) — prefer an external check.** Read the prompt back adversarially: argue the single strongest case that it will produce the wrong or weak result — a leading SUCCESS TEST, a missing capability, an ambiguous OBJECTIVE, an unenforced constraint — then apply that one highest-impact fix. **Where a second model or a retrieval/grounding tool is available, route the critique and any citation check to it rather than the answering model** — a model "verifying" its own citation just re-describes its own hallucination. Same-model critique is the fallback, not the default. This is a single pass, not an open loop. Where this skill can't run (another model, a bare chat), hand the user the install-free [meta-prompt.md](references/meta-prompt.md), which folds this whole workflow into one pasteable block.
 
-**Always surface the engineered prompt before acting — it's the deliverable, not a byproduct.** Output the copyable block first, even when the task is immediately executable and you intend to run it yourself; don't collapse into silently doing the task and returning only the result. This binds every lane: Instant returns the prompt, Lite includes it in the one reply, Full produces it after the gate, and even a big agentic task you mean to run end-to-end shows the prompt that drives it first. Exceptions: a STOP (no prompt), or the user explicitly says *"just do it"* (then state the one-line OBJECTIVE + SUCCESS TEST and proceed). 
-
-Offer the option to automatically save the approved prompt directly to a project-local `prompts.json` configuration file or to a dedicated file in the workspace's `prompts/` directory for one-click reuse.
-
-
-Then offer to run it. If accepted, execute with the tools Phase 2 identified. If declined, stop cleanly.
-
-**Post-run tighten loop** (one pass, not endless polishing): grade the actual output against its SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, and re-grade once. Then ship with the self-score and any flagged gaps. One targeted fix beats five cosmetic ones; a good-enough result now beats a marginally-better one the user is still waiting on.
-
-**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock output to the workspace's `scratch/` folder and run `scripts/dry-run.py <prompt-file> --mock <scratch/mock>` — it confirms the declared OUTPUT FORMAT (JSON schema, JSON example, or markdown table) parses and that the mock conforms, before you present the finalized prompt. Catches a broken schema or mismatched table here, not in production. **Determinism self-test:** for prompts that declare `temperature: 0.0` and a strict schema, run `dry-run.py` (or the p
+**Always surface the engineered prompt before acting — it's
