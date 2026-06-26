@@ -1,54 +1,67 @@
-# Install a skill on Claude.ai (the easy way)
+# Install the FHSkillz skills (the easy way)
 
-No coding, no git, no terminal. About 3 minutes.
+No git, no terminal. About 2 minutes. This installs **every** Fuller Horizons skill at once as the `fh-skillz` plugin.
 
-> You need a **Pro, Max, Team, or Enterprise** Claude.ai account (custom skills aren't available on the free plan).
-
----
-
-## Step 1 — Download the skill file
-
-Click the link below. It downloads one file called **`jail-prompt.zip`** — leave it zipped, don't open it.
-
-**➡️ [Download jail-prompt.zip](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/jail-prompt.zip)**
-
-(If the link opens a page instead of downloading, click the **Download** button / the download icon on that page.)
-
-> **Want a different skill?** The same steps work for any skill ZIP in [`dist/`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/dist) — for example [company-prospect-research.zip](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/company-prospect-research.zip). Download it instead and follow the rest of this guide unchanged.
+> You need a plan that supports custom skills/plugins (Pro, Max, Team, or Enterprise — not the free plan), and the Claude desktop app / Cowork or Claude Code.
 
 ---
 
-## Step 2 — Turn on the setting that lets skills run
+## Step 1 — Turn on code execution
 
-1. In Claude.ai, click your name / icon (bottom-left) → **Settings**.
+1. In Claude, open **Settings**.
 2. Open **Capabilities**.
 3. Turn **on** *Code execution & file creation*.
 
-Skills won't work without this, so don't skip it.
+Skills won't run without this, so don't skip it.
 
 ---
 
-## Step 3 — Upload the skill
+## Step 2 — Install the plugin
 
-1. Go to **Settings → Customize → Skills** (or click **Customize**, then **Skills**).
-2. Click the **+** button, then **+ Create skill**.
-3. Choose the **`jail-prompt.zip`** file you downloaded in Step 1.
-4. It appears in your skills list. Make sure its toggle is **on**.
+**Desktop / Cowork (clicks only):**
+
+1. Go to **Settings → Customize → Plugins**.
+2. Find **fh-skillz** (by FHSkillz). If it isn't listed, add the marketplace first: choose **Add marketplace** and enter `Fuller-Horizons/FHSkillz`.
+3. Click **Install**.
+
+**Claude Code (commands):**
+
+```
+/plugin marketplace add Fuller-Horizons/FHSkillz
+/plugin install fh-skillz@fh-skillz
+```
+
+That's it — all the skills come in together (jail-prompt, company-prospect-research, jail-rate, rate-skill).
 
 ---
 
-## Step 4 — Try it
+## Step 3 — Try it
 
-Start a normal chat and type something like:
+Restart / reload, then start a normal chat and type something like:
 
 > *I want my landing page to convert better — help me prompt this the right way.*
 
-The skill should kick in automatically and walk you through it. That's it.
+The `jail-prompt` skill should kick in automatically. Skills fire on their own based on what you ask — there's nothing to turn on per skill.
+
+---
+
+## Updating later
+
+When new skills or versions ship, refresh:
+
+- **Desktop / Cowork:** Settings → Customize → Plugins → **fh-skillz** → **Update**.
+- **Claude Code:**
+  ```
+  /plugin marketplace update fh-skillz
+  /plugin update fh-skillz
+  ```
+
+Reload the app afterward so the new versions load.
 
 ---
 
 ## Notes
 
-- Skills you upload are **private to your account**. On Team/Enterprise plans, an admin can share them with everyone through organization settings.
-- To **update** later: download the latest `jail-prompt.zip` and upload it again the same way.
+- Installed skills are **private to your account**. On Team/Enterprise plans an admin can share them org-wide.
 - Only install skills from people you trust — skills can contain code.
+- **Want just one skill on Claude.ai web (not the whole plugin)?** Build that skill's upload ZIP locally with `./scripts/build-zips.sh` and upload it under **Settings → Customize → Skills**. (ZIPs aren't kept in the repo — the plugin installer rejects nested ZIPs — so there's no `dist/` download link.)
