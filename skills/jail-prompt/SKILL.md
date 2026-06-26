@@ -1,7 +1,7 @@
 ---
 name: jail-prompt
 metadata:
-  version: 1.6.0
+  version: 1.8.0
 description: Pre-flight workflow that converts a vague desired result into an engineered, verifiable, token-efficient prompt — after deciding whether the task is even worth doing with AI. Use whenever the user states an outcome but hasn't written a real prompt, asks to "make this prompt better," wants to know if AI is the right tool, says they want to use AI "correctly" / "properly" / "without wasting tokens or time," pastes a rough goal, or describes a result they want without a plan. Trigger even when they only state a result and don't ask for prompt help — that's exactly when it's most valuable. Do not trigger for a fully-specified prompt the user just wants executed verbatim, or for plain conversation.
 ---
 
@@ -9,7 +9,7 @@ description: Pre-flight workflow that converts a vague desired result into an en
 
 Jonathan's Actually Intelligent Logic for Prompting.
 
-**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), and failure modes in [antipatterns.md](references/antipatterns.md). Bundled checks live in `scripts/` (`secret-scan.py`, `prompt-lint.py`, `dry-run.py` — see [scripts/README.md](scripts/README.md)).
+**At a glance:** a stakes triage routes each task to the lightest path that still earns the result — **Instant** (clear, low-stakes → straight to the prompt), **Lite** (assumptions + verdict + draft in one reply), or **Full** (Phase 1 Frame & Clarify → Phase 2 Viability gate → Phase 3 Engineer the prompt, pausing for answers). Same three phases underneath; the lane sets the ceremony. References load only when needed: worked examples (including Lite vs Full lane output comparisons) in [examples.md](references/examples.md), source-tiering in [sources.md](references/sources.md), failure modes in [antipatterns.md](references/antipatterns.md), multi-prompt chaining in [chaining.md](references/chaining.md), and a portable, install-free version in [meta-prompt.md](references/meta-prompt.md). Bundled checks live in `scripts/` (`secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `chain-lint.py` — see [scripts/README.md](scripts/README.md)).
 
 Turn a half-formed goal into either a STOP or an engineered prompt that's grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
@@ -60,14 +60,14 @@ Disqualifiers (short-circuit to STOP on the first decisive failure):
 
 
 2. **Groundable?** Is the answer backable by free, current, authoritative sources? If not, name the gap and the options.
-3. **Effort vs. payoff (Build vs. Buy)?** Does the value justify the work? Cheap-and-good beats elaborate-and-marginal. Make sure the user is not spending time building or designing something that is already available for free on the internet (e.g., existing tools, open-source libraries). If the level of effort to build it is high, evaluate and present paid/commercial options in the market that the user could purchase to accomplish their goal. Run a quick online search across repositories (like GitHub) and extension marketplaces (like VS Code Marketplace, npm, or PyPI) to check for existing pre-built registries before suggesting a custom build. Weigh effort in BOTH tokens and the user's own effort. If a far cheaper path reaches ≥99% of what the user wants, recommend it over the elaborate one — even if that means a smaller prompt, a non-AI tool, or an off-the-shelf product.
+3. **Effort vs. payoff (build vs. buy)?** Does the value justify the work? Before suggesting a custom build, search repos and marketplaces (GitHub, VS Code Marketplace, npm, PyPI) for an existing free tool, and weigh paid/off-the-shelf options for high-effort goals. Cost counts in both tokens and the user's own effort; if a far cheaper path reaches ≥99% of the goal, recommend it — even a smaller prompt, a non-AI tool, or a purchased product.
 
 
 
 Only once it clears:
 
 4. **Enhancement?** What one or two additions would materially improve the result?
-5. **Secure?** If the task touches API keys, credentials, secrets, PII, tokens, or system access, bake safe handling into the plan — env vars not hardcoding, least privilege (scoped / read-only / restricted creds), localhost-only binding, nothing logged — and carry each into the prompt's CONSTRAINTS and PROCESS, not just the gate discussion. Least-privilege is the highest-leverage and easiest to forget; make it explicit ("use a restricted, read-only key, never the full secret"). Run `scripts/secret-scan.py` on supplied inputs/files (it flags high-entropy keys and hardcoded secrets and exits non-zero); replace anything it finds with environment variables before generating the prompt. If the generated prompt processes untrusted user/external input, include explicit **Prompt Injection Defense** (e.g., encapsulating inputs in distinct XML/Markdown tags, strictly prohibiting the execution of payload-contained commands, and sanitizing outputs).
+5. **Secure?** If the task touches API keys, credentials, secrets, PII, tokens, or system access, bake safe handling into the plan — env vars not hardcoding, least privilege (scoped / read-only / restricted creds), localhost-only binding, nothing logged — and carry each into the prompt's CONSTRAINTS and PROCESS, not just the gate discussion. Least-privilege is the highest-leverage and easiest to forget; make it explicit ("use a restricted, read-only key, never the full secret"). Run `scripts/secret-scan.py` on supplied inputs/files (it flags high-entropy keys and hardcoded secrets and exits non-zero); replace anything it finds with environment variables before generating the prompt. If the generated prompt processes untrusted user/external input, include explicit **Prompt Injection Defense** (e.g., encapsulating inputs in distinct XML/Markdown tags, strictly prohibiting the execution of payload-contained commands, and sanitizing outputs). **Output sanitization is not optional when output is rendered or executed downstream:** require the prompt to strip/escape anything that could be interpreted as markup, code, or a tool call by the consumer (HTML/JS, shell, SQL, further LLM instructions), and add a SUCCESS TEST assertion that a known-malicious sample input produces inert output.
 
 
 
@@ -87,11 +87,11 @@ Rewrite as a senior prompt engineer would, optimizing for:
 - **Simplicity** — only what the goal needs; no unrequested scope. Premium ≠ bloated.
 - **Token efficiency** — what's needed, nothing more, in both prompt and expected output.
 
-Decompose if it won't fit one prompt: output a short **chain** of 2–4 sequenced prompts with handoffs and human checkpoints, not a mega-prompt. Even when the user asks for "one prompt," if one can't do the job well, give the chain and explain why, offering a single-prompt fallback. (Distinct stages needing different expertise, separate verification, or human judgment between them — e.g. *extract findings → derive personas → prioritize roadmap → model finances* — are the signal to chain.)
+Decompose if it won't fit one prompt: output a short **chain** of 2–4 sequenced prompts with handoffs and human checkpoints, not a mega-prompt. Even when the user asks for "one prompt," if one can't do the job well, give the chain and explain why, offering a single-prompt fallback. (Distinct stages needing different expertise, separate verification, or human judgment between them — e.g. *extract findings → derive personas → prioritize roadmap → model finances* — are the signal to chain.) **When you chain, load [chaining.md](references/chaining.md)** and emit a chain manifest alongside the prompt blocks: it makes every handoff explicit (each step's `produces` keys are the only things later steps may `requires`), defines the checkpoint gate between steps (`retry` / `stop` / `rollback` / `human` on a failed step), and a chain-level SUCCESS TEST. Lint the manifest with `scripts/chain-lint.py` — it fails on a broken handoff (a step requiring a key no earlier step produces) before a single token runs.
 
 Output each prompt in a copyable block using this skeleton (omit lines that don't apply):
 ```
-METADATA: <YAML block detailing inputs, outputs, parameters (e.g. temperature: 0.0 for low-variance structure/idempotency), prerequisite skills, and downstream dependencies for other agents/processes>
+METADATA: <YAML block with a fixed key set so downstream agents can parse the handoff: `inputs:` `outputs:` `params:` (e.g. temperature: 0.0 for low-variance/idempotent structure) `requires:` (prerequisite skills/tools) `produces:` (downstream dependencies). Keep these keys even when a value is "none".>
 ROLE: <expert framing — only if it shifts expertise/standards>
 CONTEXT: <user-specific facts, constraints, environment, what's been tried — from Phase 1>
 OBJECTIVE: <one sentence>
@@ -104,6 +104,8 @@ BEFORE RETURNING: self-check against SUCCESS TEST; 1–5 self-score on grounded 
 ```
 Sanity-check the prompt against `references/antipatterns.md` (over-constraining, fake precision, leading-the-witness, unverifiable tests), then lint it with `scripts/prompt-lint.py` — it enforces the skeleton, fails a SUCCESS TEST with no machine-verifiable check, flags an OUTPUT FORMAT that only names a shape, and confirms any embedded JSON parses.
 
+**Self-critique pass (one round, before surfacing).** Read the prompt back adversarially: argue the single strongest case that it will produce the wrong or weak result — a leading SUCCESS TEST, a missing capability, an ambiguous OBJECTIVE, an unenforced constraint — then apply that one highest-impact fix. This is the model-driven complement to the script lints (which catch structure, not intent); it's a single pass, not an open loop. Where this skill can't run (another model, a bare chat), hand the user the install-free [meta-prompt.md](references/meta-prompt.md), which folds this whole workflow into one pasteable block.
+
 **Always surface the engineered prompt before acting — it's the deliverable, not a byproduct.** Output the copyable block first, even when the task is immediately executable and you intend to run it yourself; don't collapse into silently doing the task and returning only the result. This binds every lane: Instant returns the prompt, Lite includes it in the one reply, Full produces it after the gate, and even a big agentic task you mean to run end-to-end shows the prompt that drives it first. Exceptions: a STOP (no prompt), or the user explicitly says *"just do it"* (then state the one-line OBJECTIVE + SUCCESS TEST and proceed). 
 
 Offer the option to automatically save the approved prompt directly to a project-local `prompts.json` configuration file or to a dedicated file in the workspace's `prompts/` directory for one-click reuse.
@@ -113,14 +115,4 @@ Then offer to run it. If accepted, execute with the tools Phase 2 identified. If
 
 **Post-run tighten loop** (one pass, not endless polishing): grade the actual output against its SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, and re-grade once. Then ship with the self-score and any flagged gaps. One targeted fix beats five cosmetic ones; a good-enough result now beats a marginally-better one the user is still waiting on.
 
-**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock output to the workspace's `scratch/` folder and run `scripts/dry-run.py <prompt-file> --mock <scratch/mock>` — it confirms the declared OUTPUT FORMAT (JSON schema, JSON example, or markdown table) parses and that the mock conforms, before you present the finalized prompt. Catches a broken schema or mismatched table here, not in production.
-
-## Gotchas
-Failure modes seen in practice — check against these before returning:
-- **Collapsing into the task.** Silently doing the work and returning only the result. The engineered prompt is the deliverable; surface the copyable block *first*, then offer to run it.
-- **Praising a flawed premise.** Going along with a bad idea to seem helpful. A flawed premise is a **STOP** no matter how good a prompt you could write — discernment over agreeableness.
-- **Re-engineering a finished prompt.** If the user pasted a complete, runnable prompt and wants it executed verbatim, run it — don't trigger the workflow.
-- **Lane inflation.** Running Full ceremony (multi-question gate) on a trivially clear, low-stakes ask. Match the lane to the stakes; default to the lightest lane that still earns the result.
-- **Fake SUCCESS TEST.** A subjective-only test that can't fail. Require at least one programmatic/machine-verifiable check.
-- **Reference link rot.** Keep `references/*.md` links **relative**. Absolute machine-specific paths (e.g. `file:///C:/Users/...`) break the moment the skill is installed elsewhere.
-
+**Dry Run Sandbox Verification**: For high-stakes prompts, write a temporary mock output to the workspace's `scratch/` folder and run `scripts/dry-run.py <prompt-file> --mock <scratch/mock>` — it confirms the declared OUTPUT FORMAT (JSON schema, JSON example, or markdown table) parses and that the mock conforms, before you present the finalized prompt. Catches a broken schema or mismatched table here, not in production. **Determinism self-test:** for prompts that declare `temperature: 0.0` and a strict schema, run `dry-run.py` (or the p
