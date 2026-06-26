@@ -24,4 +24,9 @@ All notable changes to this skill. Versions track `metadata.version` in SKILL.md
 - Standardized the METADATA handoff block to a fixed key set (`inputs`/`outputs`/`params`/`requires`/`produces`) so downstream agents can parse it reliably.
 - Added a mandatory output-sanitization requirement with a malicious-sample SUCCESS TEST assertion for prompts whose output is rendered or executed downstream.
 - Added a determinism self-test in the dry-run step (run twice, diff structure) to verify the idempotency the METADATA promises.
-- Tightened the build-vs-buy gate paragraph to reduce token footprint wit
+- Tightened the build-vs-buy gate paragraph to reduce token footprint without losing meaning.
+
+## 1.6.0
+- Stakes-triage lanes (Instant / Lite / Full) with a silent comprehension gate.
+- Bundled scripts: `secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `validate-skills.py`, `pre-commit-hook.sh`.
+- Reference set: `examples.md`, `sources.md`, `antipatterns.md`, `templates.md`.

@@ -131,4 +131,5 @@ Failure modes seen in practice — check against these before returning:
 - **Broken chain handoff.** A chain step that consumes a key no earlier step produces, or per-step tests that pass while the chain goal is missed. Emit a manifest, run `scripts/chain-lint.py`, and grade the chain-level SUCCESS TEST — not just the per-step ones.
 - **Chaining the trivial.** Splitting a task one good prompt could handle into a multi-step chain. Chain only when stages need different expertise, separate verification, or human judgment between them; otherwise one prompt wins.
 - **Self-graded verification.** Asking the answering model to check its own citations or critique its own answer — it re-describes its own errors. Route verification to a different model or a retrieval tool; same-model is the fallback.
-- **Truth tags as theater.** Prose `✓Known` labels the model assigns to itself. Require the schema form (status + evidence ids) and run `scripts/truth-lint.py`; an unevidenced `✓Known` triggers re-query, not acceptan
+- **Truth tags as theater.** Prose `✓Known` labels the model assigns to itself. Require the schema form (status + evidence ids) and run `scripts/truth-lint.py`; an unevidenced `✓Known` triggers re-query, not acceptance.
+
