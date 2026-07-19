@@ -1,0 +1,152 @@
+{
+  "suite": "kernel+frameworks triggering \u2014 should-trigger pairs + cross-routing near-misses (the collision set)",
+  "cases": [
+    {
+      "id": "k1",
+      "prompt": "Before we start this migration project, make sure we're fully aligned on scope.",
+      "expect": "jail-task-contract"
+    },
+    {
+      "id": "k2",
+      "prompt": "Research the current state of SMB cyber-insurance requirements for me.",
+      "expect": "jail-research"
+    },
+    {
+      "id": "k3",
+      "prompt": "The agent says the deploy is done \u2014 check before we tell the client.",
+      "expect": "jail-verify"
+    },
+    {
+      "id": "k4",
+      "prompt": "Should we build the portal in-house or buy off the shelf?",
+      "expect": "jail-decide"
+    },
+    {
+      "id": "k5",
+      "prompt": "Poke holes in this expansion plan before Thursday's board call.",
+      "expect": "jail-red-team"
+    },
+    {
+      "id": "k6",
+      "prompt": "Turn 'we should follow up leads faster' into an actual process with owners.",
+      "expect": "jail-operationalize"
+    },
+    {
+      "id": "k7",
+      "prompt": "Fan this audit out across a few subagents and merge the results.",
+      "expect": "jail-orchestrate"
+    },
+    {
+      "id": "k8",
+      "prompt": "Summarize this pen-test report for the CEO in one page.",
+      "expect": "jail-exec-brief"
+    },
+    {
+      "id": "k9",
+      "prompt": "What will you do without asking me first on this run?",
+      "expect": "jail-approval-gate"
+    },
+    {
+      "id": "k10",
+      "prompt": "Import these 400 scraped contacts into the CRM.",
+      "expect": "jail-quarantine (adoption gate)"
+    },
+    {
+      "id": "k11",
+      "prompt": "Remember for next time: the client hates October deadlines.",
+      "expect": "jail-memory"
+    },
+    {
+      "id": "k12",
+      "prompt": "Mine SharperOS for disciplines worth adding to the plugin.",
+      "expect": "jail-skill-miner"
+    },
+    {
+      "id": "k13",
+      "prompt": "Keep iterating on this landing page until conversion actually improves.",
+      "expect": "jail-lab"
+    },
+    {
+      "id": "k14",
+      "prompt": "Run a PESTLE for our expansion into Texas municipal contracts.",
+      "expect": "pestle-analysis"
+    },
+    {
+      "id": "k15",
+      "prompt": "SWOT us against the two regional competitors.",
+      "expect": "swot-analysis"
+    },
+    {
+      "id": "k16",
+      "prompt": "Map the business model for the new subscription offering.",
+      "expect": "business-model-canvas"
+    },
+    {
+      "id": "k17",
+      "prompt": "Build the agenda for Monday's board reset meeting.",
+      "expect": "cpr-agenda-builder"
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "n1",
+      "prompt": "Rate this codebase out of 10.",
+      "expect": "jail-rate, NOT jail-verify (score, not completeness)"
+    },
+    {
+      "id": "n2",
+      "prompt": "Verify the final report is complete and grounded before it ships.",
+      "expect": "jail-verify, NOT jail-rate/jail-red-team (finished artifact vs contract)"
+    },
+    {
+      "id": "n3",
+      "prompt": "What am I missing in this draft strategy?",
+      "expect": "jail-red-team, NOT jail-verify (draft, not finished deliverable)"
+    },
+    {
+      "id": "n4",
+      "prompt": "Which CRM should we pick: HubSpot or Zoho?",
+      "expect": "jail-decide, NOT jail-rate (choice among options)"
+    },
+    {
+      "id": "n5",
+      "prompt": "Write me a prompt that makes ChatGPT do this research well.",
+      "expect": "jail-prompt, NOT jail-research (deliverable is a prompt)"
+    },
+    {
+      "id": "n6",
+      "prompt": "Is this plumbing company a good brokerage prospect?",
+      "expect": "company-prospect-research, NOT jail-research/jail-rate"
+    },
+    {
+      "id": "n7",
+      "prompt": "Plan the tasks and owners for the quarter.",
+      "expect": "jail-task-contract/decomposition, NOT cpr-agenda-builder (no meeting)"
+    },
+    {
+      "id": "n8",
+      "prompt": "Summarize what we decided in yesterday's meeting from the transcript.",
+      "expect": "NOT cpr-agenda-builder (post-meeting; wave-3 meeting-to-execution)"
+    },
+    {
+      "id": "n9",
+      "prompt": "Optimize this function's runtime \u2014 here's the benchmark.",
+      "expect": "jail-lab (metric exists), NOT jail-verify"
+    },
+    {
+      "id": "n10",
+      "prompt": "Store this API key so we have it handy later.",
+      "expect": "jail-memory REFUSES (secret) + jail-quarantine halt"
+    },
+    {
+      "id": "n11",
+      "prompt": "Evaluate this skill folder I just wrote.",
+      "expect": "rate-skill, NOT jail-skill-miner/jail-rate"
+    },
+    {
+      "id": "n12",
+      "prompt": "Draft a quick email to Sam about lunch.",
+      "expect": "no kernel skill \u2014 trivial task, direct execution"
+    }
+  ]
+}

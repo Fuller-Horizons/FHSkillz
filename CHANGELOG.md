@@ -2,6 +2,24 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.18.0] — 2026-07-19
+
+**The JAIL OS release** — plugin grows 6 → 24 skills in three governed layers, built by consolidating ~44 candidates (ChatGPT's 16-core + 20 follow-ons, 8 disciplines mined from SharperOS/VanguardOS, karpathy/autoresearch) down to what survived dedup against the existing six.
+
+### New — Layer 1 reasoning kernel (12 × v1.0.0)
+jail-task-contract · jail-research · jail-verify · jail-decide · jail-red-team · jail-orchestrate · jail-approval-gate · jail-quarantine · jail-memory · jail-lab · jail-skill-miner (+ jail-prompt, already shipped). Lean, small-context-first, code-free, each ending in the JAIL-HANDOFF block, each with negative-trigger routing and a Gotchas section.
+
+### New — workflow + frameworks + companion
+jail-operationalize (13-field operating workflows) · jail-exec-brief (executive synthesis + technical translation) · pestle-analysis · swot-analysis · business-model-canvas · cpr-agenda-builder (each chains the kernel by name with inline fallbacks) · **jail-py-lab** (runnable experiment-ledger harness for jail-lab, 9/9 self-tests green; keep/discard/tie verdicts, direction lock, metric-cmd parsing).
+
+### System
+- **docs/JAIL-CONSTITUTION.md** — 12 rules binding every skill + the JAIL-HANDOFF contract.
+- **docs/skill-graph.md** — routing registry: consumes/produces, may-invoke/invoked-by, data sensitivity, failure behavior, forbidden patterns (cycles, unbounded recursion, duplicate research, silent overrides, approval laundering).
+- **docs/ROADMAP-wave3-domain-packs.md** — 17 staged domain skills with the entry bar (4-box filter, dedup, rate-skill ≥8.0).
+- **evals/** — kernel-trigger-evals.json (17 + 12 collision near-misses) and kernel-evals.json (8 required case types + 3 integration chains). Authored, not yet run.
+- jail-prompt auto-triage now names the kernel; jail-rate claim labels reference the constitution taxonomy; CLAUDE.md carries the constitution/graph/small-context conventions.
+- Attribution: jail-lab / jail-py-lab pattern adapted from Andrej Karpathy's autoresearch (MIT).
+
 ## [plugin 0.17.0] — 2026-07-19
 
 The **code-free core** release: every core skill is now instruction-only; all runnable code lives in dedicated JAIL-PY companion skills. Plugin grows from 4 to 6 skills.

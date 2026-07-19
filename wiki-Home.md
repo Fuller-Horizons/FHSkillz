@@ -44,16 +44,14 @@ Scope to a single project instead: clone, then `./scripts/install.sh .claude/ski
 
 ## Available skills
 
-| Skill | What it does |
-|---|---|
-| [`jail-prompt`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-prompt) | Pre-flight workflow that turns a vague goal into either a **STOP** (wrong tool / flawed idea) or an engineered, verifiable, token-efficient prompt. Instruction-only. |
-| [`jail-rate`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-rate) | Universal evidence-based **0.0–10.0 rating of anything** — software, hardware, code, people (professional/public), ideas, programs, services, content — weighted rubric per subject type, every score cited, current → projected. |
-| [`company-prospect-research`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/company-prospect-research) | US private company as a sell-side / consulting prospect, free authoritative sources only — one-page brief with two 0–100 scores, red flags, outreach hook, cited appendix. |
-| [`rate-skill`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/rate-skill) | Rates another AI skill on a 10-category matrix + IDE/CLI compatibility matrices, machine-readable record. Instruction-only. |
-| [`jail-py-prompt-tools`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-py-prompt-tools) | JAIL-PY companion to jail-prompt: runnable secret scan, prompt lint, chain lint, truth lint, dry-run (stdlib Python; optional). |
-| [`jail-py-rate-tools`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-py-rate-tools) | JAIL-PY companion to rate-skill: validate/save rating records, variance check, structure lint (stdlib Python; optional). |
+**24 skills in three layers** (full table in the [repo README](https://github.com/Fuller-Horizons/FHSkillz#available-skills)):
 
-**House rule:** core skills are instruction-only; anything runnable ships as a `jail-py-*` companion the core references with a manual fallback.
+- **Layer 1 — Reasoning kernel:** jail-prompt · jail-task-contract · jail-research · jail-verify · jail-decide · jail-red-team · jail-orchestrate · jail-approval-gate · jail-quarantine · jail-memory · jail-lab (adapted from karpathy/autoresearch, MIT) · jail-skill-miner
+- **Layer 2 — Workflow:** jail-rate · jail-operationalize · jail-exec-brief · rate-skill · company-prospect-research
+- **Layer 3 — Domain packs:** pestle-analysis · swot-analysis · business-model-canvas · cpr-agenda-builder
+- **JAIL-PY companions (code execution):** jail-py-prompt-tools · jail-py-rate-tools · jail-py-lab
+
+Governed by the [JAIL Constitution](https://github.com/Fuller-Horizons/FHSkillz/blob/main/docs/JAIL-CONSTITUTION.md) (12 system rules + a structured handoff contract) and routed per the [skill graph](https://github.com/Fuller-Horizons/FHSkillz/blob/main/docs/skill-graph.md). Core skills are instruction-only; runnable helpers live in jail-py-* companions with manual fallbacks.
 
 ---
 

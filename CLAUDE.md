@@ -33,6 +33,13 @@ repo that bundles all of Fuller Horizons' Claude skills as one installable plugi
 - No secrets/keys committed.
 
 ## CONVENTIONS
+- **The JAIL Constitution** (`docs/JAIL-CONSTITUTION.md`) binds every skill: 12
+  system rules + the JAIL-HANDOFF block kernel skills end with. Routing map:
+  `docs/skill-graph.md`. New skills declare their place in the graph.
+- Skills invoke each other **by name** with a graceful inline fallback — never a
+  hard dependency; chains stay acyclic.
+- Small-context first: lean SKILL.md cores; each skill self-sufficient (the
+  rules it needs are inline, not only linked).
 - Keep SKILL.md short; put long content in `skills/<name>/references/` and link it.
 - **Code-free core skills.** Core skills are instruction-only — no Python or other
   runnable code inside them. Runnable helpers live in dedicated `jail-py-*`

@@ -54,7 +54,9 @@ whatever the user supplied (code, product, document). Exceptions:
   confidence.
 - Every claim behind a score is labeled **Fact** (cited) · **Inference**
   (reasoned from cited evidence) · **Judgment** (expert read, no direct
-  source). A dimension resting only on Judgment gets its confidence capped at
+  source) — the compact form of the constitution's seven-class taxonomy
+  (docs/JAIL-CONSTITUTION.md Rule 1); use the full set when the consumer
+  needs Estimate/User-provided distinguished. A dimension resting only on Judgment gets its confidence capped at
   Low and says so.
 
 ### 4 — Score each dimension (0.0–10.0, one decimal)

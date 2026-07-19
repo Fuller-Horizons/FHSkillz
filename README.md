@@ -6,14 +6,51 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 ## Available skills
 
+### Layer 1 — Reasoning kernel (governs all work)
+
 | Skill | What it does |
 |---|---|
-| [`jail-prompt`](skills/jail-prompt/) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt — with prompt-chaining, epistemic truth-tagging, and verification checkpoints. Instruction-only. |
-| [`jail-rate`](skills/jail-rate/) | Universal evidence-based **0.0–10.0 rating of anything** — software, codebases, hardware, people (professional/public roles only), ideas, programs, services, content — on a weighted rubric matched to the subject type, every score backed by cited empirical evidence, with a projected post-fix rating. |
-| [`company-prospect-research`](skills/company-prospect-research/) | Researches a US private company as a sell-side brokerage / consulting prospect using only free, authoritative sources. Outputs a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity score, red flags, an outreach hook, and a cited source appendix. |
-| [`rate-skill`](skills/rate-skill/) | Evaluates and rates another AI skill using a 10-category Skill Rating Matrix plus IDE/CLI compatibility matrices, with a machine-readable JSON record. Instruction-only. |
-| [`jail-py-prompt-tools`](skills/jail-py-prompt-tools/) | **JAIL-PY companion** to jail-prompt: five runnable checks (secret scan, prompt lint, chain lint, truth lint, dry-run). Stdlib Python; optional — the core skill has manual fallbacks. |
-| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | **JAIL-PY companion** to rate-skill: validate/save rating records, measure score variance, lint skill structure. Stdlib Python; optional — the core skill has manual fallbacks. |
+| [`jail-prompt`](skills/jail-prompt/) | Pre-flight that turns a vague goal into a **STOP** or an engineered, verifiable, token-efficient prompt. |
+| [`jail-task-contract`](skills/jail-task-contract/) | Executable task contracts before work begins; scope guarding after — material change = new contract. |
+| [`jail-research`](skills/jail-research/) | Research into a citable evidence packet — tiered dated sources, contradictions weighed, honest gaps. |
+| [`jail-verify`](skills/jail-verify/) | Independent verification against the contract, on real artifacts — never on an agent's say-so. |
+| [`jail-decide`](skills/jail-decide/) | Decision packages: criteria first, do-nothing priced, reversibility named, change-conditions stated. |
+| [`jail-red-team`](skills/jail-red-team/) | Adversarial pressure-testing — steelman first, three lenses, full bias sweep on consequential calls. |
+| [`jail-orchestrate`](skills/jail-orchestrate/) | Multi-agent runs: delegation gates, scoped briefs, verified-node resume ledger, evidence-based merge. |
+| [`jail-approval-gate`](skills/jail-approval-gate/) | Action tiers (never/per-action/batchable/auto), fail-closed, proper approval requests, audit trail. |
+| [`jail-quarantine`](skills/jail-quarantine/) | Inbound data quarantined until adopted; protected data halts processing and fails closed. |
+| [`jail-memory`](skills/jail-memory/) | Memory governance (six-check ingestion gate, supersede-don't-delete) + the learning-postmortem ritual. |
+| [`jail-lab`](skills/jail-lab/) | Metric-driven experiment loops with an append-only audit ledger — adapted from karpathy/autoresearch (MIT). |
+| [`jail-skill-miner`](skills/jail-skill-miner/) | Mines codebases/histories for plugin-worthy disciplines; dedupes against installed skills; stops for approval. |
+
+### Layer 2 — Workflow skills
+
+| Skill | What it does |
+|---|---|
+| [`jail-rate`](skills/jail-rate/) | Universal evidence-cited **0–10 rating of anything**, weighted rubric per subject type, current → projected. |
+| [`jail-operationalize`](skills/jail-operationalize/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
+| [`jail-exec-brief`](skills/jail-exec-brief/) | Decision-ready executive communication; technical findings translated into business consequences. |
+| [`rate-skill`](skills/rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
+| [`company-prospect-research`](skills/company-prospect-research/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
+
+### Layer 3 — Domain packs
+
+| Skill | What it does |
+|---|---|
+| [`pestle-analysis`](skills/pestle-analysis/) | Evidence-grounded PESTLE tied to a subject + decision, with tripwires per factor. |
+| [`swot-analysis`](skills/swot-analysis/) | Evidence-sorted SWOT → TOWS strategies; the misclassification traps enforced. |
+| [`business-model-canvas`](skills/business-model-canvas/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
+| [`cpr-agenda-builder`](skills/cpr-agenda-builder/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
+
+### JAIL-PY companions (optional; need code execution)
+
+| Skill | Backs |
+|---|---|
+| [`jail-py-prompt-tools`](skills/jail-py-prompt-tools/) | jail-prompt — secret scan, prompt/chain/truth lint, dry-run. |
+| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | rate-skill — validate/save records, variance check, structure lint. |
+| [`jail-py-lab`](skills/jail-py-lab/) | jail-lab — experiment ledger bookkeeping and reports. |
+
+**System docs:** the [JAIL Constitution](docs/JAIL-CONSTITUTION.md) (12 rules + the handoff contract every kernel skill ends with) · the [skill graph](docs/skill-graph.md) (routing registry) · [wave-3 roadmap](docs/ROADMAP-wave3-domain-packs.md).
 
 **House rule:** core skills are instruction-only (no bundled code); anything runnable ships as a `jail-py-*` companion skill the core references with a manual fallback.
 
