@@ -26,6 +26,7 @@ repo that bundles all of Fuller Horizons' Claude skills as one installable plugi
 - Commit + push with a clear message.
 
 ## CHECKS before every commit
+- Run `python3 scripts/validate-skills.py` (frontmatter, name==folder, link rot).
 - Each `skills/*/` has a SKILL.md with valid YAML frontmatter (name + description).
 - Folder name matches frontmatter name. No spaces/uppercase/underscores in names.
 - marketplace.json is valid JSON and skills[] exactly matches the folders present.
@@ -33,7 +34,12 @@ repo that bundles all of Fuller Horizons' Claude skills as one installable plugi
 
 ## CONVENTIONS
 - Keep SKILL.md short; put long content in `skills/<name>/references/` and link it.
-- Put runnable helpers in `skills/<name>/scripts/` and reference by relative path.
+- **Code-free core skills.** Core skills are instruction-only — no Python or other
+  runnable code inside them. Runnable helpers live in dedicated `jail-py-*`
+  companion skills (e.g. `jail-py-prompt-tools`, `jail-py-rate-tools`); a core
+  skill references its companion by name and always states a manual fallback.
+- Repo maintenance tooling (`scripts/`, `hooks/`) is infrastructure, not skill
+  content — it may contain code.
 - Default git remote: https://github.com/Fuller-Horizons/FHSkillz (branch: main).
 
 Always run the actual scripts and git commands rather than describing them.

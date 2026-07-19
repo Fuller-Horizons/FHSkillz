@@ -31,7 +31,7 @@ Skills won't run without this, so don't skip it.
 /plugin install fh-skillz@fh-skillz
 ```
 
-That's it — all the skills come in together (jail-prompt, company-prospect-research, jail-rate, rate-skill).
+That's it — all the skills come in together (jail-prompt, jail-rate, company-prospect-research, rate-skill, plus the optional jail-py-prompt-tools and jail-py-rate-tools runnable companions).
 
 ---
 

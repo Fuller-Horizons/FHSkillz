@@ -2,6 +2,10 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.0.0
+- **Instruction-only core (code-free policy).** All bundled Python moved out: the five machine checks (`secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `chain-lint.py`, `truth-lint.py`) now live in the companion **jail-py-prompt-tools** skill; `validate-skills.py` moved to repo `scripts/` (maintenance tooling). Every checkpoint that invoked a script now names the companion-skill run *and* a manual fallback, so the workflow degrades gracefully where code can't run.
+- References updated to match (meta-prompt, chaining, truth-tagging); README rewritten to current structure and version.
+
 ## 1.9.1
 - Hardened `validate-skills.py` to skip link checks inside code spans / fenced blocks, so illustrative absolute-path examples in docs no longer false-positive; generalized the "Reference link rot" gotcha example to a non-machine-specific path. The repo's own validator now passes on this skill.
 

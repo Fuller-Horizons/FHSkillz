@@ -1,125 +1,168 @@
 ---
 name: jail-rate
 metadata:
-  version: 1.0.0
+  version: 2.0.0
 description: >-
-  Rate and judge a software product on a disciplined 0.0–10.0 scale across five
-  weighted dimensions — software quality, features, usability, marketability,
-  and security — then give prioritized recommendations for improvement and a
-  projected post-improvement rating (current → potential). Use whenever the user
-  asks to "rate", "score", "judge", "grade", or "review" a software product,
-  app, SaaS, website, or codebase; says "how would you rate this", "give it a
-  0–10", "what's its score out of 10"; or wants a before/after rating that shows
-  the upside of fixing issues.
+  Rate and judge ANYTHING on a disciplined 0.0–10.0 scale — software, apps,
+  SaaS, websites, codebases, code, hardware, physical products, people
+  (professional/public roles only), ideas, business plans, programs,
+  initiatives, services, businesses, content, processes — using a weighted
+  rubric matched to what is being rated and empirical, cited evidence behind
+  every score. Then give prioritized recommendations and a projected
+  post-improvement rating (current → potential). Use whenever the user asks to
+  "rate", "score", "judge", "grade", "review", or "evaluate" something; says
+  "how would you rate this", "give it a 0–10", "what's its score out of 10",
+  "is this idea any good"; or wants a before/after rating showing the upside of
+  fixing issues. Do NOT use for rating an AI skill directory (use rate-skill)
+  or for sell-side company prospecting briefs (use company-prospect-research).
 ---
 
-# JAIL-RATE — Software Product Rating (0.0–10.0)
+# JAIL-RATE — Universal Evidence-Based Rating (0.0–10.0)
 
-Produce a consistent, evidence-based rating of a software product, the
-improvements that would raise it, and the score it would reach once those
-improvements are made. Always separate **current** reality from **potential**.
-
-## When to use
-- "Rate / score / judge / grade this app, SaaS, website, or codebase."
-- "How would you rate this out of 10?" / "Give it a 0–10."
-- "What would the score be after we fix it?" (before/after rating)
-- After a code review or product teardown, to attach a numeric verdict.
-
-## The five dimensions (default weights)
-
-| Dimension | Weight | What it measures | Look for |
-|-----------|:------:|------------------|----------|
-| Software quality | 25% | Architecture, code health, reliability, tests, maintainability | Clear structure, test coverage, error handling, no obvious bugs, CI |
-| Features | 20% | Completeness, depth, differentiation, fit to the job-to-be-done | Core flows present, breadth vs. competitors, no critical gaps |
-| Usability | 20% | UX, onboarding, clarity, accessibility, ease of ownership | Intuitive flows, sensible defaults, a11y, good empty/error states |
-| Security | 20% | Auth, data protection, vulnerability posture, compliance | Input validation, secrets handling, authz, dependency hygiene |
-| Marketability | 15% | Market fit, positioning, differentiation, discoverability, GTM readiness | Clear value prop, target audience, SEO/visibility, pricing, traction |
-
-Weights are defaults. If the user supplies weights, use theirs; they must sum to
-100%. State the weights you used.
-
-## The 0.0–10.0 scale (calibration anchors)
-
-Score each dimension to **one decimal**. Decimals are meaningful — 7.4 ≠ 7.8.
-
-- **9.0–10.0 — Exceptional.** Best-in-class; hard to meaningfully improve. Rare.
-- **8.0–8.9 — Excellent.** Strong across the board, only minor gaps.
-- **7.0–7.9 — Good.** Solid and competitive; a few real weaknesses.
-- **6.0–6.9 — Above average.** Works well but clearly behind the best.
-- **5.0–5.9 — Average / competent.** Does the job; notable rough edges.
-- **3.0–4.9 — Weak.** Significant problems undermine it.
-- **1.0–2.9 — Poor.** Largely fails at its purpose.
-- **0.0–0.9 — Broken / unusable.**
-
-### Calibration rules
-- **Evidence over vibes.** Every sub-score cites a specific observation.
-- **No grade inflation.** Reserve 9+ for the genuinely exceptional; "good and
-  competent" is a 7, not a 9.
-- **Critical flaws cap a dimension.** A blocking issue caps the relevant
-  dimension at **≤ 4.0** regardless of other strengths — e.g. an exploitable
-  vulnerability caps Security; a feature that silently fails caps Features.
-- **Consistency.** The same product, same evidence → the same score on re-rating.
-- **Confidence.** If evidence is missing, state the assumption (or ask) and note
-  it lowered confidence; don't guess silently.
+Rate any subject with a rubric built for **what it is**, scores grounded in
+**cited empirical evidence**, and a clear split between **current** reality and
+**potential** after fixes. No vibes, no grade inflation, no unlabeled guesses.
 
 ## Process
 
-1. **Gather evidence.** Inspect the product / read the code / use the relevant
-   tools. Note what you could and couldn't verify.
-2. **Score each dimension** 0.0–10.0 with a one-sentence justification tied to
-   specific evidence. Apply the critical-flaw cap where warranted.
-3. **Compute the overall**: `Σ(score × weight)`, rounded to one decimal.
-4. **Write recommendations**, ranked by **impact × (1/effort)** — biggest score
-   movers for least effort first. Tie each to the dimension(s) it lifts.
-5. **Project the post-improvement rating.** Re-score each dimension assuming the
-   *recommended* fixes (only those) are implemented competently — not
-   perfection. Recompute the weighted overall. Show **current → projected** and
-   the delta. Label it an estimate.
+### 1 — Classify the subject
+Name what you're rating before anything else. Types with built-in rubrics (see
+[rubric-library.md](references/rubric-library.md)): **software product ·
+codebase/code · hardware/physical product · person (professional) · idea/concept
+· program/initiative · service/business · content/media**. Anything else: derive
+a rubric with the library's meta-procedure. If the subject is an AI skill
+directory, hand off to **rate-skill**; if the ask is a brokerage/consulting
+prospect decision on a company, hand off to **company-prospect-research**.
+
+### 2 — Declare the rubric (before scoring)
+Pull the type's dimensions + weights from the library (or derive them), adjust
+if the user's context demands it, and **show the rubric first**: each dimension,
+its weight, and one line on why it's weighted that way for this subject type.
+Weights must sum to 100%. If the user supplies weights, use theirs and say so.
+Never score against an undisclosed rubric.
+
+### 3 — Gather empirical evidence (default: live research)
+Scores follow evidence, not the other way around. By default, **search
+authoritative external sources** — benchmarks, reviews, studies, docs, filings,
+issue trackers, changelogs, teardown reports — per
+[evidence-standards.md](references/evidence-standards.md): tiered sources,
+recency-checked, each citation carrying URL + date accessed. Also inspect
+whatever the user supplied (code, product, document). Exceptions:
+- **Private/internal subjects** (an unreleased app, an internal program, the
+  user's own draft): rate from supplied materials, mark external evidence
+  **N/A — private subject**, and say what independent evidence would upgrade
+  confidence.
+- Every claim behind a score is labeled **Fact** (cited) · **Inference**
+  (reasoned from cited evidence) · **Judgment** (expert read, no direct
+  source). A dimension resting only on Judgment gets its confidence capped at
+  Low and says so.
+
+### 4 — Score each dimension (0.0–10.0, one decimal)
+Calibration anchors — identical for every subject type:
+
+- **9.0–10.0 Exceptional** — best-in-class; hard to meaningfully improve. Rare.
+- **8.0–8.9 Excellent** — strong across the board, only minor gaps.
+- **7.0–7.9 Good** — solid and competitive; a few real weaknesses.
+- **6.0–6.9 Above average** — works, clearly behind the best.
+- **5.0–5.9 Average** — does the job; notable rough edges.
+- **3.0–4.9 Weak** — significant problems undermine it.
+- **1.0–2.9 Poor** — largely fails at its purpose.
+- **0.0–0.9 Broken/untenable.**
+
+Rules: every score cites its specific evidence; no 9+ for merely good;
+**a critical flaw caps its dimension at ≤ 4.0** (an exploitable vulnerability,
+a safety defect, a fatal feasibility blocker, a disqualifying integrity issue)
+regardless of other strengths; same subject + same evidence → same score on
+re-rating; missing evidence lowers stated confidence — it never silently
+becomes a guessed score.
+
+### 5 — Compute, recommend, project
+**Overall = Σ(score × weight)**, one decimal. Recommendations ranked by
+impact × (1/effort) — biggest movers first, each tied to the dimension(s) it
+lifts. Then re-score assuming only the recommended fixes are implemented
+competently (not perfection) and show **current → projected (Δ)**, labeled an
+estimate.
 
 ## Output format
 
-Lead with the headline, then the scorecard, then the reasoning.
+Lead with the headline, then the declared rubric, then the evidence-backed
+scorecard, then sources.
 
-> **Overall: X.X / 10**  →  **Y.Y / 10** projected after fixes  (▲ +Z.Z)
+> **[Subject] — [type] — Overall: X.X / 10 → Y.Y / 10 projected (▲ +Z.Z)**
 
-| Dimension | Weight | Now | Projected | One-line basis |
-|-----------|:------:|:---:|:---------:|----------------|
-| Software quality | 25% | 0.0 | 0.0 | … |
-| Features | 20% | 0.0 | 0.0 | … |
-| Usability | 20% | 0.0 | 0.0 | … |
-| Security | 20% | 0.0 | 0.0 | … |
-| Marketability | 15% | 0.0 | 0.0 | … |
+**Rubric used** (declared before scoring; weights sum to 100%)
+
+| Dimension | Weight | Why this weight for a [type] |
+|---|:---:|---|
+
+**Scorecard**
+
+| Dimension | Weight | Now | Projected | Evidence (label + source) |
+|---|:---:|:---:|:---:|---|
 
 **Why this score** — 2–4 sentences on the biggest drivers up and down.
 
-**Top recommendations (ranked)**
-1. *(Dimension)* Action — expected impact, rough effort.
-2. …
+**Top recommendations (ranked)** — numbered; each names its dimension, expected
+impact, rough effort.
 
-**Projected rating** — which fixes move which dimensions, and why the new total
-is realistic (not a 10).
+**Projected rating** — which fixes move which dimensions; why the new total is
+realistic (not a 10).
 
-For a quick ask, a single line is acceptable — `X.X/10 — one-sentence why` — but
-offer the full scorecard.
+**Sources** — numbered list, each: source · what it evidenced · URL · date
+accessed. Private-subject ratings state "rated from supplied materials only."
+
+**Confidence** — High / Medium / Low per the evidence-depth rules in
+[evidence-standards.md](references/evidence-standards.md), with the one thing
+that would most raise it.
+
+Quick ask → a single line (`X.X/10 — one-sentence why + strongest evidence`) is
+acceptable; offer the full scorecard.
+
+## Self-check before delivering (all must pass)
+- Weights shown, sum exactly 100%; rubric declared **before** any score.
+- Overall recomputed: Σ(score × weight) matches the headline to one decimal
+  (show the arithmetic on request). Projected overall recomputed the same way.
+- Every scorecard row has ≥1 evidence entry — a numbered citation or an
+  explicit **Judgment** label; no bare adjectives.
+- Every citation resolves in Sources with URL + date accessed (or the
+  private-subject statement is present).
+- Any critical flaw applied its ≤ 4.0 cap; current and projected never blended.
+- Confidence stated with the one action that would most raise it.
+One failed line = fix before delivering, not a footnote.
+
+## Rating people — hard boundaries
+Professional/public evaluation only, and only with public, verifiable evidence
+(track record, published work, documented outcomes, public statements in the
+role). Never: private individuals' personal lives, protected attributes (race,
+religion, age, health, orientation, etc.), rumor/anonymous allegations as
+evidence, or "character" scores. Frame the output as an **evidence-based
+assessment of professional performance in a role**, name the role, and refuse
+or reframe requests outside these lines (offer the role-performance version).
+Thin public evidence → say so and keep confidence Low; a person is never rated
+on vibes.
 
 ## Guardrails
 - Never blend current and potential into one number; always show both.
-- Justify with specifics; no unsupported adjectives.
-- Don't inflate; 9+ is exceptional, not merely good.
-- State assumptions and anything you couldn't verify.
-- The projected score is an estimate of upside, clearly labeled as such.
+- Rubric before scores; evidence before rubric-filling; cite or label Judgment.
+- Uncited marketing claims are claims, not evidence — verify or downgrade.
+- State assumptions and everything you couldn't verify.
+- The projected score is an estimate of upside, clearly labeled.
 
-## Brief example
-
-> **Overall: 6.2 / 10 → 8.1 / 10 projected (▲ +1.9)**
-
-| Dimension | Weight | Now | Projected | Basis |
-|-----------|:------:|:---:|:---------:|-------|
-| Software quality | 25% | 6.5 | 8.5 | Clean modules, but no tests / CI gaps |
-| Features | 20% | 7.0 | 7.5 | Core flows solid; thin reporting |
-| Usability | 20% | 6.0 | 7.5 | Works, weak onboarding & empty states |
-| Security | 20% | 4.0 | 8.5 | Capped: unescaped output (stored XSS) |
-| Marketability | 15% | 7.5 | 8.0 | Clear niche, good SEO surface |
-
-Security caps the current total; fixing the XSS plus adding tests/CI is the fast
-path from 6.2 to ~8.1.
+## Gotchas
+- **Scoring before evidence.** Deciding 7-ish then decorating it with sources.
+  Gather first; let scores fall out of the anchors.
+- **One rubric for everything.** Rating hardware on "software quality" or an
+  idea on "usability." Classify first; the rubric must match the subject.
+- **Hidden rubric.** Presenting scores without the weighted rubric that
+  produced them. Declare it first, every time.
+- **Marketing-claim laundering.** A vendor's "99.9% uptime" cited as Fact. That
+  tier of source is a claim to verify, not evidence (see evidence-standards).
+- **People-rating drift.** A role-performance rating sliding into character
+  judgment or personal-life material. Re-read the boundaries section; reframe.
+- **Stale evidence.** Reviews or benchmarks years old scored as current state.
+  Date every citation; flag anything stale to the subject's cadence.
+- **False precision.** A 7.4 the evidence can't distinguish from a 7.6. Anchor
+  the band first; use the decimal only when evidence supports it.
+- **Wrong skill.** AI skill directory → rate-skill. Prospect decision →
+  company-prospect-research. Engineering the prompt to run a rating elsewhere →
+  jail-prompt.

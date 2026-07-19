@@ -8,9 +8,6 @@
 
 FHSkillz bundles every Fuller Horizons Claude skill into a single installable plugin (`fh-skillz`) and registers the repo as a Claude Code plugin marketplace. One command loads all skills at once; a clone-and-symlink script covers any IDE that reads `~/.claude/skills/`.
 
-> ### ⭐ Just want to use a skill on Claude.ai? (no coding)
-> **[Download jail-prompt.zip](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/jail-prompt.zip)** and follow the **[3-minute install guide →](Install-on-Claude-ai)**
-
 ---
 
 ## Install
@@ -24,6 +21,8 @@ FHSkillz bundles every Fuller Horizons Claude skill into a single installable pl
 
 Restart Claude Code. Skills activate automatically based on their description — nothing to load by hand.
 
+**Cowork / desktop app (clicks only):** **Settings → Customize → Plugins**, find **fh-skillz**, click **Install** (add the marketplace `Fuller-Horizons/FHSkillz` first if it isn't listed). See the [full guide](Install-on-Claude-ai).
+
 **Any IDE / Cursor / Codex CLI (skills-directory fallback):**
 
 ```
@@ -36,47 +35,41 @@ Scope to a single project instead: clone, then `./scripts/install.sh .claude/ski
 
 ```
 /plugin marketplace update fh-skillz
+/plugin update fh-skillz
 ```
 
-**Claude.ai (web & desktop app):**
-
-Claude.ai doesn't use plugins or marketplaces — you upload each skill as its own ZIP.
-
-1. Turn on **Settings → Capabilities → Code execution & File creation** (skills won't run without it). Requires a Pro, Max, Team, or Enterprise plan.
-2. Zip the skill folder so the folder itself is the **root** of the archive (the ZIP must contain `jail-prompt/SKILL.md`, not a loose `SKILL.md`):
-
-   ```
-   cd skills && zip -r jail-prompt.zip jail-prompt
-   ```
-
-3. In Claude.ai go to **Customize → Skills → "+" → "+ Create skill"** and upload the ZIP. The skill appears in your list and can be toggled on or off.
-4. Test with a few prompts to confirm it triggers.
-
-Uploaded skills are private to your account. On Team/Enterprise plans, share them org-wide through organization settings rather than per-user upload.
+**Single skill on Claude.ai web:** build that skill's ZIP locally with `./scripts/build-zips.sh` and upload it under **Settings → Customize → Skills** (ZIPs aren't committed to the repo — the plugin installer rejects nested ZIPs).
 
 ---
 
 ## Available skills
 
-| Skill | What it does | Claude.ai ZIP |
-|---|---|---|
-| [`jail-prompt`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-prompt) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt that succeeds on the first run. | [download](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/jail-prompt.zip) |
-| [`company-prospect-research`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/company-prospect-research) | Researches a US private company as a sell-side brokerage / consulting prospect using only free, authoritative sources — produces a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity score, red flags, an outreach hook, and a cited source appendix. | [download](https://github.com/Fuller-Horizons/FHSkillz/raw/main/dist/company-prospect-research.zip) |
+| Skill | What it does |
+|---|---|
+| [`jail-prompt`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-prompt) | Pre-flight workflow that turns a vague goal into either a **STOP** (wrong tool / flawed idea) or an engineered, verifiable, token-efficient prompt. Instruction-only. |
+| [`jail-rate`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-rate) | Universal evidence-based **0.0–10.0 rating of anything** — software, hardware, code, people (professional/public), ideas, programs, services, content — weighted rubric per subject type, every score cited, current → projected. |
+| [`company-prospect-research`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/company-prospect-research) | US private company as a sell-side / consulting prospect, free authoritative sources only — one-page brief with two 0–100 scores, red flags, outreach hook, cited appendix. |
+| [`rate-skill`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/rate-skill) | Rates another AI skill on a 10-category matrix + IDE/CLI compatibility matrices, machine-readable record. Instruction-only. |
+| [`jail-py-prompt-tools`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-py-prompt-tools) | JAIL-PY companion to jail-prompt: runnable secret scan, prompt lint, chain lint, truth lint, dry-run (stdlib Python; optional). |
+| [`jail-py-rate-tools`](https://github.com/Fuller-Horizons/FHSkillz/tree/main/skills/jail-py-rate-tools) | JAIL-PY companion to rate-skill: validate/save rating records, variance check, structure lint (stdlib Python; optional). |
+
+**House rule:** core skills are instruction-only; anything runnable ships as a `jail-py-*` companion the core references with a manual fallback.
 
 ---
 
 ## How it works
 
-Each skill lives in `skills/<name>/` with a `SKILL.md`. Skills are **model-invoked** — Claude fires them based on the `description` field, not by being installed. The `.claude-plugin/marketplace.json` manifest lists every skill and is the single source of truth for what loads.
+Each skill lives in `skills/<name>/` with a `SKILL.md`. Skills are **model-invoked** — Claude fires them based on the `description` field. `.claude-plugin/marketplace.json` lists every skill and is the single source of truth for what loads.
 
 ```
 FHSkillz/
 ├── .claude-plugin/marketplace.json   # install manifest (lists every skill)
 ├── skills/<name>/
 │   ├── SKILL.md                      # required
-│   ├── scripts/                      # optional helpers
-│   └── references/                   # optional reference docs
-├── scripts/                          # new-skill / sync-marketplace / install
+│   ├── references/                   # optional reference docs
+│   └── scripts/                      # jail-py-* companions only
+├── scripts/                          # repo tooling (new-skill / sync / validate / install)
+├── docs/                             # legacy + design documents
 └── CLAUDE.md                         # repo guidance for Claude
 ```
 
@@ -88,6 +81,7 @@ FHSkillz/
 ./scripts/new-skill.sh my-skill        # scaffold + auto-register
 # edit skills/my-skill/SKILL.md  (write a strong description — it's the trigger)
 ./scripts/sync-marketplace.sh          # ensure manifest matches folders
+python3 scripts/validate-skills.py     # frontmatter / name / link checks
 git add -A && git commit -m "add my-skill skill" && git push
 # then in Claude Code:  /plugin marketplace update fh-skillz
 ```
@@ -100,5 +94,6 @@ The **description is the product** — a weak description means a skill that nev
 
 - Folder name == frontmatter `name`, lowercase-hyphenated (`[a-z0-9-]` only).
 - Keep `SKILL.md` lean; push long material into `references/` and link it.
+- Core skills are instruction-only; runnable helpers live in `jail-py-*` companion skills.
 - Bump `plugins[0].version` (semver) on any release that changes skills.
 - Keep the repo **public** so `/plugin marketplace add` and the raw `install.sh` URL resolve.

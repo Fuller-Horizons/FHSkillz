@@ -7,10 +7,11 @@ vendor's model, a teammate without the plugin), or wants a reusable artifact to
 paste into their own tooling.
 
 It is deliberately editor-agnostic plaintext — no proprietary IDE commands, no
-file paths — so it survives copy-paste anywhere. The bundled `scripts/` checks
-(`secret-scan`, `prompt-lint`, `dry-run`, `chain-lint`) are *not* available to a
+file paths — so it survives copy-paste anywhere. The machine checks
+(secret scan, prompt lint, dry-run, chain lint) are *not* available to a
 pasted meta-prompt, so it asks the model to perform those checks by reasoning
-instead. Where this skill *is* installed, prefer the real scripts.
+instead. Where the companion **jail-py-prompt-tools** skill is installed,
+prefer its real scripts.
 
 ## Template — copy from here down
 

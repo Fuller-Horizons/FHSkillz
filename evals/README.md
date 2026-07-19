@@ -1,9 +1,14 @@
 # Evals — how to re-run the validation loop
 
-This folder holds the test sets used to validate JAIL-PROMPT. Re-run them whenever you change `SKILL.md` or the references, so improvements are evidence-backed rather than vibes.
+This folder holds the plugin's test sets. Re-run the relevant set whenever you change a skill's `SKILL.md` or references, so improvements are evidence-backed rather than vibes.
 
 ## Files
 
+**jail-rate** (v2.0.0 universal rebuild — authored 2026-07-19, not yet run):
+- `jail-rate-trigger-evals.json` — 10 should-trigger + 6 near-miss routing cases (rate-skill / company-prospect-research handoffs, people-boundary declines).
+- `jail-rate-evals.json` — 4 behavioral cases with grader assertions (type classification + declared rubric, private-subject handling, people boundary, critical-flaw cap).
+
+**jail-prompt:**
 - `evals.json` — 11 behavioral cases (as of v1.2.0, repaired from a truncated file and extended with **Lite-lane** and **connector-routing** coverage). Each has a `prompt`, an `expected_output`, and (in the workspace copies) an `assertions` list the grader checks.
 - `trigger_evals.json` — 20 triggering cases (10 should-trigger, 10 tricky near-misses) for description tuning.
 

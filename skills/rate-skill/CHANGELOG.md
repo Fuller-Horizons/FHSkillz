@@ -2,6 +2,10 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.0.0
+- **Instruction-only core (code-free policy).** `validate-rating.py`, `save-rating.py`, `variance-check.py`, and `validate-skill-structure.py` moved to the companion **jail-py-rate-tools** skill; the skill-level pre-commit hook retired in favor of the repo-level `scripts/pre-commit-hook.sh`. Every validation step now names the companion-skill run *and* a manual fallback (recompute the mean, diff repeat records, eyeball structure).
+- Fixed the duplicated History-location paragraph; added a README.
+
 ## 1.4.0
 - Added `references/summarizer-guide.md` and a 300-line summarizer rule to stay within the token budget on large targets.
 - Added `scripts/validate-skill-structure.py` (structural lint) and `scripts/pre-commit-hook.sh` (gates commits with both validators).

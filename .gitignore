@@ -33,8 +33,9 @@ dist/
 # Original handoff bundle (internal history; un-ignore if you want it public)
 files.zip
 
-# Staged for deletion (sandbox could not unlink; remove this folder manually)
+# Staged for deletion (sandbox could not unlink; remove these folders manually)
 _ARCHIVE_DELETE_ME/
+_to_delete/
 
 # WIP — not part of the plugin (no SKILL.md); un-ignore when ready to publish
 systems/

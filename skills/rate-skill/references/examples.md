@@ -1,7 +1,7 @@
 # Record schema & worked examples
 
 ## Machine-readable record schema
-Emit one JSON object per rated skill, then validate + save it with the scripts in `scripts/`.
+Emit one JSON object per rated skill, then validate + save it (companion skill **jail-py-rate-tools**, or the manual checks in SKILL.md).
 
 ```json
 {

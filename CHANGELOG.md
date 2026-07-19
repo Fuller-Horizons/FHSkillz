@@ -2,6 +2,34 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.17.0] — 2026-07-19
+
+The **code-free core** release: every core skill is now instruction-only; all runnable code lives in dedicated JAIL-PY companion skills. Plugin grows from 4 to 6 skills.
+
+### jail-rate → 2.0.0 (universal rebuild)
+- Rates **anything** — software, codebases, hardware, people (professional/public roles only), ideas, programs, services, businesses, content — not just software. Classifies the subject first; the rubric must match the type.
+- New `references/rubric-library.md`: 8 built-in weighted rubrics (weights + per-dimension evidence sources + rationale) and a meta-procedure for deriving a declared rubric for any other type. The rubric is always shown before the scores.
+- New `references/evidence-standards.md`: live research by default, tiered sources, URL + date-accessed citations, Fact/Inference/Judgment labeling, ≥2-independent-sources target per dimension, confidence rules, private-subject handling. Marketing claims are not evidence.
+- Hard people-rating boundaries; handoffs to rate-skill (AI skills) and company-prospect-research (prospect decisions).
+
+### jail-py-prompt-tools → 1.0.0 (new) · jail-py-rate-tools → 1.0.0 (new)
+- JAIL-PY companion skills receiving, unchanged, the Python previously bundled inside jail-prompt (secret-scan, prompt-lint, chain-lint, truth-lint, dry-run) and rate-skill (validate-rating, save-rating, variance-check, validate-skill-structure). Optional installs; the core skills document manual fallbacks.
+
+### jail-prompt → 2.0.0 · rate-skill → 2.0.0
+- Instruction-only cores. Every checkpoint that ran a bundled script now names the companion-skill run *and* a manual fallback. rate-skill's duplicated history paragraph fixed. `validate-skills.py` promoted to repo `scripts/` (maintenance tooling); repo-level `scripts/pre-commit-hook.sh` replaces the per-skill hooks.
+
+### company-prospect-research → 1.1.0
+- Added `metadata.version`, a Gotchas section (entity collisions, stale signals, headcount inflation, score-without-signal, size-band ≠ valuation, ability-to-pay), Related-skills pointers, and a README.
+
+### Repo
+- Every skill now has a README + CHANGELOG; root README/wiki updated to all 6 skills (dead `dist/` links removed).
+- Legacy/design docs (HANDOFF, FHSkillz-Setup, Enhancement-Audit, AI-Control-Surface ×2, FH-AI-OS reference) moved to `docs/`.
+- CLAUDE.md: code-free-core convention + validator added to pre-commit CHECKS.
+
+## [plugins 0.12.0–0.16.0] — 2026-06-14 → 2026-06-26 (backfill)
+
+Root changelog was not updated during this span; the detail lives in the per-skill changelogs. Summary: **jail-prompt 1.7.0** (standardized METADATA keys, output sanitization + malicious-sample success test, determinism self-test), **1.8.0** (chain manifests + chain-lint, self-critique pass, portable meta-prompt), **1.9.0** (schema-based truth-tagging + truth-lint, external/second-model verification, VERIFICATION PLAN line, per-mode generation settings), **1.9.1** (validator false-positive fix); **rate-skill 1.3.0** (variance-check, skill-creator handoff), **1.4.0** (summarizer guide, structure validator, scan-target-scripts rule, history fallback path).
+
 ## [plugin 0.11.0] — 2026-06-14
 
 ### jail-rate → 1.0.0 (new)

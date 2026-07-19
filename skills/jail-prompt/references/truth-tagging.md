@@ -42,8 +42,9 @@ the claim was reached (`source` / `reasoned` / `none`).
 
 **A `Known` claim with `evidence_count: 0` or empty `source_ids` is a failure
 that triggers a re-query, not a pass.** The whole point is to make an
-unevidenced certainty claim impossible to ship silently. `scripts/truth-lint.py`
-enforces this.
+unevidenced certainty claim impossible to ship silently. The companion
+**jail-py-prompt-tools** skill's `truth-lint.py` enforces this; without it,
+enforce it by inspection — reject any `Known` with empty evidence.
 
 ## Grounding-conditional (be honest about retrieval)
 
@@ -65,8 +66,9 @@ inventing source ids to satisfy a linter is worse than an honest `Unknown`.
 ## Lint it
 
 ```bash
-python3 scripts/truth-lint.py claims.json                      # status validity + internal consistency
-python3 scripts/truth-lint.py claims.json --require-evidence   # also: every Known needs >=1 evidence id
+# via the companion jail-py-prompt-tools skill
+python3 <jail-py-prompt-tools>/scripts/truth-lint.py claims.json                    # status validity + internal consistency
+python3 <jail-py-prompt-tools>/scripts/truth-lint.py claims.json --require-evidence # also: every Known needs >=1 evidence id
 ```
 
 `0` = pass, `1` = a tag violation, `2` = IO/parse error. Fold the relevant

@@ -1,5 +1,7 @@
 ---
 name: company-prospect-research
+metadata:
+  version: 1.1.0
 description: >-
   Research a US private company as a business-brokering (sell-side) and consulting
   prospect using only FREE, authoritative sources. Use when evaluating whether to
@@ -46,10 +48,24 @@ A **one-page brief** per company (template in `assets/brief-template.md`): snaps
 
 For a list of companies, produce one screening-table row each (template in the same file) and only write full briefs for the rows that clear your pursue threshold.
 
-## Self-check before delivering
-- Every Fact/Inference has a live, free-source citation with a date.
-- No invented financials; size band shows its assumptions.
-- Both scores trace to named signals; confidence stated.
-- Recommendation is one of the four allowed values.
-- Owner data is business-relevant only.
+## Gotchas
+Failure modes seen in practice — check before delivering:
+- **Wrong legal entity.** Common names collide in SoS registries and USAspending; a DBA is not the registrant. Confirm state + registered agent + address agree before attributing anything.
+- **Stale signals scored as current.** Old reviews, a years-old news item, or a Wayback snapshot scored as if current. Date every time-sensitive claim; >~24 months = flag stale.
+- **LinkedIn headcount inflation.** "Associated members" includes alumni and contractors; treat it as an upper bound, corroborate with job postings or facility size.
+- **Score without signal.** A component score with no named, cited signal behind it. Unknown component = 0 + a diligence question, never a guessed midpoint.
+- **Size band read as valuation.** The indicative band is triangulation from stated assumptions — label it, show the assumptions, never present it as what the business is worth.
+- **Consulting score ignoring ability to pay.** Gaps at a 3-person shop don't fund an engagement; apply the ability-to-pay modifier in the recommendation, not just the score.
+
+## Related skills
+- Want a 0–10 quality/marketability rating of the business itself (not a prospect decision)? Use **jail-rate**.
+- Turning this brief's next step into an engineered prompt or chain? Use **jail-prompt**.
+
+## Self-check before delivering (structural — all must pass)
+- Brief contains every template section (snapshot, scores, drivers, size band, red flags, hook, recommendation, source appendix); none left as placeholders.
+- Every Fact/Inference has a live, free-source citation with a date accessed; anything uncitable is relabeled Analyst Judgment or Missing Evidence.
+- No invented financials; size band shows each assumption; labeled "NOT a valuation."
+- Each component score traces to ≥1 named cited signal, or is scored 0 with a diligence question — never a guessed midpoint.
+- Recommendation is exactly one of: pursue-brokering / pursue-consulting / pass / need more; confidence % present for both scores.
+- Owner data is business-relevant only; every time-sensitive claim dated, >~24-month items flagged stale.
 - 1–5 self-score on grounded / verifiable / scoped / format-matched, plus an overall confidence %.

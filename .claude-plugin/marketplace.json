@@ -12,11 +12,13 @@
       "name": "fh-skillz",
       "source": "./",
       "description": "Every Fuller Horizons skill. Installs all skills in one command.",
-      "version": "0.16.0",
+      "version": "0.17.0",
       "strict": false,
       "skills": [
         "./skills/company-prospect-research",
         "./skills/jail-prompt",
+        "./skills/jail-py-prompt-tools",
+        "./skills/jail-py-rate-tools",
         "./skills/jail-rate",
         "./skills/rate-skill"
       ]

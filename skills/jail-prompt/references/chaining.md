@@ -89,11 +89,16 @@ output, it is sequential, not fan-out, and must say so in `requires`.
 
 ## Verify before running
 
-Run the bundled linker check on the manifest:
+With the companion **jail-py-prompt-tools** skill installed, run its linker
+check on the manifest:
 
 ```bash
-python3 scripts/chain-lint.py chain.json          # 0 pass · 1 errors · 2 IO
+python3 <jail-py-prompt-tools>/scripts/chain-lint.py chain.json   # 0 pass · 1 errors · 2 IO
 ```
+
+Without it, walk the manifest manually: every `requires` key traced to an
+earlier `produces` (or declared `inputs`), and a success test present per step
+and for the chain.
 
 It fails if any step `requires` a key that no earlier step (or declared `inputs`)
 `produces` — i.e. a broken handoff — and warns on steps with no

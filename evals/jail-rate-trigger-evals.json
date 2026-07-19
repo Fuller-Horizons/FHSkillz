@@ -1,0 +1,88 @@
+{
+  "skill": "jail-rate",
+  "purpose": "Triggering eval \u2014 10 should-trigger, 6 near-misses that must route elsewhere or not fire.",
+  "should_trigger": [
+    {
+      "id": "t1",
+      "prompt": "Rate my task-manager SaaS out of 10.",
+      "expect": "software-product rubric"
+    },
+    {
+      "id": "t2",
+      "prompt": "How would you grade this Python repo?",
+      "expect": "codebase rubric"
+    },
+    {
+      "id": "t3",
+      "prompt": "Score the Framework Laptop 16 0-10.",
+      "expect": "hardware rubric, live research"
+    },
+    {
+      "id": "t4",
+      "prompt": "Judge my business idea: subscription tool rental for contractors.",
+      "expect": "idea rubric, private-subject handling"
+    },
+    {
+      "id": "t5",
+      "prompt": "Rate our city's pothole-repair program.",
+      "expect": "program/initiative rubric"
+    },
+    {
+      "id": "t6",
+      "prompt": "How does Satya Nadella rate as a CEO?",
+      "expect": "person-professional rubric, public evidence only"
+    },
+    {
+      "id": "t7",
+      "prompt": "Give this blog post a score out of ten.",
+      "expect": "content rubric"
+    },
+    {
+      "id": "t8",
+      "prompt": "Review and rate this local HVAC company.",
+      "expect": "service/business rubric (not CPR \u2014 no sell-side ask)"
+    },
+    {
+      "id": "t9",
+      "prompt": "Is this idea any good? Be honest, number it.",
+      "expect": "idea rubric"
+    },
+    {
+      "id": "t10",
+      "prompt": "What would our app score after we fix the onboarding?",
+      "expect": "current \u2192 projected"
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "n1",
+      "prompt": "Rate this skill folder I wrote for Claude.",
+      "expect": "route to rate-skill"
+    },
+    {
+      "id": "n2",
+      "prompt": "Should I approach this owner about selling his plumbing business?",
+      "expect": "route to company-prospect-research"
+    },
+    {
+      "id": "n3",
+      "prompt": "Write me a 5-star review for my own app.",
+      "expect": "no rating \u2014 that's copywriting (and astroturf risk)"
+    },
+    {
+      "id": "n4",
+      "prompt": "What's the best laptop under $1000?",
+      "expect": "recommendation/research task, not a rating of a named subject"
+    },
+    {
+      "id": "n5",
+      "prompt": "Rate my sister's new boyfriend.",
+      "expect": "decline/reframe \u2014 private individual, personal life"
+    },
+    {
+      "id": "n6",
+      "prompt": "Convert this 5-point rubric to a 10-point scale.",
+      "expect": "mechanical transform, no jail-rate"
+    }
+  ]
+}

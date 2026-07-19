@@ -8,10 +8,14 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 | Skill | What it does |
 |---|---|
-| [`jail-prompt`](skills/jail-prompt/) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt — with prompt-chaining, epistemic truth-tagging, and built-in verification. |
+| [`jail-prompt`](skills/jail-prompt/) | Pre-flight workflow that turns a vague goal into either a **STOP** (when AI is the wrong tool or the idea is flawed) or an engineered, verifiable, token-efficient prompt — with prompt-chaining, epistemic truth-tagging, and verification checkpoints. Instruction-only. |
+| [`jail-rate`](skills/jail-rate/) | Universal evidence-based **0.0–10.0 rating of anything** — software, codebases, hardware, people (professional/public roles only), ideas, programs, services, content — on a weighted rubric matched to the subject type, every score backed by cited empirical evidence, with a projected post-fix rating. |
 | [`company-prospect-research`](skills/company-prospect-research/) | Researches a US private company as a sell-side brokerage / consulting prospect using only free, authoritative sources. Outputs a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity score, red flags, an outreach hook, and a cited source appendix. |
-| [`jail-rate`](skills/jail-rate/) | Rates a software product on a disciplined 0.0–10.0 scale across five weighted dimensions — quality, features, usability, marketability, security — with prioritized recommendations and a projected post-fix score. |
-| [`rate-skill`](skills/rate-skill/) | Evaluates and rates another AI skill using a 10-category Skill Rating Matrix plus IDE/CLI compatibility matrices, with a machine-readable, validated JSON record tracked over time. |
+| [`rate-skill`](skills/rate-skill/) | Evaluates and rates another AI skill using a 10-category Skill Rating Matrix plus IDE/CLI compatibility matrices, with a machine-readable JSON record. Instruction-only. |
+| [`jail-py-prompt-tools`](skills/jail-py-prompt-tools/) | **JAIL-PY companion** to jail-prompt: five runnable checks (secret scan, prompt lint, chain lint, truth lint, dry-run). Stdlib Python; optional — the core skill has manual fallbacks. |
+| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | **JAIL-PY companion** to rate-skill: validate/save rating records, measure score variance, lint skill structure. Stdlib Python; optional — the core skill has manual fallbacks. |
+
+**House rule:** core skills are instruction-only (no bundled code); anything runnable ships as a `jail-py-*` companion skill the core references with a manual fallback.
 
 ## Install
 
@@ -53,8 +57,9 @@ FHSkillz/
 ├── skills/<name>/
 │   ├── SKILL.md                      # required — the skill + its trigger description
 │   ├── references/                   # optional reference docs (progressive disclosure)
-│   └── scripts/                      # optional runnable helpers
-├── scripts/                          # new-skill / sync-marketplace / install / build-zips
+│   └── scripts/                      # jail-py-* companion skills only — core skills are code-free
+├── scripts/                          # repo tooling: new-skill / sync-marketplace / validate-skills / install / build-zips
+├── docs/                             # legacy + design documents (not part of the plugin)
 └── CLAUDE.md                         # repo guidance for Claude when maintaining this repo
 ```
 
@@ -77,6 +82,7 @@ The **description is the product** — a weak description means a skill that nev
 
 - One skill = one folder under `skills/` containing a `SKILL.md`. Folder name == frontmatter `name`, lowercase-hyphenated (`[a-z0-9-]` only).
 - `SKILL.md` frontmatter requires `name` and `description`. Keep `SKILL.md` lean; push long material into `references/` and link it.
+- **Core skills are instruction-only.** Runnable code ships in `jail-py-*` companion skills; a core skill referencing one always states a manual fallback.
 - Bump `plugins[0].version` (semver) in `marketplace.json` on any release that changes skills.
 - **Never commit `.zip` files** (`dist/` is gitignored) — the plugin installer rejects nested ZIPs and the install will fail.
 - Keep the repo **public** so `/plugin marketplace add` and the raw `install.sh` URL resolve.
