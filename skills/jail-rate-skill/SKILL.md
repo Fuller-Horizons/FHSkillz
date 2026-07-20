@@ -1,12 +1,12 @@
 ---
-name: rate-skill
+name: jail-rate-skill
 description: >-
-  Evaluate and rate another AI skill (its SKILL.md and support files) using the standardized 10-category Skill Rating Matrix, IDE Compatibility Matrix, and CLI Compatibility Matrix. Triggers: "/rate-skill", "rate this skill", "evaluate this skill", "score this skill".
+  Evaluate and rate another AI skill (its SKILL.md and support files) using the standardized 10-category Skill Rating Matrix, IDE Compatibility Matrix, and CLI Compatibility Matrix. Triggers: "/jail-rate-skill", "rate this skill", "evaluate this skill", "score this skill".
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 ---
 
-# Rate Skill
+# JAIL-RATE-SKILL
 
 Standardized, **repeatable** technical review and scoring of any AI skill directory (its `SKILL.md`, references, and scripts). Produces a 10-category rating matrix, IDE/CLI compatibility matrices, concrete upgrade recommendations, and a machine-readable JSON record that is programmatically validated and tracked over time.
 
@@ -18,10 +18,10 @@ This skill is a folder — load the right file at the right time:
 - **Machine checks** — live in the companion **jail-py-rate-tools** skill: `validate-rating.py` (checks a record), `save-rating.py` (stores history + reports deltas), `variance-check.py` (empirically measures score drift across repeated runs), `validate-skill-structure.py` (structural lint of the target). This skill itself is instruction-only — no bundled code; every check has a manual fallback below.
 
 ## See also — static audit vs empirical eval
-This skill is a **static design audit**: it reads the target's files and scores them against a fixed rubric without running the skill. It is the fast first pass for triaging or comparing many skills on one consistent scale. For an **empirical behavioral eval** — actually running the skill on test prompts, A/B against a no-skill baseline, with pass-rate/token/time benchmarks — use Anthropic's `skill-creator`. The two are complementary: rate-skill answers "is it well-built and portable?"; skill-creator answers "does it beat baseline, and how do I iterate it?". When a static score isn't enough to trust a skill, hand off to `skill-creator` for behavioral validation. And this skill rates **AI skill directories only** — to rate any other subject (software, hardware, people, ideas, businesses), hand off to `jail-rate`.
+This skill is a **static design audit**: it reads the target's files and scores them against a fixed rubric without running the skill. It is the fast first pass for triaging or comparing many skills on one consistent scale. For an **empirical behavioral eval** — actually running the skill on test prompts, A/B against a no-skill baseline, with pass-rate/token/time benchmarks — use Anthropic's `skill-creator`. The two are complementary: jail-rate-skill answers "is it well-built and portable?"; skill-creator answers "does it beat baseline, and how do I iterate it?". When a static score isn't enough to trust a skill, hand off to `skill-creator` for behavioral validation. And this skill rates **AI skill directories only** — to rate any other subject (software, hardware, people, ideas, businesses), hand off to `jail-rate`.
 
 ## When to Use
-- **Single skill** — the user types `/rate-skill <skill-name>` or asks to "rate / evaluate / score this skill."
+- **Single skill** — the user types `/jail-rate-skill <skill-name>` or asks to "rate / evaluate / score this skill."
 - **Batch mode** — the user asks to rate "all skills" / "every skill in the repo." Walk each `skills/*/` (or the supplied root), rate each independently, then emit the summary roll-up from `references/examples.md`, sorted by Overall descending.
 
 ## Setup

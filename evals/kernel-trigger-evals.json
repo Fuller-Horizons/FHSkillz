@@ -69,22 +69,22 @@
     {
       "id": "k14",
       "prompt": "Run a PESTLE for our expansion into Texas municipal contracts.",
-      "expect": "pestle-analysis"
+      "expect": "jail-pestle"
     },
     {
       "id": "k15",
       "prompt": "SWOT us against the two regional competitors.",
-      "expect": "swot-analysis"
+      "expect": "jail-swot"
     },
     {
       "id": "k16",
       "prompt": "Map the business model for the new subscription offering.",
-      "expect": "business-model-canvas"
+      "expect": "jail-bmc"
     },
     {
       "id": "k17",
       "prompt": "Build the agenda for Monday's board reset meeting.",
-      "expect": "cpr-agenda-builder"
+      "expect": "jail-cpr"
     }
   ],
   "near_misses": [
@@ -116,17 +116,17 @@
     {
       "id": "n6",
       "prompt": "Is this plumbing company a good brokerage prospect?",
-      "expect": "company-prospect-research, NOT jail-research/jail-rate"
+      "expect": "jail-prospect, NOT jail-research/jail-rate"
     },
     {
       "id": "n7",
       "prompt": "Plan the tasks and owners for the quarter.",
-      "expect": "jail-task-contract/decomposition, NOT cpr-agenda-builder (no meeting)"
+      "expect": "jail-task-contract/decomposition, NOT jail-cpr (no meeting)"
     },
     {
       "id": "n8",
       "prompt": "Summarize what we decided in yesterday's meeting from the transcript.",
-      "expect": "NOT cpr-agenda-builder (post-meeting; wave-3 meeting-to-execution)"
+      "expect": "NOT jail-cpr (post-meeting; wave-3 meeting-to-execution)"
     },
     {
       "id": "n9",
@@ -141,7 +141,7 @@
     {
       "id": "n11",
       "prompt": "Evaluate this skill folder I just wrote.",
-      "expect": "rate-skill, NOT jail-skill-miner/jail-rate"
+      "expect": "jail-rate-skill, NOT jail-skill-miner/jail-rate"
     },
     {
       "id": "n12",

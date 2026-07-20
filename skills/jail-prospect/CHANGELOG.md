@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 1.2.0
+- **Renamed** `company-prospect-research` → `jail-prospect` (JAIL family naming). Folder, frontmatter, and every cross-reference updated; earlier changelog entries keep the historical name.
+
 ## 1.1.0
 - Added `metadata.version` to frontmatter (was the only skill without one).
 - Added a **Gotchas** section (wrong legal entity/DBA collisions, stale signals, LinkedIn headcount inflation, score-without-signal, size-band-read-as-valuation, ability-to-pay).

@@ -1,7 +1,7 @@
 ---
-name: cpr-agenda-builder
+name: jail-cpr
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Build a CPR (Context · Purpose · Results) and an execution-oriented meeting
   agenda where every item produces information, alignment, a decision, or an
@@ -12,7 +12,7 @@ description: >-
   or for project task planning with no meeting (jail-task-contract).
 ---
 
-# CPR-AGENDA-BUILDER
+# JAIL-CPR
 
 Meetings exist to produce Results; the agenda is reverse-engineered from
 them. CPR here means **Context · Purpose · Results** — in that order on the

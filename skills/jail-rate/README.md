@@ -14,7 +14,7 @@ Part of the **[FHSkillz](../../README.md)** collection. Version 2.0.0.
 
 ## Boundaries
 
-People are rated on **professional performance in a public role, from public verifiable evidence only** — never personal lives, protected attributes, or rumor. AI skill directories route to [`rate-skill`](../rate-skill/); sell-side company prospecting routes to [`company-prospect-research`](../company-prospect-research/).
+People are rated on **professional performance in a public role, from public verifiable evidence only** — never personal lives, protected attributes, or rumor. AI skill directories route to [`jail-rate-skill`](../jail-rate-skill/); sell-side company prospecting routes to [`jail-prospect`](../jail-prospect/).
 
 ## Contents
 

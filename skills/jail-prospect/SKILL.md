@@ -1,7 +1,7 @@
 ---
-name: company-prospect-research
+name: jail-prospect
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Research a US private company as a business-brokering (sell-side) and consulting
   prospect using only FREE, authoritative sources. Use when evaluating whether to
@@ -12,7 +12,7 @@ description: >-
   "should I approach this owner", "sell-side screen", "consulting opportunity".
 ---
 
-# Company Prospect Research (brokering-led)
+# JAIL-PROSPECT — Company Prospect Research (brokering-led)
 
 Turn a company name + website into a decision: **pursue as a brokerage prospect / pursue as a consulting prospect / pass / need more** — grounded only in free, authoritative sources, with every material claim cited.
 

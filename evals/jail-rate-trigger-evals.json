@@ -57,12 +57,12 @@
     {
       "id": "n1",
       "prompt": "Rate this skill folder I wrote for Claude.",
-      "expect": "route to rate-skill"
+      "expect": "route to jail-rate-skill"
     },
     {
       "id": "n2",
       "prompt": "Should I approach this owner about selling his plumbing business?",
-      "expect": "route to company-prospect-research"
+      "expect": "route to jail-prospect"
     },
     {
       "id": "n3",

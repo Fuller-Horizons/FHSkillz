@@ -1,7 +1,7 @@
 ---
-name: swot-analysis
+name: jail-swot
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Produce an evidence-grounded SWOT that cleanly separates internal
   capabilities (Strengths/Weaknesses) from external conditions
@@ -9,11 +9,11 @@ description: >-
   and recommended actions. Use when asked for "SWOT", "strengths and
   weaknesses", "where do we stand competitively", or a strategic self-
   assessment feeding a plan. Do NOT use for macro-environment scans
-  (pestle-analysis feeds the O/T side), business-model design
-  (business-model-canvas), or rating a product 0-10 (jail-rate).
+  (jail-pestle feeds the O/T side), business-model design
+  (jail-bmc), or rating a product 0-10 (jail-rate).
 ---
 
-# SWOT-ANALYSIS
+# JAIL-SWOT
 
 The failure mode of every SWOT is wishful sorting — aspirations filed as
 strengths, market weather filed as company-specific opportunity. This skill
@@ -25,7 +25,7 @@ sorts by evidence and ships strategy (TOWS), not just quadrants.
    inline.)*
 2. **jail-research** — where evidence is incomplete: internal evidence
    (results, capabilities, churn, delivery record) and external evidence
-   (market, competitors, regulation — a prior pestle-analysis slots in
+   (market, competitors, regulation — a prior jail-pestle slots in
    here). Dated citations; user-provided facts labeled as such.
 3. **Classify — with the sorting rules enforced:**
    - **Strength/Weakness = internal + evidenced.** Demonstrated capability

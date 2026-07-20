@@ -47,8 +47,8 @@ Scope to a single project instead: clone, then `./scripts/install.sh .claude/ski
 **24 skills in three layers** (full table in the [repo README](https://github.com/Fuller-Horizons/FHSkillz#available-skills)):
 
 - **Layer 1 — Reasoning kernel:** jail-prompt · jail-task-contract · jail-research · jail-verify · jail-decide · jail-red-team · jail-orchestrate · jail-approval-gate · jail-quarantine · jail-memory · jail-lab (adapted from karpathy/autoresearch, MIT) · jail-skill-miner
-- **Layer 2 — Workflow:** jail-rate · jail-operationalize · jail-exec-brief · rate-skill · company-prospect-research
-- **Layer 3 — Domain packs:** pestle-analysis · swot-analysis · business-model-canvas · cpr-agenda-builder
+- **Layer 2 — Workflow:** jail-rate · jail-operationalize · jail-exec-brief · jail-rate-skill · jail-prospect
+- **Layer 3 — Domain packs:** jail-pestle · jail-swot · jail-bmc · jail-cpr
 - **JAIL-PY companions (code execution):** jail-py-prompt-tools · jail-py-rate-tools · jail-py-lab
 
 Governed by the [JAIL Constitution](https://github.com/Fuller-Horizons/FHSkillz/blob/main/docs/JAIL-CONSTITUTION.md) (12 system rules + a structured handoff contract) and routed per the [skill graph](https://github.com/Fuller-Horizons/FHSkillz/blob/main/docs/skill-graph.md). Core skills are instruction-only; runnable helpers live in jail-py-* companions with manual fallbacks.

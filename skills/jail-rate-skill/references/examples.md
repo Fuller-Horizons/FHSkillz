@@ -42,4 +42,4 @@ After the per-skill matrices, emit a summary sorted by Overall descending:
 | Skill | Overall | Top weakness |
 | :--- | :---: | :--- |
 | jail-prompt | 8.x | … |
-| rate-skill | 8.x | … |
+| jail-rate-skill | 8.x | … |

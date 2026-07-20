@@ -9,7 +9,7 @@ This folder holds the plugin's test sets. Re-run the relevant set whenever you c
 - `kernel-evals.json` — 11 behavioral cases covering the 8 required types (normal, ambiguous, missing evidence, contradictory, routes-elsewhere, should-not-trigger, security, partial failure) + 3 integration chains (research→PESTLE→decide→brief · contract→orchestrate→verify · lab loop).
 
 **jail-rate** (v2.0.0 universal rebuild — authored 2026-07-19, not yet run):
-- `jail-rate-trigger-evals.json` — 10 should-trigger + 6 near-miss routing cases (rate-skill / company-prospect-research handoffs, people-boundary declines).
+- `jail-rate-trigger-evals.json` — 10 should-trigger + 6 near-miss routing cases (jail-rate-skill / jail-prospect handoffs, people-boundary declines).
 - `jail-rate-evals.json` — 4 behavioral cases with grader assertions (type classification + declared rubric, private-subject handling, people boundary, critical-flaw cap).
 
 **jail-prompt:**

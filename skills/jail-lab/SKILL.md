@@ -69,7 +69,7 @@ In plain language, fix four things — they don't change mid-run:
 ## Related skills
 Score without iterating → **jail-rate**. Verify a single output →
 **jail-verify**. The metric belongs to a workflow → **jail-operationalize**
-defines it first. Skill improvement loops → this skill over rate-skill
+defines it first. Skill improvement loops → this skill over jail-rate-skill
 scores or eval pass-rates.
 
 ## Gotchas

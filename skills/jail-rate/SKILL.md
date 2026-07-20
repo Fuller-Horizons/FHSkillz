@@ -13,8 +13,8 @@ description: >-
   "rate", "score", "judge", "grade", "review", or "evaluate" something; says
   "how would you rate this", "give it a 0–10", "what's its score out of 10",
   "is this idea any good"; or wants a before/after rating showing the upside of
-  fixing issues. Do NOT use for rating an AI skill directory (use rate-skill)
-  or for sell-side company prospecting briefs (use company-prospect-research).
+  fixing issues. Do NOT use for rating an AI skill directory (use jail-rate-skill)
+  or for sell-side company prospecting briefs (use jail-prospect).
 ---
 
 # JAIL-RATE — Universal Evidence-Based Rating (0.0–10.0)
@@ -31,8 +31,8 @@ Name what you're rating before anything else. Types with built-in rubrics (see
 codebase/code · hardware/physical product · person (professional) · idea/concept
 · program/initiative · service/business · content/media**. Anything else: derive
 a rubric with the library's meta-procedure. If the subject is an AI skill
-directory, hand off to **rate-skill**; if the ask is a brokerage/consulting
-prospect decision on a company, hand off to **company-prospect-research**.
+directory, hand off to **jail-rate-skill**; if the ask is a brokerage/consulting
+prospect decision on a company, hand off to **jail-prospect**.
 
 ### 2 — Declare the rubric (before scoring)
 Pull the type's dimensions + weights from the library (or derive them), adjust
@@ -165,6 +165,6 @@ on vibes.
   Date every citation; flag anything stale to the subject's cadence.
 - **False precision.** A 7.4 the evidence can't distinguish from a 7.6. Anchor
   the band first; use the decimal only when evidence supports it.
-- **Wrong skill.** AI skill directory → rate-skill. Prospect decision →
-  company-prospect-research. Engineering the prompt to run a rating elsewhere →
+- **Wrong skill.** AI skill directory → jail-rate-skill. Prospect decision →
+  jail-prospect. Engineering the prompt to run a rating elsewhere →
   jail-prompt.

@@ -21,9 +21,9 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-orchestrate | parallelizable plan | integrated result + ledger | jail-research (per stream), jail-verify (merge) | jail-task-contract, jail-research | inherits streams' | node unverified → not complete; resume from ledger |
 | jail-approval-gate | intended actions | tiered inventory + approvals | jail-quarantine (sensitive classes) | any acting skill | high | unclassified → PER-ACTION; no response → not approved |
 | jail-quarantine | inbound/bulk/sensitive data | adopted data + halt report | jail-approval-gate | jail-research, jail-memory, extraction tasks | high | safe path unavailable → skip (fail closed) |
-| jail-memory | lessons/decisions/context | governed memory entries | jail-approval-gate (durable writes) | jail-task-contract (retrieval), cpr-agenda-builder | medium | gate fails → don't store + say why |
+| jail-memory | lessons/decisions/context | governed memory entries | jail-approval-gate (durable writes) | jail-task-contract (retrieval), jail-cpr | medium | gate fails → don't store + say why |
 | jail-lab | improvable artifact + metric | experiment ledger + best | jail-py-lab (bookkeeping) | jail-operationalize, skill iteration | low | no metric → refuse or route to jail-rate |
-| jail-skill-miner | codebase/history | candidate table → skills | rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
+| jail-skill-miner | codebase/history | candidate table → skills | jail-rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
 | jail-prompt | vague goal | engineered prompt / STOP | jail-py-prompt-tools, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
 
 ## Layer 2 — Workflow skills
@@ -32,18 +32,18 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 |---|---|---|---|---|
 | jail-operationalize | decision/recommendation | 13-field operating workflow | jail-verify (readiness), jail-lab (metric loop) | jail-decide, frameworks |
 | jail-exec-brief | any complex material | decision-ready brief | — (voice layer) | frameworks, jail-decide, kernel chains |
-| jail-rate | any ratable subject | 0–10 scorecard, cited | jail-research (evidence), rate-skill / company-prospect-research (handoffs) | jail-decide (option scoring) |
-| rate-skill | AI skill directory | 10-category matrix + record | jail-py-rate-tools, skill-creator (behavioral) | jail-skill-miner |
-| company-prospect-research | company name | prospect brief | — | jail-research (domain handoff) |
+| jail-rate | any ratable subject | 0–10 scorecard, cited | jail-research (evidence), jail-rate-skill / jail-prospect (handoffs) | jail-decide (option scoring) |
+| jail-rate-skill | AI skill directory | 10-category matrix + record | jail-py-rate-tools, skill-creator (behavioral) | jail-skill-miner |
+| jail-prospect | company name | prospect brief | — | jail-research (domain handoff) |
 
 ## Layer 3 — Domain packs
 
 | Skill | Chain (in order; inline fallback per step) |
 |---|---|
-| pestle-analysis | task-contract → research → classify 6 dims → red-team → decide → exec-brief → verify |
-| swot-analysis | task-contract → research → classify+sort rules → red-team → TOWS → decide → exec-brief → verify |
-| business-model-canvas | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → exec-brief → verify |
-| cpr-agenda-builder | task-contract → memory retrieval → CPR (exec-brief voice) → agenda-from-Results → verify |
+| jail-pestle | task-contract → research → classify 6 dims → red-team → decide → exec-brief → verify |
+| jail-swot | task-contract → research → classify+sort rules → red-team → TOWS → decide → exec-brief → verify |
+| jail-bmc | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → exec-brief → verify |
+| jail-cpr | task-contract → memory retrieval → CPR (exec-brief voice) → agenda-from-Results → verify |
 
 Wave 3 (planned, not shipped): docs/ROADMAP-wave3-domain-packs.md.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a rate-skill JSON rating record.
+"""Validate a jail-rate-skill JSON rating record.
 
 Checks: all 10 canonical categories present; every score / post_reco is within
 0.0-10.0 at 0.1 increments; post_reco >= score; overall == rounded mean of the

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """variance-check.py — empirically verify rating determinism.
 
-Takes 2+ rate-skill JSON records of the SAME skill (produced across repeated
+Takes 2+ jail-rate-skill JSON records of the SAME skill (produced across repeated
 runs) and reports per-category mean and standard deviation. Fails (non-zero
 exit) if any category's stddev exceeds the determinism threshold, so a claim of
 "temperature 0.0, identical scores" is measured rather than assumed.
@@ -27,7 +27,7 @@ def load(path):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Check score variance across repeated rate-skill runs.")
+    ap = argparse.ArgumentParser(description="Check score variance across repeated jail-rate-skill runs.")
     ap.add_argument("records", nargs="+", help="2+ rating JSON files of the same skill")
     ap.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD,
                     help=f"max allowed per-category stddev (default {DEFAULT_THRESHOLD})")

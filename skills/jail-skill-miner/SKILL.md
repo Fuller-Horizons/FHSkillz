@@ -10,7 +10,7 @@ description: >-
   disciplines does this codebase enforce", "should this become a skill", or
   when evaluating candidate-skill lists from other tools/models. Do NOT use
   to author an already-approved skill from scratch (follow repo conventions
-  directly) or to rate an existing skill (rate-skill).
+  directly) or to rate an existing skill (jail-rate-skill).
 ---
 
 # JAIL-SKILL-MINER
@@ -61,7 +61,7 @@ House format, matching the repo's conventions (FHSkillz: frontmatter
 name/version/router-description with negative triggers; lean code-free core;
 per-step checks that CAN FAIL; Related-skills routing; Gotchas naming how
 people fake compliance; JAIL-HANDOFF block). Then register (sync manifest,
-version bump) per repo rules, and route to **rate-skill** for the QA score.
+version bump) per repo rules, and route to **jail-rate-skill** for the QA score.
 
 ## Self-check before reporting
 - Every citation opened this session · every candidate shows its 4 boxes ·
@@ -69,7 +69,7 @@ version bump) per repo rules, and route to **rate-skill** for the QA score.
   the port-as-code list.
 
 ## Related skills
-Score the authored skill → **rate-skill**. Evidence-gather across a big
+Score the authored skill → **jail-rate-skill**. Evidence-gather across a big
 source → **jail-research** discipline per mining stream. Approval to author
 → the Stage-3 stop is a **jail-approval-gate** PER-ACTION.
 

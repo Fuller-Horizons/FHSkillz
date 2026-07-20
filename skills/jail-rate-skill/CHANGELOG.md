@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.1.0
+- **Renamed** `rate-skill` → `jail-rate-skill` (JAIL family naming). Folder, frontmatter, and every cross-reference updated; earlier changelog entries keep the historical name.
+
 ## 2.0.0
 - **Instruction-only core (code-free policy).** `validate-rating.py`, `save-rating.py`, `variance-check.py`, and `validate-skill-structure.py` moved to the companion **jail-py-rate-tools** skill; the skill-level pre-commit hook retired in favor of the repo-level `scripts/pre-commit-hook.sh`. Every validation step now names the companion-skill run *and* a manual fallback (recompute the mean, diff repeat records, eyeball structure).
 - Fixed the duplicated History-location paragraph; added a README.

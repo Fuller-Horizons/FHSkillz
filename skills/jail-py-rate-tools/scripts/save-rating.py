@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a rate-skill record, append it to history, and report the delta.
+"""Validate a jail-rate-skill record, append it to history, and report the delta.
 
 Runs the structural checks in validate-rating.py, then appends the record to a
 history log and prints the change in Overall versus the previous rating of the

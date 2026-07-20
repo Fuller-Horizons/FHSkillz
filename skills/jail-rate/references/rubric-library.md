@@ -84,7 +84,7 @@ significance and feasibility lead equally.
 | Financial health signals | 15% | Public filings/liens/tenure (free sources; never fabricate private financials) |
 | Market position | 15% | Share-of-voice, differentiation, competitive set |
 
-*For a pursue/pass prospecting decision, use company-prospect-research instead.*
+*For a pursue/pass prospecting decision, use jail-prospect instead.*
 
 ## Content / media (article, video, course, book, report)
 | Dimension | Weight | Evidence to seek |

@@ -4,7 +4,7 @@ Load this at Step 3, before gathering evidence. These rules make "empirical,
 cited" mean something: what counts as evidence, how to cite it, and how
 evidence depth sets confidence. (Alignment note: the tiering mirrors
 jail-prompt's `references/sources.md` and the labeling mirrors
-company-prospect-research — one house standard, three skills.)
+jail-prospect — one house standard, three skills.)
 
 ## Source tiers (prefer higher; drop lower only when forced)
 1. **Primary / official** — the entity that owns the fact: filings, official

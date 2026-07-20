@@ -1,7 +1,7 @@
 ---
-name: business-model-canvas
+name: jail-bmc
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Build or evaluate a nine-block Business Model Canvas (customer segments,
   value propositions, channels, customer relationships, revenue streams, key
@@ -10,11 +10,11 @@ description: >-
   riskiest assumptions and the experiments to test them. Use when asked for
   a "business model canvas", "BMC", "map the business model", evaluating a
   venture/product idea's model, or pressure-testing how a business makes
-  money. Do NOT use for macro scans (pestle-analysis), competitive
-  self-assessment (swot-analysis), or entity/legal-structure questions.
+  money. Do NOT use for macro scans (jail-pestle), competitive
+  self-assessment (jail-swot), or entity/legal-structure questions.
 ---
 
-# BUSINESS-MODEL-CANVAS
+# JAIL-BMC
 
 A canvas full of hopes is brainstorming with borders. This skill's contract:
 **validated information and hypotheses never wear the same clothes**, and

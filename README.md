@@ -30,24 +30,24 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 | [`jail-rate`](skills/jail-rate/) | Universal evidence-cited **0–10 rating of anything**, weighted rubric per subject type, current → projected. |
 | [`jail-operationalize`](skills/jail-operationalize/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
 | [`jail-exec-brief`](skills/jail-exec-brief/) | Decision-ready executive communication; technical findings translated into business consequences. |
-| [`rate-skill`](skills/rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
-| [`company-prospect-research`](skills/company-prospect-research/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
+| [`jail-rate-skill`](skills/jail-rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
+| [`jail-prospect`](skills/jail-prospect/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
 
 ### Layer 3 — Domain packs
 
 | Skill | What it does |
 |---|---|
-| [`pestle-analysis`](skills/pestle-analysis/) | Evidence-grounded PESTLE tied to a subject + decision, with tripwires per factor. |
-| [`swot-analysis`](skills/swot-analysis/) | Evidence-sorted SWOT → TOWS strategies; the misclassification traps enforced. |
-| [`business-model-canvas`](skills/business-model-canvas/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
-| [`cpr-agenda-builder`](skills/cpr-agenda-builder/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
+| [`jail-pestle`](skills/jail-pestle/) | Evidence-grounded PESTLE tied to a subject + decision, with tripwires per factor. |
+| [`jail-swot`](skills/jail-swot/) | Evidence-sorted SWOT → TOWS strategies; the misclassification traps enforced. |
+| [`jail-bmc`](skills/jail-bmc/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
+| [`jail-cpr`](skills/jail-cpr/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
 
 ### JAIL-PY companions (optional; need code execution)
 
 | Skill | Backs |
 |---|---|
 | [`jail-py-prompt-tools`](skills/jail-py-prompt-tools/) | jail-prompt — secret scan, prompt/chain/truth lint, dry-run. |
-| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | rate-skill — validate/save records, variance check, structure lint. |
+| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | jail-rate-skill — validate/save records, variance check, structure lint. |
 | [`jail-py-lab`](skills/jail-py-lab/) | jail-lab — experiment ledger bookkeeping and reports. |
 
 **System docs:** the [JAIL Constitution](docs/JAIL-CONSTITUTION.md) (12 rules + the handoff contract every kernel skill ends with) · the [skill graph](docs/skill-graph.md) (routing registry) · [wave-3 roadmap](docs/ROADMAP-wave3-domain-packs.md).

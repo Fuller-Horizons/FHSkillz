@@ -3,7 +3,7 @@
 Wave 1 (0.18.0) shipped the reasoning kernel + frameworks pack. These
 candidates from the 2026-07 consolidation are **staged, not built** — each
 enters through jail-skill-miner's pipeline (mine → 4-box filter → dedup →
-approve → author → rate-skill ≥8.0) so the plugin grows deliberately, not by
+approve → author → jail-rate-skill ≥8.0) so the plugin grows deliberately, not by
 accumulation. Every domain pack calls Layers 1–2 by name; none re-implements
 kernel logic.
 
@@ -14,7 +14,7 @@ kernel logic.
 - **advisory-boundary-guard** — detect advisory→implementation drift:
   independence, authorization limits, reliance, decision ownership.
 - **board-governance-reset** — disengaged-board diagnosis → expectations,
-  accountability, reset communication + agenda (chains cpr-agenda-builder).
+  accountability, reset communication + agenda (chains jail-cpr).
 - **framework-fit-selector** — NIST CSF / CIS / 800-171+CMMC / ISO 27001 /
   SOC 2 / COBIT / ATT&CK / CCM / PCI selection driven by the business driver,
   with why-not for the runners-up.
@@ -42,14 +42,14 @@ kernel logic.
 - **model-validation-council** — when a second model/validator is justified
   (impact × uncertainty × novelty × irreversibility) and when it's waste.
 - **capability-sandbox-evaluator** — evaluate a proposed tool/model/repo in a
-  restricted sandbox with synthetic data before adoption (extends rate-skill
+  restricted sandbox with synthetic data before adoption (extends jail-rate-skill
   + jail-approval-gate).
 
 ## Growth pack
 - **prospect-partner-fit-classifier** — ICP → candidates → classify
   (client/partner/referral/channel/competitor/vendor/irrelevant) → sampled
   review → selective enrich → approved export (extends
-  company-prospect-research).
+  jail-prospect).
 - **dual-value-synergy-matcher** — two-sided partnership fit: needs,
   capabilities, buyer, timing, values, power balance, why each side says yes
   — and why either says no.
@@ -58,7 +58,7 @@ kernel logic.
   argument.
 - **meeting-to-execution-converter** — transcript/notes → decisions made/
   deferred, contradictions, actions with owners/deadlines, follow-ups, next
-  agenda (the post-meeting twin of cpr-agenda-builder).
+  agenda (the post-meeting twin of jail-cpr).
 - **entity-structure-decision-advisor** — DBA / LLC / corp / subsidiary
   analysis across liability, tax burden, brand architecture, investor path —
   explicitly separated from licensed legal/tax advice.
@@ -72,4 +72,4 @@ kernel logic.
 ## Entry bar (unchanged)
 4-box filter · NEW-not-EXTENDS justified · code-free core (runnable parts →
 jail-py-*) · router description with negative triggers · Gotchas · evals
-seeded · rate-skill ≥ 8.0 before the version bump ships it.
+seeded · jail-rate-skill ≥ 8.0 before the version bump ships it.

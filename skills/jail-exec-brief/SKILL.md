@@ -60,7 +60,7 @@ delivered to a human ends at next actions — humans don't need YAML.
 ## Related skills
 Decision analysis to present → **jail-decide** runs first. Evidence behind
 the brief → **jail-research** packet. Meeting around the brief →
-**cpr-agenda-builder**. Verify a consequential brief before it ships →
+**jail-cpr**. Verify a consequential brief before it ships →
 **jail-verify**.
 
 ## Gotchas

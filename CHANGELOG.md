@@ -2,6 +2,17 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.19.0] — 2026-07-19
+
+**Unified JAIL naming + full smoke pass.**
+
+### Renamed (folder + frontmatter + every cross-reference; history entries keep old names)
+- `rate-skill` → **jail-rate-skill** (2.1.0) · `company-prospect-research` → **jail-prospect** (1.2.0) · `pestle-analysis` → **jail-pestle** (1.1.0) · `swot-analysis` → **jail-swot** (1.1.0) · `business-model-canvas` → **jail-bmc** (1.1.0) · `cpr-agenda-builder` → **jail-cpr** (1.1.0). All 24 skills now carry the jail- prefix. 37 files rewired; `~/.rate-skill/` history path deliberately unchanged (data dir, not a skill name).
+
+### Smoke tests — 24/24 PASS (`docs/smoke-tests-0.19.0.md`)
+- One fixture per skill on a shared scenario; jail-py-* entries are real executions (secret-scan detection, prompt-lint pass, validate-rating tamper rejection, lab keep/discard ledger). Six skills pass by correctly refusing/halting/failing (jail-verify FAIL with named observations, jail-quarantine sensitive halt + injection defusal, jail-memory secret refusal, jail-prospect score-without-signal refusal, jail-orchestrate unverified-claim rejection, jail-lab regression discard). Supplied-materials modes used where live research would be required — no fabricated citations.
+- Smoke tests are shape + guardrail demonstrations, not the multi-case behavioral evals (still authored-not-run).
+
 ## [plugin 0.18.0] — 2026-07-19
 
 **The JAIL OS release** — plugin grows 6 → 24 skills in three governed layers, built by consolidating ~44 candidates (ChatGPT's 16-core + 20 follow-ons, 8 disciplines mined from SharperOS/VanguardOS, karpathy/autoresearch) down to what survived dedup against the existing six.

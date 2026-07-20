@@ -9,8 +9,8 @@ description: >-
   facts gathered from internal or external sources: "research X", "find
   evidence for", "what does the data say", "verify this claim", background for
   a decision/analysis/framework, or when another skill (jail-decide,
-  pestle-analysis, swot-analysis, jail-rate) needs grounding. Do NOT use for
-  US-private-company sell-side prospecting (company-prospect-research) or when
+  jail-pestle, jail-swot, jail-rate) needs grounding. Do NOT use for
+  US-private-company sell-side prospecting (jail-prospect) or when
   the user supplies all facts and just wants synthesis (jail-exec-brief).
 ---
 
@@ -63,7 +63,7 @@ Then the JAIL-HANDOFF block — `next` is usually the consuming skill
 (jail-decide, jail-verify, a framework skill, or jail-exec-brief).
 
 ## Related skills
-Company sell-side screen → **company-prospect-research**. Rate the researched
+Company sell-side screen → **jail-prospect**. Rate the researched
 subject → **jail-rate**. Contract unclear → **jail-task-contract** first.
 A deep-research tool/agent, when present, may serve as the Step-2 engine —
 its output still must be reformatted into the packet and its citations

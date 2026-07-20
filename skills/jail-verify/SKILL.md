@@ -9,7 +9,7 @@ description: >-
   when work claims to be done: "verify this", "check before we send", "is this
   actually complete", after any multi-agent run, before any deliverable with
   consequences, or whenever a completion claim lacks evidence. Do NOT use to
-  score quality 0-10 (jail-rate), rate an AI skill directory (rate-skill), or
+  score quality 0-10 (jail-rate), rate an AI skill directory (jail-rate-skill), or
   red-team a plan still being formed (jail-red-team).
 ---
 
@@ -69,7 +69,7 @@ Then the JAIL-HANDOFF block. FAIL → `next:` the producing skill with the
 ranked fixes; PASS → `next:` ship / jail-exec-brief.
 
 ## Related skills
-Numeric quality score → **jail-rate**. Skill directory → **rate-skill**.
+Numeric quality score → **jail-rate**. Skill directory → **jail-rate-skill**.
 Attack a *draft* plan's reasoning → **jail-red-team** (before build; this
 skill runs after). Iterating to a metric → **jail-lab**.
 

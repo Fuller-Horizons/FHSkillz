@@ -1,4 +1,4 @@
-# company-prospect-research
+# jail-prospect
 
 Researches a **US private company as a sell-side brokerage / consulting prospect** using only free, authoritative sources. Produces a one-page brief: Likelihood-to-Sell score (0–100), Consulting-Opportunity score (0–100), red flags, an outreach hook, and a fully cited source appendix.
 
@@ -17,7 +17,7 @@ Related: a 0–10 quality rating of a business (not a prospect decision) is [`ja
 ## Contents
 
 ```
-skills/company-prospect-research/
+skills/jail-prospect/
 ├── SKILL.md · README.md · CHANGELOG.md
 ├── assets/brief-template.md
 ├── prompts/prompt-chain.md

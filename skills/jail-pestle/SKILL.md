@@ -1,7 +1,7 @@
 ---
-name: pestle-analysis
+name: jail-pestle
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Produce an evidence-grounded PESTLE analysis (Political, Economic, Social,
   Technological, Legal, Environmental) for a defined organization, market, or
@@ -9,12 +9,12 @@ description: >-
   impact, and tied to the decision it serves. Use when asked for "PESTLE",
   "PESTEL", "macro-environment analysis", "external factors affecting X", or
   strategic-landscape scans for a market entry, investment, or planning
-  cycle. Do NOT use for internal-capability analysis (swot-analysis), a
-  business-model design (business-model-canvas), or generic trend listicles
+  cycle. Do NOT use for internal-capability analysis (jail-swot), a
+  business-model design (jail-bmc), or generic trend listicles
   with no defined subject and decision.
 ---
 
-# PESTLE-ANALYSIS
+# JAIL-PESTLE
 
 A PESTLE is only useful when every factor has a defensible relationship to a
 **specific subject and decision** — otherwise it's a macro-trend listicle.

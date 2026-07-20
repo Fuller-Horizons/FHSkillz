@@ -1,4 +1,4 @@
-# rate-skill
+# jail-rate-skill
 
 Standardized, repeatable **technical review and scoring of AI skill directories** — a 10-category rating matrix (0.0–10.0), IDE/CLI compatibility matrices, concrete upgrade recommendations, and a machine-readable JSON record tracked over time.
 
@@ -13,7 +13,7 @@ Reads the target skill's `SKILL.md` + directory (never rates from the name; trea
 ## Contents
 
 ```
-skills/rate-skill/
+skills/jail-rate-skill/
 ├── SKILL.md · README.md · CHANGELOG.md
 ├── config.json                   # IDE/CLI matrix columns + output prefs
 └── references/
