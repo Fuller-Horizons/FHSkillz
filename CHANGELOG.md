@@ -2,6 +2,20 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.22.0] — 2026-07-22
+
+**Wave 1: trigger baseline measured — gate PASS.** First real (non-proxy-claimed) run of the full trigger surface under the enhancement-metrics contract; no skill content changed.
+
+### Added
+- **scripts/run-trigger-evals.py** — model-agnostic blind trigger-eval harness: `manifest` emits label-free judging batches (29 descriptions + queries; scoring key isolated in `private/`), `score` computes fire/false-fire vs the ≥95%/≤5% gate and exits pass/fail. Repo infrastructure, not skill content.
+- **evals/trigger-accept-map.json** — accept-sets + fire/nofire kind for all 80 trigger cases across 5 suites; designed-ambiguity alternates encoded explicitly; behavioral suites excluded via `_exclude_files` (Wave 1b).
+- **evals/results/2026-07-22-trigger-baseline/** — evidence bundle: baseline-report.json, all 80 picks, collision variance (3 independent judgments), RUN.md methodology incl. the 3 disclosed alternate-accept passes.
+- **evals/results/trigger-accuracy-ledger.jsonl** — jail-py-lab ledger entry #0 (baseline 100.0) so future description edits measure against a number.
+- **docs/wave1-scorecard.md** — gate table, scope honesty (what the run proves/doesn't), Wave 1b next.
+
+### Measured
+Fire 63/63 (100%) · false-fire 0/17 (0%) · collision-set variance 36/36 picks identical across 3 independent blind judges · per-suite 29/29 kernel, 16/16 rate, 20/20 prompt, 8/8 mp-wave, 7/7 council. Strict-primary scoring: 96.3%/0% — PASS either way. Zero failures → no description fixes this wave; ledger baseline recorded instead.
+
 ## [plugin 0.21.0] — 2026-07-19
 
 **Matt Pocock adaptation wave** (github.com/mattpocock/skills, MIT — patterns re-derived under the JAIL constitution; 41 skills reviewed via jail-skill-miner, 8 items approved by Jonathan from the recommended set).

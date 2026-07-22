@@ -2,6 +2,25 @@
 
 This folder holds the plugin's test sets. Re-run the relevant set whenever you change a skill's `SKILL.md` or references, so improvements are evidence-backed rather than vibes.
 
+## Trigger baseline (Wave 1 — RUN 2026-07-22, gate PASS)
+
+All 80 trigger cases (5 suites, 29 descriptions) now run through a scripted,
+blind-judged harness:
+
+```
+python3 scripts/run-trigger-evals.py manifest --repo . --out <dir> --batch 12
+# dispatch one independent subagent judge per <dir>/manifest-N.json
+# (judges see descriptions + queries ONLY; the key sits in <dir>/private/)
+python3 scripts/run-trigger-evals.py score --out <dir> --picks <picks.jsonl>
+```
+
+The accept-sets live in `trigger-accept-map.json` (case → accepted picks +
+fire/nofire kind; `_exclude_files` keeps behavioral suites out of the trigger
+gate). **Baseline result: fire 63/63 (100%), false-fire 0/17 (0%), collision-set
+variance 36/36 — gate ≥95/≤5 PASS.** Evidence:
+[`results/2026-07-22-trigger-baseline/`](results/2026-07-22-trigger-baseline/RUN.md) ·
+ledger: `results/trigger-accuracy-ledger.jsonl`.
+
 ## Files
 
 **MP-adaptation wave** (0.21.0 — authored 2026-07-19): `mp-wave-evals.json` — 4 triggers, 4 routing near-misses, 4 behavioral cases (loop-refusal, throwaway enforcement, baton redaction, plan-not-do).

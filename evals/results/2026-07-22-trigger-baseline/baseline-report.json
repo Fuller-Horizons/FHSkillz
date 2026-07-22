@@ -1,0 +1,10 @@
+{
+ "fire_total": 63,
+ "fire_ok": 63,
+ "fire_rate": 1.0,
+ "nofire_total": 17,
+ "nofire_ok": 17,
+ "false_fire_rate": 0.0,
+ "gate_95_5": "PASS",
+ "failures": []
+}

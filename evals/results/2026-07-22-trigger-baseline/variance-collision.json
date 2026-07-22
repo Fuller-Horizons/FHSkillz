@@ -1,0 +1,126 @@
+{
+ "collision_set": "kernel-trigger-evals.json near_misses n1-n12",
+ "judgments": 3,
+ "judges": [
+  "batch-run",
+  "variance-A",
+  "variance-B"
+ ],
+ "agent_ids": [
+  "a363035f9c63381c8/a7f4762c5dc1c9e56",
+  "ac56af2660ed8b532",
+  "ae90000ce742c283f"
+ ],
+ "unanimous_cases": "12/12",
+ "pick_agreement": "36/36",
+ "rows": [
+  {
+   "id": "kernel-trigger-evals.json::n1",
+   "picks": [
+    "jail-rate",
+    "jail-rate",
+    "jail-rate"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n2",
+   "picks": [
+    "jail-verify",
+    "jail-verify",
+    "jail-verify"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n3",
+   "picks": [
+    "jail-red-team",
+    "jail-red-team",
+    "jail-red-team"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n4",
+   "picks": [
+    "jail-decide",
+    "jail-decide",
+    "jail-decide"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n5",
+   "picks": [
+    "jail-prompt",
+    "jail-prompt",
+    "jail-prompt"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n6",
+   "picks": [
+    "jail-prospect",
+    "jail-prospect",
+    "jail-prospect"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n7",
+   "picks": [
+    "jail-task-contract",
+    "jail-task-contract",
+    "jail-task-contract"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n8",
+   "picks": [
+    "none",
+    "none",
+    "none"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n9",
+   "picks": [
+    "jail-lab",
+    "jail-lab",
+    "jail-lab"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n10",
+   "picks": [
+    "jail-quarantine",
+    "jail-quarantine",
+    "jail-quarantine"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n11",
+   "picks": [
+    "jail-rate-skill",
+    "jail-rate-skill",
+    "jail-rate-skill"
+   ],
+   "unanimous": true
+  },
+  {
+   "id": "kernel-trigger-evals.json::n12",
+   "picks": [
+    "none",
+    "none",
+    "none"
+   ],
+   "unanimous": true
+  }
+ ]
+}
