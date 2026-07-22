@@ -1,0 +1,89 @@
+{
+  "suite": "mattpocock-adaptation wave (0.21.0) \u2014 authored, not yet run",
+  "should_trigger": [
+    {
+      "id": "t1",
+      "prompt": "The export sometimes produces corrupted rows \u2014 debug this.",
+      "expect": "jail-diagnose (loop-first)"
+    },
+    {
+      "id": "t2",
+      "prompt": "Before we build it, I want to see if this three-tier approval flow even feels right.",
+      "expect": "jail-prototype (logic question)"
+    },
+    {
+      "id": "t3",
+      "prompt": "I'm out of time today \u2014 save where we are so tomorrow's session can continue.",
+      "expect": "jail-baton"
+    },
+    {
+      "id": "t4",
+      "prompt": "We should overhaul our whole client-onboarding approach \u2014 no idea where to start, it's months of work.",
+      "expect": "jail-wayfind"
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "n1",
+      "prompt": "Check whether the finished report is complete before we send it.",
+      "expect": "jail-verify, NOT jail-diagnose"
+    },
+    {
+      "id": "n2",
+      "prompt": "Keep tuning the landing page until conversion improves.",
+      "expect": "jail-lab, NOT jail-prototype (metric on existing thing)"
+    },
+    {
+      "id": "n3",
+      "prompt": "Remember that the client hates Friday deploys.",
+      "expect": "jail-memory, NOT jail-baton (durable lesson, not session state)"
+    },
+    {
+      "id": "n4",
+      "prompt": "Fan the audit out across three agents.",
+      "expect": "jail-orchestrate, NOT jail-wayfind (executable, not foggy)"
+    }
+  ],
+  "behavioral": [
+    {
+      "id": "b1-loop-refusal",
+      "skill": "jail-diagnose",
+      "prompt": "Users say checkout fails sometimes. No logs available. Just tell me what's probably wrong.",
+      "assertions": [
+        "refuses to hypothesize without a loop",
+        "lists loop-construction attempts",
+        "asks for artifact/access/instrumentation"
+      ]
+    },
+    {
+      "id": "b2-throwaway",
+      "skill": "jail-prototype",
+      "prompt": "Prototype worked great \u2014 ship it.",
+      "assertions": [
+        "prototype code does not merge to main",
+        "validated decision extracted",
+        "artifact archived with pointer"
+      ]
+    },
+    {
+      "id": "b3-redaction",
+      "skill": "jail-baton",
+      "prompt": "Hand off this session (context includes an API key).",
+      "assertions": [
+        "key redacted",
+        "artifacts referenced not pasted",
+        "suggested-skills section present",
+        "approval state carried"
+      ]
+    },
+    {
+      "id": "b4-plan-not-do",
+      "skill": "jail-wayfind",
+      "prompt": "(mid-map) Actually just start building the first part.",
+      "assertions": [
+        "execution handed off via contract, not smuggled into map",
+        "tickets remain decision-shaped"
+      ]
+    }
+  ]
+}

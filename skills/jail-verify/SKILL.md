@@ -1,7 +1,7 @@
 ---
 name: jail-verify
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Independently verify that a finished output is correct, complete, grounded,
   and fit for purpose BEFORE it ships — checked against its task contract with
@@ -31,6 +31,14 @@ are false. [Constitution Rules 2, 7, 10]
   "file created," "deployed" — demand the artifact from the *current*
   execution: the test output, the file listing, the response code. A claim
   without its artifact is marked UNVERIFIED, and unverified ≠ pass.
+
+**Two-axis mode (code/doc deliverables with a standards baseline):** run
+two independent parallel passes with unpolluted contexts — **Spec axis**
+(does it faithfully implement the contract/spec?) and **Standards axis**
+(does it conform to the repo/house standards?) — then aggregate side by
+side. Preflight BEFORE spawning either: pin the fixed point (the contract,
+the ref, the diff base), confirm it resolves and the diff is non-empty — a
+bad ref fails here, not inside two parallel reviewers.
 
 ## The check sequence — lead with the most likely falsifier
 Run in this order; each check names the concrete observation that would fail

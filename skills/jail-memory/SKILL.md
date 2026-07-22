@@ -1,7 +1,7 @@
 ---
 name: jail-memory
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Govern what enters, stays in, and leaves durable memory or organizational
   knowledge — provenance-checked, deduplicated, classified, superseded-not-
@@ -37,7 +37,10 @@ Each candidate entry must pass all six checks:
 2. **Worth** — not re-derivable from source control, docs, or config; not
    ephemeral task state; generic observations don't qualify.
 3. **One lesson per entry** — one clear decision/lesson/fact + **why it
-   matters** + how to apply it.
+   matters** + how to apply it. Architectural/design decisions use the
+   **ADR shape** (Architecture Decision Record): context → decision →
+   consequences → status (accepted/superseded-by) — the named entry type
+   for decisions that shape future structure.
 4. **Dedup** — search existing entries first; UPDATE the existing entry
    rather than write a near-duplicate.
 5. **Contradiction check** — conflicts with an existing entry are resolved

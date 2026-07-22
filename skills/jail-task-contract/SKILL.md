@@ -1,7 +1,7 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Convert an ambiguous, multithreaded, or high-stakes request into an
   executable TASK CONTRACT before work begins — objective, stakeholder,
@@ -22,9 +22,17 @@ This is jail-prompt's Phase-1 discipline applied to *any* execution — by you,
 another model, an agent team, or a human.
 
 ## Step 1 — Cross-examine (staged, not an interrogation)
-Ask **3–5 related questions per round, maximum two rounds.** Force the WHY
-before optimizing the HOW. Challenge vague or conflicting answers directly —
-"fast and comprehensive" is a conflict to resolve, not transcribe. Then split
+**Look up facts; ask only decisions.** Anything discoverable from the
+environment (files, tools, prior artifacts) gets looked up, never asked —
+the human's attention is spent exclusively on decisions that are theirs.
+Default lane: **3–5 related questions per round, maximum two rounds.**
+**Grill mode (high-stakes):** when a wrong guess is expensive, switch to an
+exhaustive branch-walk — ONE question at a time, each with your recommended
+answer, walking every branch of the decision tree until shared
+understanding is reached; the two-round cap lifts. Say which mode you're in.
+Force the WHY before optimizing the HOW. Challenge vague or conflicting
+answers directly — "fast and comprehensive" is a conflict to resolve, not
+transcribe. Then split
 remaining ambiguity into two piles:
 - **Resolvable** → make the reasonable assumption, mark it, proceed.
 - **Blocking** → genuinely prevents execution (wrong guess = wasted work or
@@ -72,8 +80,9 @@ needed → **jail-research**. Multi-agent execution → **jail-orchestrate**.
 Verify the finished work against this contract → **jail-verify**.
 
 ## Gotchas
-- **Question fatigue.** More than two rounds means you're outsourcing thinking
-  to the stakeholder. Round 3 = make marked assumptions and show them.
+- **Question fatigue.** In the default lane, more than two rounds means you're
+  outsourcing thinking — round 3 = marked assumptions, shown. Grill mode is
+  exempt by declaration, but even grilling asks decisions, never facts.
 - **Contract theater.** Filling all 14 fields with restated request text. Each
   field must add information the request didn't state.
 - **Untestable done.** "Completion: report delivered" fails Rule 7. What check

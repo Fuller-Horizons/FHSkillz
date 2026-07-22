@@ -48,3 +48,14 @@
 | **jail-py-rate-tools** 1.0.0 | Runnable validation/persistence for ratings — tamper-proof records, history deltas, variance | Exit-coded checks + rating-history.jsonl | **7.2** |
 
 **Suite mean value: 8.15** across 25 skills · spread 7.2–9.0. The kernel out-values the frameworks because its failures are severer and its disciplines least replaceable by an unaided model; jail-council (8.4) is reserved for the calls that must be maximally right — proven in the live 0.20.0 smoke run, where anonymized review caught a real error inside a unanimous council. Frameworks are commodity formats made valuable by evidence discipline; companions score on enforcement, bounded by needing code execution.
+
+## Addendum (0.21.0) — Matt Pocock adaptation wave (MIT, attributed)
+
+| Skill | Purpose / use case | Output | Value |
+|---|---|---|:---:|
+| **jail-diagnose** 1.0.0 | Feedback-loop-first defect diagnosis — red-capable repro before hypotheses; confirmed cause; mandatory regression case | Diagnosis report: loop · minimized case · cause+evidence · fix · proof | **8.6** |
+| **jail-baton** 1.0.0 | Session-to-session handoff — compact state, decisions-with-why, references, next actions, redacted | The baton document | **8.2** |
+| **jail-prototype** 1.0.0 | Throwaway prototypes answering a named design question; answer graduates, code dies | Verdict + evidence + archived artifact pointer | **7.9** |
+| **jail-wayfind** 1.0.0 | Decision-ticket maps through fog until the way to a named destination clears | The map + cleared-way handoff | **7.6** |
+
+Deltas also shipped (1.1.0 bumps): grill mode + facts-vs-decisions → jail-task-contract · two-axis ∥ review + preflight → jail-verify · tracer-bullet slicing + expand–contract → jail-orchestrate · ADR entry shape → jail-memory · invocation economics → jail-skill-miner. Quality quick-ratings (band-anchored): diagnose 8.4 · prototype 8.2 · baton 8.2 · wayfind 8.1.

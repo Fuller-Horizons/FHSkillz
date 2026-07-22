@@ -24,6 +24,10 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-quarantine | inbound/bulk/sensitive data | adopted data + halt report | jail-approval-gate | jail-research, jail-memory, extraction tasks | high | safe path unavailable → skip (fail closed) |
 | jail-memory | lessons/decisions/context | governed memory entries | jail-approval-gate (durable writes) | jail-task-contract (retrieval), jail-cpr | medium | gate fails → don't store + say why |
 | jail-lab | improvable artifact + metric | experiment ledger + best | jail-py-lab (bookkeeping) | jail-operationalize, skill iteration | low | no metric → refuse or route to jail-rate |
+| jail-diagnose | reported defect | confirmed cause + minimal fix + regression case | jail-verify (consequential fixes), jail-memory (root-cause lessons) | user, jail-verify (failing deliverables) | low | no loop constructible → STOP + ask for artifacts/access |
+| jail-prototype | design question | verdict + evidence; artifact archived off-main | jail-decide (verdicts as evidence), jail-memory (ADR) | jail-decide, jail-bmc (experiments) | low | question unnamed → refuse to start |
+| jail-baton | ending/overflowing session | handoff baton (state, decisions, refs, next, skills) | jail-memory (durable lessons), jail-quarantine (redaction classes) | user, jail-wayfind, jail-orchestrate | medium (travels) | secrets present → redact before write |
+| jail-wayfind | foggy multi-session goal | decision-ticket map → cleared way + handoff | jail-research, jail-prototype, jail-decide, jail-council, jail-baton | user | low | destination unnameable → route to jail-red-team/jail-prompt |
 | jail-skill-miner | codebase/history | candidate table → skills | jail-rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
 | jail-prompt | vague goal | engineered prompt / STOP | jail-py-prompt-tools, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
 

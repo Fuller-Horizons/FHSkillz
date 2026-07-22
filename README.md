@@ -23,6 +23,10 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 | [`jail-memory`](skills/jail-memory/) | Memory governance (six-check ingestion gate, supersede-don't-delete) + the learning-postmortem ritual. |
 | [`jail-lab`](skills/jail-lab/) | Metric-driven experiment loops with an append-only audit ledger — adapted from karpathy/autoresearch (MIT). |
 | [`jail-skill-miner`](skills/jail-skill-miner/) | Mines codebases/histories for plugin-worthy disciplines; dedupes against installed skills; stops for approval. |
+| [`jail-diagnose`](skills/jail-diagnose/) | Feedback-loop-first defect diagnosis — red-capable repro signal before hypotheses; confirmed cause; mandatory regression case. |
+| [`jail-prototype`](skills/jail-prototype/) | Throwaway prototypes answering a named design question — the answer graduates, the code dies on a branch. |
+| [`jail-baton`](skills/jail-baton/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
+| [`jail-wayfind`](skills/jail-wayfind/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
 
 ### Layer 2 — Workflow skills
 

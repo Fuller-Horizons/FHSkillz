@@ -1,7 +1,7 @@
 ---
 name: jail-orchestrate
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Run multiple agents/subagents as one coordinated system — decide when
   delegation earns its cost, assign non-overlapping scopes with minimum
@@ -37,6 +37,15 @@ sequential, wins — coordination overhead is real work lost.
   done-check, and the citation rule if it researches.
 - **Recursion bound:** agents may not re-delegate beyond depth 1 without the
   orchestrator's explicit approval; cap total agents up front.
+
+**Slice work as tracer bullets.** When scoping build-type nodes, each
+slice cuts a narrow but COMPLETE path through every layer — vertical, never
+a horizontal slice of one layer; demoable/verifiable on its own; sized to
+one fresh context window; prefactoring first ("make the change easy, then
+make the easy change"). **Exception — wide refactors:** one mechanical
+change whose blast radius spans the codebase can't land as a vertical
+slice; sequence it expand–contract (add the new alongside, migrate
+callers, remove the old) instead of forcing a tracer bullet.
 
 ## During the run — the ledger
 Maintain a **dependency graph + completed-nodes ledger**: for every node

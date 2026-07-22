@@ -1,7 +1,7 @@
 ---
 name: jail-skill-miner
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Mine a codebase, chat history, or document set for plugin-worthy SKILLS —
   reusable disciplines, not app features — then dedupe candidates against the
@@ -57,6 +57,13 @@ a top-3 with one reason each. **STOP and wait for selection — authoring
 unapproved skills is scope creep with a commit history.**
 
 ## Stage 4 — AUTHOR (approved candidates only)
+**Invocation economics first:** a model-invoked skill's description sits in
+context every turn (**context load**); a user-invoked/manual skill costs
+the human remembering it exists (**cognitive load**). Pick model-invocation
+only when the agent (or another skill) must reach it autonomously; prune
+descriptions hard — one trigger per distinct branch, synonyms are
+duplication. When manual skills multiply past memory, a router skill cures
+the pile.
 House format, matching the repo's conventions (FHSkillz: frontmatter
 name/version/router-description with negative triggers; lean code-free core;
 per-step checks that CAN FAIL; Related-skills routing; Gotchas naming how

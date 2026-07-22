@@ -4,6 +4,8 @@ This folder holds the plugin's test sets. Re-run the relevant set whenever you c
 
 ## Files
 
+**MP-adaptation wave** (0.21.0 — authored 2026-07-19): `mp-wave-evals.json` — 4 triggers, 4 routing near-misses, 4 behavioral cases (loop-refusal, throwaway enforcement, baton redaction, plan-not-do).
+
 **jail-council** (0.20.0 — authored 2026-07-19): `jail-council-evals.json` — 4 triggers, 3 routing near-misses, 5 behavioral cases (tier honesty, anonymization, mandatory error-hunt, evidence-beats-votes, audit-appendix-or-theater). A live Tier-C run is recorded in docs/smoke-tests-0.19.0.md (0.20.0 addendum).
 
 **Kernel + frameworks** (0.18.0 wave 1 — authored 2026-07-19, not yet run):

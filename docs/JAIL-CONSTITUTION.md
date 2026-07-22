@@ -66,7 +66,8 @@ those three must always appear (an empty list is itself a claim).
 - **Layer 1 — Reasoning kernel** (govern all work): jail-task-contract,
   jail-research, jail-verify, jail-decide, jail-red-team, jail-council,
   jail-orchestrate, jail-approval-gate, jail-quarantine, jail-memory,
-  jail-lab, jail-skill-miner, jail-prompt.
+  jail-lab, jail-diagnose, jail-prototype, jail-baton, jail-wayfind,
+  jail-skill-miner, jail-prompt.
 - **Layer 2 — Workflow skills** (repeatable outcomes): jail-operationalize,
   jail-exec-brief, jail-rate, jail-rate-skill, jail-prospect.
 - **Layer 3 — Domain packs** (call Layers 1–2, never duplicate them):

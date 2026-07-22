@@ -2,6 +2,22 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.21.0] — 2026-07-19
+
+**Matt Pocock adaptation wave** (github.com/mattpocock/skills, MIT — patterns re-derived under the JAIL constitution; 41 skills reviewed via jail-skill-miner, 8 items approved by Jonathan from the recommended set).
+
+### New kernel skills (4 × 1.0.0)
+- **jail-diagnose** — feedback-loop-first diagnosis: red-capable repro signal before any hypothesizing (8 escalating techniques), tighten/minimize/instrument, confirmed-cause fixes, mandatory regression case (matches the enhancement contract's regression rule). Refuses to guess loopless.
+- **jail-prototype** — throwaway prototypes answering a named design question; one command, no persistence, state surfaced; the verdict graduates, the artifact dies off-main.
+- **jail-baton** — session handoff batons: state with proof pointers, decisions-with-why, reference-don't-duplicate, suggested skills, quarantine-class redaction; sized to the recipient (small-context aware).
+- **jail-wayfind** — decision-ticket maps for foggy multi-session work; plan-don't-do; resolve via kernel skills until the way to a named destination clears.
+
+### Deltas into existing skills (5 × 1.1.0)
+jail-task-contract (grill mode: one-question-at-a-time exhaustive branch-walk for high stakes + look-up-facts/ask-only-decisions) · jail-verify (two-axis Spec ∥ Standards parallel review + pin-the-fixed-point preflight) · jail-orchestrate (tracer-bullet vertical slices + expand–contract for wide refactors) · jail-memory (ADR entry shape) · jail-skill-miner (invocation economics: context load vs cognitive load, description pruning).
+
+### Not adopted (recorded)
+research (duplicate — ours stronger), to-spec/implement/tdd/codebase-design/triage/merge-conflicts et al. (deferred to wave-3 software-build-governor as feeders), teaching/personal/installer skills (out of scope). Plugin: 29 skills; evals/mp-wave-evals.json seeded; 4 fixture smokes PASS (smoke doc addendum).
+
 ## [plugin 0.20.0] — 2026-07-19
 
 ### jail-council → 1.0.0 (new, kernel) — the LLM-council pattern, accuracy-first
