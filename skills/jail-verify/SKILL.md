@@ -76,7 +76,7 @@ Flags: concerns that don't block shipping, stated plainly
 Evidence examined: <artifacts, logs, citations opened>
 ```
 Then the JAIL-HANDOFF block. FAIL → `next:` the producing skill with the
-ranked fixes; PASS → `next:` ship / jail-exec-brief.
+ranked fixes; PASS → `next:` ship / jail-summarize.
 
 ## Related skills
 Numeric quality score → **jail-rate**. Skill directory → **jail-rate-skill**.

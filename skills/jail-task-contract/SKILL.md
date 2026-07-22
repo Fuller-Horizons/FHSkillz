@@ -70,7 +70,7 @@ and proceed).
   completion = the testable check that FAILS if the build is wrong
   (script/diff/observation) · risks must include blast radius + rollback.
 - **ANALYSIS** → deliverable = the decision-shaped output (which skill:
-  decide/rate/strategy-scan) · stakeholder field must name the decision it
+  decide/rate/strategy) · stakeholder field must name the decision it
   feeds · completion = recommendation with confidence + change-conditions.
 
 ## Step 3 — Guard the contract during execution

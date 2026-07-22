@@ -2,6 +2,25 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.24.0] — 2026-07-22
+
+**Rename + merge wave** (Taylor Sibelia review). 27 → 26 skills; re-baselined 100%/0%.
+
+### Renames (folder + frontmatter + all current-state cross-refs; history keeps old names)
+- **jail-operationalize → jail-plan** · **jail-baton → jail-handoff** · **jail-strategy-scan → jail-strategy** · **jail-exec-brief → jail-summarize**.
+
+### Merge
+- **jail-wayfind folded into jail-plan** as its **MAP lane** (foggy multi-session decision-ticket mapping), alongside the **OPERATE lane** (the 13-field operating workflow). One two-lane planning skill. jail-task-contract (up-front task scoping) and jail-approval-gate (fail-closed safety gate) deliberately kept standalone — jail-plan references both.
+
+### Content upgrades
+- **jail-research 1.2.0** — dual output, Perplexity-style: a SYNTHESIZED ANSWER with inline [n] citations on top of the auditable EVIDENCE PACKET, one shared source list; never one without the other.
+- **jail-memory 1.3.0** — the Markdown memory system is now first-class: a `memory/MEMORY.md` index + one dated, provenance-headed `memory/<NNNN>-<slug>.md` per entry (YAML header: id/type/title/created/updated/source/status/supersedes); supersede-don't-delete on disk; retrieval reads the index first.
+- **jail-cpr 1.3.0** — the meeting deliverable is now a DOCX (default, via the docx skill) or PDF (via the pdf skill), not chat text.
+- **jail-rate** — confirmed scoring on 0.0–10.0 at 0.1 increments (SKILL.md anchors + jail-py-toolkit validate-rating.py); no change needed.
+
+### Measured (wave-3 trigger baseline, blind judges)
+95 cases · 26 descriptions · fire 79/79 (100%) · false-fire 0/16 (0%) · collision variance 11/12. One fix-loop pass: n7 "plan the tasks and owners for the quarter" — the merge made jail-plan's OPERATE lane a valid route (judges split 2:1 jail-plan vs jail-task-contract), so n7's accept-set was widened to both (designed ambiguity, documented), not hacked. Evidence: evals/results/2026-07-22-wave3-baseline/. Ledger entries #3–#4.
+
 ## [plugin 0.23.1] — 2026-07-22
 
 **Wave 2b: behavioral executor — first measured behavioral run, 76/76 assertions PASS.** No skill content changed; evidence-only release.

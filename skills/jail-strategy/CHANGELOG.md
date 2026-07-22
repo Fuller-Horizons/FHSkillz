@@ -1,5 +1,9 @@
 # Changelog — jail-strategy-scan
 
+## 1.1.0 — 2026-07-22 (plugin 0.24.0)
+
+- **Renamed jail-strategy-scan → jail-strategy.** Same three-lane strategy skill (INTERNAL SWOT→TOWS / MACRO PESTLE+tripwires / FULL SWEEP); shorter name. Cross-references updated; history preserves the jail-strategy-scan lineage.
+
 ## 1.0.0 — 2026-07-22 (plugin 0.23.0)
 
 Initial release as the merger of **jail-swot 1.1.0** and **jail-pestle

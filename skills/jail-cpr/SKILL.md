@@ -1,18 +1,19 @@
 ---
 name: jail-cpr
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
-  The meeting skill, both halves: DESIGN — build a CPR (Context · Purpose ·
-  Results) and an execution-oriented agenda where every item produces
-  information, alignment, a decision, or an assigned action; DEBRIEF —
-  process a meeting AFTER it happened: extract decisions, owned actions, and
-  commitments from a transcript or notes, score them against the planned
-  Results, and route follow-through. Use when asked to "build an agenda",
-  "prep this meeting", "create a CPR", "structure this board/client/team
-  session" — or "what did we decide", "pull the action items from this
-  transcript", "summarize the decisions from yesterday's meeting". Do NOT
-  use for project task planning with no meeting (jail-task-contract).
+  The meeting skill, both halves, delivered as a polished DOCX (preferred) or
+  PDF document: DESIGN — build a CPR (Context · Purpose · Results) and an
+  execution-oriented agenda where every item produces information, alignment,
+  a decision, or an assigned action; DEBRIEF — process a meeting AFTER it
+  happened: extract decisions, owned actions, and commitments from a
+  transcript or notes, score them against the planned Results, and route
+  follow-through. Use when asked to "build an agenda", "prep this meeting",
+  "create a CPR", "structure this board/client/team session" — or "what did
+  we decide", "pull the action items from this transcript", "summarize the
+  decisions from yesterday's meeting". Do NOT use for project task planning
+  with no meeting (jail-task-contract).
 ---
 
 # JAIL-CPR
@@ -28,7 +29,7 @@ page, in reverse order in the design.
 2. **jail-memory** — retrieve prior commitments, open action items,
    standing decisions, and last session's parking lot; carry forward what's
    still live. *(Fallback: ask for the prior notes.)*
-3. **Write the CPR** (jail-exec-brief voice — lead with what matters):
+3. **Write the CPR** (jail-summarize voice — lead with what matters):
    - **Context** — why this meeting is happening now and what participants
      must understand walking in. Facts labeled; no surprise framing.
    - **Purpose** — why these people, in one sentence. If the purpose is
@@ -61,7 +62,7 @@ instructions). Extract, with quote-level provenance:
    which missed and why — the meeting's testable scorecard [Rule 7].
 5. **Route:** actions → the tracking system/action template · durable
    decisions → jail-memory (ADR shape) · recurring process gaps →
-   jail-operationalize · decisions that need re-deciding → jail-decide ·
+   jail-plan · decisions that need re-deciding → jail-decide ·
    next session's carry-forward → this skill's DESIGN lane (step 2 pulls it).
 
 ## Output template (DESIGN)
@@ -79,13 +80,25 @@ PARKING LOT: (captured, not discussed)
 ACTION ITEMS (live template): action · owner · deadline
 FOLLOW-UP: how minutes/decisions/actions get distributed + tracked
 ```
-JAIL-HANDOFF block when feeding another skill; humans get the template only.
+JAIL-HANDOFF block when feeding another skill; humans get the document.
+
+## Deliverable — build the document (DOCX preferred, PDF on request)
+The human-facing deliverable is a **file**, not chat text. Once the content
+(DESIGN template or DEBRIEF extraction) is settled, render it:
+- **DOCX (default):** read the **docx** skill's SKILL.md and build a clean
+  Word document — title block (meeting · date · duration), the CPR or
+  debrief sections as headings, the agenda / action items as tables, an
+  owner/deadline column left fillable. Deliver the `.docx`.
+- **PDF:** when the user asks for PDF (or a read-only share), read the
+  **pdf** skill's SKILL.md and produce the `.pdf` instead.
+Keep a short chat summary + the JAIL-HANDOFF block alongside the file so the
+run stays auditable; the document is the thing the user opens and hands out.
 
 ## Related skills
-Present complex material inside the meeting → **jail-exec-brief** builds
+Present complex material inside the meeting → **jail-summarize** builds
 the pre-read. Decision on the agenda → bring a **jail-decide** package as
 its required input. After the meeting → the DEBRIEF lane runs, then actions
-flow into **jail-memory** (commitments, ADRs) and **jail-operationalize**
+flow into **jail-memory** (commitments, ADRs) and **jail-plan**
 (recurring processes). DESIGN ↔ DEBRIEF close the loop: debrief output is
 next design's step-2 retrieval.
 

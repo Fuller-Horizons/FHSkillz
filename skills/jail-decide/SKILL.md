@@ -68,13 +68,13 @@ check (run it explicitly):** contested + high-stakes + hinging on a disputed
 factual/interpretive question → convene **jail-council** on that question
 (record "council: convened/not — why" in the package; a cheap Tier-D
 mini-council covers cases that are contested but not existential).
-jail-operationalize turns the chosen option into a working process;
-jail-exec-brief presents it.
+jail-plan turns the chosen option into a working process;
+jail-summarize presents it.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.
 Pressure-test the winning option → **jail-red-team**. Make it operational →
-**jail-operationalize**.
+**jail-plan**.
 
 ## Gotchas
 - **Criteria after options.** Scoring rubrics invented once a favorite exists

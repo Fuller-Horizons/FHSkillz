@@ -9,7 +9,7 @@ false-fire 0/16 (0%), collision variance 36/36** after one fix-loop pass
 (jail-decide quantified-comparison phrases; the failing case is now the
 regression case). Suites: the wave-1 set + `wave2-trigger-evals.json`
 (new lanes + consolidations) + 3 retargeted kernel cases (k14/k15 →
-jail-strategy-scan, n8 → jail-cpr DEBRIEF). Evidence:
+jail-strategy, n8 → jail-cpr DEBRIEF). Evidence:
 [`results/2026-07-22-wave2-baseline/`](results/2026-07-22-wave2-baseline/RUN.md) ·
 ledger entries #1–#2.
 

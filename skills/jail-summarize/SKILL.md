@@ -1,7 +1,7 @@
 ---
-name: jail-exec-brief
+name: jail-summarize
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Convert complex material — analysis, research, technical findings, project
   state — into concise, DECISION-FORCING executive communication that leads
@@ -17,7 +17,7 @@ description: >-
   summarization or jail-cpr's debrief).
 ---
 
-# JAIL-EXEC-BRIEF
+# JAIL-SUMMARIZE
 
 Executives buy decisions, not detail. Lead with the answer, keep the nuance
 that changes the decision, cut everything else. [Constitution Rules 1, 6]

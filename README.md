@@ -25,16 +25,16 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 | [`jail-skill-miner`](skills/jail-skill-miner/) | Mines codebases/histories for plugin-worthy disciplines; dedupes against installed skills; stops for approval. |
 | [`jail-diagnose`](skills/jail-diagnose/) | Feedback-loop-first defect diagnosis — red-capable repro signal before hypotheses; confirmed cause; mandatory regression case. |
 | [`jail-prototype`](skills/jail-prototype/) | Throwaway prototypes answering a named design question — the answer graduates, the code dies on a branch. |
-| [`jail-baton`](skills/jail-baton/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
-| [`jail-wayfind`](skills/jail-wayfind/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
+| [`jail-handoff`](skills/jail-handoff/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
+| [`jail-plan`](skills/jail-plan/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
 
 ### Layer 2 — Workflow skills
 
 | Skill | What it does |
 |---|---|
 | [`jail-rate`](skills/jail-rate/) | Universal evidence-cited **0–10 rating of anything**, weighted rubric per subject type, current → projected. |
-| [`jail-operationalize`](skills/jail-operationalize/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
-| [`jail-exec-brief`](skills/jail-exec-brief/) | Decision-ready executive communication; technical findings translated into business consequences. |
+| [`jail-plan`](skills/jail-plan/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
+| [`jail-summarize`](skills/jail-summarize/) | Decision-ready executive communication; technical findings translated into business consequences. |
 | [`jail-rate-skill`](skills/jail-rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
 | [`jail-prospect`](skills/jail-prospect/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
 
@@ -42,7 +42,7 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 | Skill | What it does |
 |---|---|
-| [`jail-strategy-scan`](skills/jail-strategy-scan/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
+| [`jail-strategy`](skills/jail-strategy/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
 | [`jail-bmc`](skills/jail-bmc/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
 | [`jail-cpr`](skills/jail-cpr/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
 

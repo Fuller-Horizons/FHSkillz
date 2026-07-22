@@ -1,7 +1,7 @@
 ---
-name: jail-baton
+name: jail-handoff
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Compact the current session into a BATON — a handoff document a fresh
   agent (or tomorrow's session, or a smaller-context model) can pick up and
@@ -16,7 +16,7 @@ description: >-
   JAIL-HANDOFF block) or for storing durable lessons (jail-memory).
 ---
 
-# JAIL-BATON
+# JAIL-HANDOFF
 
 A session dies; the work shouldn't. The baton carries exactly what a fresh
 context needs to continue — no more (bloat defeats the purpose, especially

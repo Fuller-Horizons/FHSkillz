@@ -66,12 +66,12 @@ those three must always appear (an empty list is itself a claim).
 - **Layer 1 — Reasoning kernel** (govern all work): jail-task-contract,
   jail-research, jail-verify, jail-decide, jail-red-team, jail-council,
   jail-orchestrate, jail-approval-gate, jail-quarantine, jail-memory,
-  jail-lab, jail-diagnose, jail-prototype, jail-baton, jail-wayfind,
+  jail-lab, jail-diagnose, jail-prototype, jail-handoff, jail-plan,
   jail-skill-miner, jail-prompt.
-- **Layer 2 — Workflow skills** (repeatable outcomes): jail-operationalize,
-  jail-exec-brief, jail-rate, jail-rate-skill, jail-prospect.
+- **Layer 2 — Workflow skills** (repeatable outcomes):
+  jail-summarize, jail-rate, jail-rate-skill, jail-prospect.
 - **Layer 3 — Domain packs** (call Layers 1–2, never duplicate them):
-  jail-strategy-scan, jail-bmc, jail-cpr,
+  jail-strategy, jail-bmc, jail-cpr,
   and the wave-3 roadmap (docs/ROADMAP-wave3-domain-packs.md).
 
 Routing map and per-skill contracts: [skill-graph.md](skill-graph.md).

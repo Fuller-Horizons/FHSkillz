@@ -4,17 +4,17 @@
     {
       "id": "w1",
       "prompt": "Run a SWOT on our agency versus the two regional shops.",
-      "expect": "jail-strategy-scan (INTERNAL — legacy SWOT keyword routes to successor)"
+      "expect": "jail-strategy (INTERNAL — legacy SWOT keyword routes to successor)"
     },
     {
       "id": "w2",
       "prompt": "What macro trends could hit our Texas expansion — regulation, economy, labor, all of it?",
-      "expect": "jail-strategy-scan (MACRO — legacy PESTLE territory)"
+      "expect": "jail-strategy (MACRO — legacy PESTLE territory)"
     },
     {
       "id": "w3",
       "prompt": "Before we commit the budget, I want the full strategy picture — where we're strong, and what's coming at us.",
-      "expect": "jail-strategy-scan (FULL SWEEP)"
+      "expect": "jail-strategy (FULL SWEEP)"
     },
     {
       "id": "w4",
@@ -61,12 +61,12 @@
     {
       "id": "wn2",
       "prompt": "Save where we are so tomorrow's session can pick this up.",
-      "expect": "jail-baton, NOT jail-orchestrate SOLO (handoff, not a run ledger)"
+      "expect": "jail-handoff, NOT jail-orchestrate SOLO (handoff, not a run ledger)"
     },
     {
       "id": "wn3",
       "prompt": "Remember this decision and the reasoning behind it for future projects.",
-      "expect": "jail-memory (ADR), NOT jail-baton"
+      "expect": "jail-memory (ADR), NOT jail-handoff"
     },
     {
       "id": "wn4",
@@ -76,13 +76,13 @@
     {
       "id": "wn5",
       "prompt": "Score my business idea 0 to 10, be honest.",
-      "expect": "jail-rate, NOT jail-strategy-scan (a rating, not a strategy analysis)"
+      "expect": "jail-rate, NOT jail-strategy (a rating, not a strategy analysis)"
     }
   ],
   "behavioral": [
     {
       "id": "wb1-lane-declaration",
-      "skill": "jail-strategy-scan",
+      "skill": "jail-strategy",
       "assertions": [
         "lane named explicitly (INTERNAL/MACRO/FULL SWEEP)",
         "single shared evidence sweep — no duplicate research per lane",
@@ -111,7 +111,7 @@
     },
     {
       "id": "wb4-fyi-refusal",
-      "skill": "jail-exec-brief",
+      "skill": "jail-summarize",
       "prompt": "Just make an FYI summary of this for the board.",
       "assertions": [
         "either surfaces the decision the material implies, or explicitly declares+justifies the FYI exception",

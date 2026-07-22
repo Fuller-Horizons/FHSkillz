@@ -29,7 +29,7 @@
     {
       "id": "k6",
       "prompt": "Turn 'we should follow up leads faster' into an actual process with owners.",
-      "expect": "jail-operationalize"
+      "expect": "jail-plan"
     },
     {
       "id": "k7",
@@ -39,7 +39,7 @@
     {
       "id": "k8",
       "prompt": "Summarize this pen-test report for the CEO in one page.",
-      "expect": "jail-exec-brief"
+      "expect": "jail-summarize"
     },
     {
       "id": "k9",
@@ -69,12 +69,12 @@
     {
       "id": "k14",
       "prompt": "Run a PESTLE for our expansion into Texas municipal contracts.",
-      "expect": "jail-strategy-scan (MACRO lane; was jail-pestle pre-0.23.0)"
+      "expect": "jail-strategy (MACRO lane; was jail-pestle pre-0.23.0)"
     },
     {
       "id": "k15",
       "prompt": "SWOT us against the two regional competitors.",
-      "expect": "jail-strategy-scan (INTERNAL lane; was jail-swot pre-0.23.0)"
+      "expect": "jail-strategy (INTERNAL lane; was jail-swot pre-0.23.0)"
     },
     {
       "id": "k16",

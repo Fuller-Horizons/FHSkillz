@@ -1,7 +1,7 @@
 ---
-name: jail-strategy-scan
+name: jail-strategy
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   One evidence-grounded strategy analysis with three lanes — INTERNAL (SWOT
   with enforced sorting rules → TOWS strategy combinations), MACRO (PESTLE:
@@ -16,7 +16,7 @@ description: >-
   strategy output (jail-research).
 ---
 
-# JAIL-STRATEGY-SCAN
+# JAIL-STRATEGY
 
 Successor to jail-swot + jail-pestle (merged 0.23.0 — one entry point, shared
 evidence base, no duplicate research). The two failure modes it exists to
@@ -67,7 +67,7 @@ a decision).
      plus **tripwires**: every high-magnitude factor gets its observable
      early-warning indicator (hand to jail-memory as monitored entries so
      future sessions check them).
-8. **jail-decide** → strategic choices; **jail-exec-brief** for voice;
+8. **jail-decide** → strategic choices; **jail-summarize** for voice;
    **jail-verify** (rules held, entries evidenced/labeled, TOWS/tripwires
    traceable, gaps declared).
 

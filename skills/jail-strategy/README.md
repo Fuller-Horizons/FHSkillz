@@ -1,4 +1,4 @@
-# jail-strategy-scan
+# jail-strategy
 
 One strategy-analysis skill, three lanes: **INTERNAL** (evidence-sorted SWOT
 → TOWS strategies), **MACRO** (decision-tied PESTLE with scored factors and
@@ -19,7 +19,7 @@ opportunity, factors with no link to a named decision, quadrants without a
 strategy step, high-magnitude factors without a tripwire.
 
 Chains: jail-task-contract (scope) → jail-research (one sweep) →
-jail-red-team (attack the sort) → jail-decide (choices) → jail-exec-brief →
+jail-red-team (attack the sort) → jail-decide (choices) → jail-summarize →
 jail-verify. Tripwires hand to jail-memory as monitored entries.
 
 Fallback if chained skills are absent: each step's rule is stated inline in

@@ -1,5 +1,9 @@
 # Changelog — jail-research
 
+## 1.2.0 — 2026-07-22 (plugin 0.24.0)
+
+- **Dual output (Perplexity-style).** Now emits TWO paired parts: a SYNTHESIZED ANSWER (direct prose with inline [n] citations) on top of the auditable EVIDENCE PACKET, sharing one numbered source list. Never one without the other. Live-search availability is detected at plan time.
+
 ## 1.1.0 — 2026-07-22 (plugin 0.23.0)
 
 - Claim-class routing table (volatile/slow-moving/contested/internal -> minimum sourcing + freshness windows; stale = re-verify or downgrade to Estimate) + live-search availability detection at planning time (volatile questions become Unknown-until-searched when no engine exists).

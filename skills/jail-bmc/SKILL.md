@@ -11,7 +11,7 @@ description: >-
   a "business model canvas", "BMC", "map the business model", evaluating a
   venture/product idea's model, or pressure-testing how a business makes
   money. Do NOT use for macro scans or competitive
-  self-assessment (jail-strategy-scan), or entity/legal-structure questions.
+  self-assessment (jail-strategy), or entity/legal-structure questions.
 ---
 
 # JAIL-BMC
@@ -54,7 +54,7 @@ the riskiest assumption leaves with an experiment attached.
    **jail-lab** directly (results land in its ledger; a KEEP promotes the
    hypothesis toward VALIDATED on the next canvas pass).
 7. **jail-decide** → strategic implications and next actions.
-   **jail-exec-brief** → **jail-verify** (labels intact? blocks coherent?
+   **jail-summarize** → **jail-verify** (labels intact? blocks coherent?
    riskiest assumptions have experiments? no invented validation?).
 
 ## Canvas-delta mode (revisiting an existing canvas)

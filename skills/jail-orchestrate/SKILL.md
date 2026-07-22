@@ -14,7 +14,7 @@ description: >-
   execution ("keep a resume ledger", "track this build so we can resume"),
   or when jail-research/jail-task-contract hands off a parallelizable plan.
   Do NOT use for short single-sitting tasks or for defining the human-run
-  process itself (jail-operationalize).
+  process itself (jail-plan).
 ---
 
 # JAIL-ORCHESTRATE
@@ -34,7 +34,7 @@ dependency order, record scope/status/proving-artifact per node, and mark
 complete only on verified artifacts — your own claims of done are subject
 to the same audit rule as a subagent's. Payoff: interruption-proof resume
 (restart from the last verified node, never from zero) and an honest
-progress view. The ledger shape is shared with **jail-baton** — a baton can
+progress view. The ledger shape is shared with **jail-handoff** — a baton can
 seed a resume, and the ledger slots into a baton unrewritten. Skip the lane
 only for work that fits one sitting.
 
@@ -89,7 +89,7 @@ to the same audit rule).
 ## Related skills
 Contract first → **jail-task-contract**. Research streams → each agent runs
 **jail-research** discipline. Final check → **jail-verify** (independent).
-Human-run processes → **jail-operationalize**.
+Human-run processes → **jail-plan**.
 
 ## Gotchas
 - **Delegation as a reflex.** Fanning out a task one agent does better. Gate
