@@ -1,0 +1,1 @@
+{"id": 0, "ts": "2026-07-22T11:12:37+00:00", "change": "wave-2b first measured behavioral run (23 cases, 76 assertions, producer/grader split)", "hypothesis": "0.23.0 skills execute their mandated behaviors, not just route", "metric": 100.0, "direction": "max", "verdict": "BASELINE", "best_after": 100.0, "evidence": "evals/results/2026-07-22-wave2b-behavioral/summary.json"}

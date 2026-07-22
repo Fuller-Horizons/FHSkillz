@@ -1,0 +1,56 @@
+{
+ "run": "Wave 2b behavioral executor",
+ "date": "2026-07-22",
+ "plugin": "0.23.0",
+ "method": "23 producer agents (each reads only its SKILL.md + case prompt; blind to assertions) -> outputs on disk -> 5 independent batch-graders (adversarial, quote-evidence-required), grader != producer per the verifier rule",
+ "cases": 23,
+ "assertions": 76,
+ "passed": 76,
+ "failed": 0,
+ "pass_rate": 1.0,
+ "coverage": {
+  "kernel-evals.json (8 required case types)": "b1-b8 \u2014 25/25 assertions",
+  "jail-rate-evals.json": "r1-r4 \u2014 14/14 (incl. live-research hardware rating, private-subject, people-boundary decline, <=4.0 critical-flaw cap)",
+  "jail-council": "c1 tier-honesty (full protocol, 15 model calls, honest Tier-C) + c4 evidence-beats-votes \u2014 7/7",
+  "mp-wave-evals.json": "m1-m4 \u2014 12/12 (loop refusal, throwaway enforcement, key redaction verified by grep, plan-not-do)",
+  "wave2-trigger-evals.json behavioral": "w1-w5 \u2014 18/18 (full-sweep lanes, mini-council invariants, debrief no-guess, FYI refusal, profile diff)"
+ },
+ "deferred_honestly": [
+  "kernel integration chains i1/i2 (multi-skill end-to-end) \u2014 next behavioral pass",
+  "jail-prompt behavioral suite (11 cases) \u2014 last measured 4/4 at v1.2.0 proxy run; re-run queued",
+  "chain i3 (lab loop) \u2014 credited as live-fire only: the wave-2 wn1 description fix followed exactly this loop in production (baseline -> one variable -> re-judge -> ledger), recorded in evals/results/2026-07-22-wave2-baseline/"
+ ],
+ "discriminating_power_note": "All-pass on first measured run. Graders were adversarial with mandatory quoted evidence; several assertions are historically capable of failing (the least-privilege regression was originally caught by this suite's ancestor). Producer outputs preserved for audit.",
+ "producer_agent_ids": [
+  "ae934527",
+  "a4ea9724",
+  "a9e9b090",
+  "aab53a6c",
+  "a4ba888f",
+  "a4f97117",
+  "a94c63a3",
+  "a566b64e",
+  "a01d0126",
+  "adfe079c",
+  "a6596d21",
+  "ad45192c",
+  "a4d357f0",
+  "a6f17970",
+  "ac66ebe0",
+  "a676094f",
+  "a89f1e7c",
+  "a2548c8b",
+  "aa416c0d",
+  "a46bb5c8",
+  "a93d711b",
+  "a0567e23",
+  "a317f61c"
+ ],
+ "grader_agent_ids": [
+  "ad85d749",
+  "a2e2ddd3",
+  "a037aba2",
+  "a254a053",
+  "ab0176ea"
+ ]
+}

@@ -2,6 +2,14 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.23.1] — 2026-07-22
+
+**Wave 2b: behavioral executor — first measured behavioral run, 76/76 assertions PASS.** No skill content changed; evidence-only release.
+
+- 23 cases via producer/grader split (producers blind to assertions; 5 independent adversarial graders, quoted evidence mandatory): kernel 8 required types 25/25 · jail-rate 14/14 (live-research hardware rating, private subject, people-boundary decline, ≤4.0 critical-flaw cap) · jail-council 7/7 (honest Tier-C full protocol + evidence-beats-votes chairman) · mp-wave 12/12 (incl. grep-verified secret redaction) · wave-2 lanes 18/18 (full sweep, mini-council invariants, debrief no-guess, FYI refusal, profile diff).
+- Deferred honestly: integration chains i1/i2 + jail-prompt behavioral re-run (queued, 0.24); chain i3 credited live-fire only.
+- New: evals/results/2026-07-22-wave2b-behavioral/ (summary + all 23 producer outputs) · behavioral-pass-ledger.jsonl entry #0.
+
 ## [plugin 0.23.0] — 2026-07-22
 
 **Wave 2: the 8.5 enhancement program.** 19 skills enhanced, 4 merged into 2 (29 → 27), re-baselined and re-rated with evidence. Suite mean value 8.15 → 8.50; 18/27 at ≥ 8.5 (honest remainder documented).
