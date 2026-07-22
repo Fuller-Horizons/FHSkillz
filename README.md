@@ -16,6 +16,7 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 | [`jail-verify`](skills/jail-verify/) | Independent verification against the contract, on real artifacts — never on an agent's say-so. |
 | [`jail-decide`](skills/jail-decide/) | Decision packages: criteria first, do-nothing priced, reversibility named, change-conditions stated. |
 | [`jail-red-team`](skills/jail-red-team/) | Adversarial pressure-testing — steelman first, three lenses, full bias sweep on consequential calls. |
+| [`jail-council`](skills/jail-council/) | **Maximum-accuracy deliberation** — 3–5 independent models answer blind, review anonymized, disputed facts verified, chairman synthesizes by evidence with dissent preserved. Tier-A cross-provider native in OpenCode CLI. |
 | [`jail-orchestrate`](skills/jail-orchestrate/) | Multi-agent runs: delegation gates, scoped briefs, verified-node resume ledger, evidence-based merge. |
 | [`jail-approval-gate`](skills/jail-approval-gate/) | Action tiers (never/per-action/batchable/auto), fail-closed, proper approval requests, audit trail. |
 | [`jail-quarantine`](skills/jail-quarantine/) | Inbound data quarantined until adopted; protected data halts processing and fails closed. |

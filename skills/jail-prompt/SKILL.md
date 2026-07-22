@@ -70,7 +70,7 @@ Readiness gate: advance only when confident the output will be efficient, secure
 - **GO** (with notes) — gate clear; go to Phase 3.
 - **STOP** — wrong tool, ungroundable, low payoff, or readiness unreachable. Say why in a sentence or two, then offer a multiple-choice next step: reframe to make it viable / use the better non-AI approach / proceed with explicit caveats / drop it. Never slide past a STOP into prompt-writing.
 
-High-stakes escalation (optional): if the task is consequential *and* contested (irreversible, money, legal/medical/safety, expert-disputed), add an adversarial pass to Phase 3's BEFORE RETURNING — argue the strongest case against the output, then resolve or flag it. Route it to a different model/critic where possible, citing different sources than the main answer, and rate consequential calls **impact × likelihood × reversibility** instead of open prose.
+High-stakes escalation (optional): if the task is consequential *and* contested (irreversible, money, legal/medical/safety, expert-disputed), add an adversarial pass to Phase 3's BEFORE RETURNING — argue the strongest case against the output, then resolve or flag it. Route it to a different model/critic where possible — the full protocol is **jail-council** (blind multi-model answers, anonymized review, evidence-decided synthesis) — citing different sources than the main answer, and rate consequential calls **impact × likelihood × reversibility** instead of open prose.
 
 ## Phase 3 — Engineer the prompt
 

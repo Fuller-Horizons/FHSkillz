@@ -76,7 +76,9 @@ Rules: every score cites its specific evidence; no 9+ for merely good;
 a safety defect, a fatal feasibility blocker, a disqualifying integrity issue)
 regardless of other strengths; same subject + same evidence → same score on
 re-rating; missing evidence lowers stated confidence — it never silently
-becomes a guessed score.
+becomes a guessed score. Maximum-stakes rating (money/safety/irreversible
+decisions ride on it) → convene **jail-council** on the contested
+dimensions and cite its synthesis as evidence.
 
 ### 5 — Compute, recommend, project
 **Overall = Σ(score × weight)**, one decimal. Recommendations ranked by

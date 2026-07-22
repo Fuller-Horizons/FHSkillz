@@ -53,9 +53,10 @@ Approval required: <anything in the recommendation a human must authorize>
 Next actions: <first 1–3 steps, each with an owner>
 ```
 Then the JAIL-HANDOFF block — `next:` jail-red-team for consequential or
-contested calls (irreversible, money, legal/safety), jail-operationalize to
-turn the chosen option into a working process, or jail-exec-brief to present
-it.
+contested calls (irreversible, money, legal/safety) — and when the call is
+contested AND must be maximally right, convene **jail-council** on the
+load-bearing question; jail-operationalize to turn the chosen option into a
+working process, or jail-exec-brief to present it.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.

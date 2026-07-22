@@ -39,8 +39,7 @@ kernel logic.
 - **authoring-runtime-separation-architect** — what belongs in Notion vs
   DB vs source control vs runtime; authoring surfaces never silently become
   systems of record.
-- **model-validation-council** — when a second model/validator is justified
-  (impact × uncertainty × novelty × irreversibility) and when it's waste.
+- ~~model-validation-council~~ — **absorbed into `jail-council` (shipped 0.20.0)**: the council protocol plus its when-to-convene framing.
 - **capability-sandbox-evaluator** — evaluate a proposed tool/model/repo in a
   restricted sandbox with synthetic data before adoption (extends jail-rate-skill
   + jail-approval-gate).

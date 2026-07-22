@@ -2,6 +2,15 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.20.0] — 2026-07-19
+
+### jail-council → 1.0.0 (new, kernel) — the LLM-council pattern, accuracy-first
+- Blind independent answers (3–5 members) → **anonymized adversarial review** (mandatory error-hunt per answer) → **verification round** on disputed load-bearing facts → **chairman synthesis decided by evidence, never votes**, with dissent register + audit appendix. Pattern inspired by Karpathy's llm-council (concept only — repo has no license; no code reused).
+- **Accuracy outranks cost by charter (Jonathan's directive):** cost disclosed, never gating; invoking the skill is the Rule-11 justification.
+- Independence tiers A/B/C always declared; **Tier-A cross-provider councils are native in OpenCode CLI** — verified runbook (skills load from ~/.claude/skills; per-agent `model: provider/model-id` in opencode.json) in references/opencode-runbook.md.
+- **Proven live:** a real Tier-C council ran as the smoke test (7 subagent executions) — 3/3 members landed the troy/avoirdupois trap, and the review round still caught a material overgeneralization all three reviewers flagged independently. See docs/smoke-tests-0.19.0.md addendum.
+- Wired in: escalation hooks in jail-verify, jail-decide, jail-rate, jail-prompt; constitution Layer-1 + skill-graph rows; absorbs the wave-3 `model-validation-council` candidate; eval seeds in evals/jail-council-evals.json. Plugin: 25 skills.
+
 ## [plugin 0.19.0] — 2026-07-19
 
 **Unified JAIL naming + full smoke pass.**

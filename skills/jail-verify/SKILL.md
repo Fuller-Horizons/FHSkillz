@@ -21,7 +21,9 @@ are false. [Constitution Rules 2, 7, 10]
 ## Setup — independence first
 - **Verifier ≠ producer.** Route verification to a different model, agent, or
   session where possible. Same-model fallback: a fresh adversarial pass that
-  starts from the contract, not from the output's own narrative.
+  starts from the contract, not from the output's own narrative. For
+  maximum-stakes contested deliverables, escalate to **jail-council** — the
+  N-party version of this rule.
 - Obtain the **task contract** (jail-task-contract output, or reconstruct:
   objective, deliverables, constraints, completion criteria). No contract =
   verify against the original request verbatim and say so.

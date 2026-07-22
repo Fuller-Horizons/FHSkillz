@@ -4,6 +4,8 @@ This folder holds the plugin's test sets. Re-run the relevant set whenever you c
 
 ## Files
 
+**jail-council** (0.20.0 — authored 2026-07-19): `jail-council-evals.json` — 4 triggers, 3 routing near-misses, 5 behavioral cases (tier honesty, anonymization, mandatory error-hunt, evidence-beats-votes, audit-appendix-or-theater). A live Tier-C run is recorded in docs/smoke-tests-0.19.0.md (0.20.0 addendum).
+
 **Kernel + frameworks** (0.18.0 wave 1 — authored 2026-07-19, not yet run):
 - `kernel-trigger-evals.json` — 17 should-trigger + 12 cross-routing near-misses (the kernel's collision set: verify vs rate vs red-team, decide vs rate, research vs prospect-research, memory refusing secrets).
 - `kernel-evals.json` — 11 behavioral cases covering the 8 required types (normal, ambiguous, missing evidence, contradictory, routes-elsewhere, should-not-trigger, security, partial failure) + 3 integration chains (research→PESTLE→decide→brief · contract→orchestrate→verify · lab loop).

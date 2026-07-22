@@ -55,3 +55,11 @@
 **Why these values:** **jail-py-prompt-tools** 7.5 — Turns the flagship's rules from 'told to' into 'enforced'; value scoped to code-execution contexts · **jail-py-rate-tools** 7.2 — Narrowest scope in the suite, but it makes rating integrity mechanical — scores can't be quietly edited · **jail-py-lab** 7.8 — The difference between doing the lab discipline and skipping it; guards (direction lock, hypothesis required) enforced in code
 
 **Suite mean value: 8.14** across 24 skills · spread 7.2–9.0. The kernel out-values the frameworks because its failures are severer and its disciplines are least replaceable by an unaided model; frameworks earn their place as evidence-disciplined versions of commodity formats; companions score on enforcement, bounded by needing code execution.
+
+## Addendum (0.20.0)
+
+| Skill | Purpose / use case | Output | Value |
+|---|---|---|:---:|
+| **jail-council** 1.0.0 | Maximum-accuracy deliberation on consequential/contested questions — blind multi-model answers, anonymized adversarial review, verification round, evidence-decided chairman synthesis (accuracy outranks cost by charter; Tier-A cross-provider native in OpenCode CLI) | Council answer + per-claim confidence + dissent register + audit appendix | **8.4** |
+
+**Why 8.4:** reserved for the calls that must be right, where it's the strongest structure in the suite; bounded by run cost (by design) and by true cross-provider independence being native only where per-agent models exist (OpenCode). Proven live in the 0.20.0 smoke run — the review round caught a real error inside a unanimous council.

@@ -152,3 +152,19 @@ Fresh 3-entry ledger executed above (#13): baseline → KEEP → DISCARD with re
 - These are **smoke tests**: one fixture each, run by one model, several in supplied-materials mode. They demonstrate shape-compliance and guardrail firing — they are not the multi-case behavioral evals in `evals/`, which remain the authored-not-run item.
 - Six skills pass **by refusing or failing correctly** (verify, quarantine, memory, prospect, orchestrate, lab-discard) — that's their contract.
 - No live-research fixture invented a citation; every illustrative fact is marked [S].
+
+
+---
+
+## Addendum (0.20.0) — jail-council: LIVE Tier-C council execution — PASS
+
+**This one is not a fixture walkthrough — the council actually ran** (7 real subagent executions, ~207K subagent tokens, cost accepted per the accuracy-first charter).
+
+**Question:** "Which weighs more: a pound of feathers or a pound of gold?" — chosen because it carries a known trap (troy vs avoirdupois) that single models frequently miss.
+
+- **Stage 1 (3 blind members, fresh contexts, no cross-talk):** 3/3 independently landed the trap — feathers heavier under customary systems (453.59g avoirdupois vs 373.24g troy), same-unit equality, and the ounce reversal (31.10g troy oz > 28.35g avdp oz). All claims labeled per house epistemics.
+- **Stage 3 (3 reviewers, answers anonymized to A/B/C):** the error-hunt drew real blood despite unanimity — **all three reviewers independently caught the same material overgeneralization in Answer A** ("metals weighed troy" → only *precious* metals use troy), plus two minor nits (a 21% vs 21.5% rounding, an unearned "confidence high" assertion, disregarded as evidence). Rankings: A>B>C · A>C>B · A>C>B — A unanimous first *on evidence quality* (grain derivations + the 1878 UK statute) even while carrying the caught flaw.
+- **Stage 4:** verification round **correctly skipped** — reviewers reported zero unresolved factual conflicts (the protocol dispatches it only on disputed load-bearing facts).
+- **Stage 5 (chairman synthesis, from reviewed material only):** *Under the systems each is customarily weighed in, a pound of feathers weighs ~80.35g (21.5%) more than a pound of gold [High — unanimous, grain-derived]. In the same unit they are exactly equal by definition [High]. Per ounce it reverses: gold's troy ounce (31.10g) beats the feathers' avoirdupois ounce (28.35g) [High]. Corrected in review: troy applies to precious metals, not metals generally [High — 3/3 reviewers]. Context: the troy pound is obsolete (UK abolition, 1878); modern gold trades in troy ounces [High].* **Dissent register: none — unanimity earned, with error-hunt records proving inspection happened.**
+
+**Spec check:** ✓ blind independence held ✓ anonymization held ✓ error-hunt mandatory rule fired (caught a real error inside a unanimous council) ✓ verification round rules followed ✓ chairman added nothing unreviewed ✓ tier declared honestly (C — same-model sessions; Tier A requires OpenCode's per-agent models) ✓ audit trail complete ✓ cost disclosed, not gated.

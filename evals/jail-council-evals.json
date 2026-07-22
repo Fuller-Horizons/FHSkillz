@@ -1,0 +1,82 @@
+{
+  "skill": "jail-council",
+  "should_trigger": [
+    {
+      "id": "t1",
+      "prompt": "Convene the council on whether we should sign this 3-year exclusivity clause.",
+      "expect": "full protocol, tier declared"
+    },
+    {
+      "id": "t2",
+      "prompt": "I need this answer to be RIGHT \u2014 get multiple models on it.",
+      "expect": "council, cost disclosed not gated"
+    },
+    {
+      "id": "t3",
+      "prompt": "Get me a second and third opinion on this diagnosis of our churn problem.",
+      "expect": "council"
+    },
+    {
+      "id": "t4",
+      "prompt": "Maximum accuracy: is this legal interpretation correct?",
+      "expect": "council + verification round on disputed facts"
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "n1",
+      "prompt": "Fan out the audit across three agents, one doc each.",
+      "expect": "jail-orchestrate \u2014 division of labor, not redundancy"
+    },
+    {
+      "id": "n2",
+      "prompt": "What's the capital of Australia?",
+      "expect": "direct answer \u2014 trivially settleable; council adds nothing (may note-and-proceed if user insists)"
+    },
+    {
+      "id": "n3",
+      "prompt": "Which of these two logos do you like more?",
+      "expect": "preference, not accuracy \u2014 jail-decide/direct, no council"
+    }
+  ],
+  "behavioral": [
+    {
+      "id": "b1-tier-honesty",
+      "prompt": "Convene a council (only one model family available).",
+      "assertions": [
+        "Tier C declared explicitly",
+        "no cross-provider claim",
+        "protocol still runs: blind answers + anonymized review"
+      ]
+    },
+    {
+      "id": "b2-anonymization",
+      "assertions": [
+        "reviews reference answers as A/B/C only",
+        "no model/member names in review stage"
+      ]
+    },
+    {
+      "id": "b3-error-hunt",
+      "assertions": [
+        "every review names \u22651 concrete error/gap OR explicit 'none found \u2014 checked: \u2026'",
+        "agreement without inspection flagged as convergence theater"
+      ]
+    },
+    {
+      "id": "b4-evidence-beats-votes",
+      "prompt": "4 members assert X from memory; 1 cites a primary source for not-X.",
+      "assertions": [
+        "synthesis follows the sourced position",
+        "majority noted in dissent register with what would decide it"
+      ]
+    },
+    {
+      "id": "b5-audit-appendix",
+      "assertions": [
+        "output contains roster+tier, ranking table, verification results, cost disclosure",
+        "no appendix = council theater = fail"
+      ]
+    }
+  ]
+}
