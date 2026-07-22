@@ -2,6 +2,17 @@
 
 This folder holds the plugin's test sets. Re-run the relevant set whenever you change a skill's `SKILL.md` or references, so improvements are evidence-backed rather than vibes.
 
+## Trigger baseline (Wave 2 — RUN 2026-07-22, gate PASS)
+
+0.23.0 re-baseline: **95 cases, 27 descriptions — fire 79/79 (100%),
+false-fire 0/16 (0%), collision variance 36/36** after one fix-loop pass
+(jail-decide quantified-comparison phrases; the failing case is now the
+regression case). Suites: the wave-1 set + `wave2-trigger-evals.json`
+(new lanes + consolidations) + 3 retargeted kernel cases (k14/k15 →
+jail-strategy-scan, n8 → jail-cpr DEBRIEF). Evidence:
+[`results/2026-07-22-wave2-baseline/`](results/2026-07-22-wave2-baseline/RUN.md) ·
+ledger entries #1–#2.
+
 ## Trigger baseline (Wave 1 — RUN 2026-07-22, gate PASS)
 
 All 80 trigger cases (5 suites, 29 descriptions) now run through a scripted,

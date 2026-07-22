@@ -42,8 +42,7 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 | Skill | What it does |
 |---|---|
-| [`jail-pestle`](skills/jail-pestle/) | Evidence-grounded PESTLE tied to a subject + decision, with tripwires per factor. |
-| [`jail-swot`](skills/jail-swot/) | Evidence-sorted SWOT → TOWS strategies; the misclassification traps enforced. |
+| [`jail-strategy-scan`](skills/jail-strategy-scan/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
 | [`jail-bmc`](skills/jail-bmc/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
 | [`jail-cpr`](skills/jail-cpr/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
 
@@ -51,8 +50,7 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 | Skill | Backs |
 |---|---|
-| [`jail-py-prompt-tools`](skills/jail-py-prompt-tools/) | jail-prompt — secret scan, prompt/chain/truth lint, dry-run. |
-| [`jail-py-rate-tools`](skills/jail-py-rate-tools/) | jail-rate-skill — validate/save records, variance check, structure lint. |
+| [`jail-py-toolkit`](skills/jail-py-toolkit/) | jail-prompt + jail-rate-skill machine checks in one install: secret scan, prompt/chain/truth lint, dry-run, rating validate/save/variance, structure lint. |
 | [`jail-py-lab`](skills/jail-py-lab/) | jail-lab — experiment ledger bookkeeping and reports. |
 
 **System docs:** the [JAIL Constitution](docs/JAIL-CONSTITUTION.md) (12 rules + the handoff contract every kernel skill ends with) · the [skill graph](docs/skill-graph.md) (routing registry) · [wave-3 roadmap](docs/ROADMAP-wave3-domain-packs.md).

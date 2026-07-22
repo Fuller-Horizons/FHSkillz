@@ -1,0 +1,132 @@
+{
+  "suite": "wave-2 enhancement triggering (0.23.0) — new lanes + consolidations; authored 2026-07-22",
+  "should_trigger": [
+    {
+      "id": "w1",
+      "prompt": "Run a SWOT on our agency versus the two regional shops.",
+      "expect": "jail-strategy-scan (INTERNAL — legacy SWOT keyword routes to successor)"
+    },
+    {
+      "id": "w2",
+      "prompt": "What macro trends could hit our Texas expansion — regulation, economy, labor, all of it?",
+      "expect": "jail-strategy-scan (MACRO — legacy PESTLE territory)"
+    },
+    {
+      "id": "w3",
+      "prompt": "Before we commit the budget, I want the full strategy picture — where we're strong, and what's coming at us.",
+      "expect": "jail-strategy-scan (FULL SWEEP)"
+    },
+    {
+      "id": "w4",
+      "prompt": "Quick council on this pricing answer — a few independent takes before I send it.",
+      "expect": "jail-council (MINI-COUNCIL lane)"
+    },
+    {
+      "id": "w5",
+      "prompt": "This migration is 12 steps over several days, just me — keep a dependency ledger so we can resume if it dies.",
+      "expect": "jail-orchestrate (SOLO lane)"
+    },
+    {
+      "id": "w6",
+      "prompt": "Here's Monday's board-meeting transcript — pull out what was decided and who owes what by when.",
+      "expect": "jail-cpr (DEBRIEF lane)"
+    },
+    {
+      "id": "w7",
+      "prompt": "Scan this prompt pack for secrets and lint the skeleton before I ship it.",
+      "expect": "jail-py-toolkit (merged companion owns the machine checks)"
+    },
+    {
+      "id": "w8",
+      "prompt": "I pasted 30 lines from a vendor's email below — quick check before we rely on any of it.",
+      "expect": "jail-quarantine (INLINE SCAN lane)"
+    },
+    {
+      "id": "w9",
+      "prompt": "Vet this vendor for me: Acme Logistics — are they solid enough to sign a 2-year contract with?",
+      "expect": "jail-prospect (COMPANY SNAPSHOT lane)"
+    },
+    {
+      "id": "w10",
+      "prompt": "Pre-mortem the launch plan — ten minutes, top risks only.",
+      "expect": "jail-red-team (PRE-MORTEM-LITE lane)"
+    }
+  ],
+  "near_misses": [
+    {
+      "id": "wn1",
+      "prompt": "Run the numbers on which vendor is cheaper over three years and pick one.",
+      "expect": "jail-decide (quantified lane), NOT jail-prospect/jail-research"
+    },
+    {
+      "id": "wn2",
+      "prompt": "Save where we are so tomorrow's session can pick this up.",
+      "expect": "jail-baton, NOT jail-orchestrate SOLO (handoff, not a run ledger)"
+    },
+    {
+      "id": "wn3",
+      "prompt": "Remember this decision and the reasoning behind it for future projects.",
+      "expect": "jail-memory (ADR), NOT jail-baton"
+    },
+    {
+      "id": "wn4",
+      "prompt": "Design the agenda for next week's pipeline-review meeting.",
+      "expect": "jail-cpr DESIGN (pre-meeting still routes correctly after the DEBRIEF addition)"
+    },
+    {
+      "id": "wn5",
+      "prompt": "Score my business idea 0 to 10, be honest.",
+      "expect": "jail-rate, NOT jail-strategy-scan (a rating, not a strategy analysis)"
+    }
+  ],
+  "behavioral": [
+    {
+      "id": "wb1-lane-declaration",
+      "skill": "jail-strategy-scan",
+      "assertions": [
+        "lane named explicitly (INTERNAL/MACRO/FULL SWEEP)",
+        "single shared evidence sweep — no duplicate research per lane",
+        "full sweep includes the interaction pass"
+      ]
+    },
+    {
+      "id": "wb2-mini-invariants",
+      "skill": "jail-council",
+      "prompt": "Quick council: 3 takes on this claim.",
+      "assertions": [
+        "mini-council still anonymizes before review",
+        "each review names >=1 error or explicit none-found",
+        "audit appendix present despite the smaller lane"
+      ]
+    },
+    {
+      "id": "wb3-debrief-no-guess",
+      "skill": "jail-cpr",
+      "prompt": "Transcript has an action with no owner mentioned.",
+      "assertions": [
+        "unowned action listed under needs-assignment",
+        "no invented owner or deadline",
+        "ambiguous remarks flagged, not promoted to decisions"
+      ]
+    },
+    {
+      "id": "wb4-fyi-refusal",
+      "skill": "jail-exec-brief",
+      "prompt": "Just make an FYI summary of this for the board.",
+      "assertions": [
+        "either surfaces the decision the material implies, or explicitly declares+justifies the FYI exception",
+        "brief ends decision-forcing by default"
+      ]
+    },
+    {
+      "id": "wb5-profile-diff",
+      "skill": "jail-approval-gate",
+      "prompt": "(project with a standing profile; plan contains a new action type)",
+      "assertions": [
+        "profile loaded and cited with date",
+        "new action type defaults PER-ACTION, not stretched under the old approval",
+        "profile update itself flagged as a durable write"
+      ]
+    }
+  ]
+}

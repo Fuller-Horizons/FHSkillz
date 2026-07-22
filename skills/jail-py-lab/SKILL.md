@@ -1,16 +1,17 @@
 ---
 name: jail-py-lab
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   JAIL-PY machine bookkeeping for jail-lab experiment loops — runnable Python
   that appends measured experiments to an append-only JSONL ledger, computes
-  keep/discard verdicts against the best-so-far, and reports the trajectory.
-  Use when jail-lab is running and code execution is available: "log this
-  experiment", "what's the best so far", "summarize the lab ledger", or to
-  wire a metric command so measurement is automatic. Requires code execution
-  (Python 3.8+, stdlib only). Not for deciding WHAT to try — that's
-  jail-lab's discipline.
+  keep/discard verdicts against the best-so-far, reports the trajectory, and
+  compares ledgers or spans (A/B, wave-over-wave regression checks). Use when
+  jail-lab is running and code execution is available: "log this experiment",
+  "what's the best so far", "summarize the lab ledger", "compare this run to
+  the last one", or to wire a metric command so measurement is automatic.
+  Requires code execution (Python 3.8+, stdlib only). Not for deciding WHAT
+  to try — that's jail-lab's discipline.
 ---
 
 # JAIL-PY-LAB
@@ -20,12 +21,18 @@ bookkeeping for experiment loops. Pattern adapted from Andrej Karpathy's
 [autoresearch](https://github.com/karpathy/autoresearch) (MIT). Stdlib-only
 Python 3.8+; stable exit codes.
 
-## The two tools
+## The three tools
 
 | Script | What it does | Exit |
 |---|---|---|
 | `scripts/lab-run.py` | Appends one experiment to the JSONL ledger: takes the change + hypothesis, gets the metric (from `--metric VALUE` or by running `--metric-cmd` and parsing the last number of its output), compares against best-so-far per the declared direction, records KEEP/DISCARD. `--baseline` records experiment #0. | 0 keep/baseline · 1 discard · 2 error |
 | `scripts/lab-report.py` | Reads the ledger: baseline → best trajectory, keep rate, kept-changes list, last entries, and stop-condition status (consecutive discards). | 0 ok · 2 error |
+| `scripts/lab-compare.py` | Delta between two ledgers (`--against`: this wave vs last wave) or across a span of one ledger (`--from-id/--to-id`): best-vs-best with absolute + percent delta, keep rates, kept changes. Exit code IS the regression check — wire it into a release gate. | 0 improved-or-equal · 1 regressed · 2 error |
+
+This toolkit is also the FHSkillz suite's own metrics engine: the repo's
+trigger-accuracy ledger (`evals/results/trigger-accuracy-ledger.jsonl`) is
+a jail-py-lab ledger, and release baselines compare wave-over-wave with
+`lab-compare.py`.
 
 ## Usage (plain language → flags)
 

@@ -10,7 +10,7 @@ It is deliberately editor-agnostic plaintext — no proprietary IDE commands, no
 file paths — so it survives copy-paste anywhere. The machine checks
 (secret scan, prompt lint, dry-run, chain lint) are *not* available to a
 pasted meta-prompt, so it asks the model to perform those checks by reasoning
-instead. Where the companion **jail-py-prompt-tools** skill is installed,
+instead. Where the companion **jail-py-toolkit** skill is installed,
 prefer its real scripts.
 
 ## Template — copy from here down

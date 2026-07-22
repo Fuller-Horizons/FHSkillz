@@ -1,13 +1,14 @@
 ---
 name: jail-prototype
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Build a THROWAWAY prototype whose only job is to answer a stated design
   question — "does this logic/state model feel right?", "what should this
   look like?", "will this approach hold?" — then fold the validated answer
-  into real work and discard the prototype. Use when the user wants to
-  sanity-check a design, explore variations, "mock something up to see",
+  into real work, register it in the SPIKE LEDGER (so answered questions are
+  never re-prototyped), and discard the prototype. Use when the user wants
+  to sanity-check a design, explore variations, "mock something up to see",
   "try it before we build it", or when jail-decide/jail-bmc needs a cheap
   experiment answered by building. Do NOT use for production implementation,
   metric-driven iteration on an existing thing (jail-lab), or verification
@@ -59,6 +60,16 @@ question = no prototype — that's just building without a contract
 - **The verdict is the deliverable**: the question, the answer, and the
   evidence (what the prototype showed), recorded where the real work lives
   (decision note, ticket, jail-memory entry when durable).
+- **Register it in the SPIKE LEDGER** — one line per answered question in
+  the project's memory (jail-memory entry type: decision/spike; file-ledger
+  fallback works): question · verdict · date · archive pointer. **Check
+  the ledger BEFORE prototyping** — a question answered last month is
+  retrieved, not rebuilt; a changed premise reopens it explicitly (new
+  entry superseding the old, never silent re-litigation).
+- **Feed the consuming decision**: when jail-decide (or jail-bmc's
+  experiment sequence) sent the question here, the verdict returns as
+  labeled evidence in that decision's options table — a prototyped answer
+  is Fact-of-the-prototype, not Judgment.
 - Fold the validated decision into the real implementation plan.
 - The prototype itself is archived out of the mainline (throwaway branch,
   scratch folder) with a pointer — kept as a primary source, never merged.

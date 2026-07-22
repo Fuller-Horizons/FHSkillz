@@ -1,5 +1,5 @@
 {
-  "suite": "kernel+frameworks triggering \u2014 should-trigger pairs + cross-routing near-misses (the collision set)",
+  "suite": "kernel+frameworks triggering — should-trigger pairs + cross-routing near-misses (the collision set)",
   "cases": [
     {
       "id": "k1",
@@ -13,7 +13,7 @@
     },
     {
       "id": "k3",
-      "prompt": "The agent says the deploy is done \u2014 check before we tell the client.",
+      "prompt": "The agent says the deploy is done — check before we tell the client.",
       "expect": "jail-verify"
     },
     {
@@ -69,12 +69,12 @@
     {
       "id": "k14",
       "prompt": "Run a PESTLE for our expansion into Texas municipal contracts.",
-      "expect": "jail-pestle"
+      "expect": "jail-strategy-scan (MACRO lane; was jail-pestle pre-0.23.0)"
     },
     {
       "id": "k15",
       "prompt": "SWOT us against the two regional competitors.",
-      "expect": "jail-swot"
+      "expect": "jail-strategy-scan (INTERNAL lane; was jail-swot pre-0.23.0)"
     },
     {
       "id": "k16",
@@ -126,11 +126,11 @@
     {
       "id": "n8",
       "prompt": "Summarize what we decided in yesterday's meeting from the transcript.",
-      "expect": "NOT jail-cpr (post-meeting; wave-3 meeting-to-execution)"
+      "expect": "jail-cpr DEBRIEF lane (post-meeting half added 0.23.0; was no-skill before)"
     },
     {
       "id": "n9",
-      "prompt": "Optimize this function's runtime \u2014 here's the benchmark.",
+      "prompt": "Optimize this function's runtime — here's the benchmark.",
       "expect": "jail-lab (metric exists), NOT jail-verify"
     },
     {
@@ -146,7 +146,7 @@
     {
       "id": "n12",
       "prompt": "Draft a quick email to Sam about lunch.",
-      "expect": "no kernel skill \u2014 trivial task, direct execution"
+      "expect": "no kernel skill — trivial task, direct execution"
     }
   ]
 }

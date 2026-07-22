@@ -1,0 +1,13 @@
+{
+ "purpose": "fix-loop re-judge after jail-decide description change (blind, fresh judge aa2401fe776af4db2)",
+ "failed_case": "wave2-trigger-evals.json::wn1 (pre-fix pick: none; accept: jail-decide)",
+ "fix": "jail-decide description gained quantified-comparison trigger phrases",
+ "result": "wn1 now routes jail-decide; 4/4 regression neighbors unchanged",
+ "picks": {
+  "jail-rate-trigger-evals.json::n4": "none",
+  "kernel-trigger-evals.json::k4": "jail-decide",
+  "kernel-trigger-evals.json::n4": "jail-decide",
+  "wave2-trigger-evals.json::wn1": "jail-decide",
+  "wave2-trigger-evals.json::wn5": "jail-rate"
+ }
+}

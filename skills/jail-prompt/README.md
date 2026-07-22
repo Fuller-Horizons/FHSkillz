@@ -2,7 +2,7 @@
 
 **J**onathan's **A**ctually **I**ntelligent **L**ogic for **P**rompting — a Claude skill that turns a half-formed goal into either a **STOP** (when AI is the wrong tool, or the idea itself is flawed) or an **engineered, verifiable, token-efficient prompt** that succeeds on the first run.
 
-Part of the **[FHSkillz](../../README.md)** collection. **Version 2.0.0** — instruction-only: all machine checks now live in the companion [`jail-py-prompt-tools`](../jail-py-prompt-tools/) skill, with manual fallbacks named at every checkpoint.
+Part of the **[FHSkillz](../../README.md)** collection. **Version 2.0.0** — instruction-only: all machine checks now live in the companion [`jail-py-toolkit`](../jail-py-toolkit/) skill, with manual fallbacks named at every checkpoint.
 
 ## What it's for
 
@@ -37,7 +37,7 @@ skills/jail-prompt/
     └── meta-prompt.md            # portable, install-free single-block version
 ```
 
-Machine checks (secret scan, prompt lint, chain lint, truth lint, dry-run) live in [`jail-py-prompt-tools`](../jail-py-prompt-tools/). Eval suites live at the repo root in [`evals/`](../../evals/).
+Machine checks (secret scan, prompt lint, chain lint, truth lint, dry-run) live in [`jail-py-toolkit`](../jail-py-toolkit/). Eval suites live at the repo root in [`evals/`](../../evals/).
 
 ## Install
 

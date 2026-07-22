@@ -1,7 +1,7 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Convert an ambiguous, multithreaded, or high-stakes request into an
   executable TASK CONTRACT before work begins — objective, stakeholder,
@@ -60,6 +60,18 @@ remaining ambiguity into two piles:
 Get the stakeholder's nod on the contract before execution begins (skip the
 pause only when they've explicitly said "just do it" — then state 1, 13, 14
 and proceed).
+
+**Type presets — start from the matching preset, then fill what remains
+(presets cut fill time; they never skip fields):**
+- **RESEARCH** → 3 pre-shaped: deliverable = evidence packet (jail-research
+  shape) · completion = every question Answered-or-Unknown with citations ·
+  success = a skeptic can audit each claim to a dated source.
+- **BUILD** → deliverable = named artifacts + the run/verify command ·
+  completion = the testable check that FAILS if the build is wrong
+  (script/diff/observation) · risks must include blast radius + rollback.
+- **ANALYSIS** → deliverable = the decision-shaped output (which skill:
+  decide/rate/strategy-scan) · stakeholder field must name the decision it
+  feeds · completion = recommendation with confidence + change-conditions.
 
 ## Step 3 — Guard the contract during execution
 - Revisions that keep fields 1–3 materially unchanged → same contract, note

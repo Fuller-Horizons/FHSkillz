@@ -1,12 +1,14 @@
 ---
 name: jail-memory
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Govern what enters, stays in, and leaves durable memory or organizational
   knowledge — provenance-checked, deduplicated, classified, superseded-not-
   deleted — and run the LEARNING POSTMORTEM ritual that turns finished work
-  into stored lessons. Use when saving lessons/decisions/context for future
+  into stored lessons. Works with OR without a platform memory feature: when
+  none exists, it maintains a file ledger (MEMORY.md index + topic files) in
+  the project workspace. Use when saving lessons/decisions/context for future
   sessions ("remember this", "save that for next time"), when retrieving
   prior context for a new task, after completed or failed projects ("what did
   we learn"), or when another skill proposes a durable write. Do NOT use for
@@ -51,6 +53,20 @@ Each candidate entry must pass all six checks:
    quarantine classes), no sensitive personal information without explicit
    instruction; apply the platform's retention/privacy rules.
 Failing any check → don't store; say what failed.
+
+## No platform memory? The file-ledger fallback
+When the platform has no memory feature (OpenCode, plain CLI runs, a
+fresh web session), the skill IS the memory system, on files:
+- **MEMORY.md** in the project root = a short index (one line per entry:
+  id · type · title · file). Entries live in small topic files next to it.
+- Every write passes the same six-check gate; decisions use the ADR shape;
+  superseded entries get `status: superseded-by <id>` — never deleted.
+- **Retrieval = read MEMORY.md at the start of relevant work** (cheap by
+  design: the index is scannable in one glance; open topic files only when
+  they bear on the task).
+- The ledger is a repo/workspace artifact: it travels with the project,
+  diffs in git, and any platform can use it. A platform memory, when
+  present, mirrors the ledger — the file stays the auditable source.
 
 ## The postmortem ritual (after significant work — success or failure)
 Capture, compactly: original objective → final outcome → what worked → what

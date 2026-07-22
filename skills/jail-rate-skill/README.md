@@ -2,7 +2,7 @@
 
 Standardized, repeatable **technical review and scoring of AI skill directories** — a 10-category rating matrix (0.0–10.0), IDE/CLI compatibility matrices, concrete upgrade recommendations, and a machine-readable JSON record tracked over time.
 
-Part of the **[FHSkillz](../../README.md)** collection. **Version 2.0.0** — instruction-only: validation/persistence scripts now live in the companion [`jail-py-rate-tools`](../jail-py-rate-tools/) skill, with manual fallbacks documented.
+Part of the **[FHSkillz](../../README.md)** collection. **Version 2.0.0** — instruction-only: validation/persistence scripts now live in the companion [`jail-py-toolkit`](../jail-py-toolkit/) skill, with manual fallbacks documented.
 
 ## How it works
 

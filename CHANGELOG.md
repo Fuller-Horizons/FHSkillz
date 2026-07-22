@@ -2,6 +2,23 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.23.0] — 2026-07-22
+
+**Wave 2: the 8.5 enhancement program.** 19 skills enhanced, 4 merged into 2 (29 → 27), re-baselined and re-rated with evidence. Suite mean value 8.15 → 8.50; 18/27 at ≥ 8.5 (honest remainder documented).
+
+### Consolidations
+- **jail-strategy-scan 1.0.0** = jail-swot + jail-pestle: INTERNAL (SWOT→TOWS) / MACRO (PESTLE+tripwires) / FULL SWEEP lanes off ONE evidence sweep, with the cross-lane interaction pass; tripwires hand to jail-memory. Legacy keywords route to it (measured: w1–w3, k14/k15).
+- **jail-py-toolkit 1.0.0** = jail-py-prompt-tools + jail-py-rate-tools: 9 scripts, two check families, one install; release validator now runs its checks every release.
+
+### Enhancements (19 skills, per-skill changelogs have detail)
+task-contract 1.2.0 (type presets) · research 1.1.0 (claim-class routing + freshness windows + live-search detection) · decide 1.1.0 (quantified lane + council escalation + quantified-comparison triggers) · council 1.1.0 (MINI-COUNCIL lane) · approval-gate 1.1.0 (standing profile) · quarantine 1.1.0 (INLINE SCAN + protected-class table) · red-team 1.1.0 (falsifier-first + PRE-MORTEM-LITE) · prospect 1.3.0 (COMPANY SNAPSHOT) · baton 1.1.0 (proactive offer + shared ledger shape) · orchestrate 1.2.0 (SOLO lane) · memory 1.2.0 (file-ledger fallback) · cpr 1.2.0 (DEBRIEF lane) · prototype 1.1.0 (spike ledger) · exec-brief 1.1.0 (decision-forcing mandate + audience table) · rate-skill 2.2.0 (measured-evidence rule) · skill-miner 1.2.0 (continuous self-maintenance mode) · py-lab 1.1.0 (lab-compare.py regression gate) · bmc 1.2.0 (lab-shaped experiments + canvas-delta mode) · wayfind 1.1.0 (map-as-baton-spine + ADRs at resolution).
+
+### Measured (wave-2 trigger baseline, blind judges)
+95 cases · fire 79/79 (100%) · false-fire 0/16 (0%) · collision variance 36/36. One fix-loop pass: wn1 (quantified comparison) missed pre-fix (98.7%) → jail-decide description fix → blind re-judge with 4/4 regression holds; wn1 retained as the regression case. Ledger entries #1–#2; evidence in evals/results/2026-07-22-wave2-baseline/.
+
+### Re-rate
+docs/skill-catalog.md rewritten at 0.23.0 with per-skill evidence for every score move (determinism rule: untouched skills unmoved). docs/wave2-scorecard.md is the release gate summary.
+
 ## [plugin 0.22.0] — 2026-07-22
 
 **Wave 1: trigger baseline measured — gate PASS.** First real (non-proxy-claimed) run of the full trigger surface under the enhancement-metrics contract; no skill content changed.

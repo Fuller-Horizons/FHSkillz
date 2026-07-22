@@ -1,0 +1,25 @@
+{
+ "collision_set": "kernel near-misses n1-n12 (n8 now expects jail-cpr after the DEBRIEF lane)",
+ "judgments": 3,
+ "judges": [
+  "batch-run a997e47ad8a3eb519/a970444b40d34ce4a",
+  "variance-A a5e6763ccfd72ba97",
+  "variance-B ac072a1a69f24b0fc"
+ ],
+ "unanimous_cases": "12/12",
+ "pick_agreement": "36/36",
+ "picks_all_three_identical": {
+  "kernel-trigger-evals.json::n1": "jail-rate",
+  "kernel-trigger-evals.json::n2": "jail-verify",
+  "kernel-trigger-evals.json::n3": "jail-red-team",
+  "kernel-trigger-evals.json::n4": "jail-decide",
+  "kernel-trigger-evals.json::n5": "jail-prompt",
+  "kernel-trigger-evals.json::n6": "jail-prospect",
+  "kernel-trigger-evals.json::n7": "jail-task-contract",
+  "kernel-trigger-evals.json::n8": "jail-cpr",
+  "kernel-trigger-evals.json::n9": "jail-lab",
+  "kernel-trigger-evals.json::n10": "jail-quarantine",
+  "kernel-trigger-evals.json::n11": "jail-rate-skill",
+  "kernel-trigger-evals.json::n12": "none"
+ }
+}

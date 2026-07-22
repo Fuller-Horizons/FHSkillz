@@ -1,7 +1,7 @@
 ---
 name: jail-baton
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Compact the current session into a BATON — a handoff document a fresh
   agent (or tomorrow's session, or a smaller-context model) can pick up and
@@ -9,9 +9,11 @@ description: >-
   with why, live references to artifacts (never duplicated), next actions,
   and which skills to invoke. Use when context is filling up, a session is
   ending mid-work, the user says "hand this off", "save where we are",
-  "continue this later/elsewhere", or work must move to another
-  agent/model. Do NOT use for the in-run structured handoff between skills
-  (the JAIL-HANDOFF block) or for storing durable lessons (jail-memory).
+  "continue this later/elsewhere", or work must move to another agent/model
+  — and OFFER it proactively on context-pressure signals (long session,
+  approaching compaction, recall degrading) instead of waiting to be asked.
+  Do NOT use for the in-run structured handoff between skills (the
+  JAIL-HANDOFF block) or for storing durable lessons (jail-memory).
 ---
 
 # JAIL-BATON
@@ -48,9 +50,18 @@ MIT), extended under JAIL rules.
    yes [Rule 5].
 
 ## Rules
+- **Offer before it's too late.** On context-pressure signals — a long
+  session deep in multi-part work, compaction approaching, earlier details
+  getting fuzzy — offer the baton unprompted ("want me to write the baton
+  now, while state is still sharp?"). A baton written after degradation
+  transmits the degradation.
+- **State of play uses the orchestrate ledger shape** (node · scope ·
+  status · proving artifact), so a baton can seed a jail-orchestrate
+  resume directly and an orchestrate ledger can be pointed at instead of
+  rewritten — one shape, two carriers.
 - **Redact before writing:** secrets, credentials, and protected data
-  never enter a baton (jail-quarantine classes apply — a baton is a file
-  that travels).
+  never enter a baton (jail-quarantine protected classes apply — a baton
+  is a file that travels).
 - **Tailor to the stated next purpose.** If the user says what the next
   session is for, weight the baton toward it; carry the rest as one-line
   pointers.

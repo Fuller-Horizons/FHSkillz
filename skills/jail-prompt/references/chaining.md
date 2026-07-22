@@ -89,11 +89,11 @@ output, it is sequential, not fan-out, and must say so in `requires`.
 
 ## Verify before running
 
-With the companion **jail-py-prompt-tools** skill installed, run its linker
+With the companion **jail-py-toolkit** skill installed, run its linker
 check on the manifest:
 
 ```bash
-python3 <jail-py-prompt-tools>/scripts/chain-lint.py chain.json   # 0 pass · 1 errors · 2 IO
+python3 <jail-py-toolkit>/scripts/chain-lint.py chain.json   # 0 pass · 1 errors · 2 IO
 ```
 
 Without it, walk the manifest manually: every `requires` key traced to an

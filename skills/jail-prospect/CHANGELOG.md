@@ -1,5 +1,9 @@
 # Changelog — company-prospect-research
 
+## 1.3.0 — 2026-07-22 (plugin 0.23.0)
+
+- COMPANY SNAPSHOT lane: same 4-stage OSINT discipline + non-negotiable rules repointed at vendor due-diligence / competitor reads / partnership vetting; stage-4 rubric swaps to purpose-fit scores; outreach hook dropped unless asked.
+
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
 ## 1.2.0

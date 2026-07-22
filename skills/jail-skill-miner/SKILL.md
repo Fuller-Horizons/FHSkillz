@@ -1,16 +1,19 @@
 ---
 name: jail-skill-miner
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Mine a codebase, chat history, or document set for plugin-worthy SKILLS —
   reusable disciplines, not app features — then dedupe candidates against the
-  installed plugin before authoring anything. Use when the user asks to
+  installed plugin before authoring anything. Also the suite's SELF-
+  MAINTENANCE loop: failed eval cases and corrections repeated across
+  sessions auto-nominate skill fixes/deltas. Use when the user asks to
   "extract skills from", "mine this repo/history for skills", "what
-  disciplines does this codebase enforce", "should this become a skill", or
-  when evaluating candidate-skill lists from other tools/models. Do NOT use
-  to author an already-approved skill from scratch (follow repo conventions
-  directly) or to rate an existing skill (jail-rate-skill).
+  disciplines does this codebase enforce", "should this become a skill",
+  when evaluating candidate-skill lists from other tools/models, or when an
+  eval failure / repeated correction needs turning into a skill change. Do
+  NOT use to author an already-approved skill from scratch (follow repo
+  conventions directly) or to rate an existing skill (jail-rate-skill).
 ---
 
 # JAIL-SKILL-MINER
@@ -19,6 +22,24 @@ A JAIL skill is a **reusable discipline** — a way of working that transfers
 to unrelated projects. Features (recurrence engines, sync jobs, UI views)
 are not skills; they get ported as code. This skill finds the disciplines,
 kills the duplicates, and authors only what's approved.
+
+## Continuous mode — the suite's self-maintenance loop
+Mining sessions are rare; failure signals are constant. Three nomination
+sources feed Stage 2 directly (skipping Stage 1's exploration):
+- **A failed eval case** (trigger misroute, behavioral assertion miss) is
+  evidence of a weak description or missing discipline → nominate the fix
+  as EXTENDS <skill> with the failing case as source evidence; the case
+  becomes the regression test after the fix (jail-diagnose's rule).
+- **A correction repeated across ≥2 sessions** (surfaced by jail-memory
+  postmortems: same mistake, same fix) → nominate a delta or new skill;
+  two independent occurrences is the repeated-pattern bar.
+- **A postmortem's "recommended skill/process changes"** line routes here,
+  not into a doc nobody reopens.
+Nominations still pass the 4-box filter, still dedupe, still STOP for
+approval — continuous mode changes the intake, never the gate. For
+approved fixes, emit the ready-to-commit artifact set: the SKILL.md edit
+(or full draft for NEW), the eval case(s), and the graph/marketplace line
+— so approval-to-shipped is one commit, not a project.
 
 ## Stage 1 — MINE
 Explore the source (docs/CLAUDE.md first, then enforcement surfaces:

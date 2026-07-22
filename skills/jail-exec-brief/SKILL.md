@@ -1,17 +1,20 @@
 ---
 name: jail-exec-brief
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Convert complex material — analysis, research, technical findings, project
-  state — into concise, decision-ready EXECUTIVE COMMUNICATION that leads
-  with the answer and translates technical issues into business consequences
+  state — into concise, DECISION-FORCING executive communication that leads
+  with the answer, translates technical issues into business consequences
   (revenue, liability, resilience, competitive position, cost, control,
-  timing). Use for "summarize this for the board/CEO/client", "make this
+  timing), and ends with the decision it exists to force — no FYI briefs.
+  Use for "summarize this for the board/CEO/client", "make this
   executive-ready", "translate this technical finding", briefing packs,
   decision memos, and as the final voice of a kernel chain. Do NOT use for
-  internal working notes, raw research packets (jail-research), or full
-  decision analysis (jail-decide — this skill presents it).
+  internal working notes, raw research packets (jail-research), full
+  decision analysis (jail-decide — this skill presents it), or plain
+  recaps of meetings/threads with no executive audience (that's direct
+  summarization or jail-cpr's debrief).
 ---
 
 # JAIL-EXEC-BRIEF
@@ -41,10 +44,24 @@ a day; an incident costs customers, breach-notification liability, and the
 renewal narrative." Keep the technical identifier in a parenthetical or
 appendix for the operators; the sentence must work for the CEO.
 
+## The decision-forcing mandate (what a plain model won't do unprompted)
+A brief that informs without forcing anything is a status report wearing a
+suit. Every brief ends with: **the named decision this brief serves · the
+options, priced · one recommendation · the decision deadline and what delay
+costs**. The rare legitimate FYI ("no decision required because X") must
+say so explicitly and justify itself — it is the exception, declared, never
+the default.
+
+## Audience calibration (pick the row, say which)
+| Audience | Length | Leads with | Translation depth |
+|---|---|---|---|
+| Board / CEO | one page, hard cap | the decision + recommendation | full business-consequence; tech IDs to appendix |
+| Operating exec | brief + appendix | finding + what changes this quarter | business-first, operator detail preserved in appendix |
+| Line manager | half page | the action needed from their team | light — they speak the domain |
+
 ## Craft rules
-- **Scale depth to the audience**: board = one page; operating exec = brief
-  + appendix; the appendix holds what curiosity needs, the brief holds what
-  the decision needs.
+- **Scale depth to the audience** per the table above; the appendix holds
+  what curiosity needs, the brief holds what the decision needs.
 - Plain language beats jargon wherever plain language is sufficient; a term
   of art earns its place only when precision requires it.
 - **No heading spam, no fragment shorthand, no repetition.** Prose sentences

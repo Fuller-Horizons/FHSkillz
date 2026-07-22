@@ -1,17 +1,19 @@
 ---
 name: jail-red-team
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Adversarially pressure-test a plan, recommendation, analysis, design, or
   belief BEFORE it ships — hidden assumptions, bias patterns, missing
   stakeholders, dependency failures, second-order effects, and the conditions
-  that would invalidate it. Use when someone says "poke holes in this",
-  "what am I missing", "steelman the other side", "devil's advocate", before
-  consequential or irreversible decisions, or when jail-decide/jail-verify
-  routes a contested call here. Do NOT use to verify a finished deliverable's
-  completeness (jail-verify) or to invent objections against a trivial,
-  low-stakes choice.
+  that would invalidate it; every finding carries its cheapest falsifier
+  (the test that would disprove or confirm it). Three effort lanes down to a
+  10-minute PRE-MORTEM-LITE for ordinary drafts. Use when someone says "poke
+  holes in this", "what am I missing", "steelman the other side", "devil's
+  advocate", "pre-mortem this", before consequential or irreversible
+  decisions, or when jail-decide/jail-verify routes a contested call here.
+  Do NOT use to verify a finished deliverable's completeness (jail-verify)
+  or to invent objections against a trivial, low-stakes choice.
 ---
 
 # JAIL-RED-TEAM
@@ -25,8 +27,15 @@ is its own form of dishonesty.
   first — demolishing a weak paraphrase proves nothing).
 - Independence: prefer a different model/agent/session than the producer;
   same-producer fallback must start from the evidence, not the narrative.
-- Scale effort to stakes [Constitution Rule 11]: consequential + contested
-  gets the full sweep; modest stakes gets the three lenses only.
+- Scale effort to stakes [Constitution Rule 11] — three lanes, say which:
+  **PRE-MORTEM-LITE** (ordinary drafts, ~10 min): "it's six months later
+  and this failed — why?" Top 3–5 causes ranked by likelihood, one-line
+  mitigation each, no sweep. **THREE LENSES** (modest stakes): the lenses
+  below. **FULL SWEEP** (consequential + contested): lenses + the sweep.
+- **Falsifier-first rule (all lanes):** a finding without the cheapest test
+  that would disprove or confirm it is an opinion. Name the falsifier per
+  finding; when it's runnable (a metric, a query, a benchmark), hand it to
+  jail-lab as the experiment spec.
 
 ## The three lenses (always)
 1. **What is missing?** — stakeholders, costs, prerequisites, failure modes,
@@ -63,6 +72,7 @@ is its own form of dishonesty.
 RED-TEAM FINDINGS (ranked by severity × likelihood)
 1. <finding> — severity: critical|major|minor · basis: <evidence/reasoning>
    → fix, mitigation, or the question that must be answered
+   → falsifier: <the cheapest test that would disprove/confirm this>
 ...
 Survives the attack: <what held up, said once, without padding>
 Verdict: PROCEED | PROCEED-WITH-FIXES | RETHINK — one sentence why

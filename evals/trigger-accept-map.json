@@ -1,90 +1,583 @@
 {
-  "_notes": "Scoring key for run-trigger-evals.py. kind=fire cases count toward the >=95% fire gate; kind=nofire toward the <=5% false-fire gate. accept lists every pick that counts as correct ('none' = no skill fires). Multi-entry accept sets encode designed ambiguity (either routing is correct); the case still fails on any pick outside the set. Behavioral suites are excluded here and run in Wave 1b.",
-  "_exclude_files": ["evals.json", "kernel-evals.json", "jail-rate-evals.json"],
-
-  "kernel-trigger-evals.json::k1": {"accept": ["jail-task-contract"], "kind": "fire"},
-  "kernel-trigger-evals.json::k2": {"accept": ["jail-research"], "kind": "fire"},
-  "kernel-trigger-evals.json::k3": {"accept": ["jail-verify"], "kind": "fire"},
-  "kernel-trigger-evals.json::k4": {"accept": ["jail-decide"], "kind": "fire"},
-  "kernel-trigger-evals.json::k5": {"accept": ["jail-red-team"], "kind": "fire"},
-  "kernel-trigger-evals.json::k6": {"accept": ["jail-operationalize"], "kind": "fire"},
-  "kernel-trigger-evals.json::k7": {"accept": ["jail-orchestrate"], "kind": "fire"},
-  "kernel-trigger-evals.json::k8": {"accept": ["jail-exec-brief"], "kind": "fire"},
-  "kernel-trigger-evals.json::k9": {"accept": ["jail-approval-gate"], "kind": "fire"},
-  "kernel-trigger-evals.json::k10": {"accept": ["jail-quarantine"], "kind": "fire"},
-  "kernel-trigger-evals.json::k11": {"accept": ["jail-memory"], "kind": "fire"},
-  "kernel-trigger-evals.json::k12": {"accept": ["jail-skill-miner"], "kind": "fire"},
-  "kernel-trigger-evals.json::k13": {"accept": ["jail-lab"], "kind": "fire"},
-  "kernel-trigger-evals.json::k14": {"accept": ["jail-pestle"], "kind": "fire"},
-  "kernel-trigger-evals.json::k15": {"accept": ["jail-swot"], "kind": "fire"},
-  "kernel-trigger-evals.json::k16": {"accept": ["jail-bmc"], "kind": "fire"},
-  "kernel-trigger-evals.json::k17": {"accept": ["jail-cpr"], "kind": "fire"},
-
-  "kernel-trigger-evals.json::n1": {"accept": ["jail-rate"], "kind": "fire"},
-  "kernel-trigger-evals.json::n2": {"accept": ["jail-verify"], "kind": "fire"},
-  "kernel-trigger-evals.json::n3": {"accept": ["jail-red-team"], "kind": "fire"},
-  "kernel-trigger-evals.json::n4": {"accept": ["jail-decide"], "kind": "fire"},
-  "kernel-trigger-evals.json::n5": {"accept": ["jail-prompt"], "kind": "fire"},
-  "kernel-trigger-evals.json::n6": {"accept": ["jail-prospect"], "kind": "fire"},
-  "kernel-trigger-evals.json::n7": {"accept": ["jail-task-contract"], "kind": "fire"},
-  "kernel-trigger-evals.json::n8": {"accept": ["none"], "kind": "nofire"},
-  "kernel-trigger-evals.json::n9": {"accept": ["jail-lab"], "kind": "fire"},
-  "kernel-trigger-evals.json::n10": {"accept": ["jail-memory", "jail-quarantine"], "kind": "fire"},
-  "kernel-trigger-evals.json::n11": {"accept": ["jail-rate-skill"], "kind": "fire"},
-  "kernel-trigger-evals.json::n12": {"accept": ["none"], "kind": "nofire"},
-
-  "jail-rate-trigger-evals.json::t1": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t2": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t3": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t4": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t5": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t6": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t7": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t8": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t9": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::t10": {"accept": ["jail-rate"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::n1": {"accept": ["jail-rate-skill"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::n2": {"accept": ["jail-prospect"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::n3": {"accept": ["none"], "kind": "nofire"},
-  "jail-rate-trigger-evals.json::n4": {"accept": ["none", "jail-research"], "kind": "nofire"},
-  "jail-rate-trigger-evals.json::n5": {"accept": ["jail-rate", "none"], "kind": "fire"},
-  "jail-rate-trigger-evals.json::n6": {"accept": ["none"], "kind": "nofire"},
-
-  "jail-council-evals.json::t1": {"accept": ["jail-council"], "kind": "fire"},
-  "jail-council-evals.json::t2": {"accept": ["jail-council"], "kind": "fire"},
-  "jail-council-evals.json::t3": {"accept": ["jail-council"], "kind": "fire"},
-  "jail-council-evals.json::t4": {"accept": ["jail-council"], "kind": "fire"},
-  "jail-council-evals.json::n1": {"accept": ["jail-orchestrate"], "kind": "fire"},
-  "jail-council-evals.json::n2": {"accept": ["none"], "kind": "nofire"},
-  "jail-council-evals.json::n3": {"accept": ["none", "jail-decide"], "kind": "nofire"},
-
-  "mp-wave-evals.json::t1": {"accept": ["jail-diagnose"], "kind": "fire"},
-  "mp-wave-evals.json::t2": {"accept": ["jail-prototype"], "kind": "fire"},
-  "mp-wave-evals.json::t3": {"accept": ["jail-baton"], "kind": "fire"},
-  "mp-wave-evals.json::t4": {"accept": ["jail-wayfind"], "kind": "fire"},
-  "mp-wave-evals.json::n1": {"accept": ["jail-verify"], "kind": "fire"},
-  "mp-wave-evals.json::n2": {"accept": ["jail-lab"], "kind": "fire"},
-  "mp-wave-evals.json::n3": {"accept": ["jail-memory"], "kind": "fire"},
-  "mp-wave-evals.json::n4": {"accept": ["jail-orchestrate"], "kind": "fire"},
-
-  "trigger_evals.json::1": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::2": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::3": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::4": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::5": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::6": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::7": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::8": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::9": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::10": {"accept": ["jail-prompt"], "kind": "fire"},
-  "trigger_evals.json::11": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::12": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::13": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::14": {"accept": ["none", "jail-diagnose"], "kind": "nofire"},
-  "trigger_evals.json::15": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::16": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::17": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::18": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::19": {"accept": ["none"], "kind": "nofire"},
-  "trigger_evals.json::20": {"accept": ["none"], "kind": "nofire"}
+ "_notes": "Scoring key for run-trigger-evals.py. kind=fire cases count toward the >=95% fire gate; kind=nofire toward the <=5% false-fire gate. accept lists every pick that counts as correct ('none' = no skill fires). Multi-entry accept sets encode designed ambiguity (either routing is correct); the case still fails on any pick outside the set. Behavioral suites are excluded here and run in Wave 1b.",
+ "_exclude_files": [
+  "evals.json",
+  "kernel-evals.json",
+  "jail-rate-evals.json"
+ ],
+ "kernel-trigger-evals.json::k1": {
+  "accept": [
+   "jail-task-contract"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k2": {
+  "accept": [
+   "jail-research"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k3": {
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k4": {
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k5": {
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k6": {
+  "accept": [
+   "jail-operationalize"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k7": {
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k8": {
+  "accept": [
+   "jail-exec-brief"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k9": {
+  "accept": [
+   "jail-approval-gate"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k10": {
+  "accept": [
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k11": {
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k12": {
+  "accept": [
+   "jail-skill-miner"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k13": {
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k14": {
+  "accept": [
+   "jail-strategy-scan"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k15": {
+  "accept": [
+   "jail-strategy-scan"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k16": {
+  "accept": [
+   "jail-bmc"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::k17": {
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n1": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n2": {
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n3": {
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n4": {
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n5": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n6": {
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n7": {
+  "accept": [
+   "jail-task-contract"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n8": {
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n9": {
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n10": {
+  "accept": [
+   "jail-memory",
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n11": {
+  "accept": [
+   "jail-rate-skill"
+  ],
+  "kind": "fire"
+ },
+ "kernel-trigger-evals.json::n12": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "jail-rate-trigger-evals.json::t1": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t2": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t3": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t4": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t5": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t6": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t7": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t8": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t9": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::t10": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::n1": {
+  "accept": [
+   "jail-rate-skill"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::n2": {
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::n3": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "jail-rate-trigger-evals.json::n4": {
+  "accept": [
+   "none",
+   "jail-research"
+  ],
+  "kind": "nofire"
+ },
+ "jail-rate-trigger-evals.json::n5": {
+  "accept": [
+   "jail-rate",
+   "none"
+  ],
+  "kind": "fire"
+ },
+ "jail-rate-trigger-evals.json::n6": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "jail-council-evals.json::t1": {
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ "jail-council-evals.json::t2": {
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ "jail-council-evals.json::t3": {
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ "jail-council-evals.json::t4": {
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ "jail-council-evals.json::n1": {
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ "jail-council-evals.json::n2": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "jail-council-evals.json::n3": {
+  "accept": [
+   "none",
+   "jail-decide"
+  ],
+  "kind": "nofire"
+ },
+ "mp-wave-evals.json::t1": {
+  "accept": [
+   "jail-diagnose"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::t2": {
+  "accept": [
+   "jail-prototype"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::t3": {
+  "accept": [
+   "jail-baton"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::t4": {
+  "accept": [
+   "jail-wayfind"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::n1": {
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::n2": {
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::n3": {
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ "mp-wave-evals.json::n4": {
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::1": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::2": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::3": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::4": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::5": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::6": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::7": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::8": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::9": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::10": {
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ "trigger_evals.json::11": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::12": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::13": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::14": {
+  "accept": [
+   "none",
+   "jail-diagnose"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::15": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::16": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::17": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::18": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::19": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "trigger_evals.json::20": {
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ "wave2-trigger-evals.json::w1": {
+  "accept": [
+   "jail-strategy-scan"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w2": {
+  "accept": [
+   "jail-strategy-scan"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w3": {
+  "accept": [
+   "jail-strategy-scan"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w4": {
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w5": {
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w6": {
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w7": {
+  "accept": [
+   "jail-py-toolkit"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w8": {
+  "accept": [
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w9": {
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::w10": {
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::wn1": {
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::wn2": {
+  "accept": [
+   "jail-baton"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::wn3": {
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::wn4": {
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ "wave2-trigger-evals.json::wn5": {
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ }
 }

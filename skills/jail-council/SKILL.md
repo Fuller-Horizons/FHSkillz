@@ -1,19 +1,21 @@
 ---
 name: jail-council
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Convene an LLM COUNCIL for maximum-accuracy answers to consequential or
   contested questions: 3–5 independent models answer blind, adversarially
   review each other's ANONYMIZED answers, disputed facts get a targeted
   verification round, and a chairman synthesizes by evidence — never by vote —
-  preserving dissent. Cost is disclosed, never a gate: invoking this skill
-  means accuracy outranks tokens. Use when the user says "convene the
-  council", "ask multiple models", "get a second/third opinion", "maximum
-  accuracy", "I need this answer to be right", or when jail-verify /
-  jail-decide / jail-rate / jail-prompt escalate a high-stakes contested
-  call. Do NOT use for parallel division of labor across different subtasks
-  (jail-orchestrate) or for questions with no knowable answer (STOP those).
+  preserving dissent. Two lanes: FULL protocol for maximum stakes, and a
+  MINI-COUNCIL (3 blind answers + one anonymized review round) for everyday
+  contested calls. Cost is disclosed, never a gate. Use when the user says
+  "convene the council", "ask multiple models", "get a second/third opinion",
+  "maximum accuracy", "I need this answer to be right", "quick council" /
+  "mini council" / "council-check this", or when jail-verify / jail-decide /
+  jail-rate / jail-prompt escalate a high-stakes contested call. Do NOT use
+  for parallel division of labor across different subtasks (jail-orchestrate)
+  or for questions with no knowable answer (STOP those).
 ---
 
 # JAIL-COUNCIL — Maximum-Accuracy Deliberation
@@ -29,6 +31,20 @@ justification. Disclose the cost (≈ members + reviews + chairman ≈ N+2×
 a single answer, more with a verification round) and proceed — never refuse
 for expense. The only STOPs: the question has no knowable/groundable answer,
 or the user declines Tier C when nothing stronger is available.
+
+## Lane pick (declare it)
+- **FULL** — the complete protocol below (rebuttal round available, 5
+  members for maximum stakes). Default for "convene the council", legal /
+  irreversible / money calls, and skill escalations marked existential.
+- **MINI-COUNCIL** — the affordable everyday lane: 3 members, blind first
+  answers, ONE anonymized review round, chairman synthesis; verification
+  round fires only if a load-bearing fact is disputed; no rebuttal round.
+  ≈ half the cost of FULL. For contested-but-not-existential calls ("quick
+  council", "sanity-check this with other perspectives", jail-decide's
+  everyday escalations). **The invariants never shrink with the lane:**
+  blindness, anonymization, error-hunt-per-review, evidence-beats-votes,
+  and the audit appendix are mandatory in both. State the lane + tier in
+  the output; a mini-council that skipped an invariant is council theater.
 
 ## Step 0 — Frame
 - Restate the question and define **what would make an answer WRONG** (the

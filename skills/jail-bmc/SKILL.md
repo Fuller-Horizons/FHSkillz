@@ -1,7 +1,7 @@
 ---
 name: jail-bmc
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Build or evaluate a nine-block Business Model Canvas (customer segments,
   value propositions, channels, customer relationships, revenue streams, key
@@ -10,8 +10,8 @@ description: >-
   riskiest assumptions and the experiments to test them. Use when asked for
   a "business model canvas", "BMC", "map the business model", evaluating a
   venture/product idea's model, or pressure-testing how a business makes
-  money. Do NOT use for macro scans (jail-pestle), competitive
-  self-assessment (jail-swot), or entity/legal-structure questions.
+  money. Do NOT use for macro scans or competitive
+  self-assessment (jail-strategy-scan), or entity/legal-structure questions.
 ---
 
 # JAIL-BMC
@@ -47,13 +47,26 @@ the riskiest assumption leaves with an experiment attached.
    channel that doesn't reach them, the partnership that's actually a
    dependency risk, second-order competitor response.
 6. **Rank assumptions by risk** (impact-if-wrong × evidence weakness) and
-   attach to each of the top 3–5 a **validation experiment**: what to test,
-   with whom, the measurable pass/fail threshold, cost — sequenced
-   cheapest-decisive-first (this is jail-lab thinking applied to a business
-   model).
+   attach to each of the top 3–5 a **validation experiment in jail-lab
+   spec shape**: metric + direction · the ONE variable under test · bounded
+   run (with whom, how long, cost) · measurable pass/fail threshold —
+   sequenced cheapest-decisive-first. Runnable experiments hand off to
+   **jail-lab** directly (results land in its ledger; a KEEP promotes the
+   hypothesis toward VALIDATED on the next canvas pass).
 7. **jail-decide** → strategic implications and next actions.
    **jail-exec-brief** → **jail-verify** (labels intact? blocks coherent?
    riskiest assumptions have experiments? no invented validation?).
+
+## Canvas-delta mode (revisiting an existing canvas)
+Input: the prior canvas + what changed (experiment results, new evidence,
+a pivot). Don't rebuild: **diff** — list blocks touched by the change ·
+promote/demote labels where evidence moved (HYPOTHESIS → VALIDATED needs
+the evidence ref; VALIDATED → stale gets re-flagged) · re-run the
+coherence pass ONLY on touched blocks + their dependents · re-rank
+assumptions (a resolved top-3 assumption pulls the next one up). Output
+leads with the delta table (block · was → is · driver), then the updated
+canvas. Cheap by design — this is what makes the canvas a living document
+instead of a one-shot workshop artifact.
 
 ## Output
 The nine-block canvas (each element labeled V/H + confidence) → internal

@@ -1,23 +1,28 @@
 ---
 name: jail-prospect
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
-  Research a US private company as a business-brokering (sell-side) and consulting
-  prospect using only FREE, authoritative sources. Use when evaluating whether to
-  approach an owner about selling their business, or about a consulting engagement.
-  Produces a one-page brief with a Likelihood-to-Sell score, a Consulting-Opportunity
-  score, red flags, an outreach hook, and a fully cited source appendix. Triggers:
-  "research this company", "is this a good brokerage prospect", "prospect brief",
-  "should I approach this owner", "sell-side screen", "consulting opportunity".
+  Screen a US private company from FREE, authoritative sources — two lanes:
+  PROSPECT (business-brokering sell-side + consulting lens, scored brief with
+  Likelihood-to-Sell and Consulting-Opportunity) and COMPANY SNAPSHOT (the
+  same OSINT discipline pointed at vendor due-diligence, competitor reads, or
+  partnership vetting). Never fabricates financials. Use when evaluating
+  whether to approach an owner about selling or consulting, OR when vetting
+  any named private company before relying on it. Triggers: "research this
+  company", "is this a good brokerage prospect", "prospect brief", "should I
+  approach this owner", "sell-side screen", "consulting opportunity",
+  "snapshot this vendor/company", "vet this vendor", "due diligence on X",
+  "are they solid enough to sign with", "competitor read on X".
 ---
 
 # JAIL-PROSPECT — Company Prospect Research (brokering-led)
 
 Turn a company name + website into a decision: **pursue as a brokerage prospect / pursue as a consulting prospect / pass / need more** — grounded only in free, authoritative sources, with every material claim cited.
 
-## When to use
-A user names a target company (or a list) and wants to know whether it's worth approaching the owner about selling the business or about a consulting engagement. Brokering (sell-side) is the primary lens; consulting is the secondary lens scored in parallel.
+## When to use — and which lane (say which)
+- **PROSPECT** (the original): a user names a target company (or a list) and wants to know whether it's worth approaching the owner about selling the business or about a consulting engagement. Brokering (sell-side) is the primary lens; consulting is the secondary lens scored in parallel.
+- **COMPANY SNAPSHOT** (0.23.0): the same 4-stage OSINT discipline and non-negotiable rules, repointed at a stated purpose — **vendor due-diligence** (can we rely on them: stability, delivery record, compliance exposure), **competitor read** (posture, capacity, momentum), or **partnership vetting**. Stages 1–3 run unchanged; stage 4 swaps the sell-side rubric for a purpose-fit scorecard (e.g. Stability 0–100 + Risk-Exposure 0–100 for vendors), states the purpose on the brief, and drops the outreach hook unless asked. Snapshot ≠ rating: a 0–10 verdict on a rubric is jail-rate; this is an evidence brief.
 
 ## Non-negotiable rules
 1. **Free sources only.** No PitchBook, ZoomInfo, paid databases, or paywalled data. The catalog is in `references/free-sources.md`. If a fact is only available behind a paywall, mark it **Missing Evidence**.

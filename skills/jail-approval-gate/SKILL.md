@@ -1,7 +1,7 @@
 ---
 name: jail-approval-gate
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Classify every intended action into approval tiers BEFORE acting — never /
   per-action approval / batchable approval / auto-allowed — and fail closed:
@@ -44,6 +44,21 @@ inventory — but re-derive it; upstream may have missed some.
   sources).
 
 Tie-break rule: when two tiers arguably apply, the stricter wins. [Rule 3]
+
+## Step 2b — The standing profile (stop re-deriving the gate every run)
+- **First run in a project:** after the human has tiered the inventory,
+  offer to persist the tier map as an **APPROVAL PROFILE** — an ADR-shaped
+  jail-memory entry (context: this project · decision: the tier map ·
+  consequences: what auto-proceeds · status: accepted, dated). The write
+  itself is PER-ACTION (it's durable).
+- **Later runs:** load the profile, apply it, and say so ("standing profile
+  2026-07-22 applied — say 'retier' to revise"). Then DIFF: action types
+  not covered by the profile default to PER-ACTION until the human tiers
+  them; never stretch an old approval over a new action type.
+- A profile is a memory, so jail-memory's freshness rule applies: one
+  contradicted by current instructions is flagged and updated, not obeyed.
+  No jail-memory / no platform memory → keep the profile as a dated block
+  the user can paste into future sessions (the manual fallback).
 
 ## Step 3 — The approval request (what the human sees)
 Per approval, one compact block — a human can't authorize what they can't

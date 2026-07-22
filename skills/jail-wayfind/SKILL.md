@@ -1,7 +1,7 @@
 ---
 name: jail-wayfind
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Navigate work too big and too foggy for one session by building a MAP of
   DECISION TICKETS — questions whose resolution is a decision, not build
@@ -53,8 +53,14 @@ Work the highest-leverage unblocked ticket:
   Update the map's decisions-so-far index (one line each).
 - New fog discovered = new tickets with their edges — the map grows
   honestly rather than the work drifting silently [Constitution Rule 4].
-- Each session ends with the map current and a **jail-baton** if the next
-  session is far away.
+- **The map is the baton's spine (multi-session persistence).** Every
+  session on fog work ends with the map current + a **jail-baton** whose
+  state-of-play section POINTS at the map (never re-describes it) and
+  names the active ticket; every resuming session opens the map before
+  anything else. One artifact carries the reasoning across weeks — batons
+  come and go, the map accretes. Ticket resolutions worth keeping forever
+  also land in **jail-memory** as ADR entries at resolution time, not in a
+  bulk pass at the end (ends never come reliably on fog work).
 
 ## Step 4 — Declare the way clear
 The map is done when nothing decision-shaped remains between here and the

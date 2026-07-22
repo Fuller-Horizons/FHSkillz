@@ -1,7 +1,7 @@
 ---
 name: jail-research
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Plan, execute, and synthesize research into a structured, citable EVIDENCE
   PACKET — answerable questions, tiered authoritative sources, dates on every
@@ -9,7 +9,7 @@ description: >-
   facts gathered from internal or external sources: "research X", "find
   evidence for", "what does the data say", "verify this claim", background for
   a decision/analysis/framework, or when another skill (jail-decide,
-  jail-pestle, jail-swot, jail-rate) needs grounding. Do NOT use for
+  jail-strategy-scan, jail-rate) needs grounding. Do NOT use for
   US-private-company sell-side prospecting (jail-prospect) or when
   the user supplies all facts and just wants synthesis (jail-exec-brief).
 ---
@@ -25,8 +25,22 @@ date, and confidence — or is labeled Unknown. [Constitution Rules 1, 2, 10]
 - Break it into **answerable questions** (each has a knowable answer).
 - For each question, name the **evidence that would answer it** and the likely
   best source *before* searching — it keeps retrieval from wandering.
-- Time-sensitive subjects (prices, versions, leadership, law, "latest") →
-  live search is mandatory; model memory will be stale and will fabricate.
+- **Detect live-search availability now, not mid-run:** check which engines
+  this environment actually has (built-in web search; Google/Gemini or
+  Perplexity connectors when present). If volatile questions exist and NO
+  live search is available → those questions are **Unknown-until-searched**
+  (name the tool that would resolve each); model memory never substitutes.
+
+## Claim-class routing (which tier + how fresh)
+| Claim class | Examples | Minimum sourcing | Freshness window |
+|---|---|---|---|
+| **Volatile** | prices, versions, leadership, legal status, availability, "latest" | live search mandatory, primary preferred | ≤12 months; prices/versions ≤3 |
+| **Slow-moving** | market structure, standards, mechanisms, history | primary or peer-reviewed | ≤3–5 years acceptable |
+| **Contested** | disputed findings, competing figures | 2+ independent sources + the dispute named | strongest currently-applicable, any age |
+| **Internal** | the org's own numbers, decisions, artifacts | the artifact itself, dated | current version only |
+
+A claim outside its freshness window is treated as **stale → re-verify or
+downgrade to Estimate**; say which window was applied.
 
 ## Step 2 — Gather, tiered
 Source order: **primary/official → independent measurement/peer-reviewed →

@@ -75,6 +75,42 @@ def validate_skill_file(filepath):
 
     return errors
 
+def run_toolkit_checks(repo_root):
+    """Release-loop wiring (0.23.0): run the jail-py-toolkit / jail-py-lab
+    machine checks on every validation run, not only on request.
+    Checks: (1) every bundled script byte-compiles; (2) jail-py-toolkit's
+    validate-skill-structure.py passes on every skills/* directory."""
+    import py_compile
+    import subprocess
+    errors = []
+    skills_dir = os.path.join(repo_root, "skills")
+    # 1 — all bundled scripts compile
+    for skill in ("jail-py-toolkit", "jail-py-lab"):
+        sdir = os.path.join(skills_dir, skill, "scripts")
+        if not os.path.isdir(sdir):
+            errors.append(f"missing companion scripts dir: {sdir}")
+            continue
+        for f in sorted(os.listdir(sdir)):
+            if f.endswith(".py"):
+                try:
+                    py_compile.compile(os.path.join(sdir, f), doraise=True)
+                except py_compile.PyCompileError as e:
+                    errors.append(f"{skill}/{f}: {e.msg}")
+    # 2 — structural lint of every skill dir via the toolkit
+    lint = os.path.join(skills_dir, "jail-py-toolkit", "scripts",
+                        "validate-skill-structure.py")
+    if os.path.isfile(lint) and os.path.isdir(skills_dir):
+        for d in sorted(os.listdir(skills_dir)):
+            path = os.path.join(skills_dir, d)
+            if os.path.isdir(path):
+                r = subprocess.run([sys.executable, lint, path],
+                                   capture_output=True, text=True)
+                if r.returncode != 0:
+                    errors.append(f"structure lint failed for skills/{d}: "
+                                  f"{(r.stdout + r.stderr).strip()[:200]}")
+    return errors
+
+
 def main():
     target = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -91,6 +127,13 @@ def main():
         errs = validate_skill_file(target)
         if errs:
             all_errors[target] = errs
+
+    if os.path.isdir(target):
+        toolkit_errors = run_toolkit_checks(target)
+        if toolkit_errors:
+            all_errors["[jail-py-toolkit release checks]"] = toolkit_errors
+        else:
+            print("[toolkit] machine checks passed (script compile + structure lint)")
 
     if all_errors:
         print("\n[!] Validation Failed with Errors:")

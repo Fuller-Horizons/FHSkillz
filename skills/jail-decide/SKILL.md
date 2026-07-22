@@ -1,7 +1,7 @@
 ---
 name: jail-decide
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Convert analysis into a defensible DECISION PACKAGE — options (always
   including do-nothing), explicit criteria, costs/risks/reversibility per
@@ -9,9 +9,12 @@ description: >-
   immediate next actions. Use when someone must choose among options: "which
   should we pick", "should we do X or Y", "build vs buy", "is this worth
   doing", "help me decide", or downstream of research/analysis that ends in a
-  choice. Do NOT use to score a single subject 0-10 (jail-rate), to gather the
-  evidence itself (jail-research), or to attack one option's reasoning
-  (jail-red-team).
+  choice — including quantified comparisons that end in a pick: "run the
+  numbers on A vs B and choose", "which is cheaper/better over N years",
+  "compare the costs and pick one" (the numbers feed the decision; the
+  deliverable is the defensible pick, not the arithmetic). Do NOT use to
+  score a single subject 0-10 (jail-rate), to gather the evidence itself
+  (jail-research), or to attack one option's reasoning (jail-red-team).
 ---
 
 # JAIL-DECIDE
@@ -39,6 +42,13 @@ written down. [Constitution Rules 6, 11, 12]
 - A weighted decision matrix is optional equipment: use it when criteria and
   evidence support real numbers; otherwise comparative prose beats false
   precision — never let a made-up 7.2 outvote a true sentence.
+- **Quantified lane** (money/time is load-bearing AND real numbers exist):
+  per option add **expected value** (probability-weighted benefit − cost,
+  as a RANGE when inputs are uncertain), **cost of delay** (what each
+  month of not deciding forfeits — this prices do-nothing honestly), and
+  payback/break-even where applicable. Every number carries its basis
+  (Fact/Estimate + source); when inputs are gut-feel, stay in comparative
+  prose — the lane is earned by evidence, not ambition.
 
 ## Step 3 — Recommend
 ```
@@ -53,10 +63,13 @@ Approval required: <anything in the recommendation a human must authorize>
 Next actions: <first 1–3 steps, each with an owner>
 ```
 Then the JAIL-HANDOFF block — `next:` jail-red-team for consequential or
-contested calls (irreversible, money, legal/safety) — and when the call is
-contested AND must be maximally right, convene **jail-council** on the
-load-bearing question; jail-operationalize to turn the chosen option into a
-working process, or jail-exec-brief to present it.
+contested calls (irreversible, money, legal/safety). **Council escalation
+check (run it explicitly):** contested + high-stakes + hinging on a disputed
+factual/interpretive question → convene **jail-council** on that question
+(record "council: convened/not — why" in the package; a cheap Tier-D
+mini-council covers cases that are contested but not existential).
+jail-operationalize turns the chosen option into a working process;
+jail-exec-brief presents it.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.

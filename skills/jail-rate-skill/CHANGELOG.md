@@ -1,5 +1,9 @@
 # Changelog — rate-skill
 
+## 2.2.0 — 2026-07-22 (plugin 0.23.0)
+
+- Rule 10 — measured evidence outranks inspection: eval results, trigger-accuracy ledgers, and baseline reports in the target repo are read and scored from, cited with run date; authored-but-never-run evals earn coverage credit only.
+
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
 ## 2.1.0

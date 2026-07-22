@@ -1,17 +1,20 @@
 ---
 name: jail-orchestrate
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
-  Run multiple agents/subagents as one coordinated system — decide when
+  Run long or parallel work as one coordinated system — decide when
   delegation earns its cost, assign non-overlapping scopes with minimum
   sufficient context, keep a dependency graph and resume ledger, audit
   progress against real tool results, reconcile conflicts by evidence, and
-  integrate one final result. Use when work splits across parallel agents or
-  research streams: "fan this out", "use subagents", "divide this up",
-  long-horizon multi-part execution, or when jail-research/jail-task-contract
-  hands off a parallelizable plan. Do NOT use for single-agent tasks or for
-  defining the human-run process itself (jail-operationalize).
+  integrate one final result. Includes a SOLO lane: the same ledger
+  discipline for ONE agent on long multi-part work (no subagents needed).
+  Use when work splits across parallel agents or research streams ("fan this
+  out", "use subagents", "divide this up"), for long-horizon multi-part
+  execution ("keep a resume ledger", "track this build so we can resume"),
+  or when jail-research/jail-task-contract hands off a parallelizable plan.
+  Do NOT use for short single-sitting tasks or for defining the human-run
+  process itself (jail-operationalize).
 ---
 
 # JAIL-ORCHESTRATE
@@ -24,6 +27,16 @@ Delegate only when at least one is true: streams are **independent** (true
 parallelism), a stream needs **isolation** (fresh perspective, verifier ≠
 worker), or the work **exceeds one context window**. Otherwise one agent,
 sequential, wins — coordination overhead is real work lost.
+
+**The SOLO lane (Gate 1 says no, but the work is long).** Multi-part work
+that stays single-agent still gets the ledger: break it into nodes with a
+dependency order, record scope/status/proving-artifact per node, and mark
+complete only on verified artifacts — your own claims of done are subject
+to the same audit rule as a subagent's. Payoff: interruption-proof resume
+(restart from the last verified node, never from zero) and an honest
+progress view. The ledger shape is shared with **jail-baton** — a baton can
+seed a resume, and the ledger slots into a baton unrewritten. Skip the lane
+only for work that fits one sitting.
 
 ## Gate 2 — Scope the squad
 - **Non-overlapping scopes.** Each agent gets ONE question or workstream;

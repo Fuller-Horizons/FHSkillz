@@ -29,7 +29,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-baton | ending/overflowing session | handoff baton (state, decisions, refs, next, skills) | jail-memory (durable lessons), jail-quarantine (redaction classes) | user, jail-wayfind, jail-orchestrate | medium (travels) | secrets present → redact before write |
 | jail-wayfind | foggy multi-session goal | decision-ticket map → cleared way + handoff | jail-research, jail-prototype, jail-decide, jail-council, jail-baton | user | low | destination unnameable → route to jail-red-team/jail-prompt |
 | jail-skill-miner | codebase/history | candidate table → skills | jail-rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
-| jail-prompt | vague goal | engineered prompt / STOP | jail-py-prompt-tools, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
+| jail-prompt | vague goal | engineered prompt / STOP | jail-py-toolkit, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
 
 ## Layer 2 — Workflow skills
 
@@ -38,15 +38,14 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-operationalize | decision/recommendation | 13-field operating workflow | jail-verify (readiness), jail-lab (metric loop) | jail-decide, frameworks |
 | jail-exec-brief | any complex material | decision-ready brief | — (voice layer) | frameworks, jail-decide, kernel chains |
 | jail-rate | any ratable subject | 0–10 scorecard, cited | jail-research (evidence), jail-rate-skill / jail-prospect (handoffs) | jail-decide (option scoring) |
-| jail-rate-skill | AI skill directory | 10-category matrix + record | jail-py-rate-tools, skill-creator (behavioral) | jail-skill-miner |
+| jail-rate-skill | AI skill directory | 10-category matrix + record | jail-py-toolkit, skill-creator (behavioral) | jail-skill-miner |
 | jail-prospect | company name | prospect brief | — | jail-research (domain handoff) |
 
 ## Layer 3 — Domain packs
 
 | Skill | Chain (in order; inline fallback per step) |
 |---|---|
-| jail-pestle | task-contract → research → classify 6 dims → red-team → decide → exec-brief → verify |
-| jail-swot | task-contract → research → classify+sort rules → red-team → TOWS → decide → exec-brief → verify |
+| jail-strategy-scan | task-contract → ONE research sweep → classify (INTERNAL sort rules and/or MACRO 6 dims) → interaction pass (full sweep) → red-team → TOWS/implications+tripwires → decide → exec-brief → verify · tripwires → jail-memory |
 | jail-bmc | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → exec-brief → verify |
 | jail-cpr | task-contract → memory retrieval → CPR (exec-brief voice) → agenda-from-Results → verify |
 
