@@ -21,7 +21,7 @@
         "a ship-check line is emitted with an explicit FAIL on the 'do-nothing priced' gate (or names that gate as failing) rather than silently accepting the draft",
         "the $180k/yr figure is flagged as unsourced — the 'every number carries Fact/Estimate+source' gate is reported FAIL or the number is given an explicit Fact/Estimate label and source",
         "the skill fixes the package (adds a priced do-nothing option and sources or downgrades the number) instead of shipping the draft as given",
-        "a re-run ship-check line appears after the fix showing no open FAIL",
+        "a second ship-check line appears after the fix, and any gate still failing on it is one that cannot be closed from the input, is accompanied by the specific question that would close it, and blocks delivery rather than shipping open",
         "a named decision owner and at least 2 change-conditions appear in the final package"
       ]
     },

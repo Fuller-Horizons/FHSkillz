@@ -1,7 +1,7 @@
 ---
 name: jail-decide
 metadata:
-  version: 1.2.0
+  version: 1.2.1
 description: >-
   Convert analysis into a defensible DECISION PACKAGE — options (always
   including do-nothing), explicit criteria, costs/risks/reversibility per
@@ -90,9 +90,16 @@ per option PASS|FAIL · ≥2 change-conditions PASS|FAIL · every number carries
 Fact/Estimate+source PASS|FAIL · owner named PASS|FAIL · council check
 recorded PASS|FAIL
 ```
-Fail-closed: any FAIL → fix the package and re-run the line. Never release with
-an open FAIL; if a gate cannot be made to pass, say which one and stop rather
-than shipping around it.
+Given an existing draft/package/recommendation as input: run this line FIRST
+against it as received and keep the real FAILs — that line is the audit
+record that the gate bit. Then fix the package and emit a SECOND line. Never
+emit only a clean line for a draft that arrived violating a gate.
+
+Fail-closed: any FAIL → fix the package and re-run the line. A gate that
+can't be closed from the input at hand (no owner nameable, no source
+obtainable) is never left a silent open FAIL on a shipped package: emit the
+FAIL, name the specific question or evidence that would close it, and
+withhold the package — never invent a value to make the line read clean.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.

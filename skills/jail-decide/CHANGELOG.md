@@ -1,5 +1,16 @@
 # Changelog — jail-decide
 
+## 1.2.1 — 2026-07-26 (plugin 0.25.0)
+
+- Ship-check fix (behavioral gate defect): when the input is an existing
+  draft/package, run the ship-check FIRST against it as received and keep
+  the real FAILs as the audit record — then fix and emit a SECOND line.
+  Producers were silently repairing violating drafts and emitting only a
+  clean line, destroying the evidence that a gate was ever breached.
+- Unclosable gates (no owner nameable, no source obtainable) no longer strand
+  the run on an open FAIL: emit the FAIL, name the question/evidence that
+  would close it, and withhold the package instead of inventing a value.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Ship-check: 7 binary gates emitted as one line before release (criteria-first, do-nothing priced, door type, ≥2 change-conditions, sourced numbers, owner named, council check), fail-closed — packages no longer ship with a silently missing gate.
