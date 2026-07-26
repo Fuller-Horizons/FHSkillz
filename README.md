@@ -2,60 +2,145 @@
 
 **Fuller Horizons' Claude skills — bundled as one installable plugin.**
 
-FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz`) and registers this repo as a Claude **plugin marketplace**. Add the marketplace once and every skill installs together; skills then activate automatically based on their `description` — nothing to load by hand.
+FHSkillz is a bundle of 26 Claude skills for real work. It is built for consultants, founders, ops leads, and anyone who runs decisions, research, or client work through Claude and needs careful reasoning, not just a fast answer.
+
+Each skill covers one job. One skill helps you decide between two options and defend the pick. Another checks a finished deliverable against real evidence before you ship it. A third turns a scraped contact list into something safe to load into your CRM. Install the whole set once (`fh-skillz`), and this repo registers itself as a Claude **plugin marketplace**. Skills then activate on their own, based on the `description` field in each one — nothing to load by hand.
 
 ## Available skills
 
+The skills sort into four groups below. Every skill name links to its own folder, and every skill's own README shows a full, real worked example — the tables here just point you to it.
+
 ### Layer 1 — Reasoning kernel (governs all work)
 
-| Skill | What it does |
-|---|---|
-| [`jail-prompt`](skills/jail-prompt/) | Pre-flight that turns a vague goal into a **STOP** or an engineered, verifiable, token-efficient prompt. |
-| [`jail-task-contract`](skills/jail-task-contract/) | Executable task contracts before work begins; scope guarding after — material change = new contract. |
-| [`jail-research`](skills/jail-research/) | Research into a citable evidence packet — tiered dated sources, contradictions weighed, honest gaps. |
-| [`jail-verify`](skills/jail-verify/) | Independent verification against the contract, on real artifacts — never on an agent's say-so. |
-| [`jail-decide`](skills/jail-decide/) | Decision packages: criteria first, do-nothing priced, reversibility named, change-conditions stated. |
-| [`jail-red-team`](skills/jail-red-team/) | Adversarial pressure-testing — steelman first, three lenses, full bias sweep on consequential calls. |
-| [`jail-council`](skills/jail-council/) | **Maximum-accuracy deliberation** — 3–5 independent models answer blind, review anonymized, disputed facts verified, chairman synthesizes by evidence with dissent preserved. Tier-A cross-provider native in OpenCode CLI. |
-| [`jail-orchestrate`](skills/jail-orchestrate/) | Multi-agent runs: delegation gates, scoped briefs, verified-node resume ledger, evidence-based merge. |
-| [`jail-approval-gate`](skills/jail-approval-gate/) | Action tiers (never/per-action/batchable/auto), fail-closed, proper approval requests, audit trail. |
-| [`jail-quarantine`](skills/jail-quarantine/) | Inbound data quarantined until adopted; protected data halts processing and fails closed. |
-| [`jail-memory`](skills/jail-memory/) | Memory governance (six-check ingestion gate, supersede-don't-delete) + the learning-postmortem ritual. |
-| [`jail-lab`](skills/jail-lab/) | Metric-driven experiment loops with an append-only audit ledger — adapted from karpathy/autoresearch (MIT). |
-| [`jail-skill-miner`](skills/jail-skill-miner/) | Mines codebases/histories for plugin-worthy disciplines; dedupes against installed skills; stops for approval. |
-| [`jail-diagnose`](skills/jail-diagnose/) | Feedback-loop-first defect diagnosis — red-capable repro signal before hypotheses; confirmed cause; mandatory regression case. |
-| [`jail-prototype`](skills/jail-prototype/) | Throwaway prototypes answering a named design question — the answer graduates, the code dies on a branch. |
-| [`jail-handoff`](skills/jail-handoff/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
-| [`jail-plan`](skills/jail-plan/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
+| Skill | Use it when | What you get |
+|---|---|---|
+| [`jail-prompt`](skills/jail-prompt/) | You have a goal but no real prompt written for it yet | A go/stop verdict, then a copyable prompt with a built-in pass/fail test |
+| [`jail-task-contract`](skills/jail-task-contract/) | A request is vague, risky, or has many threads, and you want scope agreed before work starts | A 14-field contract naming the goal, the risks, and a testable finish line |
+| [`jail-research`](skills/jail-research/) | You need a real, sourced answer before a decision, not just an opinion | A short cited answer plus an evidence packet listing every source and date |
+| [`jail-verify`](skills/jail-verify/) | Someone says a task is done and you want proof, not their word for it | One verdict — pass, fail, or pass-with-flags — backed by a count of real checks |
+| [`jail-decide`](skills/jail-decide/) | You have to pick between options and need to defend the choice | A decision package with priced options, one pick, and the facts that would flip it |
+| [`jail-red-team`](skills/jail-red-team/) | A costly plan is about to ship and you want real holes found first | A ranked list of flaws, each with a fix and a cheap test to prove it right or wrong |
+| [`jail-council`](skills/jail-council/) | A call is contested and being wrong would be expensive | One final answer with confidence, sources, and any real disagreement left standing |
+| [`jail-orchestrate`](skills/jail-orchestrate/) | A job needs several agents, or spans many sessions, and you can't lose your place | A step-by-step ledger with proof behind each step, and one merged result |
+| [`jail-approval-gate`](skills/jail-approval-gate/) | An agent is about to send, spend, publish, or delete something on its own | A risk tier for every action, approval requests for the risky ones, and an audit log |
+| [`jail-quarantine`](skills/jail-quarantine/) | You just scraped or received outside data and don't fully trust it yet | A report of what's held for review, what's missing, and what got halted for safety |
+| [`jail-memory`](skills/jail-memory/) | You want to save a lesson for later, or check what you already decided | Each saved entry with its source, or a plain reason it was refused |
+| [`jail-lab`](skills/jail-lab/) | You want to test changes one at a time and track what actually worked | A declared metric and budget, plus a ledger of every try with a keep-or-discard call |
+| [`jail-skill-miner`](skills/jail-skill-miner/) | You want to know if your own codebase hides a reusable skill worth building | A short table of candidates, each with evidence and whether it's new or a duplicate |
+| [`jail-diagnose`](skills/jail-diagnose/) | A bug is real but the cause won't pin down, or a first fix didn't hold | A diagnosis with the proven cause, the fix, and a permanent test so it can't come back |
+| [`jail-prototype`](skills/jail-prototype/) | Your team is stuck arguing over one design question that talking can't settle | A one-page verdict answering that one question; the throwaway code then gets deleted |
+| [`jail-handoff`](skills/jail-handoff/) | You're ending a session and want to resume later without re-explaining everything | A short baton file: the goal, what's done, what's next, and why you chose each thing |
+| [`jail-plan`](skills/jail-plan/) | You have a decision to turn into a real process (**OPERATE** lane), or a big goal with no clear starting point (**MAP** lane) | A 13-field workflow with a named owner and finish line, or a map of the open decisions |
 
 ### Layer 2 — Workflow skills
 
-| Skill | What it does |
-|---|---|
-| [`jail-rate`](skills/jail-rate/) | Universal evidence-cited **0–10 rating of anything**, weighted rubric per subject type, current → projected. |
-| [`jail-plan`](skills/jail-plan/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
-| [`jail-summarize`](skills/jail-summarize/) | Decision-ready executive communication; technical findings translated into business consequences. |
-| [`jail-rate-skill`](skills/jail-rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
-| [`jail-prospect`](skills/jail-prospect/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
+| Skill | Use it when | What you get |
+|---|---|---|
+| [`jail-rate`](skills/jail-rate/) | You need a fair, evidence-based score on software, a product, or an idea | A weighted scorecard with sourced evidence and a ranked list of fixes |
+| [`jail-summarize`](skills/jail-summarize/) | You have technical findings and need the business version for a busy executive | A short brief that opens with the outcome and ends with one clear recommendation |
+| [`jail-rate-skill`](skills/jail-rate-skill/) | You want to know if an AI skill is ready to ship, or which of two is better | A 10-category score table, one concrete fix per row, and a re-scored total |
+| [`jail-prospect`](skills/jail-prospect/) | You want to know if a business owner might sell, or where a consulting angle fits | A one-page brief with two 0–100 scores, red flags, and every source used |
 
 ### Layer 3 — Domain packs
 
-| Skill | What it does |
-|---|---|
-| [`jail-strategy`](skills/jail-strategy/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
-| [`jail-bmc`](skills/jail-bmc/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
-| [`jail-cpr`](skills/jail-cpr/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
+| Skill | Use it when | What you get |
+|---|---|---|
+| [`jail-strategy`](skills/jail-strategy/) | You need a SWOT, a macro scan, or both, tied to one real decision | Sorted SWOT and/or PESTLE tables, plus a table of moves you can act on |
+| [`jail-bmc`](skills/jail-bmc/) | You need a business model canvas that separates proof from hope before a raise or a pivot | A nine-block canvas with proven-vs-guessed labels, and the riskiest guesses to test first |
+| [`jail-cpr`](skills/jail-cpr/) | Your meetings decide nothing, and you want an agenda built backward from real outputs | A timed agenda where every item names an owner and output, plus a scored debrief after |
 
 ### JAIL-PY companions (optional; need code execution)
 
-| Skill | Backs |
-|---|---|
-| [`jail-py-toolkit`](skills/jail-py-toolkit/) | jail-prompt + jail-rate-skill machine checks in one install: secret scan, prompt/chain/truth lint, dry-run, rating validate/save/variance, structure lint. |
-| [`jail-py-lab`](skills/jail-py-lab/) | jail-lab — experiment ledger bookkeeping and reports. |
+These two are optional. They run real code to back checks that `jail-prompt`, `jail-rate-skill`, and `jail-lab` would otherwise do by hand. Skip them if you don't run Python — the core skills still work without them, just less mechanically.
+
+| Skill | Use it when | What you get |
+|---|---|---|
+| [`jail-py-toolkit`](skills/jail-py-toolkit/) | You want a real script to catch secrets, weak prompts, or a broken skill folder before you ship | A pass-or-fail report per script, with an exit code your CI or commit hook can read |
+| [`jail-py-lab`](skills/jail-py-lab/) | You're running a jail-lab experiment and want the ledger and math kept for you | A ledger file that grows one line per try, plus a KEEP or DISCARD call on each one |
 
 **System docs:** the [JAIL Constitution](docs/JAIL-CONSTITUTION.md) (12 rules + the handoff contract every kernel skill ends with) · the [skill graph](docs/skill-graph.md) (routing registry) · [wave-3 roadmap](docs/ROADMAP-wave3-domain-packs.md).
 
 **House rule:** core skills are instruction-only (no bundled code); anything runnable ships as a `jail-py-*` companion skill the core references with a manual fallback.
+
+## See it work
+
+Every example in this repo, including the three below, is copied straight from a real run of the skill. None of it is written by hand. We picked one reasoning-kernel skill, one domain-pack skill, and one JAIL-PY companion, to show the range of what's in here.
+
+**[`jail-decide`](skills/jail-decide/)** (Layer 1) — a VP of Sales needs to decide between renewing Salesforce, negotiating a discount, or switching to HubSpot before a contract deadline. Real excerpt from the skill's output:
+
+```
+Ship-check: criteria-first PASS · do-nothing priced PASS · door type per option PASS · ≥2 change-conditions PASS · every number carries Fact/Estimate+source PASS · owner named PASS · council check recorded PASS
+
+DECISION PACKAGE
+Decision: Renew Salesforce as-is, negotiate a discounted 2-year renewal, or switch to HubSpot before the Salesforce contract auto-renews on Sept 30 · Owner: Maria Chen, VP of Sales · Needed by: Aug 15, 2026 (45-day notice deadline)
+
+Criteria (weighted):
+1. Cut SaaS spend toward the CFO's 20% target [High]
+2. Protect Q4 pipeline — $2.1M open [High]
+3. Keep the territory management and forecasting the 40 reps use [Medium]
+4. Minimize lock-in [Medium]
+
+Options table:
+
+| Option | Benefits | Costs | Risks | Reversibility | Delay cost |
+|---|---|---|---|---|---|
+| Do-nothing (renew as-is) | No disruption; team trained | $65,520/yr [Fact, AE email 7/20]; $131K/2yr [Estimate, flat renewal] | Misses the 20% target; spend keeps climbing | Two-way — revisit next cycle | Resets the clock another year |
+| Negotiate 2-yr renewal | 15% off; zero migration risk | $55,692/yr avg, $111K/2yr [Estimate, AE verbal 7/20, unconfirmed] | 5 points short of target; discount unconfirmed; ~40% early-term penalty [Estimate, standard clause] | One-way, 2 yrs (termination penalty) | Offer expires at the 9/30 renewal |
+| Switch to HubSpot | $28,800/yr, hits target; ties to Marketing Hub | $28,800/yr + $23K one-time [Fact 7/18 / Estimate 7/22]; pays back in ~8 months | No territory management [Fact, demo 7/19]; risks $2.1M Q4 pipeline [Fact, 7/21] | One-way ~1 yr (~$15K [Estimate] to reverse) | Must finish by 9/30 or lose the Q4-safe window |
+...
+Confidence: medium — discount isn't in writing yet; savings only partly meets the CFO's target.
+```
+
+Full run: [`skills/jail-decide/README.md`](skills/jail-decide/README.md).
+
+**[`jail-plan`](skills/jail-plan/)** (Layer 1, OPERATE lane) — a decision to go proactive on at-risk customer accounts needs to become a workflow the customer-success team can actually run every week. Real excerpt from the skill's output:
+
+```
+Gate check: all 13 fields filled or justified PASS · field 6 resolved per step (2 items sent for explicit approval, marked pending below) PASS · every action step is a yes/no-checkable verb PASS
+
+OPERATING WORKFLOW: At-Risk Account Proactive Outreach — Fernbank Metrics CS team
+
+Upstream decision: 2026-07-14 jail-decide package — "Launch proactive at-risk-account outreach instead of waiting for cancellation notices." Recommendation: proactive outreach, confidence high, not contested — jail-red-team not invoked.
+
+1. **Trigger** — ChurnZero fires a "usage-drop" alert when a paying account's weekly active-seat usage falls 40% or more week-over-week for two consecutive weeks (two weeks, not one, to filter out single bad weeks from holidays or vacations).
+...
+6. **Approval** — tiered per jail-approval-gate (the gate skill was not separately invoked this run; tiers are stated here and approvals requested inline, per the fail-closed fallback):
+   - Steps 1-3 (review alert, send check-in, log outcome): reversible, matches an existing CS motion, homogeneous across accounts → tier **BATCHABLE**, approved as a pattern via the request below.
+   - Step 4 (any account credit or discount): spend → tier **PER-ACTION**, no threshold exception under jail-approval-gate. Every credit needs Sam Diaz's sign-off before it is applied, regardless of size.
+   - Steps 5-6 (internal review, internal reporting): reversible and workspace-internal → tier **AUTO**.
+```
+
+Full run: [`skills/jail-plan/README.md`](skills/jail-plan/README.md).
+
+**[`jail-py-toolkit`](skills/jail-py-toolkit/)** (JAIL-PY companion) — before committing a new skill draft, its scripts scan a config file for secrets, lint a prompt, and check the folder structure. This one shows real terminal output and real exit codes, not prose:
+
+```
+Ran the three backing scripts against the drafted files, from inside the draft folder.
+
+$ python3 "C:/Dev/FHSkillz/skills/jail-py-toolkit/scripts/secret-scan.py" invoice_config.py
+secret-scan: 2 potential secret(s) found:
+
+  invoice_config.py:7: Stripe secret key -> sk_live_51Hj…
+  invoice_config.py:8: OpenAI/Anthropic key -> sk-abcdefghi…
+
+Replace these with environment variables (e.g. os.environ['API_KEY']) and use a restricted, read-only credential before generating the prompt.
+EXIT:1
+
+$ python3 "C:/Dev/FHSkillz/skills/jail-py-toolkit/scripts/prompt-lint.py" invoice_prompt.txt
+prompt-lint: PASS (0 warning(s)).
+EXIT:0
+
+$ python3 "C:/Dev/FHSkillz/skills/jail-py-toolkit/scripts/validate-skill-structure.py" invoice-parser
+[+] Skill structure valid (1 checked).
+EXIT:0
+
+Summary — fix before you commit:
+- secret-scan.py: fail. Two hardcoded keys in invoice_config.py, line 7 (Stripe) and line 8 (OpenAI). Move both to environment variables before this ships.
+- prompt-lint.py: pass. All five required sections are present, the SUCCESS TEST is machine-verifiable, and OUTPUT FORMAT shows a worked JSON example.
+- validate-skill-structure.py: pass. SKILL.md has frontmatter name + description, and the folder name matches.
+```
+
+Full run: [`skills/jail-py-toolkit/README.md`](skills/jail-py-toolkit/README.md).
 
 ## Install
 
