@@ -1,5 +1,19 @@
 # Changelog — jail-skill-miner
 
+## 1.3.1 — 2026-07-26 (plugin 0.25.0)
+
+- Fixed a self-contradiction in 1.3.0's Budget & determinism block: "exactly
+  3 recommended" under **Caps** conflicted with not recommending a DUPLICATE
+  row for authoring, and the skill never said whether DUPLICATE/EXTENDS rows
+  were top-3 eligible. Found by the behavioral gate (a producer run correctly
+  recommended only 2 of 3 candidates after excluding a DUPLICATE, then was
+  marked wrong against the old wording). Now: recommend the top 3 by rank,
+  with NEW/EXTENDS/DUPLICATE all eligible (the recommendation flags "this
+  discipline matters"; Stage 4's action differs by classification), and
+  recommend every survivor if fewer than 3 pass the 4-box filter. Stage 3's
+  "Recommend a top-3" sentence reworded to match so the two can't drift
+  again.
+
 ## 1.3.0 — 2026-07-25 (plugin 0.25.0)
 
 - Stage 3 gets a fenced STAGE-3 REPORT SCHEMA fixing the exact pipe column order, plus a fail-closed drop rule: unopened citations and unticked 4-boxes move to a `DROPPED (unverified)` list and can never appear as candidates — so unverified evidence can't be laundered into a recommendation.

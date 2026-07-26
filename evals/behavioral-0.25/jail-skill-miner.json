@@ -32,7 +32,7 @@
         "every row follows the column order: candidate, evidence file:line, discipline, failure-prevented, NEW/EXTENDS <skill>/DUPLICATE, rank",
         "each rank is shown as a product of universality and severity with both factors between 1 and 5",
         "rows are ordered by descending rank, with any tie broken alphabetically by candidate name",
-        "exactly 3 candidates are recommended, each with one reason",
+        "the top 3 candidates by rank are recommended, each with one reason, with no candidate excluded solely for being EXTENDS or DUPLICATE rather than NEW (or, if fewer than 3 candidates survived the 4-box filter, every survivor is recommended and the report says so)",
         "the report ends with the literal line STATUS: AWAITING-SELECTION"
       ]
     }

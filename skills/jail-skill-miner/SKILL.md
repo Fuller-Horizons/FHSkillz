@@ -1,7 +1,7 @@
 ---
 name: jail-skill-miner
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 description: >-
   Mine a codebase, chat history, or document set for plugin-worthy SKILLS —
   reusable disciplines, not app features — then dedupe candidates against the
@@ -25,9 +25,15 @@ kills the duplicates, and authors only what's approved.
 
 ## Budget & determinism
 - **Caps:** ≤25 source files opened in Stage 1 · ≤12 candidates surfaced ·
-  exactly 3 recommended · report ≤1200 tokens (dedup list = names only).
+  top 3 by rank recommended (fewer if fewer survive) · report ≤1200 tokens
+  (dedup list = names only).
 - **Rank formula:** `rank = universality(1-5) × severity(1-5)`, descending.
 - **Ties:** broken alphabetically by candidate name.
+- **Recommendation eligibility:** NEW, EXTENDS, and DUPLICATE rows are ALL
+  eligible for the top 3 — the recommendation means "this discipline
+  matters"; only the Stage-4 action differs by classification (NEW →
+  author, EXTENDS → amend the named skill, DUPLICATE → no new artifact,
+  record the covering skill).
 - **Determinism:** two runs over the same source emit the same ordered
   table — if they don't, the formula wasn't applied.
 
@@ -89,7 +95,10 @@ candidate | evidence file:line | discipline | failure-prevented | NEW/EXTENDS <s
 session, or with any of the 4 boxes unticked, moves to a
 `DROPPED (unverified)` list with the failing reason and **MUST NOT appear
 as a candidate** (feature drops also land on the port-as-code list).
-Recommend a top-3 with one reason each, then end with the literal line:
+Recommend the top 3 by rank — NEW, EXTENDS, and DUPLICATE rows all
+eligible — with one reason each; if fewer than 3 candidates survive the
+4-box filter, recommend every survivor and say so explicitly. Then end
+with the literal line:
 
 `STATUS: AWAITING-SELECTION`
 
