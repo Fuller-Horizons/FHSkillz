@@ -1,15 +1,21 @@
 # OpenCode CLI runbook — a true Tier-A (cross-provider) council
 
 Verified against OpenCode's docs (opencode.ai/docs — skills & agents pages,
-accessed 2026-07-19). OpenCode is the one CLI in the FHSkillz compatibility
-matrix where a cross-provider council is **native**: skills load from the
-same folders this plugin installs to, and every agent can be pinned to a
-different provider's model.
+first checked 2026-07-19, **re-verified 2026-07-26**). OpenCode is the one CLI
+in the FHSkillz compatibility matrix where a cross-provider council is
+**native**: skills load from the same folders this plugin installs to, and
+every agent can be pinned to a different provider's model.
 
 ## 1. Install the skills (already covered by the FHSkillz flow)
-OpenCode discovers skills from, among others:
-- project: `.opencode/skills/<name>/SKILL.md` and `.claude/skills/<name>/SKILL.md`
-- global: `~/.config/opencode/skills/<name>/SKILL.md` and `~/.claude/skills/<name>/SKILL.md`
+OpenCode discovers skills from:
+- project: `.opencode/skills/<name>/SKILL.md`, `.claude/skills/<name>/SKILL.md`,
+  and `.agents/skills/<name>/SKILL.md`
+- global: `~/.config/opencode/skills/<name>/SKILL.md`,
+  `~/.claude/skills/<name>/SKILL.md`, and `~/.agents/skills/<name>/SKILL.md`
+
+For project paths OpenCode walks upward from the working directory to the git
+worktree root. (`.agents/` and `~/.agents/` were added since the 2026-07-19
+check — the `~/.claude/skills` path this plugin installs to is unchanged.)
 
 So `scripts/install.sh` (which symlinks every FHSkillz skill into
 `~/.claude/skills/`) makes jail-council and the rest of the plugin visible
