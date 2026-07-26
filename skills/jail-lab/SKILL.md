@@ -1,7 +1,7 @@
 ---
 name: jail-lab
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Run a metric-driven EXPERIMENT LOOP on anything improvable — a prompt, a
   skill, code, content, a workflow, a landing page: declare one metric and a
@@ -20,10 +20,10 @@ Never trust an unmeasured improvement. One variable, one bounded run, one
 number, one ledger entry — repeat. Pattern adapted from Andrej Karpathy's
 [autoresearch](https://github.com/karpathy/autoresearch) (MIT), generalized
 from ML training to anything with a metric, with JAIL evidence and audit
-discipline added. [Constitution Rules 7, 10, 11]
+discipline added. [Constitution Rules 5, 7, 10, 11]
 
 ## Step 0 — Declare the lab (before any experiment)
-In plain language, fix four things — they don't change mid-run:
+In plain language, fix five things — they don't change mid-run:
 - **Metric** — ONE number and its direction of good ("pass rate, higher";
   "tokens per answer, lower"; "conversion %, higher"). No metric = no lab:
   either build the measurement first or route to jail-rate for a scored
@@ -32,7 +32,12 @@ In plain language, fix four things — they don't change mid-run:
   Experiment #0 is always the unmodified baseline.
 - **Budget** — the bound per experiment (time, tokens, runs, dollars) and
   the total run budget. Autoresearch uses 5 minutes of training per
-  experiment; pick your equivalent and enforce it.
+  experiment; pick your equivalent and enforce it — flag blast radius
+  (below) in this line too.
+- **Blast radius** — default runs to sandboxed / non-production data.
+  Touching production systems, real users, or irreversible state needs
+  **jail-approval-gate** sign-off before it runs; no gate installed → state
+  the tier (PER-ACTION) and get an explicit human "approved" inline. [Rule 5]
 - **Stop condition** — target reached, budget exhausted, or N consecutive
   discards (default 5) — whichever first. Endless tinkering is the failure
   mode this skill exists to kill.
@@ -53,8 +58,14 @@ In plain language, fix four things — they don't change mid-run:
    evidence ref`. External claims informing a hypothesis carry citations
    with dates. [Rule 10] Discards are data — they kill the same bad idea
    the second time it's proposed.
-6. Loop until the stop condition. Then report: baseline → best, the kept
-   changes in order, keep rate, and what the discards taught.
+6. Loop until the stop condition. **Self-check:** ledger row count =
+   experiments run (baseline + every discard); best-so-far = the ledger's
+   max KEEP row — the machine-checkable exit gate for "done." Close with
+   the JAIL-HANDOFF block: `status` complete only if the stop condition was
+   met, else partial · `facts` baseline/best metric values · `outputs`
+   ledger path + best result · `risks` kept regressions or flagged
+   blast-radius items · `approval_required` anything flagged under Step 0's
+   Blast radius rule · `unknowns` per the envelope (empty list if none).
 
 ## Running it
 - **With the companion skill `jail-py-lab` installed** (needs code
