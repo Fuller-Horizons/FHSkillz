@@ -2,6 +2,13 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.24.1] — 2026-07-22
+
+**Full-plugin build-quality rating + two defect fixes.**
+- **Rated all 26 skills** on the jail-rate-skill 10-category matrix (6 blind raters, measured-evidence-informed) → **docs/skill-matrix-0.24.0.md**. Build-quality mean **7.87**; top jail-prompt 9.0; the two code-free discipline skills (jail-prototype 6.2, jail-skill-miner 6.4) are the honest low outliers (no schema/assertion/budget).
+- **Fixed** jail-plan/README.md lineage line (the rename script had renamed both predecessors to "jail-plan"; now correctly jail-operationalize + jail-wayfind).
+- **Fixed** jail-rate-skill frontmatter version (2.1.0 → 2.2.0, matching its CHANGELOG).
+
 ## [plugin 0.24.0] — 2026-07-22
 
 **Rename + merge wave** (Taylor Sibelia review). 27 → 26 skills; re-baselined 100%/0%.

@@ -3,7 +3,7 @@ name: jail-rate-skill
 description: >-
   Evaluate and rate another AI skill (its SKILL.md and support files) using the standardized 10-category Skill Rating Matrix, IDE Compatibility Matrix, and CLI Compatibility Matrix. Triggers: "/jail-rate-skill", "rate this skill", "evaluate this skill", "score this skill".
 metadata:
-  version: 2.1.0
+  version: 2.2.0
 ---
 
 # JAIL-RATE-SKILL

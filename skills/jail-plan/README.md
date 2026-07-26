@@ -12,7 +12,7 @@ The planning skill, two lanes:
   task) and resolving them one at a time until the path to a named
   destination is clear.
 
-Successor to `jail-plan` 1.0.0 (OPERATE) merged with `jail-plan`
+Successor to `jail-operationalize` 1.0.0 (OPERATE) merged with `jail-wayfind`
 1.1.0 (MAP) at plugin 0.24.0. Rationale: both are planning at different
 scales — one makes a *known* path runnable and owned, the other clears an
 *unknown* path into decisions — and big efforts use them in sequence (map the
