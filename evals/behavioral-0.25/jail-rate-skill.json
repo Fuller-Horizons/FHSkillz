@@ -1,5 +1,5 @@
 {
-  "suite": "jail-rate-skill behavioral 0.25 — golden-set regression: re-rate the worked hello-world example from references/examples.md and confirm scores hold within +/-0.3 of the documented values",
+  "suite": "jail-rate-skill behavioral 0.25 — golden-set regression: re-rate the worked hello-world example from references/examples.md. The 5 explicitly-scored categories must hold within +/-0.3 of their documented values; the worked example elides the other 5 categories ('...remaining 5 categories scored the same way...') so its Overall (3.0) is not a real 10-category mean and is not asserted as a target — instead Overall is checked against the skill's own Rule 4 self-consistency invariant (equals the rounded mean of all 10 emitted category scores)",
   "cases": [
     {
       "id": "jail-rate-skill-0250-1",
@@ -10,7 +10,7 @@
         "the Skill Rating Matrix reports a numeric score for 'Clarity of Instructions' between 5.7 and 6.3",
         "the Skill Rating Matrix reports numeric scores for both 'Safety & Guardrails' and 'Maintainability' each between 2.7 and 3.3",
         "the Skill Rating Matrix reports a numeric score for 'Machine-Verifiable Exit Criteria' between 0.7 and 1.3",
-        "the Skill Rating Matrix reports an 'Overall Rating' between 2.7 and 3.3"
+        "the Skill Rating Matrix's 'Overall Rating' equals the arithmetic mean of all 10 individual category scores reported in that same matrix, rounded to one decimal place (per the skill's Rule 4), rather than matching any specific pre-set number"
       ]
     }
   ]
