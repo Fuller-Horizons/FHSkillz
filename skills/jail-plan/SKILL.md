@@ -1,7 +1,7 @@
 ---
 name: jail-plan
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Turn intent into an executable plan — two lanes. OPERATE: convert a
   decision, recommendation, or idea into a runnable OPERATING WORKFLOW
@@ -44,6 +44,10 @@ Every field, every workflow; "n/a" must be earned.
 5. **Owner** — a named person or role per step. "The team" owns nothing.
 6. **Approval** — which steps pause for a human, per **jail-approval-gate**
    tiers; irreversible/external/durable steps default to per-action [Rule 5].
+   Fail-closed: any step tagged irreversible / spend / external left without
+   a resolved approval tier blocks the plan from shipping — resolve via
+   jail-approval-gate before delivering the spec (unavailable: state the
+   tier and get an explicit human approval in-line).
 7. **Output** — the artifact each cycle produces, by name and location.
 8. **Evidence** — what proves a cycle ran (log, file, record); completion
    claims need artifacts.
@@ -63,40 +67,28 @@ its owner on a bad day (missing input, tool down, approver away) and patch
 what breaks. Right-size ceremony: 13 fields compress, they don't inflate.
 
 ## MAP lane — the decision-ticket map
-1. **Name the destination.** What exists when the fog clears? A spec ready to
-   execute · a locked decision set · a completed migration · a launch plan.
-   If it can't be named even loosely, the *idea* needs testing first
-   (jail-red-team / jail-prompt), not mapping.
+1. **Name the destination.** What exists when the fog clears — a spec, a
+   locked decision set, a migration, a launch plan; if it can't be named
+   even loosely, test the *idea* first (jail-red-team / jail-prompt) rather
+   than mapping it.
 2. **Chart the map** — one index artifact (a tracker issue, else a
-   `PLAN-MAP-<topic>.md` in the workspace):
-   - **Index, not a store**: lists decisions-made and points at the tickets
-     holding their reasoning. Detail lives in tickets.
-   - **Tickets are decisions, not tasks** — each is a question whose
-     resolution is a *decision* ("Which data model survives multi-tenant?"),
-     never a build slice. The pull to just build = you've hit the map's edge:
-     hand off to execution (jail-task-contract → build, or jail-orchestrate),
-     don't smuggle it into the map.
-   - **Blocking edges declared** — which decisions depend on which; unblocked
-     tickets are workable now.
-   - **Refer by name**, not id soup — every ticket has a title used in all
-     narration.
+   `PLAN-MAP-<topic>.md`) that lists decisions-made, points at the tickets
+   holding their reasoning, and declares the blocking edges between them.
 3. **Resolve tickets, one at a time** — work the highest-leverage unblocked
-   ticket with the right skill: **jail-research** (evidence),
-   **jail-prototype** (build-to-learn), **jail-decide** (the decision),
-   **jail-council** (contested + must-be-right). Record on the ticket:
-   decision · why · evidence pointer; update the map index. New fog =
-   new tickets with their edges — the map grows honestly rather than the work
-   drifting silently [Rule 4].
-   - **The map is the handoff's spine (multi-session persistence):** each
-     session ends with the map current + a **jail-handoff** whose state
-     POINTS at the map (never re-describes it) and names the active ticket;
-     resuming sessions open the map first. Ticket resolutions worth keeping
-     land in **jail-memory** as ADR entries at resolution time.
-4. **Declare the way clear** — done when nothing decision-shaped remains;
-   every leftover is executable. Close by handing off the destination
-   artifact + the map (its reasoning trail) into jail-task-contract /
-   jail-orchestrate. A map that never closes is a planning habit, not a
-   discipline — the destination test is the completion standard [Rule 7].
+   ticket with the right skill (jail-research, jail-prototype, jail-decide,
+   jail-council); record decision · why · evidence on the ticket and update
+   the map index [Rule 4].
+4. **Declare the way clear** — done when nothing decision-shaped remains,
+   every leftover is executable [Rule 7]; hand off the destination artifact
+   + the map into jail-task-contract / jail-orchestrate.
+
+Full detail (index-vs-store, ticket-resolution protocol, map as the
+handoff's spine): `references/jail-plan-map.md`.
+
+**Success test:** OPERATE ships only if all 13 fields are filled or an n/a
+is justified and field 6 is resolved per step; MAP ships only if the
+destination is named, no ticket is task-shaped, and every ticket carries
+edges + status.
 
 ## Output
 OPERATE → the filled 13-field spec (table or labeled list). MAP → the map
