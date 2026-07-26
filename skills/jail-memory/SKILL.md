@@ -1,19 +1,20 @@
 ---
 name: jail-memory
 metadata:
-  version: 1.2.0
+  version: 1.4.0
 description: >-
   Govern what enters, stays in, and leaves durable memory or organizational
   knowledge — provenance-checked, deduplicated, classified, superseded-not-
   deleted — and run the LEARNING POSTMORTEM ritual that turns finished work
-  into stored lessons. Works with OR without a platform memory feature: when
-  none exists, it maintains a file ledger (MEMORY.md index + topic files) in
-  the project workspace. Use when saving lessons/decisions/context for future
-  sessions ("remember this", "save that for next time"), when retrieving
-  prior context for a new task, after completed or failed projects ("what did
-  we learn"), or when another skill proposes a durable write. Do NOT use for
-  in-conversation working notes, or for the adoption review of raw inbound
-  data (jail-quarantine — that gate runs first).
+  into stored lessons. Implemented as a MARKDOWN MEMORY SYSTEM: a MEMORY.md
+  index plus one dated, provenance-headed .md file per entry, written to the
+  project workspace so it travels, diffs in git, and works on any platform.
+  Use when saving lessons/decisions/context for future sessions ("remember
+  this", "save that for next time"), when retrieving prior context for a new
+  task, after completed or failed projects ("what did we learn"), or when
+  another skill proposes a durable write. Do NOT use for in-conversation
+  working notes, or for the adoption review of raw inbound data
+  (jail-quarantine — that gate runs first).
 ---
 
 # JAIL-MEMORY
@@ -51,22 +52,43 @@ Each candidate entry must pass all six checks:
    itself a lesson.
 6. **Safety/classification** — no secrets, no protected data (jail-
    quarantine classes), no sensitive personal information without explicit
-   instruction; apply the platform's retention/privacy rules.
+   instruction; apply the platform's retention/privacy rules. Run
+   jail-py-toolkit's `secret-scan.py` on the entry content before writing;
+   without it, manually scan for keys, tokens, passwords, SSNs, and
+   named-individual PII, and refuse the write if found.
 Failing any check → don't store; say what failed.
 
-## No platform memory? The file-ledger fallback
-When the platform has no memory feature (OpenCode, plain CLI runs, a
-fresh web session), the skill IS the memory system, on files:
-- **MEMORY.md** in the project root = a short index (one line per entry:
-  id · type · title · file). Entries live in small topic files next to it.
-- Every write passes the same six-check gate; decisions use the ADR shape;
-  superseded entries get `status: superseded-by <id>` — never deleted.
-- **Retrieval = read MEMORY.md at the start of relevant work** (cheap by
-  design: the index is scannable in one glance; open topic files only when
-  they bear on the task).
-- The ledger is a repo/workspace artifact: it travels with the project,
-  diffs in git, and any platform can use it. A platform memory, when
-  present, mirrors the ledger — the file stays the auditable source.
+**SUCCESS-TEST:** an entry is valid only if frontmatter carries all 8 keys
+(id, type, title, created, updated, source, status, supersedes); `id` is
+the current max id in `MEMORY.md`'s table incremented by one (e.g. M0007 →
+M0008) — recomputed fresh from the table every time, never carried from
+memory or session state; `type` ∈ {lesson, decision, fact, reference,
+ADR}; `status` ∈ {active, superseded-by <id>}. Any failure → refuse the
+write and name which check failed.
+
+## The memory file system (how it's stored, indexed, and headed)
+Memory is a set of **Markdown files** in a `memory/` folder at the project
+root — the auditable source of truth on every platform. A platform's own
+memory feature, when present, *mirrors* these files; the files never stop
+being the record.
+
+**Schema:** `MEMORY.md` is an id/type/title/created/updated/status/file
+index table, newest first; each entry file `memory/<NNNN>-<slug>.md` opens
+with an 8-key YAML frontmatter header (id, type, title, created, updated,
+source, status, supersedes) then the body (ADR shape for decisions;
+lessons use what happened · why it matters · how to apply). Worked
+example: `references/schema.md`.
+
+**Rules on the files:**
+- Every write passes the six-check gate above before a file is created.
+- **Supersede, don't delete:** the loser's `status` becomes
+  `superseded-by <id>` and it stays on disk — the history of being wrong is
+  a lesson. The index row updates to match.
+- **Retrieval = read `MEMORY.md` first** at the start of relevant work; open
+  an entry file only when its row bears on the task.
+- `id` is monotonic (`M0001`…); the filename carries the same number so
+  index and files sort together. Secrets/protected data never enter a file
+  (the six-check safety gate).
 
 ## The postmortem ritual (after significant work — success or failure)
 Capture, compactly: original objective → final outcome → what worked → what

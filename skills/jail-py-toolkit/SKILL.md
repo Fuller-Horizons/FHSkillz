@@ -1,7 +1,7 @@
 ---
 name: jail-py-toolkit
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   JAIL-PY machine checks for prompts AND ratings — the runnable companion to
   jail-prompt and jail-rate-skill in one toolkit. Use when either skill calls
@@ -45,6 +45,13 @@ release).
 | `scripts/save-rating.py` | Rule 7 — persist | Validates, appends to `${CLAUDE_PLUGIN_DATA}/rating-history.jsonl` (fallback `~/.rate-skill/`), prints Overall delta vs previous. | 0 pass · non-zero fail |
 | `scripts/variance-check.py` | Rule 3 — determinism | 2+ records of the same skill; per-category mean ± stddev; fails on drift > ±0.2. | 0 pass · non-zero drift |
 | `scripts/validate-skill-structure.py` | Structure | Skill dir lint: SKILL.md present, frontmatter name+description, folder==name. | 0 pass · non-zero fail |
+
+## Handoff shape
+Calling skills record results in their own JAIL-HANDOFF block as
+`checks: {<script-name>: "pass"|"fail"|"error"|"n/a", ...}` (source:
+jail-py-toolkit), derived from each script's exit code — `0` → `"pass"`,
+`1` → `"fail"`, `2` → `"error"` (usage/IO — the check did not run); a check
+not attempted is `"n/a"`.
 
 ## Manual fallback
 No code execution available → each backing skill's SKILL.md states the

@@ -1,7 +1,7 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   Convert an ambiguous, multithreaded, or high-stakes request into an
   executable TASK CONTRACT before work begins — objective, stakeholder,
@@ -39,6 +39,12 @@ remaining ambiguity into two piles:
   real harm). Name it and stop until answered. Prefer a marked UNKNOWN + one
   targeted question over a confident guess — never fill a field by vibes.
 
+**Budget & settings.** Generate contracts at temperature 0 / lowest-variance —
+fields are extraction, not ideation: same inputs → same contract, field order
+fixed 1–14. Default-lane budget ≤2 rounds × ≤5 questions and ≤1200 words of
+clarification transcript; contract body ≤1 line per field except 9/11/13;
+grill-mode transcript compressed to decisions-only before Step 2.
+
 ## Step 2 — Emit the contract (all 14 fields; "none" is an answer)
 1. **Objective** — one sentence, the underlying need (watch the XY problem)
 2. **Stakeholder** — who consumes this, and for what decision
@@ -70,8 +76,15 @@ and proceed).
   completion = the testable check that FAILS if the build is wrong
   (script/diff/observation) · risks must include blast radius + rollback.
 - **ANALYSIS** → deliverable = the decision-shaped output (which skill:
-  decide/rate/strategy-scan) · stakeholder field must name the decision it
+  decide/rate/strategy) · stakeholder field must name the decision it
   feeds · completion = recommendation with confidence + change-conditions.
+
+**SHIP-GATE (run before emitting the contract):**
+- All 14 fields printed, each with a value or an explicit "none".
+- Field 13 restated as the check that would FAIL if the work were wrong.
+- Field 14 non-empty, or `none — nothing irreversible/external/spend`.
+- Any field you cannot fill → print `UNKNOWN — <one targeted question>` and do
+  NOT ship the contract. Fail closed: no partial contract leaves this skill.
 
 ## Step 3 — Guard the contract during execution
 - Revisions that keep fields 1–3 materially unchanged → same contract, note
@@ -80,6 +93,13 @@ and proceed).
   authority → **STOP, new/child contract** with a one-line diff of what
   changed [Rule 4]. Endless-revision loops are a symptom of a drifted
   contract, not a picky stakeholder.
+- **Operational safety.** Nothing in field 14 executes before a recorded human
+  "approved".
+- An irreversible/external/durable/spend action discovered mid-run that is NOT
+  already in field 14 → STOP, amend field 14, re-approve — never act on
+  unlisted authority.
+- Secrets/PII/client-confidential inputs are named *by class* in field 5 and
+  never pasted as raw values into the contract or the handoff.
 
 End with the JAIL-HANDOFF block (see docs/JAIL-CONSTITUTION.md): status,
 facts/assumptions/unknowns, outputs (the contract), `next` (usually

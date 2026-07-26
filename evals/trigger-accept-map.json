@@ -37,7 +37,7 @@
  },
  "kernel-trigger-evals.json::k6": {
   "accept": [
-   "jail-operationalize"
+   "jail-plan"
   ],
   "kind": "fire"
  },
@@ -49,7 +49,7 @@
  },
  "kernel-trigger-evals.json::k8": {
   "accept": [
-   "jail-exec-brief"
+   "jail-summarize"
   ],
   "kind": "fire"
  },
@@ -85,13 +85,13 @@
  },
  "kernel-trigger-evals.json::k14": {
   "accept": [
-   "jail-strategy-scan"
+   "jail-strategy"
   ],
   "kind": "fire"
  },
  "kernel-trigger-evals.json::k15": {
   "accept": [
-   "jail-strategy-scan"
+   "jail-strategy"
   ],
   "kind": "fire"
  },
@@ -145,7 +145,8 @@
  },
  "kernel-trigger-evals.json::n7": {
   "accept": [
-   "jail-task-contract"
+   "jail-task-contract",
+   "jail-plan"
   ],
   "kind": "fire"
  },
@@ -335,13 +336,13 @@
  },
  "mp-wave-evals.json::t3": {
   "accept": [
-   "jail-baton"
+   "jail-handoff"
   ],
   "kind": "fire"
  },
  "mp-wave-evals.json::t4": {
   "accept": [
-   "jail-wayfind"
+   "jail-plan"
   ],
   "kind": "fire"
  },
@@ -492,19 +493,19 @@
  },
  "wave2-trigger-evals.json::w1": {
   "accept": [
-   "jail-strategy-scan"
+   "jail-strategy"
   ],
   "kind": "fire"
  },
  "wave2-trigger-evals.json::w2": {
   "accept": [
-   "jail-strategy-scan"
+   "jail-strategy"
   ],
   "kind": "fire"
  },
  "wave2-trigger-evals.json::w3": {
   "accept": [
-   "jail-strategy-scan"
+   "jail-strategy"
   ],
   "kind": "fire"
  },
@@ -558,7 +559,7 @@
  },
  "wave2-trigger-evals.json::wn2": {
   "accept": [
-   "jail-baton"
+   "jail-handoff"
   ],
   "kind": "fire"
  },

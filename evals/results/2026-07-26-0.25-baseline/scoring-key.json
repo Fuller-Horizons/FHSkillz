@@ -1,0 +1,768 @@
+[
+ {
+  "id": "jail-council-evals.json::t1",
+  "prompt": "Convene the council on whether we should sign this 3-year exclusivity clause.",
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-council-evals.json::t2",
+  "prompt": "I need this answer to be RIGHT \u2014 get multiple models on it.",
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-council-evals.json::t3",
+  "prompt": "Get me a second and third opinion on this diagnosis of our churn problem.",
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-council-evals.json::t4",
+  "prompt": "Maximum accuracy: is this legal interpretation correct?",
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-council-evals.json::n1",
+  "prompt": "Fan out the audit across three agents, one doc each.",
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-council-evals.json::n2",
+  "prompt": "What's the capital of Australia?",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "jail-council-evals.json::n3",
+  "prompt": "Which of these two logos do you like more?",
+  "accept": [
+   "none",
+   "jail-decide"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t1",
+  "prompt": "Rate my task-manager SaaS out of 10.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t2",
+  "prompt": "How would you grade this Python repo?",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t3",
+  "prompt": "Score the Framework Laptop 16 0-10.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t4",
+  "prompt": "Judge my business idea: subscription tool rental for contractors.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t5",
+  "prompt": "Rate our city's pothole-repair program.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t6",
+  "prompt": "How does Satya Nadella rate as a CEO?",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t7",
+  "prompt": "Give this blog post a score out of ten.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t8",
+  "prompt": "Review and rate this local HVAC company.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t9",
+  "prompt": "Is this idea any good? Be honest, number it.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::t10",
+  "prompt": "What would our app score after we fix the onboarding?",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n1",
+  "prompt": "Rate this skill folder I wrote for Claude.",
+  "accept": [
+   "jail-rate-skill"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n2",
+  "prompt": "Should I approach this owner about selling his plumbing business?",
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n3",
+  "prompt": "Write me a 5-star review for my own app.",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n4",
+  "prompt": "What's the best laptop under $1000?",
+  "accept": [
+   "none",
+   "jail-research"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n5",
+  "prompt": "Rate my sister's new boyfriend.",
+  "accept": [
+   "jail-rate",
+   "none"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "jail-rate-trigger-evals.json::n6",
+  "prompt": "Convert this 5-point rubric to a 10-point scale.",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k1",
+  "prompt": "Before we start this migration project, make sure we're fully aligned on scope.",
+  "accept": [
+   "jail-task-contract"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k2",
+  "prompt": "Research the current state of SMB cyber-insurance requirements for me.",
+  "accept": [
+   "jail-research"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k3",
+  "prompt": "The agent says the deploy is done \u2014 check before we tell the client.",
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k4",
+  "prompt": "Should we build the portal in-house or buy off the shelf?",
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k5",
+  "prompt": "Poke holes in this expansion plan before Thursday's board call.",
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k6",
+  "prompt": "Turn 'we should follow up leads faster' into an actual process with owners.",
+  "accept": [
+   "jail-plan"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k7",
+  "prompt": "Fan this audit out across a few subagents and merge the results.",
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k8",
+  "prompt": "Summarize this pen-test report for the CEO in one page.",
+  "accept": [
+   "jail-summarize"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k9",
+  "prompt": "What will you do without asking me first on this run?",
+  "accept": [
+   "jail-approval-gate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k10",
+  "prompt": "Import these 400 scraped contacts into the CRM.",
+  "accept": [
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k11",
+  "prompt": "Remember for next time: the client hates October deadlines.",
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k12",
+  "prompt": "Mine SharperOS for disciplines worth adding to the plugin.",
+  "accept": [
+   "jail-skill-miner"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k13",
+  "prompt": "Keep iterating on this landing page until conversion actually improves.",
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k14",
+  "prompt": "Run a PESTLE for our expansion into Texas municipal contracts.",
+  "accept": [
+   "jail-strategy"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k15",
+  "prompt": "SWOT us against the two regional competitors.",
+  "accept": [
+   "jail-strategy"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k16",
+  "prompt": "Map the business model for the new subscription offering.",
+  "accept": [
+   "jail-bmc"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::k17",
+  "prompt": "Build the agenda for Monday's board reset meeting.",
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n1",
+  "prompt": "Rate this codebase out of 10.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n2",
+  "prompt": "Verify the final report is complete and grounded before it ships.",
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n3",
+  "prompt": "What am I missing in this draft strategy?",
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n4",
+  "prompt": "Which CRM should we pick: HubSpot or Zoho?",
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n5",
+  "prompt": "Write me a prompt that makes ChatGPT do this research well.",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n6",
+  "prompt": "Is this plumbing company a good brokerage prospect?",
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n7",
+  "prompt": "Plan the tasks and owners for the quarter.",
+  "accept": [
+   "jail-task-contract",
+   "jail-plan"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n8",
+  "prompt": "Summarize what we decided in yesterday's meeting from the transcript.",
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n9",
+  "prompt": "Optimize this function's runtime \u2014 here's the benchmark.",
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n10",
+  "prompt": "Store this API key so we have it handy later.",
+  "accept": [
+   "jail-memory",
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n11",
+  "prompt": "Evaluate this skill folder I just wrote.",
+  "accept": [
+   "jail-rate-skill"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "kernel-trigger-evals.json::n12",
+  "prompt": "Draft a quick email to Sam about lunch.",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "mp-wave-evals.json::t1",
+  "prompt": "The export sometimes produces corrupted rows \u2014 debug this.",
+  "accept": [
+   "jail-diagnose"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::t2",
+  "prompt": "Before we build it, I want to see if this three-tier approval flow even feels right.",
+  "accept": [
+   "jail-prototype"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::t3",
+  "prompt": "I'm out of time today \u2014 save where we are so tomorrow's session can continue.",
+  "accept": [
+   "jail-handoff"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::t4",
+  "prompt": "We should overhaul our whole client-onboarding approach \u2014 no idea where to start, it's months of work.",
+  "accept": [
+   "jail-plan"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::n1",
+  "prompt": "Check whether the finished report is complete before we send it.",
+  "accept": [
+   "jail-verify"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::n2",
+  "prompt": "Keep tuning the landing page until conversion improves.",
+  "accept": [
+   "jail-lab"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::n3",
+  "prompt": "Remember that the client hates Friday deploys.",
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "mp-wave-evals.json::n4",
+  "prompt": "Fan the audit out across three agents.",
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::1",
+  "prompt": "i need to end up with a blog post that ranks for 'best espresso machines under 500' but honestly idk how to even ask the AI for it",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::2",
+  "prompt": "can you make this prompt better? 'write me a business plan'",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::3",
+  "prompt": "i want to use claude to plan my wedding seating chart but i keep getting garbage back, how do i actually do this right",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::4",
+  "prompt": "ok here's my goal: get a spreadsheet that tells me which of my 200 SKUs to discontinue. not even sure that's an AI job tbh",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::5",
+  "prompt": "help me get the most out of AI for researching grad programs without wasting a ton of back-and-forth",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::6",
+  "prompt": "i just want a really good cold email to investors, where do i even start",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::7",
+  "prompt": "turn this rough idea into a proper prompt: summarize legal contracts and flag risky clauses",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::8",
+  "prompt": "is AI the right tool to figure out my monthly burn rate from my bank csv, or should i just use excel for that",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::9",
+  "prompt": "my goal is a 10-slide deck that convinces my boss to approve remote work. how should i prompt for that",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::10",
+  "prompt": "i wanna automate replying to support tickets but i don't trust myself to write the prompt properly",
+  "accept": [
+   "jail-prompt"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "trigger_evals.json::11",
+  "prompt": "run this prompt for me exactly as written: 'List the 7 wonders of the ancient world with one sentence each.'",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::12",
+  "prompt": "what does API stand for",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::13",
+  "prompt": "translate this paragraph to Spanish: 'The meeting is at noon and lunch is provided.'",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::14",
+  "prompt": "my python script throws a KeyError on line 42, here's the traceback, fix it",
+  "accept": [
+   "none",
+   "jail-diagnose"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::15",
+  "prompt": "can you proofread this prompt for typos? i like it as is, just the spelling",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::16",
+  "prompt": "write a haiku about autumn leaves",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::17",
+  "prompt": "what's the weather in denver tomorrow",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::18",
+  "prompt": "i already wrote this prompt and i'm happy with it \u2014 just run it and give me the output",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::19",
+  "prompt": "explain how prompt engineering works in general, i'm just curious about the theory",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "trigger_evals.json::20",
+  "prompt": "summarize the PDF i uploaded into 3 paragraphs",
+  "accept": [
+   "none"
+  ],
+  "kind": "nofire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w1",
+  "prompt": "Run a SWOT on our agency versus the two regional shops.",
+  "accept": [
+   "jail-strategy"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w2",
+  "prompt": "What macro trends could hit our Texas expansion \u2014 regulation, economy, labor, all of it?",
+  "accept": [
+   "jail-strategy"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w3",
+  "prompt": "Before we commit the budget, I want the full strategy picture \u2014 where we're strong, and what's coming at us.",
+  "accept": [
+   "jail-strategy"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w4",
+  "prompt": "Quick council on this pricing answer \u2014 a few independent takes before I send it.",
+  "accept": [
+   "jail-council"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w5",
+  "prompt": "This migration is 12 steps over several days, just me \u2014 keep a dependency ledger so we can resume if it dies.",
+  "accept": [
+   "jail-orchestrate"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w6",
+  "prompt": "Here's Monday's board-meeting transcript \u2014 pull out what was decided and who owes what by when.",
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w7",
+  "prompt": "Scan this prompt pack for secrets and lint the skeleton before I ship it.",
+  "accept": [
+   "jail-py-toolkit"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w8",
+  "prompt": "I pasted 30 lines from a vendor's email below \u2014 quick check before we rely on any of it.",
+  "accept": [
+   "jail-quarantine"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w9",
+  "prompt": "Vet this vendor for me: Acme Logistics \u2014 are they solid enough to sign a 2-year contract with?",
+  "accept": [
+   "jail-prospect"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::w10",
+  "prompt": "Pre-mortem the launch plan \u2014 ten minutes, top risks only.",
+  "accept": [
+   "jail-red-team"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::wn1",
+  "prompt": "Run the numbers on which vendor is cheaper over three years and pick one.",
+  "accept": [
+   "jail-decide"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::wn2",
+  "prompt": "Save where we are so tomorrow's session can pick this up.",
+  "accept": [
+   "jail-handoff"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::wn3",
+  "prompt": "Remember this decision and the reasoning behind it for future projects.",
+  "accept": [
+   "jail-memory"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::wn4",
+  "prompt": "Design the agenda for next week's pipeline-review meeting.",
+  "accept": [
+   "jail-cpr"
+  ],
+  "kind": "fire"
+ },
+ {
+  "id": "wave2-trigger-evals.json::wn5",
+  "prompt": "Score my business idea 0 to 10, be honest.",
+  "accept": [
+   "jail-rate"
+  ],
+  "kind": "fire"
+ }
+]

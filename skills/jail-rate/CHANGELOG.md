@@ -2,6 +2,12 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.1.0 — 2026-07-25 (plugin 0.25.0)
+
+- Moved the 8-bullet Gotchas list to `references/gotchas.md`; SKILL.md keeps a one-line pointer (token efficiency, largest core in the suite).
+- Added a terminal `JAIL-HANDOFF` envelope (docs/JAIL-CONSTITUTION.md format) stating the artifact produced (scorecard/rubric), confidence, and named next-skill options (jail-rate-skill, jail-prospect, jail-council on contested dimensions).
+- Added a determinism rule to Self-check: generate at temperature 0.0; identical subject + identical evidence must reproduce identical scores, and a divergent re-run means re-examine the evidence, not average it.
+
 ## 2.0.0
 - **Universal rating engine (was: software-only).** Rates any subject — software, codebases, hardware, people (professional/public roles only), ideas, programs, services, businesses, content, and derived types — instead of only software products.
 - **Subject-type awareness.** Step 1 classifies the subject; the rubric must match the type. Hands off AI-skill targets to `rate-skill` and prospecting decisions to `company-prospect-research`.

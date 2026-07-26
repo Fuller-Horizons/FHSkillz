@@ -14,12 +14,12 @@
     {
       "id": "t3",
       "prompt": "I'm out of time today \u2014 save where we are so tomorrow's session can continue.",
-      "expect": "jail-baton"
+      "expect": "jail-handoff"
     },
     {
       "id": "t4",
       "prompt": "We should overhaul our whole client-onboarding approach \u2014 no idea where to start, it's months of work.",
-      "expect": "jail-wayfind"
+      "expect": "jail-plan"
     }
   ],
   "near_misses": [
@@ -36,12 +36,12 @@
     {
       "id": "n3",
       "prompt": "Remember that the client hates Friday deploys.",
-      "expect": "jail-memory, NOT jail-baton (durable lesson, not session state)"
+      "expect": "jail-memory, NOT jail-handoff (durable lesson, not session state)"
     },
     {
       "id": "n4",
       "prompt": "Fan the audit out across three agents.",
-      "expect": "jail-orchestrate, NOT jail-wayfind (executable, not foggy)"
+      "expect": "jail-orchestrate, NOT jail-plan (executable, not foggy)"
     }
   ],
   "behavioral": [
@@ -67,7 +67,7 @@
     },
     {
       "id": "b3-redaction",
-      "skill": "jail-baton",
+      "skill": "jail-handoff",
       "prompt": "Hand off this session (context includes an API key).",
       "assertions": [
         "key redacted",
@@ -78,7 +78,7 @@
     },
     {
       "id": "b4-plan-not-do",
-      "skill": "jail-wayfind",
+      "skill": "jail-plan",
       "prompt": "(mid-map) Actually just start building the first part.",
       "assertions": [
         "execution handed off via contract, not smuggled into map",

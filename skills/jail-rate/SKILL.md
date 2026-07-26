@@ -1,7 +1,7 @@
 ---
 name: jail-rate
 metadata:
-  version: 2.0.0
+  version: 2.1.0
 description: >-
   Rate and judge ANYTHING on a disciplined 0.0–10.0 scale — software, apps,
   SaaS, websites, codebases, code, hardware, physical products, people
@@ -132,6 +132,7 @@ acceptable; offer the full scorecard.
   private-subject statement is present).
 - Any critical flaw applied its ≤ 4.0 cap; current and projected never blended.
 - Confidence stated with the one action that would most raise it.
+- Generate at temperature 0.0; identical subject + identical evidence must reproduce identical scores — if a re-run diverges, re-examine the evidence, don't average.
 One failed line = fix before delivering, not a footnote.
 
 ## Rating people — hard boundaries
@@ -151,22 +152,20 @@ on vibes.
 - Uncited marketing claims are claims, not evidence — verify or downgrade.
 - State assumptions and everything you couldn't verify.
 - The projected score is an estimate of upside, clearly labeled.
+Common failure modes: see [references/gotchas.md](references/gotchas.md).
 
-## Gotchas
-- **Scoring before evidence.** Deciding 7-ish then decorating it with sources.
-  Gather first; let scores fall out of the anchors.
-- **One rubric for everything.** Rating hardware on "software quality" or an
-  idea on "usability." Classify first; the rubric must match the subject.
-- **Hidden rubric.** Presenting scores without the weighted rubric that
-  produced them. Declare it first, every time.
-- **Marketing-claim laundering.** A vendor's "99.9% uptime" cited as Fact. That
-  tier of source is a claim to verify, not evidence (see evidence-standards).
-- **People-rating drift.** A role-performance rating sliding into character
-  judgment or personal-life material. Re-read the boundaries section; reframe.
-- **Stale evidence.** Reviews or benchmarks years old scored as current state.
-  Date every citation; flag anything stale to the subject's cadence.
-- **False precision.** A 7.4 the evidence can't distinguish from a 7.6. Anchor
-  the band first; use the decimal only when evidence supports it.
-- **Wrong skill.** AI skill directory → jail-rate-skill. Prospect decision →
-  jail-prospect. Engineering the prompt to run a rating elsewhere →
-  jail-prompt.
+## JAIL-HANDOFF
+```yaml
+JAIL-HANDOFF:
+  skill: jail-rate
+  status: complete | partial | blocked | stop
+  facts: [..]
+  assumptions: [..]
+  unknowns: [..]
+  outputs: [scorecard, rubric]        # the artifact produced
+  evidence: [..]
+  risks: [..]
+  confidence: high | medium | low     # mirrors Self-check confidence
+  next: jail-rate-skill | jail-prospect | jail-council | none   # misclassified subject | prospecting decision | contested dimension | no handoff
+  approval_required: [..]
+```

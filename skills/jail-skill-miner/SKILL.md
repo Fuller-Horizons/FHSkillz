@@ -1,7 +1,7 @@
 ---
 name: jail-skill-miner
 metadata:
-  version: 1.2.0
+  version: 1.3.1
 description: >-
   Mine a codebase, chat history, or document set for plugin-worthy SKILLS —
   reusable disciplines, not app features — then dedupe candidates against the
@@ -22,6 +22,20 @@ A JAIL skill is a **reusable discipline** — a way of working that transfers
 to unrelated projects. Features (recurrence engines, sync jobs, UI views)
 are not skills; they get ported as code. This skill finds the disciplines,
 kills the duplicates, and authors only what's approved.
+
+## Budget & determinism
+- **Caps:** ≤25 source files opened in Stage 1 · ≤12 candidates surfaced ·
+  top 3 by rank recommended (fewer if fewer survive) · report ≤1200 tokens
+  (dedup list = names only).
+- **Rank formula:** `rank = universality(1-5) × severity(1-5)`, descending.
+- **Ties:** broken alphabetically by candidate name.
+- **Recommendation eligibility:** NEW, EXTENDS, and DUPLICATE rows are ALL
+  eligible for the top 3 — the recommendation means "this discipline
+  matters"; only the Stage-4 action differs by classification (NEW →
+  author, EXTENDS → amend the named skill, DUPLICATE → no new artifact,
+  record the covering skill).
+- **Determinism:** two runs over the same source emit the same ordered
+  table — if they don't, the formula wasn't applied.
 
 ## Continuous mode — the suite's self-maintenance loop
 Mining sessions are rare; failure signals are constant. Three nomination
@@ -70,12 +84,28 @@ them; list which. Classify each surviving candidate:
 - **DUPLICATE of <skill>** — covered; discard, citing the covering section.
 
 ## Stage 3 — REPORT, then stop
-One table: candidate (jail-<kebab>) · source evidence (file:line or
-message-ref — **opened and confirmed this session, never from memory**) ·
-the discipline in one sentence · the failure it prevents · NEW/EXTENDS/
-DUPLICATE · rank (universality × severity-of-failure-prevented). Recommend
-a top-3 with one reason each. **STOP and wait for selection — authoring
-unapproved skills is scope creep with a commit history.**
+One table, rows in exactly this column order:
+
+```
+STAGE-3 REPORT SCHEMA
+candidate | evidence file:line | discipline | failure-prevented | NEW/EXTENDS <skill>/DUPLICATE | rank
+```
+
+**Fail-closed drop rule:** any row whose citation was not opened this
+session, or with any of the 4 boxes unticked, moves to a
+`DROPPED (unverified)` list with the failing reason and **MUST NOT appear
+as a candidate** (feature drops also land on the port-as-code list).
+Recommend the top 3 by rank — NEW, EXTENDS, and DUPLICATE rows all
+eligible — with one reason each; if fewer than 3 candidates survive the
+4-box filter, recommend every survivor and say so explicitly. Then end
+with the literal line:
+
+`STATUS: AWAITING-SELECTION`
+
+**No writes until a reply names candidates** — create/edit nothing: no
+SKILL.md, no manifest entry, no eval file. An ambiguous reply ("sounds
+good", "the first couple") → re-ask which candidates, never infer.
+Authoring unapproved skills is scope creep with a commit history.
 
 ## Stage 4 — AUTHOR (approved candidates only)
 **Invocation economics first:** a model-invoked skill's description sits in
@@ -90,6 +120,14 @@ name/version/router-description with negative triggers; lean code-free core;
 per-step checks that CAN FAIL; Related-skills routing; Gotchas naming how
 people fake compliance; JAIL-HANDOFF block). Then register (sync manifest,
 version bump) per repo rules, and route to **jail-rate-skill** for the QA score.
+
+**Ready-to-commit gate** — emit the artifact set only when all three boxes
+PASS: [ ] SKILL.md edit (EXTENDS) or full draft (NEW) · [ ] eval case file
+· [ ] marketplace.json entry + skill-graph line. Any box unticked → print
+`NOT-READY: <missing>` and emit nothing else. With **jail-py-toolkit**
+installed, run its `validate-skill-structure.py` over the draft to check the
+set mechanically; without it, tick the three boxes by hand and paste the
+paths.
 
 ## Self-check before reporting
 - Every citation opened this session · every candidate shows its 4 boxes ·

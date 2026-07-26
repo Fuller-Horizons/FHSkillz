@@ -1,7 +1,7 @@
 ---
 name: jail-py-lab
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   JAIL-PY machine bookkeeping for jail-lab experiment loops — runnable Python
   that appends measured experiments to an append-only JSONL ledger, computes
@@ -68,6 +68,15 @@ log jail-lab requires. Discards stay forever; they're data.
   every call; the script refuses a ledger whose direction disagrees.
 - **Metric-cmd noise.** The parser takes the LAST number in stdout — keep
   the command's output clean or print the metric last.
+- **`--metric-cmd` runs via the shell.** `lab-run.py` executes it with
+  `shell=True` (pipes/redirection work) — that means arbitrary code
+  execution. Treat it as trusted, reviewed input only, never an untrusted
+  or user-supplied string.
+- **Ledger id race.** `entry["id"]` is `len(entries)` with no file locking —
+  two concurrent sessions appending to the same ledger can collide and
+  silently corrupt the audit trail. One writer at a time — never invoke
+  `lab-run.py` concurrently against the same ledger; confirm the prior
+  session's process has exited before a handoff resumes the lab.
 - **Verdicts overridden by hand.** If you keep a DISCARD anyway, the ledger
   and reality have diverged — jail-lab's discipline is broken, and the
   report will say so.

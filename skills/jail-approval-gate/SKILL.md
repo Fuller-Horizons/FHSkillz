@@ -1,7 +1,7 @@
 ---
 name: jail-approval-gate
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Classify every intended action into approval tiers BEFORE acting — never /
   per-action approval / batchable approval / auto-allowed — and fail closed:
@@ -28,22 +28,20 @@ another skill's output, its `approval_required` list is the starting
 inventory — but re-derive it; upstream may have missed some.
 
 ## Step 2 — Tier every action
-- **NEVER** — blocked outright: actions violating law, policy, the
-  strictest applicable requirement [Rule 3], or sending protected data to an
-  unauthorized destination (see jail-quarantine). Not approvable in-run;
-  changing this tier is a human policy decision made outside the run.
-- **PER-ACTION** — a human approves each instance: irreversible actions,
-  external communications, production changes, spending, credential scope
-  changes, durable memory writes, anything with a blast radius beyond the
-  workspace. **The default tier for anything unclassified.**
-- **BATCHABLE** — a human approves the pattern once per run ("send all 12
-  outreach drafts after my review of the first"): repeated, homogeneous,
-  low-variance actions where one example represents the batch honestly.
-- **AUTO** — proceed without asking: reversible, workspace-local,
-  non-durable work (drafting, analysis, sandbox runs, reading permitted
-  sources).
-
-Tie-break rule: when two tiers arguably apply, the stricter wins. [Rule 3]
+First matching rule wins — tier assignment is a lookup, not judgment;
+stricter tiers are checked first, so ties favor the stricter tier. [Rule 3]
+1. Violates law, policy, the strictest applicable requirement, or sends
+   protected data to an unauthorized destination (see jail-quarantine) →
+   **NEVER** — blocked outright; not approvable in-run.
+2. Irreversible, an external communication, a production change, spend, a
+   credential-scope change, a durable memory write, or blast radius beyond
+   the workspace → **PER-ACTION** — a human approves each instance.
+3. Repeated, homogeneous, low-variance, and one example represents the
+   batch honestly → **BATCHABLE** — approved as a pattern once per run.
+4. Reversible AND workspace-local AND non-durable (drafting, analysis,
+   sandbox runs, reading permitted sources) → **AUTO** — proceed without
+   asking.
+5. Else → **PER-ACTION** (the default; unclear tiers fail closed).
 
 ## Step 2b — The standing profile (stop re-deriving the gate every run)
 - **First run in a project:** after the human has tiered the inventory,
@@ -74,9 +72,15 @@ Safer alternative: <the more conservative option and its cost>
 No response = not approved. Proceed-by-timeout is forbidden.
 
 ## Step 4 — Audit trail
-Record every tier assignment and every approval/denial with timestamp and
-approver — the run's authorization ledger. A disputed action later is
-settled by the ledger, not by memory.
+Before asking, restate the action's effects, targets, and reversibility in
+one line — a human approves the summary, not just the tier. Record every
+tier assignment and approval/denial as one line — a disputed action later is
+settled by the ledger, not by memory:
+```
+GATE-RECORD | action=<> | tier=<NEVER|PER-ACTION|BATCHABLE|AUTO> | approver=<> | ts=<ISO8601> | result=<approved|denied|pending>
+```
+No validator script exists for this — eyeball each GATE-RECORD line for all
+five fields.
 
 Close with the JAIL-HANDOFF block: `approval_required` carries every
 PER-ACTION and BATCHABLE item still pending.

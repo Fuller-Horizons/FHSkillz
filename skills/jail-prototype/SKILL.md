@@ -1,7 +1,7 @@
 ---
 name: jail-prototype
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   Build a THROWAWAY prototype whose only job is to answer a stated design
   question — "does this logic/state model feel right?", "what should this
@@ -32,7 +32,7 @@ question = no prototype — that's just building without a contract
 - **Logic/state question** → smallest interactive harness (terminal app,
   script, spreadsheet, even a paper walkthrough) that pushes the model
   through the cases hard to reason about in the abstract.
-- **Look/feel question** → several **radically different** variations,
+- **Look/feel question** → exactly three **radically different** variations,
   switchable in one place — contrast answers look-questions; near-identical
   variants answer nothing.
 - **Feasibility question** → the thinnest end-to-end spike through the
@@ -52,28 +52,47 @@ question = no prototype — that's just building without a contract
    question.
 5. **Surface the state.** After every action, show the full relevant state
    — the judge must see what changed, not trust that it did.
-6. **Timebox it.** A prototype that outlives its timebox without an answer
-   has become a project — stop, report what was learned, re-scope the
-   question.
+6. **Timebox it — numerically.** Default one working session; exactly one
+   extension, declared up front, then stop. Look-questions get exactly 3
+   radically different variations — no more, no fewer. A prototype past its
+   last extension without an answer has become a project: stop, ship
+   `VERDICT: inconclusive`, report what was learned, re-scope the question.
 
-## Step N — Capture the answer, kill the artifact
-- **The verdict is the deliverable**: the question, the answer, and the
-  evidence (what the prototype showed), recorded where the real work lives
-  (decision note, ticket, jail-memory entry when durable).
-- **Register it in the SPIKE LEDGER** — one line per answered question in
-  the project's memory (jail-memory entry type: decision/spike; file-ledger
-  fallback works): question · verdict · date · archive pointer. **Check
-  the ledger BEFORE prototyping** — a question answered last month is
-  retrieved, not rebuilt; a changed premise reopens it explicitly (new
-  entry superseding the old, never silent re-litigation).
-- **Feed the consuming decision**: when jail-decide (or jail-bmc's
-  experiment sequence) sent the question here, the verdict returns as
-  labeled evidence in that decision's options table — a prototyped answer
-  is Fact-of-the-prototype, not Judgment.
-- Fold the validated decision into the real implementation plan.
-- The prototype itself is archived out of the mainline (throwaway branch,
-  scratch folder) with a pointer — kept as a primary source, never merged.
-  **Main keeps only the validated decision.**
+## Step N — Ship the SPIKE VERDICT, kill the artifact
+Pass the SHIP GATE, then emit exactly this block — the verdict is the
+deliverable, the artifact is not:
+
+```
+SPIKE VERDICT
+QUESTION:     <one sentence, as stated in Step 0>
+SHAPE:        logic | look | feasibility
+TIMEBOX:      <set> → <actual>
+LEDGER-CHECK: none | reuses <id> | supersedes <id>
+EVIDENCE:     "<verbatim surfaced-state observation>"  (≥1, Rule 5)
+VERDICT:      answered | inconclusive | premise-changed
+ARCHIVE:      <throwaway branch or scratch path>
+CONSUMER:     jail-decide | jail-bmc | jail-memory | none
+```
+
+Append one canonical line to the SPIKE LEDGER (jail-memory entry type
+decision/spike; a file ledger is a fine fallback):
+`YYYY-MM-DD · question · verdict · archive · supersedes:<id|none>`
+
+**SHIP GATE — 5 of 5 or the verdict ships as `inconclusive`** (fail-closed:
+stop, report what was learned, never promote):
+1. Ledger checked BEFORE building — an answered question is retrieved, not
+   rebuilt; a changed premise opens a superseding entry, never silent
+   re-litigation.
+2. Throwaway name present (`proto-*` or `PROTOTYPE — wipe me`).
+3. Zero files under production paths.
+4. ≥1 surfaced-state observation quoted verbatim in EVIDENCE.
+5. ARCHIVE pointer resolves (branch or scratch path exists).
+
+Fold the validated decision — never the code — into the real implementation
+plan. **Main keeps only the validated decision**; the prototype stays on its
+archive pointer as a primary source, never merged. A verdict consumed by
+jail-decide (or jail-bmc's experiment sequence) enters that options table as
+**Fact-of-the-prototype**, not Judgment.
 
 ## Related skills
 Choosing among prototyped options → **jail-decide** (the verdicts are its

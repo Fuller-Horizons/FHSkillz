@@ -16,18 +16,18 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-task-contract | raw request | task contract | jail-prompt (prompt deliverables) | everything | low | blocking ambiguity → stop + ask |
 | jail-research | contract / question | evidence packet | jail-orchestrate (parallel streams), jail-quarantine (inbound data) | jail-decide, frameworks, jail-rate | medium (external fetches) | unanswerable → Unknowns in packet |
 | jail-verify | any deliverable + its contract | verdict + ranked fixes | — (terminal check; independence required) | everything | low | missing contract → verify vs request verbatim, flagged |
-| jail-decide | evidence packet / analysis | decision package | jail-research (gaps), jail-red-team (contested) | frameworks, jail-operationalize | low | thin evidence → assumption-labeled or route back |
+| jail-decide | evidence packet / analysis | decision package | jail-research (gaps), jail-red-team (contested) | frameworks, jail-plan | low | thin evidence → assumption-labeled or route back |
 | jail-red-team | draft plan/claim/analysis | ranked findings + verdict | — | jail-decide, frameworks, jail-prompt (high-stakes) | low | nothing found → "holds" is valid |
 | jail-council | consequential/contested question | evidence-decided synthesis + dissent register + audit appendix | jail-research (verification round), jail-verify (post-synthesis check) | jail-verify, jail-decide, jail-rate, jail-prompt (high-stakes escalations) | low | <2 independent members → declare Tier C or stop; unanswerable → STOP |
 | jail-orchestrate | parallelizable plan | integrated result + ledger | jail-research (per stream), jail-verify (merge) | jail-task-contract, jail-research | inherits streams' | node unverified → not complete; resume from ledger |
 | jail-approval-gate | intended actions | tiered inventory + approvals | jail-quarantine (sensitive classes) | any acting skill | high | unclassified → PER-ACTION; no response → not approved |
 | jail-quarantine | inbound/bulk/sensitive data | adopted data + halt report | jail-approval-gate | jail-research, jail-memory, extraction tasks | high | safe path unavailable → skip (fail closed) |
 | jail-memory | lessons/decisions/context | governed memory entries | jail-approval-gate (durable writes) | jail-task-contract (retrieval), jail-cpr | medium | gate fails → don't store + say why |
-| jail-lab | improvable artifact + metric | experiment ledger + best | jail-py-lab (bookkeeping) | jail-operationalize, skill iteration | low | no metric → refuse or route to jail-rate |
+| jail-lab | improvable artifact + metric | experiment ledger + best | jail-py-lab (bookkeeping) | jail-plan, skill iteration | low | no metric → refuse or route to jail-rate |
 | jail-diagnose | reported defect | confirmed cause + minimal fix + regression case | jail-verify (consequential fixes), jail-memory (root-cause lessons) | user, jail-verify (failing deliverables) | low | no loop constructible → STOP + ask for artifacts/access |
 | jail-prototype | design question | verdict + evidence; artifact archived off-main | jail-decide (verdicts as evidence), jail-memory (ADR) | jail-decide, jail-bmc (experiments) | low | question unnamed → refuse to start |
-| jail-baton | ending/overflowing session | handoff baton (state, decisions, refs, next, skills) | jail-memory (durable lessons), jail-quarantine (redaction classes) | user, jail-wayfind, jail-orchestrate | medium (travels) | secrets present → redact before write |
-| jail-wayfind | foggy multi-session goal | decision-ticket map → cleared way + handoff | jail-research, jail-prototype, jail-decide, jail-council, jail-baton | user | low | destination unnameable → route to jail-red-team/jail-prompt |
+| jail-handoff | ending/overflowing session | handoff doc (state, decisions, refs, next, skills) | jail-memory (durable lessons), jail-quarantine (redaction classes) | user, jail-plan, jail-orchestrate | medium (travels) | secrets present → redact before write |
+| jail-plan | decision/recommendation (OPERATE) OR foggy multi-session goal (MAP) | OPERATE: 13-field operating workflow · MAP: decision-ticket map → cleared way | jail-verify (readiness), jail-lab (metric), jail-research, jail-prototype, jail-decide, jail-council, jail-handoff | jail-decide, frameworks, user | low | destination unnameable → jail-red-team/jail-prompt |
 | jail-skill-miner | codebase/history | candidate table → skills | jail-rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
 | jail-prompt | vague goal | engineered prompt / STOP | jail-py-toolkit, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
 
@@ -35,8 +35,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 
 | Skill | Consumes | Produces | May invoke | Invoked by |
 |---|---|---|---|---|
-| jail-operationalize | decision/recommendation | 13-field operating workflow | jail-verify (readiness), jail-lab (metric loop) | jail-decide, frameworks |
-| jail-exec-brief | any complex material | decision-ready brief | — (voice layer) | frameworks, jail-decide, kernel chains |
+| jail-summarize | any complex material | decision-ready brief | — (voice layer) | frameworks, jail-decide, kernel chains |
 | jail-rate | any ratable subject | 0–10 scorecard, cited | jail-research (evidence), jail-rate-skill / jail-prospect (handoffs) | jail-decide (option scoring) |
 | jail-rate-skill | AI skill directory | 10-category matrix + record | jail-py-toolkit, skill-creator (behavioral) | jail-skill-miner |
 | jail-prospect | company name | prospect brief | — | jail-research (domain handoff) |
@@ -45,9 +44,9 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 
 | Skill | Chain (in order; inline fallback per step) |
 |---|---|
-| jail-strategy-scan | task-contract → ONE research sweep → classify (INTERNAL sort rules and/or MACRO 6 dims) → interaction pass (full sweep) → red-team → TOWS/implications+tripwires → decide → exec-brief → verify · tripwires → jail-memory |
-| jail-bmc | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → exec-brief → verify |
-| jail-cpr | task-contract → memory retrieval → CPR (exec-brief voice) → agenda-from-Results → verify |
+| jail-strategy | task-contract → ONE research sweep → classify (INTERNAL sort rules and/or MACRO 6 dims) → interaction pass (full sweep) → red-team → TOWS/implications+tripwires → decide → summarize → verify · tripwires → jail-memory |
+| jail-bmc | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → summarize → verify |
+| jail-cpr | task-contract → memory retrieval → CPR (summarize voice) → agenda-from-Results → verify → render DOCX/PDF |
 
 Wave 3 (planned, not shipped): docs/ROADMAP-wave3-domain-packs.md.
 

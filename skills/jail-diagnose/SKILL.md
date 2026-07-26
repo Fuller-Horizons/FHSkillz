@@ -1,7 +1,7 @@
 ---
 name: jail-diagnose
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 description: >-
   Feedback-loop-first diagnosis of hard defects — bugs, performance
   regressions, failing workflows, broken pipelines, "it sometimes doesn't
@@ -43,7 +43,8 @@ rough order of preference:
    it, script their steps precisely so even the manual loop is repeatable.
 Non-code defects (a workflow that drops leads, a doc pipeline that mangles
 formatting) get the same treatment: a repeatable trigger + a checkable
-wrong-output signal.
+wrong-output signal. Copy-paste skeleton for each loop type above:
+[harness-templates.md](references/harness-templates.md).
 
 **Tighten it:** faster (skip unrelated setup) · sharper (assert the exact
 symptom, not "didn't crash") · deterministic (pin time, seed randomness,
@@ -62,6 +63,13 @@ confidence, the exact failure this skill exists to kill.
 
 **Phase-1 done-check:** one named command (or precise procedure) that is
 tight and red-capable — it fails on the defect, reliably.
+
+## Safety
+Prefer a non-prod/staging environment for reproduction over production.
+Before any destructive repro step, snapshot or back up the affected state;
+if no snapshot is available, get explicit user confirmation before
+proceeding. Redact secrets, tokens, and PII before quoting logs, stack
+traces, or instrumentation output in the diagnosis report.
 
 ## Phase 2 — Minimize
 Shrink the failing case while the loop stays red: smallest input, fewest
@@ -94,8 +102,12 @@ Cause: <confirmed mechanism> — evidence: <what the loop/instrumentation showed
 Fix: <what changed and why it's minimal>
 Proof: loop red→green · neighbors green · regression case: <where it lives>
 ```
-Then the JAIL-HANDOFF block; `next:` jail-verify for consequential fixes,
-jail-memory when the root cause is a lesson worth keeping.
+Then the JAIL-HANDOFF block: `evidence` carries three fields verbatim from
+Output — `loop:` the Loop line, `proof: red→green` from Proof's loop
+clause, `regression_case:` from Proof's regression-case clause — so
+jail-verify/jail-memory machine-check them instead of re-deriving from
+prose. `next:` jail-verify for consequential fixes, jail-memory when the
+root cause is a lesson worth keeping.
 
 ## Related skills
 Finished-work check → **jail-verify**. Metric improvement on a working

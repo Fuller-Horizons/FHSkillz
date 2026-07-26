@@ -25,16 +25,16 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 | [`jail-skill-miner`](skills/jail-skill-miner/) | Mines codebases/histories for plugin-worthy disciplines; dedupes against installed skills; stops for approval. |
 | [`jail-diagnose`](skills/jail-diagnose/) | Feedback-loop-first defect diagnosis — red-capable repro signal before hypotheses; confirmed cause; mandatory regression case. |
 | [`jail-prototype`](skills/jail-prototype/) | Throwaway prototypes answering a named design question — the answer graduates, the code dies on a branch. |
-| [`jail-baton`](skills/jail-baton/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
-| [`jail-wayfind`](skills/jail-wayfind/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
+| [`jail-handoff`](skills/jail-handoff/) | Session handoff batons — state, decisions-with-why, references not duplicates, next actions, suggested skills; secrets redacted. |
+| [`jail-plan`](skills/jail-plan/) | Fog navigation via decision-ticket maps — resolve decisions one at a time until the way to a named destination is clear. |
 
 ### Layer 2 — Workflow skills
 
 | Skill | What it does |
 |---|---|
 | [`jail-rate`](skills/jail-rate/) | Universal evidence-cited **0–10 rating of anything**, weighted rubric per subject type, current → projected. |
-| [`jail-operationalize`](skills/jail-operationalize/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
-| [`jail-exec-brief`](skills/jail-exec-brief/) | Decision-ready executive communication; technical findings translated into business consequences. |
+| [`jail-plan`](skills/jail-plan/) | Recommendations → 13-field operating workflows a named owner can run (trigger → testable completion). |
+| [`jail-summarize`](skills/jail-summarize/) | Decision-ready executive communication; technical findings translated into business consequences. |
 | [`jail-rate-skill`](skills/jail-rate-skill/) | Rates AI skills on a 10-category matrix + IDE/CLI compatibility, machine-readable record. |
 | [`jail-prospect`](skills/jail-prospect/) | US private company as a sell-side/consulting prospect — free sources, cited one-page brief. |
 
@@ -42,7 +42,7 @@ FHSkillz packages every Fuller Horizons Claude skill into one plugin (`fh-skillz
 
 | Skill | What it does |
 |---|---|
-| [`jail-strategy-scan`](skills/jail-strategy-scan/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
+| [`jail-strategy`](skills/jail-strategy/) | One strategy skill, three lanes: SWOT→TOWS (internal), PESTLE+tripwires (macro), or full sweep with the interaction pass — one evidence base serves both. |
 | [`jail-bmc`](skills/jail-bmc/) | Nine-block BMC — validated vs hypothesis never blurred; riskiest assumptions get experiments. |
 | [`jail-cpr`](skills/jail-cpr/) | Context·Purpose·Results meeting design; agendas reverse-engineered from testable Results. |
 
@@ -74,6 +74,20 @@ Restart / reload. Skills activate automatically based on their `description`. Up
 ```
 
 **Cowork / desktop — no commands:** **Settings → Customize → Plugins**, find **fh-skillz**, and click **Install** (or **Update** if it's already added). This installs every skill in the plugin from this repo's `main` branch.
+
+**OpenCode CLI:**
+
+OpenCode discovers skills from `~/.claude/skills` and `.claude/skills` natively, so the standard installer works with no extra configuration:
+
+```
+curl -fsSL https://raw.githubusercontent.com/Fuller-Horizons/FHSkillz/main/scripts/install.sh | bash
+```
+
+Prefer OpenCode's own skill paths? Pass one as an argument — global `… | bash -s -- ~/.config/opencode/skills`, or per-project `… | bash -s -- .opencode/skills`. Re-run anytime to pull latest and re-link.
+
+Skills stay model-invoked as everywhere else; an agent can also load one explicitly with OpenCode's native `skill` tool — `skill({ name: "jail-council" })`.
+
+**OpenCode is the only CLI where a Tier-A (cross-provider) `jail-council` is native.** Each subagent can be pinned to a different provider with `"model": "provider/model-id"` in `opencode.json`, so a council of Claude + GPT + Gemini is real rather than three sessions of the same model. Run `opencode models` to list what your configured providers offer, then follow the verified config and protocol in [`skills/jail-council/references/opencode-runbook.md`](skills/jail-council/references/opencode-runbook.md). Watch the headline gotcha: omitting `model:` on a member makes it inherit the caller's model, silently collapsing the council to Tier C while still reporting as cross-provider.
 
 **Any IDE / Cursor / Codex CLI (skills-directory fallback):**
 

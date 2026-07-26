@@ -1,7 +1,7 @@
 ---
 name: jail-decide
 metadata:
-  version: 1.1.0
+  version: 1.2.1
 description: >-
   Convert analysis into a defensible DECISION PACKAGE — options (always
   including do-nothing), explicit criteria, costs/risks/reversibility per
@@ -32,6 +32,11 @@ written down. [Constitution Rules 6, 11, 12]
 - Evidence base: pull the jail-research packet or the supplied facts; every
   load-bearing fact keeps its label and source. Thin evidence → say which
   criteria are being judged on Assumption, or route back to jail-research.
+  **Sensitive inputs**: personnel, comp, health, and privileged facts plus NDA
+  figures enter the package as roles, bands, and ranges — never verbatim
+  records or names. No raw evidence dump inside the package. If the call cannot
+  be made without exposing regulated data, stop and ask the named owner rather
+  than restating it.
 
 ## Step 2 — Options, honestly
 - 2–5 real options. **Do-nothing / defer is always one of them**, priced like
@@ -51,6 +56,11 @@ written down. [Constitution Rules 6, 11, 12]
   prose — the lane is earned by evidence, not ambition.
 
 ## Step 3 — Recommend
+Budget: package ≤450 words (options table ≤5 rows, rationale ≤4 sentences) —
+cite the jail-research packet by reference, never restate its evidence. Fixed
+order: do-nothing first, then the rest by recommendation rank. Two options
+inside the evidence noise are declared a **tie** and broken by a named
+criterion — never a silent pick.
 ```
 DECISION PACKAGE
 Decision: <statement> · Owner: <who> · Needed by: <date|open>
@@ -68,13 +78,33 @@ check (run it explicitly):** contested + high-stakes + hinging on a disputed
 factual/interpretive question → convene **jail-council** on that question
 (record "council: convened/not — why" in the package; a cheap Tier-D
 mini-council covers cases that are contested but not existential).
-jail-operationalize turns the chosen option into a working process;
-jail-exec-brief presents it.
+jail-plan turns the chosen option into a working process;
+jail-summarize presents it.
+
+## Ship-check
+Run all 7 gates before releasing the package and emit the verdict as ONE line:
+
+```
+Ship-check: criteria-first PASS|FAIL · do-nothing priced PASS|FAIL · door type
+per option PASS|FAIL · ≥2 change-conditions PASS|FAIL · every number carries
+Fact/Estimate+source PASS|FAIL · owner named PASS|FAIL · council check
+recorded PASS|FAIL
+```
+Given an existing draft/package/recommendation as input: run this line FIRST
+against it as received and keep the real FAILs — that line is the audit
+record that the gate bit. Then fix the package and emit a SECOND line. Never
+emit only a clean line for a draft that arrived violating a gate.
+
+Fail-closed: any FAIL → fix the package and re-run the line. A gate that
+can't be closed from the input at hand (no owner nameable, no source
+obtainable) is never left a silent open FAIL on a shipped package: emit the
+FAIL, name the specific question or evidence that would close it, and
+withhold the package — never invent a value to make the line read clean.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.
 Pressure-test the winning option → **jail-red-team**. Make it operational →
-**jail-operationalize**.
+**jail-plan**.
 
 ## Gotchas
 - **Criteria after options.** Scoring rubrics invented once a favorite exists

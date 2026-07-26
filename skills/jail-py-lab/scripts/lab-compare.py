@@ -13,17 +13,27 @@ ledger's declared direction, 1 = regressed, 2 = error.
 Stdlib only, Python 3.8+.
 """
 import argparse
-import json
+import os
 import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+try:
+    from _ledger_io import read_ledger  # shared JSONL reader (lab-run/lab-report/lab-compare)
+except ImportError:
+    print(
+        f"[lab-compare] ERROR: missing sibling module _ledger_io.py — expected at "
+        f"{os.path.join(HERE, '_ledger_io.py')}. Copy the whole "
+        "skills/jail-py-lab/scripts/ directory together; lab-compare.py is not "
+        "self-contained without it.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
 
 
 def load(path):
-    try:
-        entries = [json.loads(l) for l in open(path, encoding="utf-8")
-                   if l.strip()]
-    except (OSError, json.JSONDecodeError) as e:
-        print(f"[lab-compare] ERROR reading {path}: {e}", file=sys.stderr)
-        sys.exit(2)
+    entries = read_ledger(path, "lab-compare")
     if not entries:
         print(f"[lab-compare] ERROR: empty ledger {path}", file=sys.stderr)
         sys.exit(2)

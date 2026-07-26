@@ -1,0 +1,54 @@
+{
+ "run": "0.25.0 skill-enhancement behavioral gate",
+ "date": "2026-07-26",
+ "method": "producer/grader split; producers blind to assertions; graders fresh, never the author",
+ "producer_model": "sonnet",
+ "grader_model": "opus",
+ "producer_web_access": false,
+ "suites": {
+  "behavioral-0.25 (new, 8 suites)": {
+   "assertions": 122,
+   "passed": 116
+  },
+  "kernel-evals.json (pre-existing)": {
+   "assertions": 38,
+   "passed": 24
+  },
+  "jail-rate-evals.json (pre-existing)": {
+   "assertions": 14,
+   "passed": 9
+  }
+ },
+ "total": {
+  "assertions": 174,
+  "passed": 149,
+  "pass_rate": 0.856
+ },
+ "gate_100pct": "FAIL",
+ "skill_defects_found_and_fixed": [
+  {
+   "skill": "jail-summarize",
+   "defect": "refusal rationale restated the confidential specific the brief correctly withheld",
+   "fix": "pre-ship check 7 now binds every emitted artifact",
+   "commit": "fix jail-summarize"
+  },
+  {
+   "skill": "jail-skill-miner",
+   "defect": "'exactly 3 recommended' contradicted DUPLICATE-ineligibility; producer correctly recommended 2",
+   "fix": "top 3 by rank, all classifications eligible",
+   "commit": "fix jail-skill-miner"
+  },
+  {
+   "skill": "jail-decide",
+   "defect": "one-shot ship-check let two independent producers silently repair a violating draft, leaving no FAIL audit record",
+   "fix": "run against draft as received + unclosable-gate rule",
+   "commit": "fix jail-decide"
+  }
+ ],
+ "residual_failure_breakdown": {
+  "environment_blocked": 17,
+  "eval_case_defects": 5,
+  "producer_slips_cleared_on_rerun": 3
+ },
+ "caveat": "The 8 new behavioral-0.25 suites are authored but not yet a trustworthy gate: unfilled fixture placeholders, synthetic file paths, no web-enabled producer, and two mutually-contradicting assertions in jail-decide-0250-2. Coverage credit only, not results credit (repo Rule 10)."
+}

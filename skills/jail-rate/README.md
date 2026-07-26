@@ -2,7 +2,7 @@
 
 Universal, evidence-based **0.0–10.0 rating** of anything — software, codebases, hardware, people (professional/public roles only), ideas, programs, services, content — on a weighted rubric matched to the subject type, with **cited empirical evidence behind every score** and a projected post-improvement rating (current → potential).
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 2.0.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 2.1.0.
 
 ## How it works
 

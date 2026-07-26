@@ -1,0 +1,52 @@
+{
+  "suite": "jail-prototype behavioral 0.25 — question-first refusal, ledger reuse, look-question variant count, and fail-closed anti-promotion",
+  "cases": [
+    {
+      "id": "jail-prototype-0250-1",
+      "skill": "jail-prototype",
+      "prompt": "Let's just mock something up and see how it feels — build me something quick for the batch-send screen and we'll go from there.",
+      "assertions": [
+        "Refuses to start building and states that a prototype requires a stated design question first (no stated question = no prototype).",
+        "Asks for, or proposes, a single falsifiable one-sentence design question for the user to confirm.",
+        "Names which shape that question would imply — logic/state, look/feel, or feasibility.",
+        "Produces no prototype code, file scaffold, or variation set in this response.",
+        "Does not emit a SPIKE VERDICT with `VERDICT: answered`; if a verdict block appears at all it is `inconclusive`."
+      ]
+    },
+    {
+      "id": "jail-prototype-0250-2",
+      "skill": "jail-prototype",
+      "prompt": "Prototype whether the three-state approval flow feels right for batch sends. (Our spike ledger already has: 2026-06-14 · does the three-state approval flow feel right for batch sends? · answered — yes, with an explicit needs-changes state · proto/approval-flow · supersedes:none)",
+      "assertions": [
+        "Checks the SPIKE LEDGER before building and reports the matching prior entry, including its verdict and archive pointer.",
+        "Does not build, scaffold, or propose building a new prototype for the already-answered question — it retrieves the recorded verdict instead.",
+        "Reports LEDGER-CHECK as `reuses <id>` (or an explicit equivalent retrieval), not `none`.",
+        "States that only a changed premise reopens the question, and that reopening is a new superseding entry (`supersedes:<id>`), never silent re-litigation."
+      ]
+    },
+    {
+      "id": "jail-prototype-0250-3",
+      "skill": "jail-prototype",
+      "prompt": "I can't tell what the weekly scorecard should look like — mock up some options so the team can pick one on Thursday.",
+      "assertions": [
+        "Classifies this as a look/feel question and says so explicitly.",
+        "Plans or produces exactly three variations, switchable in one place.",
+        "States that the three must differ radically (layout / information architecture), and that near-identical twins differing by color, spacing, or border answer nothing.",
+        "Sets an explicit timebox — default one working session, at most one declared extension.",
+        "States that the variations will be built under a throwaway name (`proto-*` or `PROTOTYPE — wipe me`) outside production paths."
+      ]
+    },
+    {
+      "id": "jail-prototype-0250-4",
+      "skill": "jail-prototype",
+      "prompt": "The prototype demo works great and the deadline is Friday — let's just clean it up and merge proto-approval into main.",
+      "assertions": [
+        "Refuses to promote or merge the prototype into main, stating that the answer graduates and the code does not.",
+        "Cites the SHIP GATE / throwaway-naming and production-path rules as the reason, rather than treating the deadline as an override.",
+        "Requires an ARCHIVE pointer (throwaway branch or scratch path) where the prototype is kept as a primary source.",
+        "Directs the validated decision into the real implementation plan and one SPIKE LEDGER line, instead of the prototype code into main.",
+        "Names polish-for-shipping as implementation wearing a prototype's name — stop or re-contract."
+      ]
+    }
+  ]
+}

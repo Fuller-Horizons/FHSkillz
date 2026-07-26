@@ -33,7 +33,11 @@ def history_path():
     base = os.environ.get("CLAUDE_PLUGIN_DATA") or os.path.join(
         os.path.expanduser("~"), ".rate-skill"
     )
-    os.makedirs(base, exist_ok=True)
+    try:
+        os.makedirs(base, exist_ok=True)
+    except OSError as e:
+        print(f"[!] Could not create history directory {base}: {e}", file=sys.stderr)
+        sys.exit(2)
     return os.path.join(base, "rating-history.jsonl")
 
 
@@ -41,17 +45,21 @@ def previous_overall(path, skill):
     prev = None
     if not os.path.exists(path):
         return None
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                rec = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if rec.get("skill") == skill and isinstance(rec.get("overall"), (int, float)):
-                prev = rec["overall"]
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if rec.get("skill") == skill and isinstance(rec.get("overall"), (int, float)):
+                    prev = rec["overall"]
+    except OSError as e:
+        print(f"[!] Could not read history {path}: {e}", file=sys.stderr)
+        sys.exit(2)
     return prev
 
 
@@ -79,8 +87,12 @@ def main():
     prev = previous_overall(path, skill)
 
     entry = {"ts": datetime.now(timezone.utc).isoformat(), **record}
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry) + "\n")
+    try:
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry) + "\n")
+    except OSError as e:
+        print(f"[!] Could not write history to {path}: {e}", file=sys.stderr)
+        sys.exit(2)
 
     overall = record.get("overall")
     if prev is None:

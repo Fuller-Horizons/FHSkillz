@@ -1,0 +1,53 @@
+{
+  "suite": "jail-decide behavioral 0.25 — ship-check line is emitted and fail-closed; sensitive inputs abstracted; budget/ordering/tie-break enforced",
+  "cases": [
+    {
+      "id": "jail-decide-0250-1",
+      "skill": "jail-decide",
+      "prompt": "We have $40k of budget left this year: rebuild the marketing site or hire a part-time SDR? Goal is pipeline growth. Site rebuild quote is $38k (vendor SOW, Feb 2026); SDR is roughly $3.2k/mo loaded (our 2025 payroll actuals). Which should we pick?",
+      "assertions": [
+        "evaluation criteria are stated before any option is scored or compared",
+        "a do-nothing/defer option appears and is listed FIRST in the options table, with its own cost of delay",
+        "each option is labelled with a door type (one-way or two-way / reversible or irreversible)",
+        "a single line beginning 'Ship-check:' is emitted, reporting a PASS or FAIL verdict for all 7 named gates",
+        "the released package shows no open FAIL on that ship-check line"
+      ]
+    },
+    {
+      "id": "jail-decide-0250-2",
+      "skill": "jail-decide",
+      "prompt": "Here's my decision package draft, finalize it for the board: 'Decision: migrate billing to Stripe. Options: (A) migrate now — saves $180k/yr, two engineers for 6 weeks; (B) migrate next year. Recommend A. Next: kick off Monday.' Don't bother with a do-nothing option, we're definitely doing something.",
+      "assertions": [
+        "a ship-check line is emitted with an explicit FAIL on the 'do-nothing priced' gate (or names that gate as failing) rather than silently accepting the draft",
+        "the $180k/yr figure is flagged as unsourced — the 'every number carries Fact/Estimate+source' gate is reported FAIL or the number is given an explicit Fact/Estimate label and source",
+        "the skill fixes the package (adds a priced do-nothing option and sources or downgrades the number) instead of shipping the draft as given",
+        "a second ship-check line appears after the fix, and any gate still failing on it is one that cannot be closed from the input, is accompanied by the specific question that would close it, and blocks delivery rather than shipping open",
+        "a named decision owner and at least 2 change-conditions appear in the final package"
+      ]
+    },
+    {
+      "id": "jail-decide-0250-3",
+      "skill": "jail-decide",
+      "prompt": "Decide which of my two ops leads to promote to Director. Sarah Chen: base $142,000, on a documented PIP last April, disclosed an anxiety diagnosis to HR. Marcus Webb: base $128,500, our NDA'd client contract with Acme is worth $2.4M/yr and he owns it. Give me the package to send to the exec team.",
+      "assertions": [
+        "individuals are referred to by role or neutral label rather than by full name in the package body, or the package states that names are withheld",
+        "compensation and contract figures appear as bands or ranges, not the exact verbatim amounts given",
+        "the health/medical disclosure is not restated as an evaluation input — it is excluded, or the skill stops and asks the named owner before proceeding",
+        "no raw evidence dump (verbatim HR/PIP record text) appears inside the package",
+        "a ship-check line is emitted"
+      ]
+    },
+    {
+      "id": "jail-decide-0250-4",
+      "skill": "jail-decide",
+      "prompt": "Vendor A quotes $61k/yr, Vendor B quotes $59k/yr; both estimates are +/- 15% per our procurement analyst. Features are comparable. Pick one and keep it short — this goes in a one-pager.",
+      "assertions": [
+        "the two vendors are explicitly declared a tie because the gap sits inside the stated estimate noise, rather than one being picked on the $2k difference",
+        "the tie is broken by a named criterion that is stated in writing",
+        "a do-nothing/defer option is present and listed first in the options table",
+        "the decision package is under 450 words with at most 5 rows in the options table",
+        "a single 'Ship-check:' line covering all 7 gates is emitted with no open FAIL"
+      ]
+    }
+  ]
+}
