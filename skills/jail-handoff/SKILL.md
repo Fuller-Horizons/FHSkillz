@@ -1,7 +1,7 @@
 ---
 name: jail-handoff
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   Compact the current session into a BATON — a handoff document a fresh
   agent (or tomorrow's session, or a smaller-context model) can pick up and
@@ -49,6 +49,11 @@ MIT), extended under JAIL rules.
    explicitly; a baton never launders a pending approval into an assumed
    yes [Rule 5].
 
+**Pre-emit gate (fail closed).** Before writing the baton, verify all 8
+parts above carry either real content or an explicit `N/A — <reason>`
+marker. Any part silently blank fails the gate — fill it or mark it N/A;
+do not emit until it passes. Worked example: references/example-baton.md
+
 ## Rules
 - **Offer before it's too late.** On context-pressure signals — a long
   session deep in multi-part work, compaction approaching, earlier details
@@ -61,7 +66,9 @@ MIT), extended under JAIL rules.
   rewritten — one shape, two carriers.
 - **Redact before writing:** secrets, credentials, and protected data
   never enter a baton (jail-quarantine protected classes apply — a baton
-  is a file that travels).
+  is a file that travels). Run jail-py-toolkit's `secret-scan.py` over
+  the drafted baton text before emit; without the toolkit, eyeball every
+  value for API keys, tokens, passwords, and connection strings.
 - **Tailor to the stated next purpose.** If the user says what the next
   session is for, weight the baton toward it; carry the rest as one-line
   pointers.
