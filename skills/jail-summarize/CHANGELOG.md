@@ -1,5 +1,9 @@
 # Changelog — jail-exec-brief
 
+## 1.3.0 — 2026-07-25 (plugin 0.25.0)
+
+- Added "Pre-ship check": a 7-item fail-closed gate (answer-first, fact/analysis labels, risk consequences, single priced recommendation, owned+dated next actions, named audience row, no classification silently dropped) run before any brief ships.
+
 ## 1.2.0 — 2026-07-22 (plugin 0.24.0)
 
 - **Renamed jail-exec-brief → jail-summarize.** Same decision-forcing executive-communication skill (lead with the answer, translate tech→business, end on the forced decision); broader name. Cross-references updated; history preserves the jail-exec-brief lineage.

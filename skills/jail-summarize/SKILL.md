@@ -1,7 +1,7 @@
 ---
 name: jail-summarize
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   Convert complex material — analysis, research, technical findings, project
   state — into concise, DECISION-FORCING executive communication that leads
@@ -73,6 +73,17 @@ the default.
 
 Close with the JAIL-HANDOFF block only when feeding another skill; a brief
 delivered to a human ends at next actions — humans don't need YAML.
+
+## Pre-ship check
+Before sending, confirm all seven — fail-closed, none skippable:
+1. Sentence one states the answer (Outcome / central finding).
+2. Every fact carries its fact vs analysis label (Material facts).
+3. Every risk names its consequence (Risks & constraints).
+4. Exactly one recommendation stands, alternatives priced not hedged (Recommendation).
+5. Every next action has an owner and a date (Immediate next actions).
+6. The audience-calibration row used is named, not implied (Audience calibration).
+7. No confidential/PII/embargoed detail crosses to a wider audience than the source cleared — redact or generalize it; never silently drop the classification.
+Any item that fails stays unshipped until fixed — never send a brief with an open item.
 
 ## Related skills
 Decision analysis to present → **jail-decide** runs first. Evidence behind
