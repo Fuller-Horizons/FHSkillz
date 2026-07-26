@@ -32,6 +32,7 @@ on a fact, say which is right and how you know — or flag it UNRESOLVED.
 ## Review record (per reviewer, machine-checkable shape)
 ```yaml
 reviewer: <member-id>          # orchestrator maps ids; answers stay anonymous
+blindness_attestation: <pass|fail>   # manual per member — see note below
 reviews:
   - answer: A
     errors_found: ["...", ...]   # or ["none found — checked: ..."]
@@ -40,6 +41,12 @@ reviews:
 ranking: [B, A, C]
 unresolved_facts: ["..."]      # feeds Step 4 verification round
 ```
+`blindness_attestation` confirms, per member: no cross-member text existed
+at Stage 1, and no un-anonymized model tell survived Stage 3 anonymization.
+No automated blindness/diff/hash check exists in the toolkit — this is
+manual: the orchestrator eyeballs each raw answer for self-identifying
+phrasing before anonymizing. Required in the audit appendix (SKILL.md
+Step 5 shipping gate).
 
 ## Verification-round dispatch (Step 4)
 One targeted brief per disputed fact:
@@ -83,3 +90,14 @@ JAIL-HANDOFF: …
 - Chairman gets the largest/strongest model available; members can be
   smaller — diversity of the panel matters more than any single member's
   size (a homogeneous panel of giants shares blind spots).
+
+## Failure modes (SKILL.md Gotchas links here for full detail)
+| Mode | Looks like | Caught by |
+|---|---|---|
+| Convergence theater | All members agree, but nobody error-hunted first | ≥1-error-or-"none found" rule, mandatory per review (Step 3) |
+| Council theater | A council narrated in prose that never actually ran | The audit appendix (roster, rankings, reviews) — no appendix, no council |
+| Majority-vote truth | Chairman sides with the 4 over the 1 that cited a primary source | Evidence-beats-votes rule (Step 5) — cite evidence, not tallies |
+| Brand/self bias | A reviewer scores an answer differently once it's attributed | Anonymization before every review (Step 3), no exceptions |
+| Tier inflation | Reporting a same-model (Tier C) council as if it were cross-provider (Tier A) | Declaring the tier is mandatory in the output (Step 1) |
+| Chairman laundering | New claims at synthesis that no member made and no verification produced | Chairman rule: synthesize ONLY from reviewed/verified material (Step 5) |
+| Skipping the verification round | Synthesizing over a live factual dispute instead of dispatching Step 4 | Step 4 fires whenever reviews disagree on a load-bearing fact |
