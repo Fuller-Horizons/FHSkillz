@@ -28,14 +28,31 @@ Usage:
 
 Exit codes: 0 = pass, 1 = errors, 2 = usage/IO/parse error. Stdlib only.
 """
-import sys, re, json, argparse
+import sys, os, json, argparse
 
-# Same notion of "machine-verifiable" as prompt-lint.py, kept in sync.
-VERIFIABLE = re.compile(
-    r"(?i)\b(test|tests|assert|assertion|unit test|test suite|script|run|execute|"
-    r"schema|json schema|regex|exit code|parse[sd]?|compile[sd]?|lint|diff|"
-    r"count|matches|==|equals|returns|validate[sd]?|pytest|build passes|trace[sd]?)\b"
-)
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+
+# Same notion of "machine-verifiable" as prompt-lint.py — imported, not copied,
+# so the two linters can't drift (filename has a hyphen, so load it by path,
+# same pattern save-rating.py uses for validate-rating.py).
+import importlib.util
+
+try:
+    _spec = importlib.util.spec_from_file_location(
+        "prompt_lint", os.path.join(HERE, "prompt-lint.py")
+    )
+    _pl = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_pl)
+    VERIFIABLE = _pl.VERIFIABLE
+except (OSError, ImportError, AttributeError) as e:
+    print(
+        f"error: cannot load sibling prompt-lint.py (must sit next to chain-lint.py "
+        f"in scripts/ for the shared VERIFIABLE regex): {e}",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
 VALID_ON_FAIL = {"retry", "stop", "rollback", "human"}
 
 

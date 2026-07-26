@@ -22,10 +22,13 @@ OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "SOURCES", "BEFORE RETURNING"]
 ALL_SECTIONS = REQUIRED + OPTIONAL
 
 # A SUCCESS TEST is machine-verifiable if it names a runnable/automatable check.
+# Single source of truth for this pattern — chain-lint.py imports VERIFIABLE from
+# here by path (see save-rating.py -> validate-rating.py for the same pattern)
+# instead of keeping its own copy, so the two linters can't drift again.
 VERIFIABLE = re.compile(
     r"(?i)\b(test|tests|assert|assertion|unit test|test suite|script|run|execute|"
     r"schema|json schema|regex|exit code|parse[sd]?|compile[sd]?|lint|diff|"
-    r"count|matches|==|equals|returns|validate[sd]?|pytest|build passes)\b"
+    r"count|matches|==|equals|returns|validate[sd]?|pytest|build passes|trace[sd]?)\b"
 )
 # OUTPUT FORMAT shows a concrete shape if it has a fence, table, JSON, or example.
 CONCRETE = re.compile(r"(```|\||\{|\[|e\.g\.|example|schema|<[A-Za-z])")
