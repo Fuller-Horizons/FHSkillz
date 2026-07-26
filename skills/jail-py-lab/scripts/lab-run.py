@@ -25,6 +25,21 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+try:
+    from _ledger_io import read_ledger  # shared JSONL reader (lab-run/lab-report/lab-compare)
+except ImportError:
+    print(
+        f"[lab-run] ERROR: missing sibling module _ledger_io.py — expected at "
+        f"{os.path.join(HERE, '_ledger_io.py')}. Copy the whole "
+        "skills/jail-py-lab/scripts/ directory together; lab-run.py is not "
+        "self-contained without it.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
 NUM_RE = re.compile(r"-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?")
 
 
@@ -33,22 +48,9 @@ def die(msg: str) -> None:
     sys.exit(2)
 
 
-def read_ledger(path: str):
-    entries = []
-    if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            for i, line in enumerate(f, 1):
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    entries.append(json.loads(line))
-                except json.JSONDecodeError:
-                    die(f"ledger line {i} is not valid JSON — ledger corrupt")
-    return entries
-
-
 def measure_from_cmd(cmd: str) -> float:
+    if not cmd or not cmd.strip():
+        die("--metric-cmd is empty or whitespace — refusing to run a blank shell command")
     try:
         proc = subprocess.run(
             cmd, shell=True, capture_output=True, text=True, timeout=1800
@@ -81,7 +83,7 @@ def main() -> None:
     if not args.baseline and not args.hypothesis:
         die("--hypothesis is required for non-baseline experiments (why should this work?)")
 
-    entries = read_ledger(args.ledger)
+    entries = read_ledger(args.ledger, "lab-run", missing_ok=True)
 
     if args.baseline and entries:
         die("ledger already has entries; baseline must be experiment #0")

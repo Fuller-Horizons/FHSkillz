@@ -9,9 +9,23 @@ Exit codes: 0 = ok · 2 = error.
 Usage: lab-report.py --ledger lab-ledger.jsonl [--tail N] [--max-discards N]
 """
 import argparse
-import json
 import os
 import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+if HERE not in sys.path:
+    sys.path.insert(0, HERE)
+try:
+    from _ledger_io import read_ledger  # shared JSONL reader (lab-run/lab-report/lab-compare)
+except ImportError:
+    print(
+        f"[lab-report] ERROR: missing sibling module _ledger_io.py — expected at "
+        f"{os.path.join(HERE, '_ledger_io.py')}. Copy the whole "
+        "skills/jail-py-lab/scripts/ directory together; lab-report.py is not "
+        "self-contained without it.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
 
 
 def die(msg: str) -> None:
@@ -29,18 +43,7 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    if not os.path.exists(args.ledger):
-        die(f"ledger not found: {args.ledger}")
-    entries = []
-    with open(args.ledger, "r", encoding="utf-8") as f:
-        for i, line in enumerate(f, 1):
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                entries.append(json.loads(line))
-            except json.JSONDecodeError:
-                die(f"ledger line {i} is not valid JSON")
+    entries = read_ledger(args.ledger, "lab-report")
     if not entries:
         die("ledger is empty — record a baseline with lab-run.py --baseline")
 
