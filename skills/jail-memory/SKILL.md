@@ -1,7 +1,7 @@
 ---
 name: jail-memory
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
   Govern what enters, stays in, and leaves durable memory or organizational
   knowledge — provenance-checked, deduplicated, classified, superseded-not-
@@ -52,8 +52,19 @@ Each candidate entry must pass all six checks:
    itself a lesson.
 6. **Safety/classification** — no secrets, no protected data (jail-
    quarantine classes), no sensitive personal information without explicit
-   instruction; apply the platform's retention/privacy rules.
+   instruction; apply the platform's retention/privacy rules. Run
+   jail-py-toolkit's `secret-scan.py` on the entry content before writing;
+   without it, manually scan for keys, tokens, passwords, SSNs, and
+   named-individual PII, and refuse the write if found.
 Failing any check → don't store; say what failed.
+
+**SUCCESS-TEST:** an entry is valid only if frontmatter carries all 8 keys
+(id, type, title, created, updated, source, status, supersedes); `id` is
+the current max id in `MEMORY.md`'s table incremented by one (e.g. M0007 →
+M0008) — recomputed fresh from the table every time, never carried from
+memory or session state; `type` ∈ {lesson, decision, fact, reference,
+ADR}; `status` ∈ {active, superseded-by <id>}. Any failure → refuse the
+write and name which check failed.
 
 ## The memory file system (how it's stored, indexed, and headed)
 Memory is a set of **Markdown files** in a `memory/` folder at the project
@@ -61,32 +72,12 @@ root — the auditable source of truth on every platform. A platform's own
 memory feature, when present, *mirrors* these files; the files never stop
 being the record.
 
-**The index — `memory/MEMORY.md`.** One scannable table, newest first, one
-row per entry so retrieval is a single glance:
-```
-| id | type | title | created | updated | status | file |
-|----|------|-------|---------|---------|--------|------|
-| M0007 | decision | Legacy IDs kept for integration parsing | 2026-07-22 | 2026-07-22 | active | 0007-legacy-ids.md |
-| M0003 | lesson | Client dislikes Friday deploys | 2026-06-30 | 2026-07-22 | superseded-by M0007 | 0003-friday-deploys.md |
-```
-
-**Each entry — `memory/<NNNN>-<slug>.md`** — opens with a provenance header
-block (YAML frontmatter) so every fact can be aged and challenged, then the
-body:
-```
----
-id: M0007
-type: decision            # lesson | decision | fact | reference | ADR
-title: Legacy IDs kept for integration parsing
-created: 2026-07-22
-updated: 2026-07-22
-source: session 2026-07-22 · migration project · Jonathan
-status: active            # active | superseded-by <id>
-supersedes: []            # ids this replaced
----
-**Context →** …  **Decision →** …  **Consequences →** …   (ADR shape for
-decisions; lessons use: what happened · why it matters · how to apply)
-```
+**Schema:** `MEMORY.md` is an id/type/title/created/updated/status/file
+index table, newest first; each entry file `memory/<NNNN>-<slug>.md` opens
+with an 8-key YAML frontmatter header (id, type, title, created, updated,
+source, status, supersedes) then the body (ADR shape for decisions;
+lessons use what happened · why it matters · how to apply). Worked
+example: `references/schema.md`.
 
 **Rules on the files:**
 - Every write passes the six-check gate above before a file is created.
