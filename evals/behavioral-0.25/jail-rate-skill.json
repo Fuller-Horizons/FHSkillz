@@ -1,0 +1,17 @@
+{
+  "suite": "jail-rate-skill behavioral 0.25 — golden-set regression: re-rate the worked hello-world example from references/examples.md and confirm scores hold within +/-0.3 of the documented values",
+  "cases": [
+    {
+      "id": "jail-rate-skill-0250-1",
+      "skill": "jail-rate-skill",
+      "prompt": "Rate this skill with jail-rate-skill. Its entire directory is one file, SKILL.md, six lines total, no references/, no scripts/, and no metadata.version field:\n\n---\nname: hello-world\ndescription: Says hello.\n---\n# hello-world\nPrint \"Hello, world!\" when invoked.\n\nThere is nothing else in the skill directory. Give me the full Skill Rating Matrix.",
+      "assertions": [
+        "the Skill Rating Matrix reports a numeric score for 'Utility & Value' between 1.7 and 2.3",
+        "the Skill Rating Matrix reports a numeric score for 'Clarity of Instructions' between 5.7 and 6.3",
+        "the Skill Rating Matrix reports numeric scores for both 'Safety & Guardrails' and 'Maintainability' each between 2.7 and 3.3",
+        "the Skill Rating Matrix reports a numeric score for 'Machine-Verifiable Exit Criteria' between 0.7 and 1.3",
+        "the Skill Rating Matrix reports an 'Overall Rating' between 2.7 and 3.3"
+      ]
+    }
+  ]
+}

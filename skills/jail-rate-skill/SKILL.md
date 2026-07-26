@@ -3,7 +3,7 @@ name: jail-rate-skill
 description: >-
   Evaluate and rate another AI skill (its SKILL.md and support files) using the standardized 10-category Skill Rating Matrix, IDE Compatibility Matrix, and CLI Compatibility Matrix. Triggers: "/jail-rate-skill", "rate this skill", "evaluate this skill", "score this skill".
 metadata:
-  version: 2.2.0
+  version: 2.3.0
 ---
 
 # JAIL-RATE-SKILL
@@ -65,6 +65,22 @@ Columns = `config.json` → `cli_targets` (default: Claude Code, Codex CLI, Open
 
 ### 4. Machine-readable record
 Emit one JSON object per rated skill using the schema in `references/examples.md`, then validate and save it (see below).
+
+### 5. JAIL-HANDOFF
+Close every run with the constitution's envelope (`docs/JAIL-CONSTITUTION.md`), same key set and order; omit empty keys except `status`, `unknowns`, `approval_required`:
+```yaml
+JAIL-HANDOFF:
+  skill: jail-rate-skill
+  status: complete | partial | blocked | stop
+  outputs: [Skill Rating Matrix, IDE/CLI Compatibility Matrices, JSON record]
+  unknowns: [..]
+  next: jail-py-toolkit | skill-creator | jail-rate | none
+  approval_required: []
+```
+Pick `next` by what the run surfaced:
+- **jail-py-toolkit** — machine-verify or persist the record. Required input: the emitted JSON record (plus 2-3 repeat-run records if invoking `variance-check.py`).
+- **skill-creator** — a static score isn't enough to trust the skill; needs behavioral eval. Required input: the target skill directory + candidate test prompts.
+- **jail-rate** — the subject under review turns out not to be an AI skill directory. Required input: the subject's name/location and its category (software, hardware, people, ideas, businesses).
 
 ## Validation & history
 Machine-run validation lives in the companion **jail-py-toolkit** skill (install it alongside this one for the full loop):

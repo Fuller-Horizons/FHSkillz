@@ -1,5 +1,11 @@
 # Changelog — rate-skill
 
+## 2.3.0 — 2026-07-25 (plugin 0.25.0)
+
+- Fixed README's stale "Version 2.0.0" stamp (line 5) to match SKILL.md frontmatter and this changelog's top entry.
+- Added a closing JAIL-HANDOFF block (Output Format §5) naming the skill's three downstream hand-offs — jail-py-toolkit, skill-creator, jail-rate — and the required input for each, per `docs/JAIL-CONSTITUTION.md`.
+- Added `evals/behavioral-0.25/jail-rate-skill.json` — a golden-set regression case that re-rates the worked hello-world example from `references/examples.md` and asserts each documented category lands within ±0.3.
+
 ## 2.2.0 — 2026-07-22 (plugin 0.23.0)
 
 - Rule 10 — measured evidence outranks inspection: eval results, trigger-accuracy ledgers, and baseline reports in the target repo are read and scored from, cited with run date; authored-but-never-run evals earn coverage credit only.
