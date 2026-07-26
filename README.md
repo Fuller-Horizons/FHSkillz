@@ -75,6 +75,20 @@ Restart / reload. Skills activate automatically based on their `description`. Up
 
 **Cowork / desktop — no commands:** **Settings → Customize → Plugins**, find **fh-skillz**, and click **Install** (or **Update** if it's already added). This installs every skill in the plugin from this repo's `main` branch.
 
+**OpenCode CLI:**
+
+OpenCode discovers skills from `~/.claude/skills` and `.claude/skills` natively, so the standard installer works with no extra configuration:
+
+```
+curl -fsSL https://raw.githubusercontent.com/Fuller-Horizons/FHSkillz/main/scripts/install.sh | bash
+```
+
+Prefer OpenCode's own skill paths? Pass one as an argument — global `… | bash -s -- ~/.config/opencode/skills`, or per-project `… | bash -s -- .opencode/skills`. Re-run anytime to pull latest and re-link.
+
+Skills stay model-invoked as everywhere else; an agent can also load one explicitly with OpenCode's native `skill` tool — `skill({ name: "jail-council" })`.
+
+**OpenCode is the only CLI where a Tier-A (cross-provider) `jail-council` is native.** Each subagent can be pinned to a different provider with `"model": "provider/model-id"` in `opencode.json`, so a council of Claude + GPT + Gemini is real rather than three sessions of the same model. Run `opencode models` to list what your configured providers offer, then follow the verified config and protocol in [`skills/jail-council/references/opencode-runbook.md`](skills/jail-council/references/opencode-runbook.md). Watch the headline gotcha: omitting `model:` on a member makes it inherit the caller's model, silently collapsing the council to Tier C while still reporting as cross-provider.
+
 **Any IDE / Cursor / Codex CLI (skills-directory fallback):**
 
 ```
