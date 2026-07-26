@@ -1,7 +1,7 @@
 ---
 name: jail-strategy
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   One evidence-grounded strategy analysis with three lanes — INTERNAL (SWOT
   with enforced sorting rules → TOWS strategy combinations), MACRO (PESTLE:
@@ -46,13 +46,16 @@ a decision).
    - **O/T = external + specific mechanism for THIS subject.** "Market is
      growing" qualifies only with the link.
    - Symptom vs root cause: classify the evidenced cause, not the symptom.
-   - One point, one quadrant; per entry: statement · evidence ref ·
-     materiality (H/M/L) · confidence.
+   - One point, one quadrant — ties broken by the more proximate causal
+     mechanism, stated in the entry; never split or duplicate. Per entry:
+     statement · evidence ref · materiality (H/M/L) · confidence.
 4. **MACRO classify** — per factor: finding (Fact/Inference/Estimate) ·
    evidence ref · trend direction · likelihood (H/M/L) · magnitude (H/M/L) ·
    time-to-impact (<1y / 1–3y / 3y+) · opportunity-or-threat · confidence.
    No defensible link to the decision = cut, not kept for completeness.
    Empty dimension = "nothing material found (searched: …)", never filler.
+   A factor spanning two dimensions files once, under the more proximate
+   causal mechanism — never split or duplicated (same rule as INTERNAL).
 5. **Interaction pass (FULL SWEEP)** — macro factors that flip internal
    entries (a Legal shift that expires a Strength; an Economic turn that
    converts a Weakness into a W×T vulnerability); cross-dimensional macro
@@ -76,6 +79,8 @@ Scope + lane + horizon → classified tables (per lane, fields above) →
 interactions (full sweep) → vulnerabilities (W×T) → TOWS strategies and/or
 implications + priority actions → tripwires → validation requirements →
 dated sources appendix → JAIL-HANDOFF block.
+Tables sort materiality (INTERNAL) / magnitude (MACRO) descending, then
+alphabetical — identical evidence reproduces identical tables on re-run.
 
 ## Gotchas
 - **Aspirations as strengths / weather as opportunity.** Demonstrated and
@@ -90,3 +95,20 @@ dated sources appendix → JAIL-HANDOFF block.
   is a photo, not a forecast.
 - **Double research.** Running separate sweeps per lane duplicates cost —
   one evidence base serves both; that's why the merge exists.
+- **Sensitive inputs.** Competitive intel, confidential financials, and
+  unannounced plans are marked CONFIDENTIAL in the sources appendix; never
+  fabricate a specific to fill an evidence gap; fail closed — when
+  materiality can't be sourced, flag it unverified rather than guessing.
+
+## SUCCESS-TEST (run before shipping)
+- Every S/W entry carries evidence ref + materiality (H/M/L) + confidence.
+- Every O/T entry states its mechanism for this subject, not a bare trend.
+- Every kept MACRO factor has a stated decision-link, or was cut — not kept
+  for completeness.
+- TOWS cells and/or MACRO implications are present, each traceable to
+  specific entries by ref.
+- Every high-magnitude MACRO factor carries a stated tripwire.
+- Every source in the appendix is dated.
+
+Worked FULL SWEEP example with this checklist applied:
+`references/example.md`.
