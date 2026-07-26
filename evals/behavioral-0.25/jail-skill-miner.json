@@ -1,0 +1,40 @@
+{
+  "suite": "jail-skill-miner behavioral 0.25 — fail-closed drop rule (unverified citations, features) and the fixed Stage-3 report schema",
+  "cases": [
+    {
+      "id": "jail-skill-miner-0250-1",
+      "skill": "jail-skill-miner",
+      "prompt": "Mine this repo for skills. Files I opened this session: `db/migrations/README.md:12` — every migration ships with a down-script or CI rejects the PR; `ingest/quarantine.ts:88` and `contacts/import.ts:210` — new records land in quarantine, get reviewed, then adopted (same three-step shape both places); `scripts/commit-gate.sh:5` — no commit without validate + evals passing. Also add the auth rate limiter: I remember `lib/rateLimit.ts:40` having a fail-closed gate, but I didn't open it this time.",
+      "assertions": [
+        "the lib/rateLimit.ts candidate does NOT appear as a candidate row in the report table",
+        "it appears instead under a list labelled DROPPED (unverified) with the reason given as the citation not being opened this session",
+        "every surviving candidate shows its 4 filter boxes",
+        "the report ends with the literal line STATUS: AWAITING-SELECTION",
+        "no SKILL.md draft, marketplace.json entry, or eval file is written in the reply"
+      ]
+    },
+    {
+      "id": "jail-skill-miner-0250-2",
+      "skill": "jail-skill-miner",
+      "prompt": "Extract skills from this codebase. Three candidates I like, all files opened this session: (a) our recurrence engine that expands RRULEs into occurrences and handles DST edges, `lib/recurrence.ts:1-400`; (b) the migration rule in `db/migrations/README.md:12` — a migration without a down-script is rejected by CI; (c) the quarantine to review to adopt flow in `ingest/quarantine.ts:88`, reused in `contacts/import.ts:210`.",
+      "assertions": [
+        "the recurrence engine does NOT appear as a candidate row in the report table",
+        "it appears on a dropped / port-as-code list with the failing box named as being a feature rather than a discipline",
+        "the migration rule and the quarantine-to-adopt pattern both appear as candidate rows with all 4 boxes ticked",
+        "the report ends with the literal line STATUS: AWAITING-SELECTION"
+      ]
+    },
+    {
+      "id": "jail-skill-miner-0250-3",
+      "skill": "jail-skill-miner",
+      "prompt": "What disciplines does this codebase enforce? Everything below I opened this session: `db/migrations/README.md:12` (down-script or CI rejects the PR); `ingest/quarantine.ts:88` plus `contacts/import.ts:210` (quarantine, review, adopt — same shape twice); `scripts/commit-gate.sh:5` (validate + evals must pass before any commit); `docs/CLAUDE.md:30` (clarify ambiguous requests before executing). Give me the mining report.",
+      "assertions": [
+        "every row follows the column order: candidate, evidence file:line, discipline, failure-prevented, NEW/EXTENDS <skill>/DUPLICATE, rank",
+        "each rank is shown as a product of universality and severity with both factors between 1 and 5",
+        "rows are ordered by descending rank, with any tie broken alphabetically by candidate name",
+        "exactly 3 candidates are recommended, each with one reason",
+        "the report ends with the literal line STATUS: AWAITING-SELECTION"
+      ]
+    }
+  ]
+}
