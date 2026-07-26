@@ -1,5 +1,11 @@
 # Changelog — company-prospect-research
 
+## 1.4.0 — 2026-07-25 (plugin 0.25.0)
+
+- Output section now closes with a JAIL-HANDOFF block (constitution key set/order) so downstream skills get structured facts/evidence/risks instead of prose.
+- Added `references/example-brief.md` — one fully filled brief + JAIL-HANDOFF, pointed to from Output.
+- Self-check: a failed check now explicitly blocks delivery (fix it, or downgrade the recommendation to "need more").
+
 ## 1.3.0 — 2026-07-22 (plugin 0.23.0)
 
 - COMPANY SNAPSHOT lane: same 4-stage OSINT discipline + non-negotiable rules repointed at vendor due-diligence / competitor reads / partnership vetting; stage-4 rubric swaps to purpose-fit scores; outreach hook dropped unless asked.

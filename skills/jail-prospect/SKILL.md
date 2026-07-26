@@ -1,7 +1,7 @@
 ---
 name: jail-prospect
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
   Screen a US private company from FREE, authoritative sources — two lanes:
   PROSPECT (business-brokering sell-side + consulting lens, scored brief with
@@ -53,6 +53,22 @@ A **one-page brief** per company (template in `assets/brief-template.md`): snaps
 
 For a list of companies, produce one screening-table row each (template in the same file) and only write full briefs for the rows that clear your pursue threshold.
 
+Filled example (brief + JAIL-HANDOFF): [references/example-brief.md](references/example-brief.md). Close every brief with the constitution's envelope (`docs/JAIL-CONSTITUTION.md`), same key set and order; omit empty keys except `status`, `unknowns`, `approval_required`:
+```yaml
+JAIL-HANDOFF:
+  skill: jail-prospect
+  status: complete | partial | blocked | stop
+  facts: [..]
+  assumptions: [..]        # size-band assumptions, stated explicitly
+  unknowns: [..]           # Missing Evidence + open diligence questions
+  outputs: [prospect brief | screening-table row]
+  evidence: [..]           # source appendix: source · claim · URL · date
+  risks: [..]              # red flags, verbatim
+  confidence: high | medium | low   # mirrors the brief's own confidence %
+  next: jail-prompt | jail-rate | none
+  approval_required: [..]  # any outreach/contact action (Rule 5)
+```
+
 ## Gotchas
 Failure modes seen in practice — check before delivering:
 - **Wrong legal entity.** Common names collide in SoS registries and USAspending; a DBA is not the registrant. Confirm state + registered agent + address agree before attributing anything.
@@ -74,3 +90,4 @@ Failure modes seen in practice — check before delivering:
 - Recommendation is exactly one of: pursue-brokering / pursue-consulting / pass / need more; confidence % present for both scores.
 - Owner data is business-relevant only; every time-sensitive claim dated, >~24-month items flagged stale.
 - 1–5 self-score on grounded / verifiable / scoped / format-matched, plus an overall confidence %.
+- Any failed check blocks delivery — fix it, or downgrade the recommendation to "need more" and state which check failed.
