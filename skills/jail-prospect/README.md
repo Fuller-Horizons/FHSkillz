@@ -2,7 +2,7 @@
 
 Researches a **US private company as a sell-side brokerage / consulting prospect** using only free, authoritative sources. Produces a one-page brief: Likelihood-to-Sell score (0–100), Consulting-Opportunity score (0–100), red flags, an outreach hook, and a fully cited source appendix.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.1.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
 
 ## Non-negotiables
 
