@@ -1,5 +1,9 @@
 # Changelog — jail-exec-brief
 
+## 1.3.1 — 2026-07-26 (plugin 0.25.0)
+
+- Fixed defect found by the behavioral gate: a refusal rationale restated a confidential specific verbatim (raw SSN count) that the shipped brief correctly withheld. Pre-ship check item 7 now explicitly binds every emitted artifact — refusal, hold notice, gap list — not only the shipped brief; name the class of sensitive detail, never the specific, in the rationale.
+
 ## 1.3.0 — 2026-07-25 (plugin 0.25.0)
 
 - Added "Pre-ship check": a 7-item fail-closed gate (answer-first, fact/analysis labels, risk consequences, single priced recommendation, owned+dated next actions, named audience row, no classification silently dropped) run before any brief ships.

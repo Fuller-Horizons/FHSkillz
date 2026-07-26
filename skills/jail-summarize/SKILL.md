@@ -1,7 +1,7 @@
 ---
 name: jail-summarize
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 description: >-
   Convert complex material — analysis, research, technical findings, project
   state — into concise, DECISION-FORCING executive communication that leads
@@ -83,6 +83,9 @@ Before sending, confirm all seven — fail-closed, none skippable:
 5. Every next action has an owner and a date (Immediate next actions).
 6. The audience-calibration row used is named, not implied (Audience calibration).
 7. No confidential/PII/embargoed detail crosses to a wider audience than the source cleared — redact or generalize it; never silently drop the classification.
+
+Item 7 binds every artifact the skill emits, not only the shipped brief: a refusal, hold notice, or gap list explaining why nothing shipped is itself a disclosure surface. Name the class ("customer PII", "regulated identifiers"), never the specific value, in that rationale exactly as in the brief.
+
 Any item that fails stays unshipped until fixed — never send a brief with an open item.
 
 ## Related skills
