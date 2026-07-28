@@ -46,7 +46,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 |---|---|
 | jail-strategy | task-contract → ONE research sweep → classify (INTERNAL sort rules and/or MACRO 6 dims) → interaction pass (full sweep) → red-team → TOWS/implications+tripwires → decide → summarize → verify · tripwires → jail-memory |
 | jail-bmc | task-contract → research → 9 blocks → coherence pass → red-team → assumption-ranking/experiments → decide → summarize → verify |
-| jail-cpr | task-contract → memory retrieval → CPR (summarize voice) → agenda-from-Results → verify → render DOCX/PDF |
+| jail-cpr | DESIGN: task-contract → memory retrieval → CPR (summarize voice) → agenda-from-Results → verify → render DOCX/PDF · COMMIT: task-contract (period+domains) → memory retrieval → CPR, no agenda → verify → render · DEBRIEF: extract → Results audit → route |
 
 Wave 3 (planned, not shipped): docs/ROADMAP-wave3-domain-packs.md.
 
