@@ -1,5 +1,21 @@
 # Changelog — cpr-agenda-builder
 
+## 1.5.0 — 2026-07-27 (plugin 0.26.0)
+
+- **New COMMIT lane.** A third lane for a personal or team commitment
+  contract over a defined period (a quarter, a "tour," a fixed number of
+  weeks) — no meeting, no agenda. Its own Purpose rule (identity-level why,
+  not one sentence) and a Results rule tightened to self-contained testable
+  (no outside-witness corroboration, no undefined qualifiers). DEBRIEF's
+  Results-audit step now doubles as the period-end scorecard, accepting a
+  self-report/check-in as valid input alongside transcripts.
+- **New COMMIT output template**, alongside the existing DESIGN template —
+  leads with an explicit **DEADLINE** (the period's real calendar end date,
+  pinned in step 1 and checked by the closing verify gate), not folded
+  into a Result or left as a fuzzy "in a few months."
+- **New gotchas:** unverifiable corroboration, undefined qualifiers,
+  DESIGN-machinery leaking into COMMIT, fuzzy deadline.
+
 ## 1.4.0 — 2026-07-25 (plugin 0.25.0)
 
 - **Closing checks are now hard gates.** DESIGN step 5 (jail-verify) and DEBRIEF step 4 (Results audit) state FAIL-any-check gates — do not render the document until fixed or flagged inline.

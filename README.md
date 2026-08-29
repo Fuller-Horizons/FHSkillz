@@ -47,7 +47,7 @@ The skills sort into four groups below. Every skill name links to its own folder
 |---|---|---|
 | [`jail-strategy`](skills/jail-strategy/) | You need a SWOT, a macro scan, or both, tied to one real decision | Sorted SWOT and/or PESTLE tables, plus a table of moves you can act on |
 | [`jail-bmc`](skills/jail-bmc/) | You need a business model canvas that separates proof from hope before a raise or a pivot | A nine-block canvas with proven-vs-guessed labels, and the riskiest guesses to test first |
-| [`jail-cpr`](skills/jail-cpr/) | Your meetings decide nothing, and you want an agenda built backward from real outputs | A timed agenda where every item names an owner and output, plus a scored debrief after |
+| [`jail-cpr`](skills/jail-cpr/) | Your meetings decide nothing and you want an agenda built backward from real outputs (**DESIGN**), or you want a personal/team commitment contract for a set period with no meeting at all (**COMMIT**) | A timed agenda where every item names an owner and output — or a dated, testable Results contract for the period — plus a scored debrief/audit after (**DEBRIEF**) |
 
 ### JAIL-PY companions (optional; need code execution)
 
