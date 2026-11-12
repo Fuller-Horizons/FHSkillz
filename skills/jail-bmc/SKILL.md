@@ -1,7 +1,7 @@
 ---
 name: jail-bmc
 metadata:
-  version: 1.4.1
+  version: 1.4.2
 description: >-
   Build or evaluate a nine-block Business Model Canvas: "business model
   canvas", "BMC", "map the business model", pressure-test how a venture or
@@ -19,8 +19,10 @@ the riskiest assumption leaves with an experiment attached.
 
 **Wrong-lane check first.** Asked for a SWOT, TOWS, PESTLE, five forces or
 competitor scan? That is **jail-strategy**'s job: say so in one line and
-hand off to it by name (fallback: do that analysis inline in jail-strategy's
-shape). Never force a canvas, and never reply with questions only.
+hand off to it by name, or (if it isn't available) write the SWOT now in
+jail-strategy's shape from what was given, with stated assumptions; any
+questions come after the analysis. Never force a canvas, and never reply
+with questions only.
 
 **Label mapping (declared once).** This skill keeps two domain labels:
 **VALIDATED** = a Fact-backed element (it carries a checkable evidence
@@ -44,7 +46,9 @@ Unknown.
    evidence strength: none/weak/comparable-based) · confidence.
    **Fail closed:** VALIDATED needs a checkable evidence ref (dated
    citation, transaction, signed commitment) or it defaults to
-   HYPOTHESIS; step 4 may not start until every element is labeled.
+   HYPOTHESIS. An operating owner's own current figures (customers, prices,
+   costs, volumes) are VALIDATED with ref `User-provided: owner, <date>`
+   and a spot-check note; forecasts and plans stay HYPOTHESIS; step 4 may not start until every element is labeled.
    **Fixed schema**, blocks always in this order (customer segments,
    value propositions, channels, customer relationships, revenue
    streams, key resources, key activities, key partnerships, cost

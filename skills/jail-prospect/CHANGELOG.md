@@ -1,5 +1,8 @@
 # Changelog — company-prospect-research
 
+## 1.5.2 — 2026-11-12
+- Round 2 from the 0.27.1 retest: component tables carry a signal-and-source column next to every sub-score; same-name businesses and competitors appear only with a source.
+
 ## 1.5.1 — 2026-11-12
 - Each score line names its drivers with citations; every body Fact carries an inline source; the brief ends with one RECOMMENDATION line (exactly one of four) plus confidence. From the 0.27 batch-2 blind test.
 

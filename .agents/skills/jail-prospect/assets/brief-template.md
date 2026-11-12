@@ -23,13 +23,13 @@ Labels: Fact · User-provided · Inference · Estimate · Judgment · Unknown.
 - Market pull: [signal] — _[label, source]_
 
 Likelihood-to-Sell components (checked with score-check.py):
-| Component | Score | Max |
-|---|---|---|
-| Succession and owner signals | | 30 |
-| Exit / transition signals | | 25 |
-| Saleability and quality | | 25 |
-| Market pull | | 20 |
-| Total | | 100 |
+| Component | Score | Max | Signal that drove it [source] |
+|---|---|---|---|
+| Succession and owner signals | | 30 | [signal] [n], or 0 + diligence question |
+| Exit / transition signals | | 25 | [signal] [n], or 0 + diligence question |
+| Saleability and quality | | 25 | [signal] [n], or 0 + diligence question |
+| Market pull | | 20 | [signal] [n], or 0 + diligence question |
+| Total | | 100 | |
 
 ### Consulting-Opportunity drivers
 - Operational: [signal] — _[label, source]_
@@ -38,13 +38,13 @@ Likelihood-to-Sell components (checked with score-check.py):
 - Compliance/risk: [signal] — _[label, source]_
 
 Consulting-Opportunity components:
-| Component | Score | Max |
-|---|---|---|
-| Operational gaps | | 30 |
-| Digital / tech maturity gaps | | 25 |
-| Growth strain | | 25 |
-| Compliance / risk exposure | | 20 |
-| Total | | 100 |
+| Component | Score | Max | Signal that drove it [source] |
+|---|---|---|---|
+| Operational gaps | | 30 | [signal] [n], or 0 + diligence question |
+| Digital / tech maturity gaps | | 25 | [signal] [n], or 0 + diligence question |
+| Growth strain | | 25 | [signal] [n], or 0 + diligence question |
+| Compliance / risk exposure | | 20 | [signal] [n], or 0 + diligence question |
+| Total | | 100 | |
 
 ## Indicative size band (NOT a valuation)
 - **Range:** [$X–$Y revenue, rough] — _Estimate_

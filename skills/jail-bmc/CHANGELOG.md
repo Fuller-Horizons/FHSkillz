@@ -1,5 +1,8 @@
 # Changelog — business-model-canvas
 
+## 1.4.2 — 2026-11-12
+- Round 2 from the 0.27.1 retest: wrong-lane requests get the SWOT written now (questions after), and an operating owner's own current figures count as VALIDATED (User-provided ref) while forecasts stay HYPOTHESIS.
+
 ## 1.4.1 — 2026-11-12
 - Wrong-lane check: SWOT/PESTLE/five-forces requests hand off to jail-strategy by name (or do it inline) instead of forcing a canvas or replying with questions only. From the 0.27 batch-2 blind test.
 
