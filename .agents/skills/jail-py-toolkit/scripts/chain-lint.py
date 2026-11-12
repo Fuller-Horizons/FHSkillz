@@ -70,6 +70,56 @@ MODEL_ID = re.compile(r"^claude-(haiku|sonnet|opus|fable)-\d+(-\d+)*(\[1m\])?$")
 PIN_FAMILIES = {"fable": "claude-fable-5-2"}
 TIER = {"haiku": 1, "sonnet": 2, "opus": 3, "fable": 4}
 VALID_CHECK_POLICY = {"all", "risk"}
+VALID_MODES = {"quality-first", "cost-first"}
+STRONG_TIER = 3  # opus and above
+
+
+def parse_score(v):
+    """'16/16' -> 1.0, 0.9 -> 0.9; None if unreadable."""
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    m = re.match(r"^\s*(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)\s*$", str(v))
+    if m and float(m.group(2)) > 0:
+        return float(m.group(1)) / float(m.group(2))
+    return None
+
+
+def lint_selection(sid, ag, mode):
+    """Validate agent.selected_by (measured model trial)."""
+    errors, warnings = [], []
+    sel = ag.get("selected_by")
+    if not isinstance(sel, dict):
+        return [f"step {sid!r}: agent.selected_by must be a JSON object"], []
+    cands = sel.get("candidates")
+    if not isinstance(cands, list) or len(cands) < 2 or not all(valid_model(c) for c in cands):
+        return [f"step {sid!r}: selected_by.candidates must list 2+ valid models"], []
+    scores = sel.get("scores") if isinstance(sel.get("scores"), dict) else {}
+    parsed = {c: parse_score(scores.get(c)) for c in cands}
+    missing = [c for c, v in parsed.items() if v is None]
+    if missing:
+        return [f"step {sid!r}: selected_by.scores missing or unreadable for {missing}"], []
+    if not isinstance(sel.get("items"), int) or sel.get("items") < 1:
+        warnings.append(f"step {sid!r}: selected_by.items (number of test items) missing")
+    if not str(sel.get("date") or "").strip():
+        warnings.append(f"step {sid!r}: selected_by.date missing (re-run selection when models change)")
+    model = ag.get("model")
+    if model not in parsed:
+        errors.append(f"step {sid!r}: chosen model {model!r} is not among selected_by.candidates")
+        return errors, warnings
+    top = max(parsed.values())
+    if parsed[model] < top:
+        errors.append(f"step {sid!r}: chosen model {model!r} scored {parsed[model]:.2f}, below the top score {top:.2f}")
+    tops = [c for c, v in parsed.items() if v == top]
+    ranked = [t for t in (tier(c) for c in tops) if t is not None]
+    if ranked and tier(model) is not None and tier(model) > min(ranked):
+        warnings.append(f"step {sid!r}: a cheaper candidate tied the top score; a tie goes to the cheaper model")
+    if mode == "quality-first":
+        strong = [c for c in cands if (tier(c) or 0) >= STRONG_TIER]
+        if not strong:
+            errors.append(f"step {sid!r}: quality-first selection must include a strong candidate (opus or fable)")
+    return errors, warnings
 MAX_AGENTS_BEFORE_BATCH_WARNING = 8
 
 
@@ -268,6 +318,26 @@ def lint_orchestration(manifest, steps):
         if str(ag.get("model") or "").startswith(("haiku", "claude-haiku")) and not VERIFIABLE.search(str(by_id[sid].get("success_test") or "")):
             warnings.append(f"step {sid!r}: haiku step needs a machine-verifiable success_test to catch cheap misses")
 
+    mode = orch.get("mode")
+    if mode is None:
+        warnings.append("orchestration.mode not set; treated as quality-first")
+        mode = "quality-first"
+    elif mode not in VALID_MODES:
+        errors.append(f"orchestration.mode {mode!r} not one of {sorted(VALID_MODES)}")
+        mode = "quality-first"
+    for sid in agent_steps:
+        ag = by_id[sid].get("agent")
+        if not isinstance(ag, dict):
+            continue
+        if "selected_by" in ag:
+            e3, w3 = lint_selection(sid, ag, mode)
+            errors += e3
+            warnings += w3
+        elif mode == "quality-first" and tier(ag.get("model")) is not None \
+                and tier(ag.get("model")) < STRONG_TIER and sid != str(orch.get("verifier") or ""):
+            warnings.append(f"step {sid!r}: quality-first mode, {ag.get('model')!r} below the strong tier "
+                            "with no agent.selected_by proof that it ties the strong model")
+
     if len(agent_steps) > MAX_AGENTS_BEFORE_BATCH_WARNING:
         warnings.append(f"{len(agent_steps)} agent steps: each agent re-loads its instructions and tools; "
                         "batch items into fewer agents unless isolation or speed requires it")
@@ -289,6 +359,25 @@ def lint_orchestration(manifest, steps):
         pm = {(by_id[c].get("agent") or {}).get("model") for c in checked if isinstance(by_id[c].get("agent"), dict)}
         if vm and pm == {vm} and vm != "inherit":
             warnings.append(f"verifier {vid!r} uses the same model as everything it checks; prefer a different model")
+        if mode == "quality-first":
+            if tier(vm) is not None and tier(vm) < STRONG_TIER:
+                errors.append(f"quality-first: verifier {vid!r} must run on a strong model (opus or fable), not {vm!r}")
+            strong_producers = {m for m in pm if (tier(m) or 0) >= STRONG_TIER}
+            if vm in strong_producers:
+                warnings.append(f"quality-first: verifier {vid!r} shares model {vm!r} with a strong producer it checks; "
+                                "use a different strong model")
+
+    # merge steps: agent steps that combine 2+ other agent steps' outputs
+    if mode == "quality-first":
+        for sid in agent_steps:
+            if sid == vid:
+                continue
+            reqs = as_keys(by_id[sid].get("requires")) or []
+            sources = {p for k in reqs for p in produced.get(k, set()) if p != sid and p in agent_steps}
+            m = (by_id[sid].get("agent") or {}).get("model") if isinstance(by_id[sid].get("agent"), dict) else None
+            if len(sources) >= 2 and tier(m) is not None and tier(m) < STRONG_TIER:
+                errors.append(f"quality-first: merge step {sid!r} combines {len(sources)} agents' work and must run "
+                              f"on a strong model (opus or fable), not {m!r}")
 
     groups = {}
     for sid, st in by_id.items():

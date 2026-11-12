@@ -11,7 +11,8 @@
     "max_depth": 1,
     "budget": "45 minutes wall clock; on overrun stop and return finished rows plus gaps",
     "verifier": "verify",
-    "check_policy": "risk"
+    "check_policy": "risk",
+    "mode": "quality-first"
   },
   "steps": [
     {
@@ -37,7 +38,22 @@
           "competitor-list row A"
         ],
         "escalate_to": "sonnet",
-        "max_output": "JSON only, 400 tokens"
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
       }
     },
     {
@@ -63,7 +79,22 @@
           "competitor-list row B"
         ],
         "escalate_to": "sonnet",
-        "max_output": "JSON only, 400 tokens"
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
       }
     },
     {
@@ -89,7 +120,22 @@
           "competitor-list row C"
         ],
         "escalate_to": "sonnet",
-        "max_output": "JSON only, 400 tokens"
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
       }
     },
     {
@@ -107,7 +153,7 @@
       "success_test": "pricing-table.csv parses with 3 rows and columns service, client_price, competitor, competitor_price, source_id; gaps.md lists every Unknown",
       "on_fail": "stop",
       "agent": {
-        "model": "sonnet",
+        "model": "opus",
         "effort": "medium",
         "tools": [],
         "scope": "Merge the three scans with the client sheet; no new research",
@@ -135,7 +181,7 @@
       "success_test": "verdict.json parses; one PASS, FAIL or UNVERIFIED entry per pricing-table row with the evidence used",
       "on_fail": "human",
       "agent": {
-        "model": "opus",
+        "model": "claude-fable-5-2",
         "effort": "medium",
         "tools": [
           "web_fetch"

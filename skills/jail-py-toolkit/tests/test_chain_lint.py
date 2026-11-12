@@ -126,7 +126,7 @@ class TestChainLintDelegation(unittest.TestCase):
 
     def test_full_model_ids_accepted(self):
         def f(m):
-            step(m, "compare")["agent"]["model"] = "claude-sonnet-5-5"
+            step(m, "compare")["agent"]["model"] = "claude-opus-5-5"
             step(m, "verify")["agent"]["model"] = "claude-fable-5-2"
         rc, _, err = lint(mutate(f), "--strict")
         self.assertEqual(rc, 0, err)
@@ -195,6 +195,79 @@ class TestChainLintDelegation(unittest.TestCase):
         rc, _, err = lint(mutate(f), "--strict")
         self.assertEqual(rc, 1)
         self.assertIn("batch items into fewer agents", err)
+
+    # ---- quality-first mode and measured model selection
+    def test_mode_missing_warns_and_bad_mode_errors(self):
+        m = mutate(lambda m: m["orchestration"].pop("mode"))
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("treated as quality-first", err)
+        rc, _, err = lint(mutate(lambda m: m["orchestration"].update(mode="fast")))
+        self.assertEqual(rc, 1)
+        self.assertIn("orchestration.mode", err)
+
+    def test_quality_first_weak_merge_errors(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "compare")["agent"].update(model="sonnet")))
+        self.assertEqual(rc, 1)
+        self.assertIn("merge step 'compare'", err)
+
+    def test_quality_first_weak_verifier_errors(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "verify")["agent"].update(model="sonnet")))
+        self.assertEqual(rc, 1)
+        self.assertIn("verifier 'verify' must run on a strong model", err)
+
+    def test_quality_first_verifier_same_as_merge_warns(self):
+        m = mutate(lambda m: step(m, "verify")["agent"].update(model="opus"))
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("use a different strong model", err)
+
+    def test_quality_first_unmeasured_cheap_step_warns(self):
+        m = mutate(lambda m: step(m, "scan-a")["agent"].pop("selected_by"))
+        self.assertEqual(lint(m)[0], 0)
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("no agent.selected_by proof", err)
+
+    def test_cost_first_allows_cheap_merge_unmeasured(self):
+        def f(m):
+            m["orchestration"]["mode"] = "cost-first"
+            step(m, "compare")["agent"]["model"] = "sonnet"
+            step(m, "scan-a")["agent"].pop("selected_by")
+        rc, _, err = lint(mutate(f), "--strict")
+        self.assertEqual(rc, 0, err)
+
+    def test_selection_chosen_below_top_errors(self):
+        def f(m):
+            step(m, "scan-a")["agent"]["selected_by"]["scores"] = {"haiku": "9/12", "sonnet": "12/12", "opus": "12/12"}
+        rc, _, err = lint(mutate(f))
+        self.assertEqual(rc, 1)
+        self.assertIn("below the top score", err)
+
+    def test_selection_tie_should_pick_cheaper(self):
+        def f(m):
+            ag = step(m, "scan-a")["agent"]
+            ag["model"] = "sonnet"
+            ag["escalate_to"] = "opus"
+        rc, _, err = lint(mutate(f), "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("tie goes to the cheaper model", err)
+
+    def test_selection_needs_strong_candidate_in_quality_first(self):
+        def f(m):
+            step(m, "scan-a")["agent"]["selected_by"]["candidates"] = ["haiku", "sonnet"]
+            step(m, "scan-a")["agent"]["selected_by"]["scores"] = {"haiku": "12/12", "sonnet": "12/12"}
+        rc, _, err = lint(mutate(f))
+        self.assertEqual(rc, 1)
+        self.assertIn("must include a strong candidate", err)
+
+    def test_selection_shape_errors(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "scan-a")["agent"]["selected_by"].update(scores={"haiku": "x"})))
+        self.assertEqual(rc, 1)
+        self.assertIn("scores missing or unreadable", err)
+        rc, _, err = lint(mutate(lambda m: step(m, "scan-a")["agent"]["selected_by"].update(candidates=["haiku"])))
+        self.assertEqual(rc, 1)
+        self.assertIn("2+ valid models", err)
 
 
 if __name__ == "__main__":

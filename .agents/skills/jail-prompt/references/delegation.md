@@ -103,6 +103,56 @@ BEFORE RETURNING: check yourself against the SUCCESS TEST; list gaps
   list. It does **not** get worker transcripts or their "done" claims.
 - It returns PASS / FAIL / UNVERIFIED per check, with the evidence it used.
 
+## Mode: quality-first (default) or cost-first
+
+`orchestration.mode` sets what "good enough" means for every step.
+
+**quality-first (the default).** The bar is the best output the strongest
+model would give.
+- The lead agent's merge and the final check run on a strong model (Opus 5.5
+  or Fable 5.2), never lower. The check runs on a different strong model from
+  the one that produced what it checks (e.g. merge on Opus 5.5, check on Fable
+  5.2).
+- A cheaper model may keep a step **only with measured proof** that it scores
+  the same as the strong model on that step's test items (`agent.selected_by`,
+  below). Without proof, the step starts one tier up from the table and
+  escalates from there.
+- Cheap-first escalation (rule 5 below) still applies, so you pay strong-model
+  prices only where the cheap model is proven equal or the item needs it.
+
+**cost-first (only when the user asks for it, e.g. a quick internal draft).**
+Cheapest model that passes the step's SUCCESS TEST, as in the table. Say in the
+reply that the run was cost-first.
+
+## Measured model selection
+
+For any prompt set that will be reused, run at volume, or shipped to a client,
+pick each step's model by test, not by table:
+
+1. Take 3–5 test items for the step (typical, hard, edge; prompt-testing.md).
+2. Run the step's brief on 2–3 candidate models: the strong model plus the
+   one or two cheaper ones you hope to use. Same brief, same effort, same items.
+3. Grade blind (labels shuffled, a fresh grader on a strong model) against the
+   step's SUCCESS TEST and QUALITY BAR, pass/fail per check.
+4. Choose the highest score. A tie goes to the cheaper model. In quality-first
+   mode a cheaper model must **tie the strong model**, not just pass.
+5. Record it on the step and save it with the prompt in the library, so the
+   trial isn't repeated until the model, the brief or the inputs change:
+
+```json
+"selected_by": {
+  "date": "2026-11-12",
+  "items": 4,
+  "candidates": ["haiku", "sonnet", "opus"],
+  "scores": {"haiku": "16/16", "sonnet": "16/16", "opus": "16/16"},
+  "grader": "fresh opus agent, blind"
+}
+```
+
+Re-run the selection when a new model generation ships (e.g. Fable 5.1 → 5.2)
+or the step's brief changes. No way to run trials in this session → keep
+quality-first defaults and list "model selection not measured" as an Unknown.
+
 ## Quality per token: the architecture
 
 Goal: the best output (on goal, authoritative, fewest errors) for the fewest
@@ -147,7 +197,7 @@ claim (numbers, prices, legal or safety facts, anything client-facing) against
 its source, and a sample of the rest. A failure in the sample means checking
 everything.
 
-**8. Strong models where judgment lives.** The lead agent's merge and the final
+**8. Strong models where judgment lives (both modes).** The lead agent's merge and the final
 check decide the quality of the whole run, so they get the strong model (Opus
 5.5; Fable 5.2 for the hardest jobs). Extraction and formatting never do.
 
@@ -183,7 +233,9 @@ prompt was validated on 5.1): [generation-settings.md](generation-settings.md).
 | `agent.max_output` | Output cap per call, e.g. `"800 tokens"` or `"JSON only, 300 words"`. |
 | `agent.escalate_to` | Stronger model for items that fail the check, come back Unknown, or are low confidence. Must be a valid model. |
 | `agent.batch` | Items per agent when one brief covers many items, e.g. `10`. |
-| `orchestration.check_policy` | `"all"`, or `"risk"` = every high-risk claim plus a sample of the rest. |
+| `orchestration.check_policy` | `"all"`, or `"risk"` = every high-risk claim plus a sample of the rest. Quality-first client work: `"all"` for numbers and facts. |
+| `orchestration.mode` | `"quality-first"` (default) or `"cost-first"`. |
+| `agent.selected_by` | The measured model trial for this step (above). Required in quality-first mode for any step below the strong tier. |
 
 ## Checks before surfacing
 

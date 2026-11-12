@@ -28,9 +28,10 @@ the scans one after another and check its own output.
 ### Delegation manifest
 
 The manifest is in `jail-py-toolkit/tests/fixtures/delegation_pass.json`
-(steps: `scan-a`, `scan-b`, `scan-c` on Haiku in parallel group `scan` →
-`compare` on Sonnet → `verify` on Opus; `max_agents` 5, `max_depth` 1,
-45-minute budget). `chain-lint.py --strict` on it: **PASS, 0 warnings.**
+(mode **quality-first**; steps: `scan-a`, `scan-b`, `scan-c` on Haiku in
+parallel group `scan`, escalating to Sonnet → `compare` on Opus 5.5 → `verify`
+on Fable 5.2 (`claude-fable-5-2`); `max_agents` 5, `max_depth` 1, 45-minute
+budget). `chain-lint.py --strict` on it: **PASS, 0 warnings.**
 
 ### Orchestrator prompt
 
@@ -86,10 +87,13 @@ BEFORE RETURNING: check against the SUCCESS TEST.
 
 **Model choice:** the scans are extraction into a fixed schema, so Haiku at low
 effort, with a machine-checkable test that catches a miss and sends only the
-failed items to Sonnet. Every return is capped JSON, so the lead agent's
-context stays small. The check covers every price (all are client-facing). Compare is light
-analysis (Sonnet). The verifier uses a different model from every producer
-(Opus). Try one scan first; if it fails its SUCCESS TEST, move scans to Sonnet.
+failed items to Sonnet. Haiku keeps the scans only because a
+measured trial showed it tied Opus on 4 test items (12/12 each, recorded as
+`selected_by` on each scan step); without that proof, quality-first would start
+the scans on Sonnet. Every return is capped JSON, so the lead agent's context
+stays small. The merge combines three agents' work, so it runs on Opus 5.5.
+The check runs on a different strong model (Fable 5.2) and covers every price,
+since all are client-facing.
 
 ```yaml
 JAIL-HANDOFF:

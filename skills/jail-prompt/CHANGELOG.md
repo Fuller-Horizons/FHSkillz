@@ -2,6 +2,12 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.5.0 — 2026-11-12
+- **Quality-first mode (default)** for delegation sets: merge steps and the final check run on strong models (Opus 5.5 / Fable 5.2), the check on a different strong model from the producer; a cheaper model keeps a step only with measured proof it ties the strong model. **Cost-first** only on request, stated in the reply.
+- **Measured model selection** (`references/delegation.md`, `references/prompt-testing.md`): run the step on 2-3 candidate models over 3-5 test items, grade blind, take the top score (tie → cheaper; quality-first needs a tie with the strong model), record it as `agent.selected_by` and in the prompt library; re-run when models or briefs change.
+- `chain-lint.py`: `orchestration.mode`; quality-first errors on a weak merge or verifier, warns on a verifier sharing a strong producer's model and on unmeasured cheap steps; validates `selected_by` (2+ valid candidates, readable scores, chosen = top score, tie → cheaper, strong candidate present). +10 tests (toolkit 100).
+- Worked example now quality-first: scans on Haiku with recorded trials, merge on Opus 5.5, check on Fable 5.2.
+
 ## 2.4.0 — 2026-11-12
 - **Quality-per-token architecture** for delegation sets (`references/delegation.md`): fewer batched agents, pointers instead of pasted context, identical brief openings for cache reuse, capped JSON returns, cheap-first cascade that escalates only failed / Unknown / low-confidence items, script checks before model checks, risk-based checking, strong models only for the merge and the final check, effort per step, fetch-once sources.
 - Manifest fields `agent.max_output`, `agent.escalate_to`, `agent.batch`, `orchestration.check_policy`. `chain-lint.py` errors on an invalid or non-stronger escalation target, bad batch or check policy; warns on a missing output cap, a cheap step with no escalation, and more than 8 agents. +6 tests (toolkit 90).

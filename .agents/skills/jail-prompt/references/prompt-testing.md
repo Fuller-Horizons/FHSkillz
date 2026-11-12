@@ -47,6 +47,14 @@ both outputs blind (labels A/B, order shuffled). Report:
 If the engineered prompt doesn't win, say so plainly and ship the simpler one.
 Extra structure that doesn't improve the output is cost, not quality.
 
+## Picking the model by test
+
+The same test set picks the model: run it on 2–3 candidate models, grade
+blind, take the top score (tie → cheaper; quality-first needs a tie with the
+strong model). Record the result in RUN SETTINGS (`model sonnet · effort
+medium · selected by test: 4 items, sonnet 16/16 = opus 16/16`) and in the
+library entry. Delegation sets record it per step (delegation.md).
+
 ## 5. Report in the reply
 
 ```
