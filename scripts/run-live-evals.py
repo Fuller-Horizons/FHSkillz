@@ -175,7 +175,8 @@ def execute_one(job, args, key, lock, done_ids):
     timed_out = False
     if not resumed:
         cmd = claude_cmd() + [
-            "-p", c["prompt"], "--model", model,
+            "-p", (f"/{args.force_skill_prefix}:{c['skill']} " if args.force_skill_prefix else "") + c["prompt"],
+            "--model", model,
             "--setting-sources", "project",
             "--plugin-dir", os.path.abspath(job["dir"]),
             "--output-format", "stream-json", "--verbose",
@@ -444,6 +445,9 @@ def main(argv=None):
     r.add_argument("--timeout", type=int, default=600)
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--dry-run", action="store_true")
+    r.add_argument("--force-skill-prefix", default=None,
+                   help="FORCED arm: prefix each prompt with /<prefix>:<skill> so the skill "
+                        "under test is always loaded (e.g. fh-skillz). Default: natural routing.")
     g = sub.add_parser("grade-pack")
     g.add_argument("--out", required=True)
     s = sub.add_parser("score")
