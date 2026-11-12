@@ -2,6 +2,13 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.6.0 — 2026-11-12
+- **Leaner core.** SKILL.md rewritten: 2,213 → 1,304 words (−41%), 124 → 96 lines; every decision rule kept, detail moved to references. Fixed a stale `temperature: 0.0` dry-run note.
+- **Delegation guide split**: `references/delegation.md` (how to delegate, quality-per-token rules) + new `references/model-selection.md` (quality-first vs cost-first, measured selection, model table).
+- **One model reference**: new `references/models.md` (IDs, aliases per host, tiers, effort defaults, accepted settings, Fable safety routing, tool-neutral tiers, sources) with a `Last verified:` date; other guides point to it instead of repeating facts.
+- **Testing is hard to skip**: every engineered-prompt reply carries `TEST RESULTS: …` or `UNTESTED: <reason> · test set: …`. `prompt-lint.py --reply` enforces it and lints every prompt block in a reply. +3 tests.
+- **Examples linted on every validation**: `scripts/validate-skills.py` runs `prompt-lint --reply --strict` on every `references/example-*.md` and `chain-lint --strict` on their manifests (blocking), and warns when a `Last verified:` date is over 60 days old. Delegation example briefs completed (QUALITY BAR, PROCESS) to pass.
+
 ## 2.5.0 — 2026-11-12
 - **Quality-first mode (default)** for delegation sets: merge steps and the final check run on strong models (Opus 5.5 / Fable 5.2), the check on a different strong model from the producer; a cheaper model keeps a step only with measured proof it ties the strong model. **Cost-first** only on request, stated in the reply.
 - **Measured model selection** (`references/delegation.md`, `references/prompt-testing.md`): run the step on 2-3 candidate models over 3-5 test items, grade blind, take the top score (tie → cheaper; quality-first needs a tie with the strong model), record it as `agent.selected_by` and in the prompt library; re-run when models or briefs change.

@@ -104,10 +104,34 @@ def lint(text):
     return errors, warnings
 
 
+TEST_LINE = re.compile(r"(?m)^\W{0,3}(TEST RESULTS|UNTESTED)\W{0,3}:\s*\S")
+
+
+def lint_reply(text):
+    """Lint a whole jail-prompt reply: every fenced prompt block, plus the
+    TEST RESULTS / UNTESTED line. Full prompts (blocks with METADATA:) get
+    warnings; standalone subagent briefs get errors only."""
+    errors, warnings = [], []
+    blocks = [b for b in re.findall(r"```[a-zA-Z]*\n(.*?)```", text, flags=re.S)
+              if re.search(r"(?m)^\s*OBJECTIVE\s*:", b) and re.search(r"(?m)^\s*SUCCESS TEST\s*:", b)]
+    if not blocks:
+        return errors, ["no engineered prompt block found (fine for a STOP reply)"]
+    for i, b in enumerate(blocks, 1):
+        e, w = lint(b)
+        errors += [f"prompt block #{i}: {x}" for x in e]
+        if re.search(r"(?m)^\s*METADATA\s*:", b):
+            warnings += [f"prompt block #{i}: {x}" for x in w]
+    if not TEST_LINE.search(text):
+        errors.append("reply has no 'TEST RESULTS:' or 'UNTESTED: <reason>' line")
+    return errors, warnings
+
+
 def main():
     ap = argparse.ArgumentParser(description="Lint a JAIL-PROMPT engineered-prompt block.")
     ap.add_argument("file", nargs="?", default="-", help="file to lint; - or omit for stdin")
     ap.add_argument("--strict", action="store_true", help="treat warnings as failures")
+    ap.add_argument("--reply", action="store_true",
+                    help="lint a whole reply: all prompt blocks + the TEST RESULTS/UNTESTED line")
     args = ap.parse_args()
 
     try:
@@ -116,7 +140,7 @@ def main():
         print(f"error: cannot read {args.file}: {e}", file=sys.stderr)
         return 2
 
-    errors, warnings = lint(text)
+    errors, warnings = (lint_reply if args.reply else lint)(text)
     for w in warnings:
         print(f"warning: {w}", file=sys.stderr)
     for e in errors:

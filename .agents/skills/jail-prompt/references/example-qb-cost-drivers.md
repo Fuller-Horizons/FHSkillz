@@ -48,6 +48,8 @@ BEFORE RETURNING: self-check against SUCCESS TEST and QUALITY BAR; 1-5 score on 
 ```
 (The sample row is a placeholder showing the shape; it contains no data.)
 
+UNTESTED: the P&L export isn't attached, so there is nothing to run it on · test set: your export, plus one P&L with a net loss and one with expense lines split across sub-accounts (checks the ranking and the total).
+
 **Next step, pick one:** (A) attach the P&L and I will run this prompt, (B) paste only the expense section, (C) change the output to a one-page memo.
 
 ```yaml

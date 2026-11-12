@@ -67,6 +67,26 @@ class TestPromptLint(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("no effort level", err)
 
+    def test_reply_needs_test_line(self):
+        reply = "Verdict: GO.\n```\n" + FULL + "```\n"
+        rc, _, err = lint(reply, "--reply")
+        self.assertEqual(rc, 1)
+        self.assertIn("TEST RESULTS", err)
+        rc, _, err = lint(reply + "\nUNTESTED: no data attached · test set: 3 P&Ls\n", "--reply", "--strict")
+        self.assertEqual(rc, 0, err)
+        rc, _, err = lint(reply + "\n**TEST RESULTS:** 4 inputs, 20/20\n", "--reply", "--strict")
+        self.assertEqual(rc, 0, err)
+
+    def test_reply_lints_each_block(self):
+        bad = FULL.replace("OUTPUT FORMAT:", "FORMAT:")
+        rc, _, err = lint("```\n" + bad + "```\nUNTESTED: x\n", "--reply")
+        self.assertEqual(rc, 1)
+        self.assertIn("prompt block #1: missing required section: OUTPUT FORMAT", err)
+
+    def test_reply_without_block_is_ok(self):
+        rc, _, err = lint("STOP: use a spreadsheet.\n", "--reply")
+        self.assertEqual(rc, 0, err)
+
 
 if __name__ == "__main__":
     unittest.main()
