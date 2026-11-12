@@ -6,6 +6,7 @@
 - **Ledger check moved to Step 0** (before naming the shape); design direction chosen and stated; SPIKE VERDICT gains DESIGN and ANSWER lines and counts rounds; SHIP GATE clause 6 (artifact-lint) and evidence must be reviewer answers or surfaced state, never the builder's opinion.
 - **artifact-lint.py** (jail-py-toolkit) checks review pages; repo validation runs it on HTML worked examples.
 - Worked example: `references/example-scorecard-layouts.html` (lint-clean, browser-checked at desktop and 360px) + `references/example-review-round.md`. JAIL-HANDOFF with `tested:`. Description 447 chars with "Do NOT use"; core 137 lines.
+- **Sandboxed hosts:** review pages must run without errors inside sandboxed previews (the Claude app blocks `history.replaceState`, storage and similar calls); the example page's deep-link call is guarded, `artifact-lint.py` flags unguarded sandbox-blocked calls, and `scripts/review-page-smoke.js` runs each example page in a browser both directly and in a sandboxed iframe during validation. Found by the owner viewing the example in the Claude app.
 - New behavioral cases `evals/behavioral-0.28/jail-prototype.json` (review page, feedback round, promotion pressure, held-out logic question).
 
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)

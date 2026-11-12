@@ -88,6 +88,17 @@ class TestArtifactLint(unittest.TestCase):
     def test_usage(self):
         self.assertEqual(run("artifact-lint.py", "missing.html")[0], 2)
 
+    def test_sandbox_blocked_calls_need_try(self):
+        bad = GOOD.replace("try { if (location.protocol !== 'about:') history.replaceState(null, '', '#variant-' + v); } catch (e) { /* not allowed here */ }",
+                           "history.replaceState(null, '', '#variant-' + v);")
+        rc, _, err = lint(bad)
+        self.assertEqual(rc, 1)
+        self.assertIn("history.replaceState outside try/catch", err)
+        bad2 = GOOD.replace("<script>\n  const show", "<script>\n  localStorage.setItem('v','A');\n  const show")
+        rc, _, err = lint(bad2)
+        self.assertEqual(rc, 1)
+        self.assertIn("localStorage outside try/catch", err)
+
 
 if __name__ == "__main__":
     unittest.main()

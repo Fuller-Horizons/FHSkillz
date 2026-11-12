@@ -19,6 +19,9 @@ Errors (exit 1):
   - data-question controls without a data-copy-feedback button
   - a data-revisions JSON legend that doesn't parse or lacks id/summary, or a
     data-rev value not in the legend
+  - a sandbox-blocked call (history.pushState/replaceState, localStorage,
+    sessionStorage, document.cookie, window.top/parent access) outside a
+    try { } catch block: sandboxed previews such as the Claude app throw
 Warnings (exit 0 unless --strict):
   - no data-review-id points, no data-question controls, no visible
     "PROTOTYPE" text in the page body, --look given but no variants
@@ -32,6 +35,7 @@ from html.parser import HTMLParser
 
 ASSET_ATTRS = {("script", "src"), ("img", "src"), ("iframe", "src"), ("source", "src"),
                ("video", "src"), ("audio", "src"), ("embed", "src"), ("link", "href")}
+SANDBOX_CALLS = re.compile(r"\b(history\.(pushState|replaceState)|localStorage|sessionStorage|document\.cookie|window\.(top|parent)\.)")
 BG = re.compile(r"(?is)(^|[},\s])(html|body|:root)\b[^{]*\{[^}]*\bbackground(-color)?\s*:")
 
 
@@ -44,7 +48,7 @@ class Page(HTMLParser):
         self.assets = []          # (tag, attr, value)
         self.review_ids = []
         self.variants, self.switches, self.questions, self.copy_buttons = [], 0, 0, 0
-        self.revs, self.rev_legends = [], []
+        self.revs, self.rev_legends, self.scripts = [], [], []
         self._script_is_legend, self._legend_buf = False, []
 
     def handle_starttag(self, tag, attrs):
@@ -95,6 +99,8 @@ class Page(HTMLParser):
         elif self.in_script:
             if self._script_is_legend:
                 self._legend_buf.append(data)
+            else:
+                self.scripts.append(data)
         else:
             self.body_text.append(data)
 
@@ -149,6 +155,13 @@ def lint(text, look=False, allow_hosts=(), prototype=True):
     unknown = sorted(set(r for r in p.revs if r) - legend_ids)
     if unknown:
         errors.append(f"data-rev values not in the revisions legend: {', '.join(unknown)}")
+    for js in p.scripts:
+        for m in SANDBOX_CALLS.finditer(js):
+            before = js[:m.start()]
+            t = before.rfind("try")
+            guarded = t != -1 and before.count("{", t) > before.count("}", t) and "catch" in js[m.end():m.end() + 400]
+            if not guarded:
+                errors.append(f"{m.group(1).rstrip('.')} outside try/catch (throws in sandboxed previews such as the Claude app)")
     if prototype and "prototype" not in " ".join(p.body_text).lower():
         warnings.append("no visible PROTOTYPE banner text in the page body")
     return errors, warnings

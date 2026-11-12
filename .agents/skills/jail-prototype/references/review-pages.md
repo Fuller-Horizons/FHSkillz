@@ -23,6 +23,14 @@ Chen), rewritten for a server-free, single-file prototype.
   never inherits a host's dark or transparent background.
 - **`<meta name="viewport" content="width=device-width, initial-scale=1">`**
   and a layout that works at 360px wide: reviewers often look on a phone.
+- **Works inside sandboxed hosts.** The Claude app and other previewers load
+  the page in a sandboxed frame where `history.pushState/replaceState`,
+  `localStorage`/`sessionStorage`, the clipboard, and access to the parent
+  window can be blocked and throw errors. Wrap every such call in
+  `try { … } catch (e) {}`, skip history changes when `location.protocol` is
+  `about:`, and make the page fully usable without them (show the copied
+  answers on the page as well as copying them). Test it both opened directly
+  and inside a sandboxed frame.
 - **Sample data only**, labeled as such. Never real client records in a
   prototype, and nothing leaves the machine unless the user asks.
 

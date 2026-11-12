@@ -2,7 +2,7 @@
 
 ## 1.7.0 — 2026-11-12
 
-- **artifact-lint.py**: single-file HTML review pages (prototype marking, viewport, explicit background, no outside requests or local asset files, unique review ids, exactly 3 variants + 1 switch, answer controls need a copy button, revisions legend). 10 tests.
+- **artifact-lint.py**: single-file HTML review pages (prototype marking, viewport, explicit background, no outside requests or local asset files, unique review ids, exactly 3 variants + 1 switch, answer controls need a copy button, revisions legend, sandbox-blocked calls outside try/catch). 11 tests.
 
 ## 1.6.0 — 2026-11-12
 

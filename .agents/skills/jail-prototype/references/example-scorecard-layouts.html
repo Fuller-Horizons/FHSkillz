@@ -90,10 +90,11 @@
   const show = v => {
     document.querySelectorAll('[data-variant]').forEach(s => s.classList.toggle('on', s.dataset.variant === v));
     document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', b.dataset.show === v));
-    history.replaceState(null, '', '#variant-' + v);
+    // Deep link only where the host allows it; sandboxed previews (Claude app, srcdoc frames) block history.
+    try { if (location.protocol !== 'about:') history.replaceState(null, '', '#variant-' + v); } catch (e) { /* not allowed here */ }
   };
   document.querySelectorAll('[data-show]').forEach(b => b.addEventListener('click', () => show(b.dataset.show)));
-  const h = location.hash.match(/^#variant-([ABC])$/); if (h) show(h[1]);
+  let h = null; try { h = location.hash.match(/^#variant-([ABC])$/); } catch (e) { /* no location access */ } if (h) show(h[1]);
   document.querySelector('[data-copy-feedback]').addEventListener('click', async () => {
     const pick = (document.querySelector('input[name=pick]:checked') || {}).value || '(none)';
     const first = document.querySelector('input[name=first-read]').value.trim() || '(blank)';

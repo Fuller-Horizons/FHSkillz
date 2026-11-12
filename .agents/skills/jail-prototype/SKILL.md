@@ -49,7 +49,9 @@ Kun Chen); both under JAIL evidence rules.
 ## The review page (look questions, and anything easier judged by looking)
 Full rules and templates: [review-pages.md](references/review-pages.md).
 - **One self-contained HTML file**: inline CSS/JS/SVG, no outside requests,
-  explicit page background, viewport meta, readable at 360px wide.
+  explicit page background, viewport meta, readable at 360px wide, and no
+  script errors inside sandboxed previews (wrap history, storage, clipboard
+  calls in try/catch; the Claude app blocks them).
 - **Design direction chosen, not defaulted:** client/project look first, then
   a direction the user named, then a stated neutral one; say which in the
   footer.
@@ -66,8 +68,10 @@ Full rules and templates: [review-pages.md](references/review-pages.md).
   into chat. Say which channel and exactly what to send back.
 - **Each round regenerates the whole file** with a revisions legend and a
   visible "What changed" note; rounds count against the timebox.
-- **Check it:** `artifact-lint.py proto-<slug>.html --look` (jail-py-toolkit);
-  fallback: walk the same list by hand and say "manually checked".
+- **Check it:** `artifact-lint.py proto-<slug>.html --look` (jail-py-toolkit),
+  and open it once directly and once in the host the reviewer will use (or a
+  sandboxed frame) with the console open; fallback: walk the same list by
+  hand and say "manually checked".
 
 ## Step N: Ship the SPIKE VERDICT, archive the build
 ```
