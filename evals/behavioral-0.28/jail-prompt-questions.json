@@ -1,0 +1,42 @@
+{
+ "suite": "0.28.1 jail-prompt question rounds",
+ "cases": [
+  {
+   "id": "jail-prompt-0281-Q1",
+   "skill": "jail-prompt",
+   "scenario": "ambiguous reused request -> MC questions + v1",
+   "prompt": "Write me a prompt I can reuse every month to turn my consulting clients' numbers into a monthly report for them.",
+   "assertions": [
+    "[O] asks at most 3 clarifying questions",
+    "[O] each question is multiple choice with 2-4 listed options",
+    "[O] each question marks a recommended option or lists it first as the default",
+    "[O] offers an option or clear invitation to add more context in the user's own words",
+    "[O] delivers a usable first-draft prompt in the same reply (not questions only)",
+    "[O] the reply ends with a JAIL-HANDOFF block"
+   ]
+  },
+  {
+   "id": "jail-prompt-0281-Q2",
+   "skill": "jail-prompt",
+   "scenario": "new context after earlier rounds -> another round allowed, draft updated",
+   "prompt": "Continuing from before: you already asked me two rounds of questions about the monthly client report prompt and I answered them (owners, one page, plain English). New context: two of these clients are banks, so anything about customer accounts is regulated and must never appear by name in the report. Update the prompt.",
+   "assertions": [
+    "[O] delivers an updated prompt that adds a rule keeping customer/account names or identifiers out of the report",
+    "[O] does not refuse or skip further questions because of how many rounds already happened (either asks a short new round about the bank context or states its assumptions)",
+    "[O] any questions asked are multiple choice with an option to add more context",
+    "[O] keeps the earlier answers (owners, one page, plain English) in the updated prompt"
+   ]
+  },
+  {
+   "id": "jail-prompt-0281-Q3",
+   "skill": "jail-prompt",
+   "scenario": "clear simple ask -> no questions",
+   "prompt": "Give me a quick prompt to turn my bullet notes from a client call into a 3-sentence follow-up email. Just for today.",
+   "assertions": [
+    "[O] asks no clarifying questions (or only optional ones after the prompt)",
+    "[O] gives the prompt as a copyable block",
+    "[O] includes a TEST RESULTS or UNTESTED line"
+   ]
+  }
+ ]
+}
