@@ -1,0 +1,41 @@
+{
+  "disagreements": [],
+  "graded_outputs": 16,
+  "table": {
+    "jail-prompt-e2e": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.8636,
+          "case_pass_rate": 0.5,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.8182,
+          "case_pass_rate": 0.25,
+          "cases": 4
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-prompt-e2e": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 1.0,
+      "old_case_pass_rate": 0.375,
+      "verdict": "KEEP"
+    }
+  }
+}

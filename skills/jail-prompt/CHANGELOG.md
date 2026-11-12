@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.10.1 — 2026-11-12
+- Fixes from the blind old-vs-new test (2.1.0 vs 2.10.0, Opus 5.5): (1) the prompt must appear in the reply itself, never only in a saved file; a delegation set shows the lead prompt and every brief (or the lead prompt, one full brief, and each other brief's scope and model). In the test, 2.10.0 wrote a strong delegation set to `prompts.md` and showed only a summary. (2) A STOP ends with a lettered choice (non-AI tool / reframe / proceed with caveats / drop); 2.10.0 dropped it.
+
 ## 2.10.0 — 2026-11-12
 - **References merged 20 → 14 files**: `writing.md` (skeleton + Claude style), `models.md` (models + run settings + model choice), `evidence.md` (sources + claim labels), `testing.md` (testing + prompt library), `antipatterns.md` (+ gotchas). Links updated across the skill, jail-py-toolkit (truth-lint), jail-rate (evidence-standards), evals.json, and the Project's prompt library doc. Validation's link check passes.
 - **Lane card**: one table in the core showing exactly what Instant / Lite / Full do for questions, gate, prompt shape, testing and the test line; anything reused, at volume or client-facing is Full; the test line is never skipped, even under time pressure.

@@ -1,6 +1,6 @@
 # Prompt library — Fuller Horizons / Signal Results
 
-Maintained by jail-prompt (references/testing.md, Part 2 rules). Reuse a fitting entry before writing a new prompt. Entries marked **untested** have not yet passed a test set; don't rely on them for client work until they show a Tested line.
+Maintained by jail-prompt (references/testing.md, Part 2 rules). Reuse a fitting entry before writing a new prompt. Each entry's Tested line shows its blind test against a plain request. An entry that hasn't beaten the plain request says so; don't rely on it for client work until it does.
 
 ## prospect-brief v1 — Screen a private company as a sell-side or consulting prospect
 Tested: n/a (routes to a skill)
@@ -8,7 +8,7 @@ Use when: deciding whether to approach an owner, or vetting a vendor/competitor
 Route: **use the jail-prospect skill** (`/fh-skillz:jail-prospect <company, town>`). It already runs the free-source research, the Likelihood-to-Sell and Consulting-Opportunity scores, and refuses to invent financials; a separate prompt would be a weaker copy.
 
 ## pnl-cost-drivers v1 — Top five cost drivers from a P&L for an owner meeting
-Tested: **untested** · scheduled: blind test vs the plain request on 2026-11-12 (Sonnet 5.5 and Haiku 5.5, medium effort) · written on Opus 5.5 medium
+Tested: 2026-11-12 · sonnet 5.5 + haiku 5.5 · effort medium · score 12/12 · baseline won 2, tied 0, lost 0 of 2 (plain request 8/12) · blind, 2 graders · synthetic test data
 Use when: An owner or client P&L (CSV or pasted) needs a meeting-ready cost summary
 Inputs: pnl (replace {{INPUT}} with them)
 Test set: FHSkillz repo `evals/e2e/jail-prompt-e2e.json` (synthetic)
@@ -36,7 +36,7 @@ BEFORE RETURNING: re-add the amounts you cite against the P&L; confirm 5 rows an
 ```
 
 ## interview-complaints v1 — Rank customer complaints from interview notes, with verbatim quotes
-Tested: **untested** · scheduled: blind test vs the plain request on 2026-11-12 (Sonnet 5.5 and Haiku 5.5, medium effort) · written on Opus 5.5 medium
+Tested: 2026-11-12 · sonnet 5.5 + haiku 5.5 · effort medium · score 12/12 · baseline won 1, tied 1, lost 0 of 2 (plain request 11/12) · blind, 2 graders · synthetic test data
 Use when: Several customer interviews or call notes; deciding what to fix first
 Inputs: interview_notes (replace {{INPUT}} with them)
 Test set: FHSkillz repo `evals/e2e/jail-prompt-e2e.json` (synthetic)
@@ -64,7 +64,7 @@ BEFORE RETURNING: check each quote against the input character for character; co
 ```
 
 ## cold-outreach-email v1 — First-touch email to a local service-business owner
-Tested: **untested** · scheduled: blind test vs the plain request on 2026-11-12 (Sonnet 5.5 and Haiku 5.5, medium effort) · written on Opus 5.5 medium
+Tested: 2026-11-12 · sonnet 5.5 + haiku 5.5 · effort medium · score 10/10 · baseline won 2, tied 0, lost 0 of 2 (plain request 8/10; plain requests invented facts) · blind, 2 graders · synthetic test data
 Use when: Prospect facts + offer facts in hand; goal is a 15-minute call
 Inputs: prospect_facts, offer_facts (replace {{INPUT}} with them)
 Test set: FHSkillz repo `evals/e2e/jail-prompt-e2e.json` (synthetic)
@@ -93,7 +93,7 @@ BEFORE RETURNING: count the words in the body; check every fact and number again
 ```
 
 ## vendor-quote-comparison v1 — Compare vendor quotes on total cost and pick one
-Tested: **untested** · scheduled: blind test vs the plain request on 2026-11-12 (Sonnet 5.5 and Haiku 5.5, medium effort) · written on Opus 5.5 medium
+Tested: 2026-11-12 · sonnet 5.5 + haiku 5.5 · effort medium · score 10/10 · baseline won 0, tied 2, lost 0 of 2 (plain request also 10/10) · not yet shown to beat a plain request; needs a harder test case before client use · blind, 2 graders · synthetic test data
 Use when: Two or more quotes and the buyer's needs and plans
 Inputs: quotes, buyer_needs (replace {{INPUT}} with them)
 Test set: FHSkillz repo `evals/e2e/jail-prompt-e2e.json` (synthetic)
