@@ -1,5 +1,16 @@
 # Changelog — jail-task-contract
 
+## 1.4.0 — 2026-11-12
+
+- Field 13 now uses a structured acceptance-criterion format (AC-NNN: scenario, trigger/action, expected result, must-not, verification method, priority); Quick Capture 3-7 ACs, Full adds a risk row per security/data/migration/external dependency; "the check must be able to FAIL" kept. Pattern adapted from ECC (MIT).
+- New ENGAGEMENT preset (consulting scope): ACs, in-scope list, 5+ out-of-scope items with why, change-order triggers, decision rights, client inputs with due dates.
+- Preset detail moved out of the core into `references/presets.md`.
+- Business-rule boundary: business rules, compliance duties, SLAs, pricing, retention policy are never inferred from files; User-provided or Unknown until an authoritative artifact states them.
+- Proportion rule: trivial single-step asks get no contract; vague goals are recorded as an assumption or blocking question; `[revised]` handling for ACs blocked by a discovered constraint.
+- New Delivery section (client-facing copy: clean document, 9th-grade English, no YAML).
+- Worked example `references/example-engagement-contract.md`.
+- Canonical claim labels; description shortened to under 450 characters.
+
 ## 1.3.0 — 2026-07-25 (plugin 0.25.0)
 
 - SHIP-GATE before emitting: 14 fields valued-or-"none", field 13 restated as the failing check, field 14 non-empty-or-none, any unfillable field ships as `UNKNOWN — <question>` and blocks the contract (fail-closed — no partial contract leaves the skill).

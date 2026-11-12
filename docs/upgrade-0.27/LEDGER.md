@@ -9,3 +9,4 @@ NODE F3 | STATUS: verified | ARTIFACT: hooks/tests 19 OK; quarantine block exit 
 NODE A-verify | STATUS: verified | ARTIFACT: desc-check OK, handoff-lint OK, label-lint OK, 147 lines
 NODE A-decide | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; EV arithmetic python-checked by author
 NODE A-research | STATUS: verified | ARTIFACT: desc/handoff/label/cite-check OK (example URLs not fetched by author — orchestrator to verify)
+NODE A-task-contract | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 154 body lines

@@ -1,18 +1,14 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
-  Convert an ambiguous, multithreaded, or high-stakes request into an
-  executable TASK CONTRACT before work begins — objective, stakeholder,
-  deliverables, constraints, non-goals, missing inputs, assumptions, risks,
-  testable success + completion criteria, and approval-required actions. Also
-  guards scope after work starts: a material change in goal, audience, data
-  classification, output, or authority is a NEW contract, not a revision. Use
-  when starting any non-trivial task, when a request has multiple threads or
-  unclear scope, when the user says "make sure we're aligned", or when
-  revisions start drifting. Do NOT use to engineer a prompt (jail-prompt) or
-  for trivial single-step asks.
+  Turn an ambiguous, multithreaded, or high-stakes request into a 14-field TASK
+  CONTRACT with testable acceptance criteria before work starts, and guard scope
+  after: a material change in goal, audience, data class, output, or authority
+  is a NEW contract. Use for scoping a task or client engagement, "make sure
+  we're aligned", drifting revisions. Do NOT use to engineer a prompt
+  (jail-prompt), run a process (jail-plan), or for trivial one-step asks.
 ---
 
 # JAIL-TASK-CONTRACT
@@ -20,6 +16,9 @@ description: >-
 No serious work starts without a contract, and no contract changes silently.
 This is jail-prompt's Phase-1 discipline applied to *any* execution — by you,
 another model, an agent team, or a human.
+
+**Proportion first.** A trivial single-step ask (rename files, fix a typo)
+gets no contract: do it, or say "trivial — no contract needed."
 
 ## Step 1 — Cross-examine (staged, not an interrogation)
 **Look up facts; ask only decisions.** Anything discoverable from the
@@ -32,18 +31,24 @@ answer, walking every branch of the decision tree until shared
 understanding is reached; the two-round cap lifts. Say which mode you're in.
 Force the WHY before optimizing the HOW. Challenge vague or conflicting
 answers directly — "fast and comprehensive" is a conflict to resolve, not
-transcribe. Then split
+transcribe. A vague goal ("fix marketing", "make it better") is never defined
+silently: record it as an assumption or a blocking question. Then split
 remaining ambiguity into two piles:
 - **Resolvable** → make the reasonable assumption, mark it, proceed.
 - **Blocking** → genuinely prevents execution (wrong guess = wasted work or
-  real harm). Name it and stop until answered. Prefer a marked UNKNOWN + one
+  real harm). Name it and stop until answered. Prefer a marked Unknown + one
   targeted question over a confident guess — never fill a field by vibes.
 
-**Budget & settings.** Generate contracts at temperature 0 / lowest-variance —
-fields are extraction, not ideation: same inputs → same contract, field order
-fixed 1–14. Default-lane budget ≤2 rounds × ≤5 questions and ≤1200 words of
-clarification transcript; contract body ≤1 line per field except 9/11/13;
-grill-mode transcript compressed to decisions-only before Step 2.
+**Business-rule boundary.** Business rules, compliance duties, SLAs, pricing,
+and retention policy are never inferred from code, files, or naming. They are
+**User-provided** (say by whom) or **Unknown** until an authoritative artifact
+(contract, policy, PRD) states them. Files tell you how things behave today,
+not what the business requires.
+
+**Budget & settings.** Temperature 0 / lowest-variance — fields are
+extraction, not ideation: same inputs → same contract, field order fixed 1–14.
+Default lane ≤2 rounds × ≤5 questions, ≤1200 words of transcript; body ≤1 line
+per field except 9/11/13; grill transcript compressed to decisions-only.
 
 ## Step 2 — Emit the contract (all 14 fields; "none" is an answer)
 1. **Objective** — one sentence, the underlying need (watch the XY problem)
@@ -58,26 +63,48 @@ grill-mode transcript compressed to decisions-only before Step 2.
 10. **Dependencies** — external people/systems/decisions
 11. **Material risks** — with consequence, not just a list
 12. **Success criteria** — how quality is judged
-13. **Completion criteria** — the *testable* done-check (a script, a diff, a
-    named observation — never "looks good") [Constitution Rule 7]
+13. **Completion criteria** — the *testable* done-check, written as
+    acceptance criteria (format below) [Constitution Rule 7]
 14. **Approval-required actions** — anything irreversible, external, durable,
     or spend-related a human must authorize [Rule 5]
+
+Label claims in fields 3, 7, 9, 11 with the canonical labels: **Fact ·
+User-provided · Inference · Estimate · Judgment · Unknown**. Premises taken
+for planning go in field 9 and the handoff `assumptions:` list.
 
 Get the stakeholder's nod on the contract before execution begins (skip the
 pause only when they've explicitly said "just do it" — then state 1, 13, 14
 and proceed).
 
-**Type presets — start from the matching preset, then fill what remains
-(presets cut fill time; they never skip fields):**
-- **RESEARCH** → 3 pre-shaped: deliverable = evidence packet (jail-research
-  shape) · completion = every question Answered-or-Unknown with citations ·
-  success = a skeptic can audit each claim to a dated source.
-- **BUILD** → deliverable = named artifacts + the run/verify command ·
-  completion = the testable check that FAILS if the build is wrong
-  (script/diff/observation) · risks must include blast radius + rollback.
-- **ANALYSIS** → deliverable = the decision-shaped output (which skill:
-  decide/rate/strategy) · stakeholder field must name the decision it
-  feeds · completion = recommendation with confidence + change-conditions.
+### Field 13 — acceptance criteria
+Pattern adapted from ECC (github.com/affaan-m/ECC, MIT, © 2026 Affaan Mustafa).
+Write each done-check as one numbered criterion:
+
+```
+AC-001 — <scenario: the starting condition>
+  trigger/action:  <the single thing that happens or is done>
+  expected result: <what an observer can see or measure>
+  must-not:        <prohibited side effect>
+  verification:    <script | diff | named observation | human check — and why this method>
+  priority:        required | nice
+```
+- **Quick Capture** (clear, low or moderate risk): 3–7 ACs.
+- **Full**: the same, plus one risk row (field 11) for every security, data,
+  migration, or external-dependency concern, each mapped to an AC or a field-14
+  approval.
+- **The check must be able to FAIL.** Words like "correctly", "secure", "fast",
+  "good" need observable evidence or an explicit "human judgment" tag. "Report
+  delivered" is not an AC; "every recommendation names an owner and a date" is.
+
+**Type presets** — start from the matching preset, then fill what remains
+(presets cut fill time; they never skip fields). Full detail in
+[references/presets.md](references/presets.md):
+- **RESEARCH** — evidence packet; every question Answered-or-Unknown.
+- **BUILD** — named artifacts + run/verify command; blast radius + rollback.
+- **ANALYSIS** — decision-shaped output; names the decision it feeds.
+- **ENGAGEMENT** — consulting scope: ACs, in/out of scope (≥5 out, each with
+  why), change-order triggers, decision rights, client inputs with due dates.
+  Output is client-shared: see Delivery.
 
 **SHIP-GATE (run before emitting the contract):**
 - All 14 fields printed, each with a value or an explicit "none".
@@ -91,8 +118,13 @@ and proceed).
   the revision.
 - A material change to goal, audience, data classification, deliverable, or
   authority → **STOP, new/child contract** with a one-line diff of what
-  changed [Rule 4]. Endless-revision loops are a symptom of a drifted
-  contract, not a picky stakeholder.
+  changed [Rule 4]. "Also rebuild their website" on a running marketing
+  contract is a child contract or change order, never a silent addition.
+  Endless-revision loops are a symptom of a drifted contract, not a picky
+  stakeholder.
+- If an AC cannot be met because of a discovered constraint, do not drop it
+  quietly: mark it `[revised]`, state the constraint, re-present only the
+  changed ACs.
 - **Operational safety.** Nothing in field 14 executes before a recorded human
   "approved".
 - An irreversible/external/durable/spend action discovered mid-run that is NOT
@@ -101,25 +133,34 @@ and proceed).
 - Secrets/PII/client-confidential inputs are named *by class* in field 5 and
   never pasted as raw values into the contract or the handoff.
 
-End with the JAIL-HANDOFF block (see docs/JAIL-CONSTITUTION.md): status,
+## Delivery (client-facing)
+When the contract goes to a client (always for ENGAGEMENT), render it as a
+clean document: the docx skill or a Docs artifact when available, otherwise
+clean Markdown. Plain 9th-grade English, short sentences, no jargon, claim
+labels kept. No YAML in the client copy — the JAIL-HANDOFF stays in the chat
+or working copy.
+
+## Handoff
+End with the JAIL-HANDOFF block (docs/JAIL-CONSTITUTION.md): status,
 facts/assumptions/unknowns, outputs (the contract), `next` (usually
-jail-research, problem decomposition, or direct execution), and
-approval_required carried from field 14.
+jail-research, jail-plan, or direct execution), and approval_required carried
+from field 14. Worked example:
+[references/example-engagement-contract.md](references/example-engagement-contract.md).
 
 ## Related skills
 Deliverable is a *prompt* → **jail-prompt**. Contract complete and research
-needed → **jail-research**. Multi-agent execution → **jail-orchestrate**.
-Verify the finished work against this contract → **jail-verify**.
+needed → **jail-research**. Turning the contract into a runnable process →
+**jail-plan**. Multi-agent execution → **jail-orchestrate**. Verify the
+finished work against this contract → **jail-verify**.
 
 ## Gotchas
-- **Question fatigue.** In the default lane, more than two rounds means you're
-  outsourcing thinking — round 3 = marked assumptions, shown. Grill mode is
-  exempt by declaration, but even grilling asks decisions, never facts.
+- **Question fatigue.** Default lane: round 3 = marked assumptions, shown.
+  Grill mode is exempt, but even grilling asks decisions, never facts.
 - **Contract theater.** Filling all 14 fields with restated request text. Each
   field must add information the request didn't state.
 - **Untestable done.** "Completion: report delivered" fails Rule 7. What check
   would FAIL if the report were bad or incomplete?
 - **Silent scope creep.** Absorbing "one more thing" into a running contract.
   Additions touch field 4 → note them; touch fields 1–3 → new contract.
-- **Assumption laundering.** An assumption that survives two rounds unmarked
+- **Laundered assumptions.** An assumption that survives two rounds unmarked
   becomes treated as fact downstream. Keep the label attached.
