@@ -23,3 +23,6 @@ NODE A-bmc | STATUS: verified | ARTIFACT: desc/handoff OK; unit-economics arithm
 NODE A-cpr | STATUS: verified | ARTIFACT: desc 418 chars (from 1,386), desc/handoff OK
 NODE T-routing | STATUS: verified | ARTIFACT: evals/results/2026-11-12-0.27-trigger/ — 3 Haiku judges each 100% fire / 0% false-fire on 109 cases
 FINDING natural-arm | b1: 96 runs, 0 errors, $5.02; skill auto-invoked in only 10/48 old and 11/48 new runs (research 0/8 both) — natural routing in claude -p rarely loads the skill, so content A/B uses a FORCED arm (/fh-skillz:<skill>); natural arm kept as invocation-rate evidence only
+NODE T-live-b1 | STATUS: verified | ARTIFACT: evals/results/2026-11-12-0.27-waveA-b1-forced/ — 96 forced runs, 0 errors, $6.28; 2 blind Sonnet graders + 14 blind Opus tie-breaks (grades/resolved.jsonl)
+RESULT b1 | KEEP decide 8/8 vs 7/8 · research 5/8 vs 3/8 · summarize 6/8 vs 5/8 · task-contract 6/8 vs 4/8 | TIE red-team 7/8, verify 6/8 (rule says REVERT; owner call pending)
+RESULT b1-heldout | new 10/12 vs old 8/12 cases (46/48 vs 42/48 assertions) — no overfitting signal

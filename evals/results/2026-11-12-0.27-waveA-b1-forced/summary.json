@@ -1,0 +1,218 @@
+{
+  "disagreements": [],
+  "graded_outputs": 96,
+  "table": {
+    "jail-decide": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        }
+      }
+    },
+    "jail-red-team": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9091,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9091,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      }
+    },
+    "jail-research": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 0.8462,
+          "case_pass_rate": 0.5,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9231,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.8462,
+          "case_pass_rate": 0.5,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.7692,
+          "case_pass_rate": 0.25,
+          "cases": 4
+        }
+      }
+    },
+    "jail-summarize": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.8,
+          "case_pass_rate": 0.5,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.8,
+          "case_pass_rate": 0.5,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      }
+    },
+    "jail-task-contract": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 0.9091,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9091,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.7273,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.6364,
+          "case_pass_rate": 0.25,
+          "cases": 4
+        }
+      }
+    },
+    "jail-verify": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-decide": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 1.0,
+      "old_case_pass_rate": 0.875,
+      "verdict": "KEEP"
+    },
+    "jail-red-team": {
+      "assertion_regressions": {
+        "2": [
+          "jail-red-team-0270-1"
+        ]
+      },
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.875,
+      "old_case_pass_rate": 0.875,
+      "verdict": "REVERT"
+    },
+    "jail-research": {
+      "assertion_regressions": {
+        "0": [
+          "jail-research-0270-1"
+        ]
+      },
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.625,
+      "old_case_pass_rate": 0.375,
+      "verdict": "KEEP"
+    },
+    "jail-summarize": {
+      "assertion_regressions": {
+        "0": [
+          "jail-summarize-0270-H"
+        ]
+      },
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.75,
+      "old_case_pass_rate": 0.625,
+      "verdict": "KEEP"
+    },
+    "jail-task-contract": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.75,
+      "old_case_pass_rate": 0.5,
+      "verdict": "KEEP"
+    },
+    "jail-verify": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.75,
+      "old_case_pass_rate": 0.75,
+      "verdict": "REVERT"
+    }
+  }
+}
