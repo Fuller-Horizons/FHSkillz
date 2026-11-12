@@ -1,0 +1,2 @@
+- **Fact** Revenue grew 12%.
+- **Fact** Margin is 20% [2].

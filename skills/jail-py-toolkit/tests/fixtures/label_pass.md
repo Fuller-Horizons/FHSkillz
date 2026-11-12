@@ -1,0 +1,6 @@
+- **Fact** Revenue grew 12% [1].
+- [Inference] Growth likely continues because of the backlog.
+- **Judgment:** The owner is motivated.
+- [Unknown] Customer concentration; resolve with the AR aging report.
+- [VALIDATED] Pricing tested with 5 customers.
+- See [the docs](http://x.test) and item [2] and [ ] todo.

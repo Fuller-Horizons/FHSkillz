@@ -1,5 +1,9 @@
 # Changelog — jail-py-toolkit
 
+## 1.2.0 — 2026-11-12
+
+- Added fh_patterns.py (shared secret + PII detectors, value-free results) and handoff-lint, label-lint, cite-check, gate-record-lint, pii-scan, desc-check, score-check; secret-scan.py now uses fh_patterns and prints file:line: kind only; unit tests + fixtures added.
+
 ## 1.1.0 — 2026-07-25 (plugin 0.25.0)
 
 - De-duplicated the `VERIFIABLE` regex: chain-lint.py now imports it from

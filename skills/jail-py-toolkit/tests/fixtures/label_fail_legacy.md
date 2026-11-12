@@ -1,0 +1,3 @@
+- **Known** The owner is 61.
+- [Analyst Judgment] Likely to sell.
+- [Missing Evidence] Financials.

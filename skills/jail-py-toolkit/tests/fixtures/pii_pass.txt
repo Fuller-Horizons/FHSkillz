@@ -1,0 +1,2 @@
+Order 123456 shipped. Call the helpdesk (no personal data here).
+Ticket 000-12-3456 is not an SSN. Reference 4111111111111112 fails Luhn.
