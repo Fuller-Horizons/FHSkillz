@@ -1,20 +1,15 @@
 ---
 name: jail-decide
 metadata:
-  version: 1.2.1
+  version: 1.3.0
 description: >-
-  Convert analysis into a defensible DECISION PACKAGE — options (always
-  including do-nothing), explicit criteria, costs/risks/reversibility per
-  option, a recommendation with confidence and change-conditions, and
-  immediate next actions. Use when someone must choose among options: "which
-  should we pick", "should we do X or Y", "build vs buy", "is this worth
-  doing", "help me decide", or downstream of research/analysis that ends in a
-  choice — including quantified comparisons that end in a pick: "run the
-  numbers on A vs B and choose", "which is cheaper/better over N years",
-  "compare the costs and pick one" (the numbers feed the decision; the
-  deliverable is the defensible pick, not the arithmetic). Do NOT use to
-  score a single subject 0-10 (jail-rate), to gather the evidence itself
-  (jail-research), or to attack one option's reasoning (jail-red-team).
+  Turn a choice into a defensible DECISION PACKAGE: options incl. do-nothing,
+  criteria first, one recommendation with confidence and change-conditions.
+  Use for "which should we pick", "should we do X or Y", "build vs buy", "is
+  this worth doing", "help me decide", "run the numbers on A vs B and pick
+  one", "cheaper over N years". Do NOT use to score one subject 0-10
+  (jail-rate), gather evidence (jail-research), or attack an option
+  (jail-red-team).
 ---
 
 # JAIL-DECIDE
@@ -29,9 +24,13 @@ written down. [Constitution Rules 6, 11, 12]
 - **Criteria before options.** List the evaluation criteria and constraints
   FIRST, from the stakeholder's goals — not reverse-engineered from a
   favorite option. Weight them only if the stakes justify it.
+- **When evidence is thin:** If the criteria that decide the call rest only on
+  assumptions or Unknowns (no data supplied), do NOT issue a confident
+  recommendation: mark those criteria "judged on assumption", cap confidence
+  at low, name the specific evidence needed, and route to jail-research.
 - Evidence base: pull the jail-research packet or the supplied facts; every
   load-bearing fact keeps its label and source. Thin evidence → say which
-  criteria are being judged on Assumption, or route back to jail-research.
+  criteria are being judged on assumption, or route back to jail-research.
   **Sensitive inputs**: personnel, comp, health, and privileged facts plus NDA
   figures enter the package as roles, bands, and ranges — never verbatim
   records or names. No raw evidence dump inside the package. If the call cannot
@@ -53,7 +52,8 @@ written down. [Constitution Rules 6, 11, 12]
   month of not deciding forfeits — this prices do-nothing honestly), and
   payback/break-even where applicable. Every number carries its basis
   (Fact/Estimate + source); when inputs are gut-feel, stay in comparative
-  prose — the lane is earned by evidence, not ambition.
+  prose — the lane is earned by evidence, not ambition. Worksheet and a
+  checked numeric example: [references/expected-value.md](references/expected-value.md).
 
 ## Step 3 — Recommend
 Budget: package ≤450 words (options table ≤5 rows, rationale ≤4 sentences) —
@@ -79,7 +79,13 @@ factual/interpretive question → convene **jail-council** on that question
 (record "council: convened/not — why" in the package; a cheap Tier-D
 mini-council covers cases that are contested but not existential).
 jail-plan turns the chosen option into a working process;
-jail-summarize presents it.
+jail-summarize presents it. A complete worked run (ship-check line, package,
+handoff): [references/example-package.md](references/example-package.md).
+
+**Decision log (optional, durable decisions only).** If the decision will
+outlive this session, add one line for jail-memory in ADR shape:
+`context: … · decision: … · consequences: … · status: proposed|accepted`.
+jail-memory decides whether to store it; this skill never writes memory itself.
 
 ## Ship-check
 Run all 7 gates before releasing the package and emit the verdict as ONE line:
@@ -100,6 +106,13 @@ can't be closed from the input at hand (no owner nameable, no source
 obtainable) is never left a silent open FAIL on a shipped package: emit the
 FAIL, name the specific question or evidence that would close it, and
 withhold the package — never invent a value to make the line read clean.
+
+## Delivery (client-facing)
+When the package goes to a client, render it as a clean document (docx skill
+or a Docs artifact when available; otherwise clean Markdown): plain
+9th-grade English, short sentences, labels (Fact, Estimate, …) kept, options
+table kept, no YAML in the client copy. The JAIL-HANDOFF block stays in the
+chat/working copy, never in the client document.
 
 ## Related skills
 Score one subject → **jail-rate**. Evidence missing → **jail-research**.

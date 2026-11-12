@@ -7,3 +7,5 @@ NODE F2 | STATUS: verified | ARTIFACT: jail-py-toolkit tests 42 OK; pii-scan exi
 NODE FIX | STATUS: verified | ARTIFACT: evals/behavioral-0.27 36 cases, all assertions tagged [O]/[F], JSON valid
 NODE F3 | STATUS: verified | ARTIFACT: hooks/tests 19 OK; quarantine block exit 2 without value; off mode exit 0; approval_gate emits ask JSON for git push
 NODE A-verify | STATUS: verified | ARTIFACT: desc-check OK, handoff-lint OK, label-lint OK, 147 lines
+NODE A-decide | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; EV arithmetic python-checked by author
+NODE A-research | STATUS: verified | ARTIFACT: desc/handoff/label/cite-check OK (example URLs not fetched by author — orchestrator to verify)

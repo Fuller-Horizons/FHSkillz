@@ -2,7 +2,7 @@
 
 This skill turns a question into an answer you can trust, backed by real sources you can check.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
 
 ## What it does
 
