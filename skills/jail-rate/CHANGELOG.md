@@ -2,6 +2,17 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.2.0 — 2026-11-12
+
+- Core diet: SKILL.md cut from 171 to 140 lines; output template moved to `references/output-format.md`, people rules to `references/people-boundaries.md` (4-line summary stays inline).
+- Rubric library: added Small business (diagnostic), Sales & marketing function, and Leadership team (professional role) rubrics, weights 100 each, with evidence sources per dimension.
+- Bias controls (pattern adapted from ECC benchmark-methodology): asserted vs proven, aesthetic/recency/survivorship checks, side-by-side calibration with per-dimension scores, never a composite alone. New Step 4; detail in `references/evidence-standards.md`.
+- Self-check names jail-py-toolkit `score-check.py` for the arithmetic, with a manual fallback; handoff gains optional `checks:`.
+- Canonical claim labels (added User-provided, Estimate, Unknown); material concentration risk added as a critical-flaw example.
+- Worked example `references/example-scorecard.md` (small-business rating for a buyer).
+- Added client-facing Delivery section; gotchas extended.
+- Description shortened from 875 to under 450 characters; kept the rate/score/grade/judge triggers and the jail-rate-skill and jail-prospect negatives, added jail-strategy.
+
 ## 2.1.0 — 2026-07-25 (plugin 0.25.0)
 
 - Moved the 8-bullet Gotchas list to `references/gotchas.md`; SKILL.md keeps a one-line pointer (token efficiency, largest core in the suite).

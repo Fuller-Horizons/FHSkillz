@@ -14,7 +14,7 @@ description: >-
 # JAIL-RATE — Universal Evidence-Based Rating (0.0–10.0)
 
 Rate any subject with a rubric built for **what it is**, scores grounded in
-**cited evidence**, and a clear split between **current** reality and
+cited evidence, and a clear split between **current** reality and
 **potential** after fixes. No vibes, no grade inflation, no unlabeled guesses.
 
 ## Process
@@ -100,8 +100,7 @@ Quick ask → one line (`X.X/10 — why + evidence`), offer the full scorecard.
 - Critical-flaw caps applied; current and projected never blended.
 - No vendor/owner claim is labeled Fact without corroboration.
 - Confidence stated, with the one action that would most raise it.
-- Same subject + same evidence reproduces the same scores; if a re-run
-  diverges, re-examine the evidence, do not average.
+- Same subject + same evidence reproduces the same scores; a divergent re-run means re-examine the evidence.
 One failed line = fix before delivering.
 
 ## Rating people — hard boundaries
@@ -136,5 +135,6 @@ JAIL-HANDOFF:
   confidence: high | medium | low     # mirrors Self-check confidence
   next: jail-rate-skill | jail-prospect | jail-council | none
   approval_required: [..]
-  checks: {score-check.py: pass | fail | error | n/a}
+  checks:
+    score-check.py: pass | fail | error | n/a
 ```

@@ -2,7 +2,7 @@
 
 Give any subject a fair, evidence-based score out of 10.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 2.1.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 2.2.0.
 
 ## What it does
 

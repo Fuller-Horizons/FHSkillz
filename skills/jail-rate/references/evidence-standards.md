@@ -19,7 +19,7 @@ jail-prospect — one house standard, three skills.)
 4. **Crowd** — app-store reviews, Reddit, forums, star ratings. Valid for
    *pattern evidence only*: recurring themes across many independent voices
    (cite the pattern and where you saw it), never a single anecdote as Fact.
-5. **Not evidence** — vendor marketing claims, SEO listicles, undated blogs,
+5. **Excluded source type** — vendor marketing claims, SEO listicles, undated blogs,
    AI-generated pages without sourcing. A marketing claim may be *reported* as
    the vendor's claim, clearly attributed — it cannot back a score by itself.
 
