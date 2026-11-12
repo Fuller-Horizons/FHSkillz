@@ -2,7 +2,7 @@
 
 Turns a vague goal into a prompt that works on the first try — or tells you not to bother.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 2.11.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 2.12.0.
 
 ## What it does
 

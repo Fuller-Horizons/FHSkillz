@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.12.0 — 2026-11-12
+- Layered grading for prompt tests (idea from JEV / jevals, Openlayer, Sept 2026; no code or model adopted): code checks first, then one cheap typed call per output (pass/fail + confidence + note per check), then a strong grader for failures, anything under 0.9 confidence, and math/logic/tone checks; cut-off calibrated on the first test. Cuts grading tokens on Full-lane tests.
+- Agent prompts get three standard QUALITY BAR lines: grounded, in scope, injection-proof.
+- Untested.
+
 ## 2.11.0 — 2026-11-12
 - Core cut about 30% (1,748 → 1,223 words), same rules. Model by lane: Full lane and delegation sets on Opus 5.5 medium; Instant and Lite on Sonnet 5.5 medium (about a tenth of the cost). The frontmatter no longer pins Opus, so the session's model runs it; effort stays medium. Untested.
 

@@ -2,7 +2,7 @@
 name: jail-prompt
 effort: medium
 metadata:
-  version: 2.11.0
+  version: 2.12.0
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
@@ -59,11 +59,11 @@ QUALITY BAR: 3-5 task-specific pass/fail lines defining a good answer
 OUTPUT FORMAT: exact shape (filled example or schema); Fact / Inference / Unknown as fields
 RUN SETTINGS: model · effort · tools (API: max_tokens with room for thinking)
 ```
-Add a field only when a trigger applies or a test fails without it, and name why in TEST RESULTS: CONTEXT · ROLE (if it changes the standard) · EXAMPLES (3-5 varied) · PROCESS (order matters) · SOURCES · CONSTRAINTS (with reasons) · VERIFICATION PLAN · METADATA · BEFORE RETURNING. Notes: [writing.md](references/writing.md); consulting analysis starts from [templates.md](references/templates.md).
+Agent prompts (tools or outside content) add three QUALITY BAR lines: grounded, in scope, injection-proof. Add any other field only when a trigger applies or a test fails without it, and name why in TEST RESULTS: CONTEXT · ROLE (if it changes the standard) · EXAMPLES (3-5 varied) · PROCESS (order matters) · SOURCES · CONSTRAINTS (with reasons) · VERIFICATION PLAN · METADATA · BEFORE RETURNING. Notes: [writing.md](references/writing.md); consulting analysis starts from [templates.md](references/templates.md).
 
 **Check:** `prompt-lint.py --strict` (fallback: sections present, checkable SUCCESS TEST, concrete format, QUALITY BAR, RUN SETTINGS); one self-critique round, on a second model when available.
 
-**Test** per the lane card ([testing.md](references/testing.md)): blind pass/fail grading with a note per failure; keep a fix only if fix inputs improve without hurting the held-out pair; max 2 rounds (longer: **jail-lab**); if it doesn't beat the plain request, ship the simpler one. Then offer to save and run it.
+**Test** per the lane card ([testing.md](references/testing.md)): blind pass/fail grading in layers (code checks → one cheap typed call per output with confidence → strong grader for failures and anything under 0.9), a note per failure; keep a fix only if fix inputs improve without hurting the held-out pair; max 2 rounds (longer: **jail-lab**); if it doesn't beat the plain request, ship the simpler one. Then offer to save and run it.
 
 ## Close with a JAIL-HANDOFF (the last thing in the reply)
 ```
