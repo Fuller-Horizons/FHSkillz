@@ -2,6 +2,12 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.10.0 — 2026-11-12
+- **References merged 20 → 14 files**: `writing.md` (skeleton + Claude style), `models.md` (models + run settings + model choice), `evidence.md` (sources + claim labels), `testing.md` (testing + prompt library), `antipatterns.md` (+ gotchas). Links updated across the skill, jail-py-toolkit (truth-lint), jail-rate (evidence-standards), evals.json, and the Project's prompt library doc. Validation's link check passes.
+- **Lane card**: one table in the core showing exactly what Instant / Lite / Full do for questions, gate, prompt shape, testing and the test line; anything reused, at volume or client-facing is Full; the test line is never skipped, even under time pressure.
+- **`tested:` handoff field** (Constitution + schema + handoff-lint, optional, after `checks`): `tested - <inputs, pass^3, baseline>` | `untested - <reason>` | `n/a`. jail-prompt's handoff and both worked examples carry it.
+- **Monthly regression scheduled task** (1st of each month): validation, model-freshness check against Anthropic's release notes, end-to-end + library + compliance tests, blind grading, comparison with last month, results PR.
+
 ## 2.9.0 — 2026-11-12
 - **Id-tagged pasted content** (Opus 5.5 guide): anything the user didn't write goes in `<pasted_content id="random">…</pasted_content id="random">`, followed only where the user's own message asks (`security.md`, core, meta-prompt).
 - **Testing without overfitting**: 5-input test set split 3 fix / 2 held out; grader writes one note per failure and the fix is written from those notes (reflective fixing, after GEPA); a fix is kept only if the fix set improves without hurting the held-out pair. **pass^3** for reused / shipped prompts (after ECC eval-harness). `select-models.py --repeats K`.

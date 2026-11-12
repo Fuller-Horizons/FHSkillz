@@ -1,6 +1,6 @@
 # Prompt library — Fuller Horizons / Signal Results
 
-Maintained by jail-prompt (references/prompt-library.md rules). Reuse a fitting entry before writing a new prompt. Entries marked **untested** have not yet passed a test set; don't rely on them for client work until they show a Tested line.
+Maintained by jail-prompt (references/testing.md, Part 2 rules). Reuse a fitting entry before writing a new prompt. Entries marked **untested** have not yet passed a test set; don't rely on them for client work until they show a Tested line.
 
 ## prospect-brief v1 — Screen a private company as a sell-side or consulting prospect
 Tested: n/a (routes to a skill)

@@ -86,8 +86,11 @@ JAIL-HANDOFF:
 
 Omit empty keys **except** `status`, `unknowns`, and `approval_required` —
 those three must always appear (an empty list is itself a claim). Keys
-appear in the order above; one optional key may follow `approval_required`:
-`checks: {<script>: pass|fail|error|n/a}` (results from jail-py-toolkit).
+appear in the order above; two optional keys may follow `approval_required`,
+in this order: `checks: {<script>: pass|fail|error|n/a}` (results from
+jail-py-toolkit), then `tested: <tested … | untested: <reason> | n/a>` (whether
+the output was run against test inputs, e.g. `tested: 5 inputs, pass^3 5/5,
+baseline won 4/5`). Downstream skills read `tested` instead of parsing prose.
 Machine form: [schemas/jail-handoff.schema.json](schemas/jail-handoff.schema.json),
 checked by **jail-py-toolkit** `handoff-lint.py`.
 

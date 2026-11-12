@@ -112,4 +112,5 @@ JAIL-HANDOFF:
   outputs: [delegation set]
   next: jail-orchestrate
   approval_required: []
+  tested: tested - scan-step model trial only (4 items); full run untested
 ```

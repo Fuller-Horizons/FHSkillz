@@ -66,7 +66,7 @@ Fields:
 | `parallel_group` | Steps in one group run at the same time and must not need each other's output. |
 
 ### 2. Orchestrator prompt
-A normal Phase 3 block (skeleton.md) with these lines in PROCESS and CONSTRAINTS:
+A normal Phase 3 block (writing.md) with these lines in PROCESS and CONSTRAINTS:
 - Spawn each subagent with its brief **verbatim**, nothing added from this conversation.
 - Run each `parallel_group` together; run everything else in manifest order.
 - Check every subagent output against its step's SUCCESS TEST before using it.
@@ -190,7 +190,7 @@ everything.
 check decide the quality of the whole run, so they get the strong model (Opus
 5.5; Fable 5.2 for the hardest jobs). Extraction and formatting never do.
 Which model each step gets, quality-first vs cost-first, and measured
-selection: [model-selection.md](model-selection.md).
+selection: [models.md](models.md).
 
 **9. Effort matches the step.** `low` for mechanical work, `medium` by default,
 `high` only for the merge or check of a high-stakes job. Effort covers the

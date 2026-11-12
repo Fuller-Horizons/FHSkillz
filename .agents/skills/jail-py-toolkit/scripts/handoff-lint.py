@@ -7,7 +7,8 @@ parser — no PyYAML): required keys (skill, status, unknowns, approval_required
 allowed top-level keys only, canonical key order (x-key-order), status in
 {complete, partial, blocked, stop}, confidence in {high, medium, low}, skill
 matching ^jail-[a-z0-9-]+$, list-typed keys are lists, `next` is a scalar,
-`checks` maps to {pass, fail, error, n/a}.
+`checks` maps to {pass, fail, error, n/a}; optional `tested` starts with
+tested | untested | n/a.
 
 Parser supports `key: value`, `key: [a, b]`, `key:` + `- item` lines, and one
 nested `checks:` mapping. Trailing ` # comments` are stripped.
@@ -20,7 +21,7 @@ import sys
 import argparse
 
 ORDER = ["skill", "status", "facts", "assumptions", "unknowns", "outputs",
-         "evidence", "risks", "confidence", "next", "approval_required", "checks"]
+         "evidence", "risks", "confidence", "next", "approval_required", "checks", "tested"]
 REQUIRED = ["skill", "status", "unknowns", "approval_required"]
 LISTS = {"facts", "assumptions", "unknowns", "outputs", "evidence", "risks",
          "approval_required"}
@@ -168,6 +169,8 @@ def validate(pairs):
             errs.append(f"{k} must be a list")
     if "next" in vals and not isinstance(vals["next"], str):
         errs.append("next must be a scalar string")
+    if "tested" in vals and not re.match(r"^(tested|untested|n/a)\b", str(vals["tested"]).strip().strip('"\'')):
+        errs.append("tested must start with 'tested', 'untested' or 'n/a'")
     if "checks" in vals:
         c = vals["checks"]
         if not isinstance(c, dict):

@@ -1,5 +1,9 @@
 # Changelog — jail-py-toolkit
 
+## 1.6.0 — 2026-11-12
+
+- handoff-lint: optional `tested` key after `checks` (tested | untested | n/a); +1 test.
+
 ## 1.5.0 — 2026-11-12
 
 - prompt-lint: Claude 5 checks (written-out reasoning requests, "think carefully"/"don't think", prefill); minimal-first required sections (OBJECTIVE, SUCCESS TEST, OUTPUT FORMAT); +4 tests.

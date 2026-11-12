@@ -28,6 +28,17 @@ class TestHandoffLint(unittest.TestCase):
         m = load("handoff-lint.py")
         self.assertEqual(m.lint_text("nothing here"), ["no JAIL-HANDOFF block found"])
 
+    def test_tested_field(self):
+        m = load("handoff-lint.py")
+        ok = ("```yaml\nJAIL-HANDOFF:\n  skill: jail-prompt\n  status: complete\n  unknowns: []\n"
+              "  approval_required: []\n  tested: tested - 5 inputs, pass^3 5/5\n```\n")
+        self.assertEqual(m.lint_text(ok), [])
+        bad = ok.replace("tested: tested - 5 inputs, pass^3 5/5", "tested: looks fine")
+        self.assertTrue(any("tested must start" in e for e in m.lint_text(bad)))
+        order = ok.replace("  approval_required: []\n  tested: tested - 5 inputs, pass^3 5/5\n",
+                           "  tested: untested: no data\n  approval_required: []\n")
+        self.assertTrue(any("canonical order" in e for e in m.lint_text(order)))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -68,4 +68,5 @@ JAIL-HANDOFF:
   next: attach the P&L export, then run the prompt
   approval_required:
     - running the prompt on client-confidential financial data
+  tested: untested - P&L export not attached
 ```

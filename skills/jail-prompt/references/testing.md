@@ -1,10 +1,15 @@
-# Testing a prompt before trusting it
+# Testing prompts and the prompt library
+
+Part 1: testing a prompt before trusting it. Part 2: reusing tested prompts and saving new ones.
+
+
+## Testing a prompt before trusting it
 
 Load this when a prompt will be reused, run at volume, or shipped to a client,
 and in every Full-lane run. The goal is a prompt proven on real inputs, not one
 that only reads well.
 
-## 1. Build a small test set (5 inputs: 3 to fix on, 2 held out)
+### 1. Build a small test set (5 inputs: 3 to fix on, 2 held out)
 
 - **Typical:** the input the prompt will see most often.
 - **Hard:** long, messy, or ambiguous input.
@@ -22,7 +27,7 @@ that only reads well.
   inputs are labeled synthetic. Save the set next to the prompt so later edits
   are re-tested on the same inputs.
 
-## 2. Run and grade
+### 2. Run and grade
 
 - Run the prompt on every input with its RUN SETTINGS. For prompts that
   will be reused, run at volume, or shipped, run each input **3 times**: the
@@ -36,7 +41,7 @@ that only reads well.
 - Grade with a fresh agent or a different model where available. A model
   grading its own output misses its own blind spots.
 
-## 3. Fix one thing, re-run, keep only improvements
+### 3. Fix one thing, re-run, keep only improvements
 
 - Minimal-first: the usual fix is adding one field (an example, a CONTEXT
   fact, a PROCESS order) for the failure you saw. Name it in TEST RESULTS.
@@ -55,7 +60,7 @@ that only reads well.
   **jail-lab** (metric = this score, budget stated) with the test set as its
   fixture.
 
-## 4. Prove it beats the plain request (baseline)
+### 4. Prove it beats the plain request (baseline)
 
 For a prompt that will be reused or sold as a deliverable, also run the
 user's original one-line request on the same inputs and settings, and grade
@@ -66,7 +71,7 @@ both outputs blind (labels A/B, order shuffled). Report:
 If the engineered prompt doesn't win, say so plainly and ship the simpler one.
 Extra structure that doesn't improve the output is cost, not quality.
 
-## Picking the model by test
+### Picking the model by test
 
 The same test set picks the model: run it on 2–3 candidate models, grade
 blind, take the top score (tie → cheaper; quality-first needs a tie with the
@@ -74,7 +79,7 @@ strong model). Record the result in RUN SETTINGS (`model sonnet · effort
 medium · selected by test: 4 items, sonnet 16/16 = opus 16/16`) and in the
 library entry. Delegation sets record it per step (delegation.md).
 
-## 5. Report in the reply
+### 5. Report in the reply
 
 ```
 TEST RESULTS: 5 inputs (3 fix, 2 held out; 2 real, 3 synthetic) · fix set 12/15 → 15/15 after 1 fix · held out 10/10 · pass^3: 5/5 inputs
@@ -86,7 +91,7 @@ Graded by: fresh Sonnet agent (blind)
 No way to run the prompt in this session → skip the runs, list the test set,
 and mark the prompt "untested; run the test set before relying on it".
 
-## Lanes
+### Lanes
 
 - **Instant:** no test set. One run if the user asked to run it.
 - **Lite:** one run on the user's input, graded against the SUCCESS TEST.
@@ -96,3 +101,46 @@ and mark the prompt "untested; run the test set before relying on it".
 Patterns adapted from GEPA (reflective fixing from failure notes, held-out
 validation; gepa-ai on GitHub) and ECC's eval-harness (pass^k; github.com/affaan-m/ECC,
 MIT, © 2026 Affaan Mustafa).
+
+## Prompt library: reuse what already worked
+
+Load this at the start of Phase 3 (check the library) and after a prompt passes
+its tests (save it). A tested prompt that fits beats a new one.
+
+### Where it lives
+
+Use the first that exists:
+1. The attached claude.ai Project: doc `claude/prompt-library.md`
+   (visible in Claude Code, the Claude app, and chat).
+2. The repo or working folder: `prompts/` with one file per prompt plus
+   `prompts/INDEX.md`.
+3. Neither: offer to create option 1 or 2. Never save without the user's OK.
+
+### Before writing a new prompt
+
+Search the library for the task type and keywords. If a saved prompt fits:
+- Reuse it, filling in the new CONTEXT and inputs.
+- Re-run its saved test set if the model or effort changed since it was tested.
+- Say "reused <name> v<n>, tested <date>".
+
+### Entry format (one per prompt)
+
+```
+### <name> v<n> — <one-line purpose>
+Tested: <date> · <model> · effort <level> · score <passed>/<run> · baseline won <x>/<n>
+Use when: <trigger, one line>
+Inputs: <tag names>
+Test set: <where the inputs are saved>
+Changes: v<n>: <what changed and why>
+<the full prompt block>
+```
+
+### Rules
+
+- Save only prompts that passed their test set (testing.md). Untested
+  drafts stay out, or are marked `untested`.
+- Never save secrets, client personal data, or real customer records in a
+  prompt or test set. Mask them first.
+- A new version keeps the old one's entry (one line in Changes) so a
+  regression can be rolled back.
+- Retire an entry when a newer version beats it on the same test set.

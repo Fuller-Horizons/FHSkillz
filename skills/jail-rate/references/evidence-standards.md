@@ -3,7 +3,7 @@
 Load this at Step 3, before gathering evidence. These rules make "empirical,
 cited" mean something: what counts as evidence, how to cite it, and how
 evidence depth sets confidence. (Alignment note: the tiering mirrors
-jail-prompt's `references/sources.md` and the labeling mirrors
+jail-prompt's `references/evidence.md` and the labeling mirrors
 jail-prospect — one house standard, three skills.)
 
 ## Source tiers (prefer higher; drop lower only when forced)

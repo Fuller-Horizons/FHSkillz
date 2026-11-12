@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """truth-lint.py — validate an epistemic truth-tagged claim block.
 
-A factual/research prompt that tags claims (see references/truth-tagging.md) emits
+A factual/research prompt that tags claims (see jail-prompt references/evidence.md) emits
 a JSON object with a `claims` array, each claim carrying `status` plus evidence
 fields. Canonical statuses are Fact / Inference / Unknown (JAIL Constitution);
 the legacy aliases Known (also "✓Known") = Fact, Infer (also "~Infer") =
