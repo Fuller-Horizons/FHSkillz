@@ -1,5 +1,8 @@
 # Changelog — business-model-canvas
 
+## 1.4.1 — 2026-11-12
+- Wrong-lane check: SWOT/PESTLE/five-forces requests hand off to jail-strategy by name (or do it inline) instead of forcing a canvas or replying with questions only. From the 0.27 batch-2 blind test.
+
 ## 1.4.0 — 2026-11-12
 
 - New `references/unit-economics.md`: worksheet for the step-4 unit-economic dependency (CAC by channel, margin, churn, lifetime, LTV with discounting, LTV:CAC, payback, contribution margin; inputs labeled VALIDATED/HYPOTHESIS) with a checked numeric example.

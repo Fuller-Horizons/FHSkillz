@@ -1,0 +1,16 @@
+{"case": "jp-e2e-1", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true, false], "notes": "Unsupported 'high for HVAC' claim; $88,000 break-even math not shown"}
+{"case": "jp-e2e-1", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true, false], "notes": "Says vehicle lines combined would rank fourth; $86,700 would rank third"}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote (none in notes); 'Arrival times also vary' shown as a quote but is not verbatim"}
+{"case": "jp-e2e-2", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote (none in notes)"}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote (none in notes)"}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote (none in notes)"}
+{"case": "jp-e2e-3", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, false, true, true], "notes": "Invents deliverable 'a clear list of what to change' and 'we worked with'"}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, false], "notes": "Recommendation is two-way conditional, no single pick"}
+{"case": "jp-e2e-4", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}

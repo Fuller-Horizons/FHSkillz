@@ -1,7 +1,7 @@
 ---
 name: jail-bmc
 metadata:
-  version: 1.4.0
+  version: 1.4.1
 description: >-
   Build or evaluate a nine-block Business Model Canvas: "business model
   canvas", "BMC", "map the business model", pressure-test how a venture or
@@ -16,6 +16,11 @@ description: >-
 A canvas full of hopes is brainstorming with borders. This skill's contract:
 **validated information and hypotheses never wear the same clothes**, and
 the riskiest assumption leaves with an experiment attached.
+
+**Wrong-lane check first.** Asked for a SWOT, TOWS, PESTLE, five forces or
+competitor scan? That is **jail-strategy**'s job: say so in one line and
+hand off to it by name (fallback: do that analysis inline in jail-strategy's
+shape). Never force a canvas, and never reply with questions only.
 
 **Label mapping (declared once).** This skill keeps two domain labels:
 **VALIDATED** = a Fact-backed element (it carries a checkable evidence

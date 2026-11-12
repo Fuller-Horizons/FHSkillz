@@ -1,0 +1,77 @@
+{
+  "disagreements": [
+    {
+      "assertion_indexes": [
+        4,
+        5
+      ],
+      "case": "jp-e2e-1",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "haiku",
+      "version": "old"
+    },
+    {
+      "assertion_indexes": [
+        4
+      ],
+      "case": "jp-e2e-1",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "sonnet",
+      "version": "old"
+    }
+  ],
+  "graded_outputs": 16,
+  "table": {
+    "jail-prompt-e2e": {
+      "new": {
+        "haiku": {
+          "assertion_pass_rate": 0.9545,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.9545,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "haiku": {
+          "assertion_pass_rate": 0.8182,
+          "case_pass_rate": 0.25,
+          "cases": 4
+        },
+        "sonnet": {
+          "assertion_pass_rate": 0.8182,
+          "case_pass_rate": 0.25,
+          "cases": 4
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-prompt-e2e": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.75,
+      "old_case_pass_rate": 0.25,
+      "verdict": "KEEP"
+    }
+  }
+}

@@ -1,5 +1,8 @@
 # Changelog — cpr-agenda-builder
 
+## 1.6.1 — 2026-11-12
+- Closing gate: item times plus buffer must add up to no more than the meeting length, with the sum written out. From the 0.27 batch-2 blind test (an agenda ran 47 of 45 minutes).
+
 ## 1.6.0 — 2026-11-12
 
 - Description cut from 1,386 to under 450 characters; one trigger phrase per lane plus two Do-NOT clauses.

@@ -1,0 +1,18 @@
+{
+  "jail-prompt-0280-C1-competing": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prompt-0280-C1-neutral": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prompt-0280-C1-supportive": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prompt-0280-C2-competing": {
+    "A": "old",
+    "B": "new"
+  }
+}

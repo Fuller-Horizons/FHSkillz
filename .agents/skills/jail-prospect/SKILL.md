@@ -1,7 +1,7 @@
 ---
 name: jail-prospect
 metadata:
-  version: 1.5.0
+  version: 1.5.1
 description: >-
   Screen a US private company from free public sources. PROSPECT lane: sell-side
   brokering plus consulting brief, two 0-100 scores. SNAPSHOT lane: vendor,
@@ -49,7 +49,7 @@ Two independent 0–100 scores, bands Low (0–39) / Medium (40–69) / High (70
 - **Likelihood-to-Sell** = succession (30) + exit/transition signals (25) + saleability/quality (25) + market pull (20).
 - **Consulting-Opportunity** = operational gaps (30) + digital/tech maturity gaps (25) + growth strain (25) + compliance/risk exposure (20).
 
-Each score must cite the specific signals that drove it. A high score on thin evidence is a fail — if confidence is low, say so and route to "need more." A name with no web presence is a "need more" case: do not invent officers, a formation date, or financials.
+Each score must cite the specific signals that drove it, written as `Consulting: 35/100 (Low) — drivers: <signal> [n]; <signal> [n]` (same for Likelihood-to-Sell); every Fact in the body carries its source inline (`[n]` → appendix entry with URL and date accessed). End the brief with one line: `RECOMMENDATION: pursue-brokering | pursue-consulting | pass | need more · confidence NN%` (exactly one). A high score on thin evidence is a fail — if confidence is low, say so and route to "need more." A name with no web presence is a "need more" case: do not invent officers, a formation date, or financials.
 
 ## Output
 A **one-page brief** per company (template in `assets/brief-template.md`): snapshot, the two scores with drivers, indicative size band + assumptions, red flags, a 1–2 sentence outreach hook tailored to the strongest angle, the recommendation (pursue-brokering / pursue-consulting / pass / need more) with a confidence %, and the source appendix.

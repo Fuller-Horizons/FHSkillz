@@ -1,0 +1,31 @@
+{
+  "disagreements": [],
+  "graded_outputs": 8,
+  "table": {
+    "jail-prompt": {
+      "new": {
+        "claude-opus-5-5": {
+          "assertion_pass_rate": 0.75,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      },
+      "old": {
+        "claude-opus-5-5": {
+          "assertion_pass_rate": 0.75,
+          "case_pass_rate": 0.75,
+          "cases": 4
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-prompt": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.75,
+      "old_case_pass_rate": 0.75,
+      "verdict": "REVERT"
+    }
+  }
+}

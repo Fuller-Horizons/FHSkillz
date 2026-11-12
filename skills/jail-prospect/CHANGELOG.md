@@ -1,5 +1,8 @@
 # Changelog — company-prospect-research
 
+## 1.5.1 — 2026-11-12
+- Each score line names its drivers with citations; every body Fact carries an inline source; the brief ends with one RECOMMENDATION line (exactly one of four) plus confidence. From the 0.27 batch-2 blind test.
+
 ## 1.5.0 — 2026-11-12
 
 - `references/free-sources.md`: every URL opened with WebFetch and dated `[checked 2026-11-12]`. Fixed moved links (FPDS now in SAM.gov, USPTO trademark search replaces TESS, OSHA search deep link, SEC search page, SBA size standards, DOL enforcement data). Noted sources the tool could not open (Yelp, LinkedIn, Wayback, Google Maps) and login or fee gates. Removed the claim that County Business Patterns gives revenue per employee (it has no revenue).

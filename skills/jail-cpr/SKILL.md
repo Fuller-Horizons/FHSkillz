@@ -1,7 +1,7 @@
 ---
 name: jail-cpr
 metadata:
-  version: 1.6.0
+  version: 1.6.1
 description: >-
   Build a CPR (Context, Purpose, Results) as a DOCX/PDF. DESIGN: build or
   design an agenda, prep a meeting. COMMIT: personal or team commitment
@@ -42,8 +42,9 @@ after the fact).
    information | assigned action). An item with no expected output is cut
    or demoted to pre-work.
 5. **jail-verify** — the closing gate, hard: **FAIL any check** — every
-   Result covered by ≥1 item; every item traces to a Result; time
-   allocations sum to the duration (with buffer); decisions have their
+   Result covered by ≥1 item; every item traces to a Result; item times
+   plus buffer add up to no more than the meeting length, with the sum
+   written out (`5+10+15+10 = 40 + 5 buffer = 45 of 45`); decisions have their
    needed inputs in pre-work; owners are named people — **→ fix or flag
    inline; do not render the document.**
 

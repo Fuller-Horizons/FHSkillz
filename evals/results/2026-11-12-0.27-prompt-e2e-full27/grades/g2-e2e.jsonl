@@ -1,0 +1,16 @@
+{"case": "jp-e2e-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, false, true], "notes": "Talking points cover groups, not each of the five drivers."}
+{"case": "jp-e2e-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, false, false], "notes": "Not a meaning per driver; claims vehicle lines combined would rank fourth, actually third (86,700>71,200)."}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote."}
+{"case": "jp-e2e-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint only paraphrased, no quote."}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no direct quote."}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint only paraphrased, no quote."}
+{"case": "jp-e2e-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "Invents 'Recently' timing, 'clear list of what to change' deliverable, and generic claims beyond inputs."}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, false], "notes": "Gives two conditional picks, not one clear recommendation."}
+{"case": "jp-e2e-4", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}

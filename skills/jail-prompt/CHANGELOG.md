@@ -2,6 +2,12 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.10.3 — 2026-11-12
+- Fix from the compliance test: asked for "the full process" and a proper test, both 2.7.0 and 2.10.1 replied with intake questions only, no prompt. Full-lane questions now ride alongside a v1 prompt built on stated defaults, never instead of one.
+
+## 2.10.2 — 2026-11-12
+- Fix from the 2.10.1 retest: the thank-you-email case (subagents requested for a one-pass task) turned into a full STOP with questions and no prompt. Now: when only the method fails the gate, say so in one line and deliver the right prompt in the same reply on stated defaults; the lettered choice is only for a whole-task STOP. Lane card: Full is for reused / at-volume / client-decision work; a short one-off client note is Lite; proceed on stated defaults instead of waiting.
+
 ## 2.10.1 — 2026-11-12
 - Fixes from the blind old-vs-new test (2.1.0 vs 2.10.0, Opus 5.5): (1) the prompt must appear in the reply itself, never only in a saved file; a delegation set shows the lead prompt and every brief (or the lead prompt, one full brief, and each other brief's scope and model). In the test, 2.10.0 wrote a strong delegation set to `prompts.md` and showed only a summary. (2) A STOP ends with a lettered choice (non-AI tool / reframe / proceed with caveats / drop); 2.10.0 dropped it.
 
