@@ -21,3 +21,4 @@ NODE A-prospect | STATUS: verified | ARTIFACT: desc/handoff/score-check OK; free
 NODE A-rate | STATUS: verified | ARTIFACT: desc/handoff/score-check OK; 140 lines
 NODE A-bmc | STATUS: verified | ARTIFACT: desc/handoff OK; unit-economics arithmetic re-checked (LTV 1600, LTV:CAC 6.7, payback 5.0)
 NODE A-cpr | STATUS: verified | ARTIFACT: desc 418 chars (from 1,386), desc/handoff OK
+NODE T-routing | STATUS: verified | ARTIFACT: evals/results/2026-11-12-0.27-trigger/ — 3 Haiku judges each 100% fire / 0% false-fire on 109 cases
