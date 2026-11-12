@@ -4,10 +4,10 @@ metadata:
   version: 1.5.0
 description: >-
   Screen a US private company from free public sources. PROSPECT lane: sell-side
-  brokering plus consulting brief with two 0-100 scores. SNAPSHOT lane: vendor,
+  brokering plus consulting brief, two 0-100 scores. SNAPSHOT lane: vendor,
   competitor or partner vetting. Never invents financials. Triggers: "prospect
-  brief", "is this a good brokerage prospect", "should I approach this owner",
-  "sell-side screen", "vet this vendor", "due diligence on X", "competitor read".
+  brief", "good brokerage prospect", "should I approach this owner",
+  "vet this vendor", "due diligence on X", "competitor read".
   Do NOT use for 0-10 ratings (jail-rate) or general research (jail-research).
 ---
 

@@ -17,3 +17,4 @@ VERIFY research-example-urls | cbp.html OK, nonemployer-statistics.html OK, bls.
 NODE A-prompt | STATUS: verified | ARTIFACT: desc/handoff OK; 1,649 words (from 3,072); key rules present inline (grep audit); toolkit tests 57 OK
 NODE A-strategy | STATUS: verified | ARTIFACT: desc/handoff/label OK; 154 lines; COMPETITIVE lane added
 FIX label-lint | flag only known legacy labels (false positives on headings like 'Fact bias' removed); tests 57 OK
+NODE A-prospect | STATUS: verified | ARTIFACT: desc/handoff/score-check OK; free-sources 17/24 URLs confirmed live (7 blocked/JS-only, marked)
