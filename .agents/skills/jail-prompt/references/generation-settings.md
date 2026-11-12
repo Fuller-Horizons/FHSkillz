@@ -57,6 +57,15 @@ There is no seed. For audits: pin the full model ID and effort, use a strict
 output schema, keep the test inputs fixed, and run twice. Structural
 differences mean the schema isn't pinning the output.
 
+## Prompts that will run outside Claude
+
+Name a **tier** (fast / standard / strong / frontier) instead of a Claude
+model, and map it on the host with the table in [models.md](models.md). Give
+the host's own reasoning or effort setting if it has one; follow that
+vendor's docs for sampling settings.
+
+`RUN SETTINGS: tier strong · effort medium (map per host) · tools: web search`
+
 ## The RUN SETTINGS line
 
 Every engineered prompt ends its block with one line, e.g.:

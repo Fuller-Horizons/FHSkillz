@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.7.0 — 2026-11-12
+- **Quote-before-claim** for document and research subagents: every Fact carries a verbatim quote (25 words or fewer) and a source id; sources are saved once to `sources/`; the lead agent runs `quote-check.py` before merging, and a quote not found sends that claim back as Unknown. In `delegation.md`, the subagent brief template, `claude-prompting.md`, the core, and the worked example.
+- **Portable meta-prompt rebuilt** for any model: gather-first, security gate, Claude-style structure rules, QUALITY BAR, EXAMPLES, quote-before-claim, RUN SETTINGS by tier, test plan and the TEST RESULTS / UNTESTED line.
+- **Tool-neutral tiers** in RUN SETTINGS for prompts that run outside Claude (`generation-settings.md`; map in `models.md`); prompt-lint accepts `tier`.
+
 ## 2.6.0 — 2026-11-12
 - **Leaner core.** SKILL.md rewritten: 2,213 → 1,304 words (−41%), 124 → 96 lines; every decision rule kept, detail moved to references. Fixed a stale `temperature: 0.0` dry-run note.
 - **Delegation guide split**: `references/delegation.md` (how to delegate, quality-per-token rules) + new `references/model-selection.md` (quality-first vs cost-first, measured selection, model table).

@@ -87,6 +87,11 @@ class TestPromptLint(unittest.TestCase):
         rc, _, err = lint("STOP: use a spreadsheet.\n", "--reply")
         self.assertEqual(rc, 0, err)
 
+    def test_tool_neutral_tier_ok(self):
+        text = FULL.replace("model sonnet · effort medium", "tier strong · effort medium (map per host: models.md)")
+        rc, _, err = lint(text, "--strict")
+        self.assertEqual(rc, 0, err)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -61,6 +61,10 @@ the end; re-check them when a new model generation ships.
   read it; parsing a tag is easier than parsing prose.
 - For grounded answers: "If the sources don't support a claim, say Unknown."
   Claude follows a stated permission to say "I don't know".
+- **Quote before claim** for document and research work: ask for the exact
+  supporting quote (25 words or fewer) and its source id before each factual
+  claim, and allow "no quote, no Fact". Quotes can be checked by script
+  (`quote-check.py`); paraphrased claims can't.
 
 ## Agents and tools
 

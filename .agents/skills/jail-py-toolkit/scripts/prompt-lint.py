@@ -93,7 +93,7 @@ def lint(text):
     if rs is None:
         warnings.append("no RUN SETTINGS: line (model · effort · tools)")
     else:
-        if not re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-|gpt|gemini|model)\b", rs):
+        if not re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-|gpt|gemini|model|tier)\b", rs):
             warnings.append("RUN SETTINGS names no model")
         if not re.search(r"(?i)\beffort\b", rs) and re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-)", rs):
             warnings.append("RUN SETTINGS names a Claude model but no effort level")

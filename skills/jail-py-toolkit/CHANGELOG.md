@@ -1,5 +1,11 @@
 # Changelog — jail-py-toolkit
 
+## 1.4.0 — 2026-11-12
+
+- **quote-check.py**: verifies each Fact's verbatim quote appears in its saved source (normalizes case, spacing, quote/dash/hyphen variants, HTML tags and entities); flags Facts with no quote, unknown sources, quotes of 3 words or fewer; warns over 40 words. 6 tests.
+- prompt-lint accepts tool-neutral tiers in RUN SETTINGS (+1 test).
+- Description rewritten to 450 chars with a "Do NOT use" line (was 838) and the new checks; keeps the "scan for secrets" / "lint" / "dry-run" / "skill structure" / rating triggers.
+
 ## 1.3.0 — 2026-11-12
 
 - **select-models.py**: pick a step's model by blind, measured trial (candidates × test items, separate grader model, `selected_by` record; tie → cheaper; quality-first / cost-first). 7 tests with an offline stand-in for `claude`.
