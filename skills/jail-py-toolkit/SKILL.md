@@ -57,6 +57,7 @@ release).
 | `scripts/pii-scan.py` | jail-quarantine | PII classes (SSN, card+Luhn, ABA routing, DOB, email+phone); prints class + line only, never the value. | 0 clean · 1 found · 2 IO |
 | `scripts/desc-check.py` | Skill hygiene | Description ≤ 450 chars with `Do NOT use`, core ≤ 160 lines, `metadata.version` present. | 0 pass · 1 fail · 2 IO |
 | `scripts/score-check.py` | jail-rate / jail-prospect | Weights sum to 100, scores in range, Overall = Σ(score×weight) to 1 decimal. | 0 pass · 1 fail · 2 IO |
+| `scripts/readability.py` | jail-summarize | Flesch-Kincaid grade + longest sentences; fails above `--max-grade` (default 9 for owner/client briefs). | 0 pass · 1 fail · 2 IO |
 
 `scripts/fh_patterns.py` is the shared detection library (secrets + PII) used
 by `secret-scan.py`, `pii-scan.py` and the enforcement hooks; results never

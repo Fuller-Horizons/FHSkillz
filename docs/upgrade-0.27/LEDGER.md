@@ -12,3 +12,4 @@ NODE A-research | STATUS: verified | ARTIFACT: desc/handoff/label/cite-check OK 
 NODE A-task-contract | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 154 body lines
 NODE A-red-team | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 141 lines
 NOTE heldout | 12 held-out cases authored by orchestrator after specs, stored outside repo until test time (authors never saw them)
+NODE A-summarize | STATUS: verified | ARTIFACT: desc/handoff checks OK; toolkit tests 48 OK; readability.py added
