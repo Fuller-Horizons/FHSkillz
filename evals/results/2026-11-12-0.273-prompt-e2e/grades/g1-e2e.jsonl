@@ -1,0 +1,16 @@
+{"case": "jp-e2e-1", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, false, true], "notes": "No per-driver meaning for each of the five drivers"}
+{"case": "jp-e2e-1", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, false], "notes": "Asserts one year of P&L data though period unstated"}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, false, true], "notes": "No per-driver meaning for every driver"}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, false, true, true, true], "notes": "Paraphrase presented in quotation marks as quote; billing complaint has no quote"}
+{"case": "jp-e2e-2", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, false, true, true], "notes": "Invents recently helped and says 20 years in Patchogue, inaccurate"}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true, true], "notes": ""}
