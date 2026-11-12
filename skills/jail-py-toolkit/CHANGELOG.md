@@ -1,5 +1,10 @@
 # Changelog — jail-py-toolkit
 
+## 1.5.0 — 2026-11-12
+
+- prompt-lint: Claude 5 checks (written-out reasoning requests, "think carefully"/"don't think", prefill); minimal-first required sections (OBJECTIVE, SUCCESS TEST, OUTPUT FORMAT); +4 tests.
+- select-models: `--repeats K` (pass^K per candidate); +1 test.
+
 ## 1.4.0 — 2026-11-12
 
 - **quote-check.py**: verifies each Fact's verbatim quote appears in its saved source (normalizes case, spacing, quote/dash/hyphen variants, HTML tags and entities); flags Facts with no quote, unknown sources, quotes of 3 words or fewer; warns over 40 words. 6 tests.

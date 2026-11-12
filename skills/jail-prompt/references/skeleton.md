@@ -2,6 +2,35 @@
 
 Load this when writing the prompt block. **Minimal first:** every prompt starts with the core (inputs in tags, OBJECTIVE, SUCCESS TEST, QUALITY BAR, OUTPUT FORMAT, RUN SETTINGS). Every other field is added only when its trigger below applies or a test input fails without it, and the reason is named in TEST RESULTS. A long prompt is not a better prompt: each extra rule is something the model can over-apply.
 
+## Missing-context check (Phase 1)
+
+Before writing, check the goal against these 11 items and mark each as found
+(files, Project, memory, conversation) or missing:
+
+1. Who reads or uses the output, and for what decision
+2. Scope: which data, files, period, people, places
+3. Done-criteria: how anyone will know it worked
+4. Inputs available, and their format
+5. Edge cases: missing, conflicting, or messy data
+6. Security and privacy: secrets, client data, who may see the output
+7. Existing patterns: templates, past work, house style to match
+8. Limits: length, time, budget, tools allowed
+9. What NOT to do (out of scope, off-limits actions)
+10. Freshness: does anything depend on current facts that need search
+11. Where it runs: model or tool, one-off or reused, by a person or a program
+
+Fill what you can as labeled assumptions. **3 or more critical items missing →
+ask up to 3 questions (each with a recommended default) before writing.**
+Pattern adapted from ECC's prompt-optimizer (github.com/affaan-m/ECC, MIT,
+© 2026 Affaan Mustafa).
+
+## Full and quick versions
+
+When add-ons made the prompt longer than the core, also give a **QUICK
+version**: the core alone (inputs, OBJECTIVE, SUCCESS TEST, QUALITY BAR,
+OUTPUT FORMAT, RUN SETTINGS), labeled as such, for fast or low-stakes use.
+Test results apply to the full version only unless the quick one was tested.
+
 ## Fields
 
 - **METADATA.** Use YAML with a fixed key set so downstream agents can parse the handoff: `inputs:` `outputs:` `params:` (for example `strict-schema: true` for idempotent structure) `requires:` `produces:`. Keep every key, even when the value is "none".

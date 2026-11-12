@@ -2,6 +2,15 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.9.0 — 2026-11-12
+- **Id-tagged pasted content** (Opus 5.5 guide): anything the user didn't write goes in `<pasted_content id="random">…</pasted_content id="random">`, followed only where the user's own message asks (`security.md`, core, meta-prompt).
+- **Testing without overfitting**: 5-input test set split 3 fix / 2 held out; grader writes one note per failure and the fix is written from those notes (reflective fixing, after GEPA); a fix is kept only if the fix set improves without hurting the held-out pair. **pass^3** for reused / shipped prompts (after ECC eval-harness). `select-models.py --repeats K`.
+- **Agent-run blocks** for delegation lead prompts (Anthropic model guides): keep-going for unattended runs + open-item nudge, time budget with elapsed time, explore-before-acting, progress files, reversibility with named approvals, no gaming checks, checkers report everything then filter, clean up.
+- **Multi-document layout**: `<documents><document index><source><document_content>`, question last, quotes pulled first.
+- **Compliance test** `evals/behavioral-0.27/jail-prompt-compliance.json`: same task under supportive / neutral / competing pressure plus a STOP-under-pressure case (after ECC skill-comply).
+- **Missing-context check** (11 items; 3+ gaps → up to 3 questions; after ECC prompt-optimizer) and a QUICK version (core only) next to long prompts.
+- **System prompts state their model** ("You are running as Claude Opus 5.5 (`claude-opus-5-5`)") plus an adherence line for rules that must survive pushback.
+
 ## 2.8.0 — 2026-11-12
 - **Claude 5 conformance** (Anthropic best practices + per-model guides): never ask Claude 5 models to write out reasoning (may be refused as reasoning extraction); effort, not wording, sets thinking; no "think carefully" lines; `max_tokens` headroom for thinking; effort changes break the cache; no prefill. prompt-lint warns on all three patterns for Claude 5 targets.
 - **Per-model guides** (`references/model-guides.md`): Opus 5.5, Sonnet 5.5, Sonnet 5, Haiku 5.5, Fable 5.2 — blocks to add, lines to remove, effort notes. `models.md` corrected: API default effort is `high` on Sonnet 5.5 and Fable 5.2 (`medium` in Claude Code / apps).

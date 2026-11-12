@@ -3,7 +3,7 @@ name: jail-prompt
 model: claude-opus-5-5
 effort: medium
 metadata:
-  version: 2.8.0
+  version: 2.9.0
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
@@ -29,6 +29,7 @@ STOP exists in every lane. Unsure: pick the lighter lane and escalate.
 ## Phase 1: Frame
 
 - **Gather before asking.** Pull attached files, Project docs, connected apps, saved preferences, memory, and the prompt library first. Fill likely answers as labeled assumptions; ask only where a wrong guess is costly. Missing context, not wording, is the usual cause of weak output.
+- **Missing-context check:** 11 items ([skeleton.md](references/skeleton.md)); 3+ critical gaps → ask up to 3 questions, each with a default.
 - **Comprehension gate (97%).** Restate the want and the why. Aim at the underlying need (XY problem). On ambiguity offer 2+ readings. Never fake the number.
 - **Split by task type** and route each: code (sandbox), current facts (live search or connector, never memory), settled facts, creative, file/image generation (its tool or skill), analysis of supplied data.
 - **Declare the mode and hold it:** Factual / Research / Brainstorm / Critique. Only Brainstorm may speculate, marked.
@@ -52,7 +53,7 @@ Kill fast; STOP on the first decisive failure.
 - **Write for the model that runs it**, using its notes in [model-guides.md](references/model-guides.md). For Claude: inputs in labeled tags, long material first and the ask last, reasons behind constraints, say what to do, no all-caps ([claude-prompting.md](references/claude-prompting.md)). Optimize for goal-driven framing, authority ([sources.md](references/sources.md)), simplicity, and tokens.
 - **Chain** 2-4 prompts only when stages need different expertise, separate checking, or human judgment: emit a manifest and lint it (`chain-lint.py`).
 - **Subagents** (the run can start them, and streams are independent, need an unbiased checker, or exceed one context window): emit a **delegation set**: manifest, lead prompt, one standalone brief per subagent, an independent checker. **Quality-first by default:** merge and check on strong models (the check on a different one); a cheaper model keeps a step only with a recorded trial showing it ties the strong model; cost-first only on request. Spend tokens only where judgment lives: batched agents, pointers not pasted context, capped returns, cheap-first with failures escalated. Research and document subagents quote before they claim; quotes are script-checked against saved sources (`quote-check.py`) before the merge. Say why delegating beats one prompt, or don't delegate. Rules: [delegation.md](references/delegation.md), [model-selection.md](references/model-selection.md). Run it with **jail-orchestrate**.
-- **Surface the prompt first** as a copyable block, in every lane, before running it. Exceptions: STOP, or an explicit "just do it". Missing inputs are listed, never invented.
+- **Surface the prompt first** as a copyable block, in every lane, before running it; if add-ons made it long, also give a QUICK version (the core alone). System prompts for apps state the model they run on. Exceptions: STOP, or an explicit "just do it". Missing inputs are listed, never invented.
 
 **Minimal first, then earn every line** (Anthropic: start minimal, add instructions only to fix observed failures). Every prompt starts as the core:
 ```

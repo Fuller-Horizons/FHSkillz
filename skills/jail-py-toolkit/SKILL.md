@@ -1,7 +1,7 @@
 ---
 name: jail-py-toolkit
 metadata:
-  version: 1.4.0
+  version: 1.5.0
 description: >-
   Runnable machine checks for FHSkillz (Python 3.8+, stdlib). Use when a skill
   asks for a machine check, or to scan for secrets or personal data, lint a

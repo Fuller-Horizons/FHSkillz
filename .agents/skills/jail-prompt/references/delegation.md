@@ -88,6 +88,36 @@ A normal Phase 3 block (skeleton.md) with these lines in PROCESS and CONSTRAINTS
 - Every external action (send, publish, spend, delete) stays in
   approval_required. Subagents never take one.
 
+**Agent-run blocks (from Anthropic's model guides; add the ones the run needs):**
+- **Keep going (unattended runs only).** "A message with no tool call ends
+  your turn and the work stops there. Put status notes and recommendations in
+  the same message as your next tool call and carry on with whatever doesn't
+  depend on the user. Stop only when nothing can move without the user, or
+  before a risky or destructive action, which still needs confirmation."
+  If the run stops with open items anyway, nudge once or twice: "Your task list
+  still has open items: <items>. Continue. If one is blocked, say what blocks it."
+- **Time budget (multi-agent runs).** "Time matters: the earlier a correct
+  result, the better." Have the host append elapsed time to each message
+  (`elapsed 340s / 1200s`), set the budget a little above the target, and keep
+  a hard timeout of your own.
+- **Explore before acting (multi-app work).** "Before taking any action, open
+  the documents, records and files that could be relevant, including ones the
+  task doesn't name, and use what you find."
+- **Progress files for long runs.** Keep state in files a fresh context can
+  resume from: `progress.md` (free-text notes), `tests.json` or `status.json`
+  (structured status), and git commits as checkpoints. The first session sets
+  these up; later sessions start by reading them.
+- **Reversibility.** Act freely on local, reversible steps; ask before
+  deleting, force-pushing, sending, posting or paying. Name the actions that
+  need approval (vague rules make some models hold back routine work).
+- **No gaming the checks.** "Solve the general case; don't hard-code test
+  values or edit tests to pass. If a test is wrong or the task infeasible, say
+  so."
+- **Checkers: coverage first, filter later.** The verifier lists every
+  problem it finds with its confidence and severity; a separate step filters.
+  "Only report serious issues" makes checkers drop real ones.
+- **Clean up.** Delete temporary helper files at the end of the run.
+
 ### 3. Subagent brief (one per agent step)
 A trimmed Phase 3 block. Every brief must stand alone, because the subagent
 sees nothing else:
@@ -106,6 +136,8 @@ BEFORE RETURNING: check yourself against the SUCCESS TEST; list gaps
 
 ### 4. Verifier brief
 - A separate agent that produced none of the work.
+- Coverage first: report every problem with confidence and severity; don't
+  pre-filter to "serious" ones.
 - It gets the merged output, the chain-level SUCCESS TEST, and the source
   list. It does **not** get worker transcripts or their "done" claims.
 - It returns PASS / FAIL / UNVERIFIED per check, with the evidence it used.
