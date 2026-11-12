@@ -7,6 +7,9 @@ repeating these facts.
 
 ## Models
 
+Per-model prompting advice (blocks to add, lines to remove):
+[model-guides.md](model-guides.md).
+
 | Model | Full ID | Alias | Tier | Notes |
 |---|---|---|---|---|
 | Claude Haiku 5.5 | `claude-haiku-5-5` | `haiku` | fast | Cheapest. Extraction, classification, fixed-schema work behind a machine check. |
@@ -25,16 +28,38 @@ Fable.
 ## Effort
 
 `low` · `medium` · `high` · `xhigh` · `max` (available levels vary by model).
-Defaults: `medium` on Opus 5.5, Sonnet 5.5, Haiku 5.5, and in Claude apps for
-Fable 5.2; `high` on most other models. Set with Claude Code `--effort` /
+Defaults differ by place. **API:** `medium` on Opus 5.5 and Haiku 5.5;
+`high` on Sonnet 5.5 and Fable 5.2. **Claude Code and Claude apps:** `medium`
+on Opus 5.5, Sonnet 5.5, Haiku 5.5 and Fable 5.2. Always set effort
+explicitly rather than relying on a default. Set with Claude Code `--effort` /
 `/effort`, skill or subagent frontmatter `effort:`, or API
 `output_config.effort`. Effort covers thinking and answer tokens.
+
+## Thinking (Claude 5 family)
+
+- **Always on:** Opus 5.5, Fable 5.2 / 5.1 (adaptive only; `thinking:
+  disabled` returns an error on Opus 5.5).
+- **On by default:** Sonnet 5.5, Haiku 5.5 (Sonnet 5.5's lowest setting is
+  `between_tools`).
+- Control depth with effort. Prompts that ask the model to write out its
+  reasoning may be refused as "reasoning extraction"; read summarized thinking
+  blocks instead. Replies can start with thinking blocks: select blocks by
+  type, never by position.
+- **Leave room in `max_tokens`** for thinking plus the answer, more at high
+  effort (Anthropic reports 128,000 working well for long agentic coding turns
+  on Opus 5.5); a tight budget truncates (`stop_reason: max_tokens`).
+- **Changing effort between requests breaks the prompt cache**; keep effort
+  fixed within a run (per-message effort is in beta).
+- **Prefill** (writing the start of Claude's reply) is not supported on
+  current models; it returns an error.
 
 ## Sampling and other settings
 
 - `temperature`, `top_p`, `top_k`: rejected by Sonnet 5.5; Anthropic's
   migration guidance says to remove them. Don't set them for current Claude.
 - No `seed`, presence/frequency penalty, or logprobs in the Messages API.
+- Sonnet 5's new tokenizer counts roughly 30% more tokens for the same text;
+  size budgets and `max_tokens` accordingly.
 - Available: model, effort, thinking (`adaptive` recommended), structured
   output via tool/JSON schema where the host enforces it, `stop_sequences`,
   tools.

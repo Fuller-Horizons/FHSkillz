@@ -92,6 +92,19 @@ class TestPromptLint(unittest.TestCase):
         rc, _, err = lint(text, "--strict")
         self.assertEqual(rc, 0, err)
 
+    def test_claude5_reasoning_extraction_warns(self):
+        text = FULL.replace("PROCESS: 1) read <pnl>", "PROCESS: 1) think step by step in <thinking> tags 2) read <pnl>")
+        rc, _, err = lint(text, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("reasoning extraction", err)
+
+    def test_claude5_think_carefully_and_prefill_warn(self):
+        text = FULL.replace("CONSTRAINTS: use only <pnl>", "CONSTRAINTS: think carefully; prefill the table header; use only <pnl>")
+        rc, _, err = lint(text, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("use effort instead", err)
+        self.assertIn("prefill", err)
+
 
 if __name__ == "__main__":
     unittest.main()

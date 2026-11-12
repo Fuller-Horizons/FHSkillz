@@ -45,13 +45,23 @@ the end; re-check them when a new model generation ships.
 
 ## Thinking and effort
 
-- For multi-step reasoning, analysis, or anything checked against criteria,
-  let Claude think before answering (extended / adaptive thinking where the
-  host offers it). In a host without it, ask for the reasoning in a
-  `<thinking>` block before the answer.
-- **Effort** is the main depth control on current models (`low`, `medium`,
-  `high`, `xhigh`, `max`; which levels exist depends on the model). See
-  generation-settings.md for picking one.
+- **Claude 5 models think on their own.** Opus 5.5 and Fable always think;
+  Sonnet 5.5 and Haiku 5.5 think by default. Set depth with **effort**, not
+  with words.
+- **Never ask a Claude 5 model to write out its reasoning** ("show your
+  thinking", "reason step by step in <thinking> tags"). Anthropic says such
+  requests may be declined as reasoning extraction. If you need the
+  reasoning, read the host's summarized thinking blocks instead.
+- **Don't add "think carefully" or "don't think" lines.** To get more or less
+  thinking, raise or lower effort; that works more reliably than wording.
+- **Prefer a general nudge to a scripted plan.** "Consider the cash impact
+  before recommending" beats a 10-step thinking script; use numbered PROCESS
+  steps only when the order truly matters.
+- **No prefilled answers.** Starting Claude's reply for it (prefill) isn't
+  supported on current models; control format with OUTPUT FORMAT and tags.
+- Older or non-Claude models with thinking off: ask for brief reasoning and
+  put the answer in `<answer>` tags.
+- Effort levels and per-model defaults: [models.md](models.md).
 
 ## Output control
 

@@ -70,6 +70,9 @@ vendor's docs for sampling settings.
 
 Every engineered prompt ends its block with one line, e.g.:
 
-`RUN SETTINGS: model sonnet · effort medium · tools: web search, file read · thinking: adaptive (API)`
+`RUN SETTINGS: model sonnet · effort medium · tools: web search, file read · max_tokens: 16000 (API, leaves room for thinking)`
+
+API runs: include `max_tokens` with room for thinking, keep effort fixed
+for the whole run (changing it breaks the prompt cache), and never prefill.
 
 Sources: see [models.md](models.md).

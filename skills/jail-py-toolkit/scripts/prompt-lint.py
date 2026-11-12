@@ -89,6 +89,18 @@ def lint(text):
         if len(lines) < 2:
             warnings.append("QUALITY BAR has fewer than 2 criteria")
 
+    # Claude 5 family: visible-reasoning requests may be refused; prefill unsupported.
+    claude5 = re.search(r"(?i)\b(opus|sonnet|haiku|fable|claude-(opus|sonnet|haiku|fable)-5)", sec.get("RUN SETTINGS") or "")
+    if claude5:
+        if re.search(r"(?i)(<thinking>|show (your|the) (reasoning|thinking|work)|think step[- ]by[- ]step|"
+                     r"write (out )?your reasoning|explain your reasoning before)", text):
+            warnings.append("asks a Claude 5 model to write out its reasoning; it may be refused as reasoning "
+                            "extraction - set effort instead and read summarized thinking")
+        if re.search(r"(?i)\bprefill", text):
+            warnings.append("uses prefill; current Claude models don't support prefilled replies")
+        if re.search(r"(?i)\b(think (very )?carefully|think hard|do not think|don't think)\b", text):
+            warnings.append("tells the model how much to think; on Claude 5 use effort instead")
+
     rs = sec.get("RUN SETTINGS")
     if rs is None:
         warnings.append("no RUN SETTINGS: line (model · effort · tools)")
