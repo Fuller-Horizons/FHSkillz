@@ -1,5 +1,8 @@
 # Changelog — jail-prototype
 
+## 2.0.1 — 2026-11-12
+- From the clean live A/B (2.0.0 lost 4/16 vs 7/16 to 1.2.0): every build reply opens with a PROTOTYPE BRIEF (question, shape, timebox, throwaway name, how variants differ, numbered points, checks run or not, exact send-back); no-question requests propose exactly one question with its shape; SHIP GATE splits into hard clauses (verbatim evidence, no production paths, marking) and recorded ones (ledger, archive, lint), so a clear reviewer answer ships as `answered` even when tooling is unreachable; promotion refusals cite the gate and name polish-to-ship.
+
 ## 2.0.0 — 2026-11-12
 
 - **Review pages** for look questions (and anything easier judged by looking): one self-contained HTML file with three switchable variants, numbered review points, answer controls and a Copy-my-answers button whose pasted text is the verdict's evidence; explicit background, viewport, phone-width layout, no outside requests, sample data only. Review channel: lavish-axi on the user's computer → Claude app artifact → local file + pasted answers. Each round regenerates the file with a revisions legend. Review-loop ideas adapted from lavish-axi (github.com/kunchenguid/lavish-axi, MIT, © 2026 Kun Chen). New `references/review-pages.md` (rules + six templates).

@@ -1,7 +1,7 @@
 ---
 name: jail-prototype
 metadata:
-  version: 2.0.0
+  version: 2.0.1
 description: >-
   Build a throwaway prototype that answers one named design question; keep the answer, discard the build. Look questions become a single-file HTML review page: 3 switchable variants, numbered review points, answer controls the reviewer copies back. Ends in a SPIKE VERDICT and ledger entry. Use for "mock this up", "which layout works", "try it first". Do NOT use for production builds, metric tuning (jail-lab), or checking done work (jail-verify).
 ---
@@ -21,7 +21,8 @@ Kun Chen); both under JAIL evidence rules.
   that supersedes the old one, never a silent rerun.
 - **One-sentence question**, falsifiable where possible: *"Which of three
   scorecard layouts lets an owner see what needs attention in 30 seconds?"*
-  No stated question = no prototype: propose one and wait for a yes.
+  No stated question = no prototype: build nothing, propose **exactly one**
+  question with the shape it implies, and wait for a yes.
 - **The question picks the shape:**
   - **Look/feel** → a review page with exactly **three radically different**
     variants (layout or information structure, never just colour or spacing).
@@ -29,6 +30,20 @@ Kun Chen); both under JAIL evidence rules.
     state panel, script, spreadsheet, or paper walkthrough) that pushes the
     model through the hard cases.
   - **Feasibility** → the thinnest end-to-end spike through the riskiest part.
+
+## Open every build reply with the PROTOTYPE BRIEF
+```
+QUESTION:  <one sentence>
+SHAPE:     look | logic | feasibility, and why in a clause
+TIMEBOX:   one working session + at most one declared extension
+BUILD:     proto-<slug> (PROTOTYPE, wipe me), outside production paths, sample data
+VARIANTS:  A/B/C, how each differs in layout or structure, one switch (look only)
+POINTS:    blocks numbered #1…#n for comment
+CHECKS:    360px phone · lint · sandboxed frame: done or not run, each
+SEND BACK: <the exact answer block, e.g. PICK: B · #3: too long>
+```
+The brief is what the reviewer sees first; a page they never open still
+tells them what was built and how to answer.
 
 ## Rules (every prototype)
 1. **Throwaway and visibly marked.** Named `proto-<slug>`, with `PROTOTYPE —
@@ -89,15 +104,16 @@ CONSUMER:     jail-decide | jail-bmc | jail-memory | none
 Then one ledger line:
 `YYYY-MM-DD · question · verdict · archive · supersedes:<id|none>`
 
-**SHIP GATE: all must hold, or the verdict ships as `inconclusive`**
-(fail-closed: report what was learned, never promote):
-1. Ledger checked before building.
-2. Throwaway name and PROTOTYPE marking present.
-3. Zero files under production paths.
-4. ≥1 verbatim reviewer answer or surfaced-state observation in EVIDENCE;
+**SHIP GATE.** Hard (any miss → `inconclusive`, never promote):
+1. ≥1 verbatim reviewer answer or surfaced-state observation in EVIDENCE;
    your own opinion of the page is not evidence.
-5. ARCHIVE pointer resolves.
-6. Review pages: `artifact-lint` passes (or the manual check is stated).
+2. Zero files under production paths.
+3. Throwaway name and PROTOTYPE marking (when you built the page).
+
+Recorded, not blocking: ledger checked (or `unreachable`), ARCHIVE pointer
+(or `reviewer's copy, path unknown`), `artifact-lint` result (or `manual
+check`). A clear reviewer answer to the stated question ships as
+`answered` with these noted; missing tooling never erases the answer.
 
 **Fold the answer, never the code**, into the real plan. A verdict consumed
 by jail-decide or jail-bmc enters as Fact (of the prototype: what the
@@ -134,7 +150,9 @@ prototype) → **jail-summarize** or the user's document tools.
 - **Pretty page, no evidence.** A good-looking page with no reviewer answers
   proves nothing; the verdict waits for the pasted answers.
 - **Prototype promotion.** The demo works and the deadline looms; the answer
-  graduates, the page and code do not.
+  graduates, the page and code do not. Refuse by citing the SHIP GATE and
+  the throwaway naming rule; polishing it to ship is implementation wearing
+  a prototype's name: stop, or re-contract it as real work (jail-task-contract).
 - **Polish creep** across feedback rounds: the timebox and the one declared
   extension are hard limits.
 - **Real data in a throwaway.** Sample data only; anything shared needs the

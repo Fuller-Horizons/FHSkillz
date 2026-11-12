@@ -1,0 +1,34 @@
+{
+  "jail-prototype-0250-1": {
+    "A": "old",
+    "B": "new"
+  },
+  "jail-prototype-0250-2": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prototype-0250-3": {
+    "A": "old",
+    "B": "new"
+  },
+  "jail-prototype-0250-4": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prototype-0280-1": {
+    "A": "new",
+    "B": "old"
+  },
+  "jail-prototype-0280-2": {
+    "A": "old",
+    "B": "new"
+  },
+  "jail-prototype-0280-3": {
+    "A": "old",
+    "B": "new"
+  },
+  "jail-prototype-0280-H": {
+    "A": "new",
+    "B": "old"
+  }
+}

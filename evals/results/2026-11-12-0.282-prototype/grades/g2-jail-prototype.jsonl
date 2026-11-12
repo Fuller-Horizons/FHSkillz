@@ -1,0 +1,32 @@
+{"case": "jail-prototype-0250-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "No shape (logic/look/feasibility) named."}
+{"case": "jail-prototype-0250-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "No shape named."}
+{"case": "jail-prototype-0250-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0250-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0250-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, false], "notes": "Does not say only changed premise reopens or that silent re-litigation is barred."}
+{"case": "jail-prototype-0250-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0250-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0250-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0250-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "No statement that variants must differ radically / near-twins answer nothing."}
+{"case": "jail-prototype-0250-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [false, true, false, false, true], "notes": "No look/feel classification, no radical-difference rule, no timebox."}
+{"case": "jail-prototype-0250-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "No radical-difference statement."}
+{"case": "jail-prototype-0250-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [false, true, false, false, true], "notes": "No look/feel classification, no radical-difference rule, no timebox."}
+{"case": "jail-prototype-0250-4", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, false, true, true, false], "notes": "Does not cite SHIP GATE/naming/production-path rule; does not call polish implementation."}
+{"case": "jail-prototype-0250-4", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, false, false], "notes": "No ledger line/plan routing; does not name cleanup as implementation."}
+{"case": "jail-prototype-0250-4", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, false, true, true, true], "notes": "Does not cite SHIP GATE or production-path rules."}
+{"case": "jail-prototype-0250-4", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, false, false, true, false, true], "notes": "Switching not described; no numbered blocks; phone width not stated."}
+{"case": "jail-prototype-0280-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, false, false, false, true], "notes": "No numbered blocks; no structured answer or send-back format; phone width only implied."}
+{"case": "jail-prototype-0280-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, false, false, true, false, true], "notes": "Switching not stated; blocks not clearly numbered; phone width unchecked."}
+{"case": "jail-prototype-0280-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, false, false, false, true], "notes": "No numbered blocks; no structured answer; phone width not stated."}
+{"case": "jail-prototype-0280-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [false, true, true, true, true], "notes": "Verdict inconclusive, not answered."}
+{"case": "jail-prototype-0280-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [false, true, false, true, false], "notes": "Inconclusive; decision not separated from prototype; no not-promoted/archived statement."}
+{"case": "jail-prototype-0280-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [false, true, false, true, false], "notes": "Inconclusive; no graduating-decision split; no archived/not-promoted statement."}
+{"case": "jail-prototype-0280-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [false, true, false, true, false], "notes": "Inconclusive; no graduating-decision split; no archived/not-promoted statement."}
+{"case": "jail-prototype-0280-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-H", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-prototype-0280-H", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [false, true, true, true], "notes": "Logic/state shape never stated."}
+{"case": "jail-prototype-0280-H", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true], "notes": "Harness only planned; no state-after-each-step shown."}
+{"case": "jail-prototype-0280-H", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
