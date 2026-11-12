@@ -13,3 +13,4 @@ NODE A-task-contract | STATUS: verified | ARTIFACT: desc/handoff/label checks OK
 NODE A-red-team | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 141 lines
 NOTE heldout | 12 held-out cases authored by orchestrator after specs, stored outside repo until test time (authors never saw them)
 NODE A-summarize | STATUS: verified | ARTIFACT: desc/handoff checks OK; toolkit tests 48 OK; readability.py added
+VERIFY research-example-urls | cbp.html OK, nonemployer-statistics.html OK, bls.gov/cew OK (WebFetch 2026-11-12); census.gov/naics/ fetch error — unverified
