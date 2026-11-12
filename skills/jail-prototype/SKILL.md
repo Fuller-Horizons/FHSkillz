@@ -1,159 +1,114 @@
 ---
 name: jail-prototype
 metadata:
-  version: 2.0.1
+  version: 1.2.0
 description: >-
-  Build a throwaway prototype that answers one named design question; keep the answer, discard the build. Look questions become a single-file HTML review page: 3 switchable variants, numbered review points, answer controls the reviewer copies back. Ends in a SPIKE VERDICT and ledger entry. Use for "mock this up", "which layout works", "try it first". Do NOT use for production builds, metric tuning (jail-lab), or checking done work (jail-verify).
+  Build a THROWAWAY prototype whose only job is to answer a stated design
+  question — "does this logic/state model feel right?", "what should this
+  look like?", "will this approach hold?" — then fold the validated answer
+  into real work, register it in the SPIKE LEDGER (so answered questions are
+  never re-prototyped), and discard the prototype. Use when the user wants
+  to sanity-check a design, explore variations, "mock something up to see",
+  "try it before we build it", or when jail-decide/jail-bmc needs a cheap
+  experiment answered by building. Do NOT use for production implementation,
+  metric-driven iteration on an existing thing (jail-lab), or verification
+  of finished work (jail-verify).
 ---
 
 # JAIL-PROTOTYPE
 
 A prototype is **throwaway work that answers a question**. The question is
-named first; the answer survives, the build does not. Discipline adapted from
-Matt Pocock's `prototype` (github.com/mattpocock/skills, MIT); review-page
-loop adapted from lavish-axi (github.com/kunchenguid/lavish-axi, MIT, © 2026
-Kun Chen); both under JAIL evidence rules.
+named first; the answer — not the artifact — is what survives. Discipline
+adapted from Matt Pocock's `prototype`
+([mattpocock/skills](https://github.com/mattpocock/skills), MIT), under
+JAIL evidence rules.
 
-## Step 0: Check the ledger, then name the question
-- **Ledger first.** Search the SPIKE LEDGER (jail-memory spike entries, or the
-  project's ledger file) for this question. Answered → report the recorded
-  verdict and archive pointer and stop. A changed premise opens a new entry
-  that supersedes the old one, never a silent rerun.
-- **One-sentence question**, falsifiable where possible: *"Which of three
-  scorecard layouts lets an owner see what needs attention in 30 seconds?"*
-  No stated question = no prototype: build nothing, propose **exactly one**
-  question with the shape it implies, and wait for a yes.
-- **The question picks the shape:**
-  - **Look/feel** → a review page with exactly **three radically different**
-    variants (layout or information structure, never just colour or spacing).
-  - **Logic/state** → the smallest interactive harness (review page with a
-    state panel, script, spreadsheet, or paper walkthrough) that pushes the
-    model through the hard cases.
-  - **Feasibility** → the thinnest end-to-end spike through the riskiest part.
+## Step 0 — Name the question
+One sentence, falsifiable-ish: *"Does the three-state approval flow feel
+right for batch sends?"* · *"Which of three layouts makes the scorecard
+scannable?"* · *"Can this parse strategy survive real inputs?"* No stated
+question = no prototype — that's just building without a contract
+[Constitution Rule 8]. The question decides the shape:
+- **Logic/state question** → smallest interactive harness (terminal app,
+  script, spreadsheet, even a paper walkthrough) that pushes the model
+  through the cases hard to reason about in the abstract.
+- **Look/feel question** → exactly three **radically different** variations,
+  switchable in one place — contrast answers look-questions; near-identical
+  variants answer nothing.
+- **Feasibility question** → the thinnest end-to-end spike through the
+  riskiest part only.
 
-## Open every build reply with the PROTOTYPE BRIEF
-```
-QUESTION:  <one sentence>
-SHAPE:     look | logic | feasibility, and why in a clause
-TIMEBOX:   one working session + at most one declared extension
-BUILD:     proto-<slug> (PROTOTYPE, wipe me), outside production paths, sample data
-VARIANTS:  A/B/C, how each differs in layout or structure, one switch (look only)
-POINTS:    blocks numbered #1…#n for comment
-CHECKS:    360px phone · lint · sandboxed frame: done or not run, each
-SEND BACK: <the exact answer block, e.g. PICK: B · #3: too long>
-```
-The brief is what the reviewer sees first; a page they never open still
-tells them what was built and how to answer.
+## Rules (all of them, every prototype)
+1. **Throwaway from day one, visibly marked.** Named so no casual reader
+   mistakes it for production (`proto-`, `PROTOTYPE — wipe me`); lives near
+   its target for context but never inside production paths.
+2. **One command to run.** Whoever's judging the answer starts it without
+   thinking.
+3. **No persistence by default.** State lives in memory; durability is
+   usually what's being *tested*, not a dependency. If storage IS the
+   question, use a scratch target with a wipe-me name.
+4. **Skip the polish.** No tests, no error handling beyond runnable, no
+   abstractions. Every hour of polish is an hour not answering the
+   question.
+5. **Surface the state.** After every action, show the full relevant state
+   — the judge must see what changed, not trust that it did.
+6. **Timebox it — numerically.** Default one working session; exactly one
+   extension, declared up front, then stop. Look-questions get exactly 3
+   radically different variations — no more, no fewer. A prototype past its
+   last extension without an answer has become a project: stop, ship
+   `VERDICT: inconclusive`, report what was learned, re-scope the question.
 
-## Rules (every prototype)
-1. **Throwaway and visibly marked.** Named `proto-<slug>`, with `PROTOTYPE —
-   wipe me` in the title and a visible banner; never inside production paths.
-2. **One step to run.** A review page opens by double-click; anything else
-   runs with one command.
-3. **No persistence by default.** State lives in memory unless storage is
-   the question (then a scratch target with a wipe-me name).
-4. **Skip the polish.** No tests, abstractions or error handling beyond
-   "it runs". Sample data only, labeled; never real client records.
-5. **Surface the state.** Show what changed after every action; the judge
-   sees it rather than trusting it.
-6. **Timebox, numerically.** Default one working session and one feedback
-   round; exactly one extension, declared up front. Past it without an answer
-   → `VERDICT: inconclusive`, report what was learned, re-scope the question.
+## Step N — Ship the SPIKE VERDICT, kill the artifact
+Pass the SHIP GATE, then emit exactly this block — the verdict is the
+deliverable, the artifact is not:
 
-## The review page (look questions, and anything easier judged by looking)
-Full rules and templates: [review-pages.md](references/review-pages.md).
-- **One self-contained HTML file**: inline CSS/JS/SVG, no outside requests,
-  explicit page background, viewport meta, readable at 360px wide, and no
-  script errors inside sandboxed previews (wrap history, storage, clipboard
-  calls in try/catch; the Claude app blocks them).
-- **Design direction chosen, not defaulted:** client/project look first, then
-  a direction the user named, then a stated neutral one; say which in the
-  footer.
-- **Top:** the question, shape and timebox. **Middle:** the three variants
-  behind one switch (or the logic harness with its state panel). Every
-  commentable block carries a visible number (`#1`, `#2` …).
-- **Bottom:** answer controls for the questions that decide the verdict, and
-  a **Copy my answers** button that builds one text block
-  (`PICK: B · #3: too long …`). That pasted block, quoted verbatim, is the
-  verdict's evidence.
-- **Review channel, first available:** lavish-axi on the user's computer
-  (`npx -y lavish-axi proto-<slug>.html`, in-page annotation) → a private
-  artifact in the Claude app → the file opened locally with answers pasted
-  into chat. Say which channel and exactly what to send back.
-- **Each round regenerates the whole file** with a revisions legend and a
-  visible "What changed" note; rounds count against the timebox.
-- **Check it:** `artifact-lint.py proto-<slug>.html --look` (jail-py-toolkit),
-  and open it once directly and once in the host the reviewer will use (or a
-  sandboxed frame) with the console open; fallback: walk the same list by
-  hand and say "manually checked".
-
-## Step N: Ship the SPIKE VERDICT, archive the build
 ```
 SPIKE VERDICT
 QUESTION:     <one sentence, as stated in Step 0>
 SHAPE:        logic | look | feasibility
-TIMEBOX:      <set> → <actual> · rounds: <n>
+TIMEBOX:      <set> → <actual>
 LEDGER-CHECK: none | reuses <id> | supersedes <id>
-DESIGN:       <direction used and its source>        (review pages)
-EVIDENCE:     "<verbatim reviewer answers or surfaced-state observation>"  (≥1)
+EVIDENCE:     "<verbatim surfaced-state observation>"  (≥1, Rule 5)
 VERDICT:      answered | inconclusive | premise-changed
-ANSWER:       <the decision that graduates, one or two sentences>
-ARCHIVE:      <throwaway branch, scratch path, or artifact link>
+ARCHIVE:      <throwaway branch or scratch path>
 CONSUMER:     jail-decide | jail-bmc | jail-memory | none
 ```
-Then one ledger line:
+
+Append one canonical line to the SPIKE LEDGER (jail-memory entry type
+decision/spike; a file ledger is a fine fallback):
 `YYYY-MM-DD · question · verdict · archive · supersedes:<id|none>`
 
-**SHIP GATE.** Hard (any miss → `inconclusive`, never promote):
-1. ≥1 verbatim reviewer answer or surfaced-state observation in EVIDENCE;
-   your own opinion of the page is not evidence.
-2. Zero files under production paths.
-3. Throwaway name and PROTOTYPE marking (when you built the page).
+**SHIP GATE — 5 of 5 or the verdict ships as `inconclusive`** (fail-closed:
+stop, report what was learned, never promote):
+1. Ledger checked BEFORE building — an answered question is retrieved, not
+   rebuilt; a changed premise opens a superseding entry, never silent
+   re-litigation.
+2. Throwaway name present (`proto-*` or `PROTOTYPE — wipe me`).
+3. Zero files under production paths.
+4. ≥1 surfaced-state observation quoted verbatim in EVIDENCE.
+5. ARCHIVE pointer resolves (branch or scratch path exists).
 
-Recorded, not blocking: ledger checked (or `unreachable`), ARCHIVE pointer
-(or `reviewer's copy, path unknown`), `artifact-lint` result (or `manual
-check`). A clear reviewer answer to the stated question ships as
-`answered` with these noted; missing tooling never erases the answer.
-
-**Fold the answer, never the code**, into the real plan. A verdict consumed
-by jail-decide or jail-bmc enters as Fact (of the prototype: what the
-reviewer chose and why), not Judgment. The prototype stays archived as the
-primary source and is never merged.
-
-## JAIL-HANDOFF
-```
-JAIL-HANDOFF:
-  skill: jail-prototype
-  status: complete | partial | blocked | stop
-  assumptions: [..]
-  unknowns: [..]
-  outputs: [SPIKE VERDICT, review page | harness | spike]
-  evidence: [verbatim reviewer answers]
-  next: jail-decide | jail-bmc | jail-memory | none
-  approval_required: [..]
-  tested: tested - <lint result, browser/phone check> | untested - <reason> | n/a
-```
-`status: partial` while waiting for the reviewer's answers;
-`approval_required` lists anything leaving the machine (publishing,
-sharing a link).
+Fold the validated decision — never the code — into the real implementation
+plan. **Main keeps only the validated decision**; the prototype stays on its
+archive pointer as a primary source, never merged. A verdict consumed by
+jail-decide (or jail-bmc's experiment sequence) enters that options table as
+**Fact-of-the-prototype**, not Judgment.
 
 ## Related skills
-Choosing among prototyped options → **jail-decide**. Business-assumption
-experiments → **jail-bmc**. Improving a kept thing by metric → **jail-lab**.
-Durable design decision → **jail-memory**. Polished client deliverable (not a
-prototype) → **jail-summarize** or the user's document tools.
+Choosing among prototyped options → **jail-decide** (the verdicts are its
+evidence). Business-assumption experiments → **jail-bmc** (its experiment
+sequence often lands here). Iterating a *kept* thing by metric →
+**jail-lab**. Durable design decision → **jail-memory** (ADR entry).
 
 ## Gotchas
-- **Question-free prototyping.** "Build something and see": see what? Name
-  the question or don't start.
-- **Twin variants.** Three layouts differing by colour answer nothing.
-- **Pretty page, no evidence.** A good-looking page with no reviewer answers
-  proves nothing; the verdict waits for the pasted answers.
-- **Prototype promotion.** The demo works and the deadline looms; the answer
-  graduates, the page and code do not. Refuse by citing the SHIP GATE and
-  the throwaway naming rule; polishing it to ship is implementation wearing
-  a prototype's name: stop, or re-contract it as real work (jail-task-contract).
-- **Polish creep** across feedback rounds: the timebox and the one declared
-  extension are hard limits.
-- **Real data in a throwaway.** Sample data only; anything shared needs the
-  user's approval.
+- **Question-free prototyping.** "Let's just build something and see" —
+  see *what*? Name the question or don't start.
+- **Prototype promotion.** The demo works, deadline looms, throwaway code
+  ships. The naming + branch rules exist for exactly this moment; the
+  answer graduates, the code does not.
+- **Polish creep.** Adding tests and error handling "while we're here."
+  That's implementation wearing a prototype's name — stop or re-contract.
+- **Twin variants.** Look-question variants that differ by a border color
+  answer nothing. Radically different, or it's one option twice.
+- **Unwitnessed state.** A prototype that hides its state proves only that
+  it runs. Rule 5 is the evidence rule in miniature.

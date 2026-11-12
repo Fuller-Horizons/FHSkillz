@@ -1,19 +1,7 @@
 # Changelog — business-model-canvas
 
-## 1.4.2 — 2026-11-12
-- Round 2 from the 0.27.1 retest: wrong-lane requests get the SWOT written now (questions after), and an operating owner's own current figures count as VALIDATED (User-provided ref) while forecasts stay HYPOTHESIS.
-
-## 1.4.1 — 2026-11-12
-- Wrong-lane check: SWOT/PESTLE/five-forces requests hand off to jail-strategy by name (or do it inline) instead of forcing a canvas or replying with questions only. From the 0.27 batch-2 blind test.
-
-## 1.4.0 — 2026-11-12
-
-- New `references/unit-economics.md`: worksheet for the step-4 unit-economic dependency (CAC by channel, margin, churn, lifetime, LTV with discounting, LTV:CAC, payback, contribution margin; inputs labeled VALIDATED/HYPOTHESIS) with a checked numeric example.
-- Declared label mapping stated once in SKILL.md (VALIDATED = Fact-backed element, HYPOTHESIS = Assumption); prose claims use canonical labels.
-- New optional visual canvas: `references/canvas-render.md` (layout only) for a one-page BMC grid with V/H badges; fixed table otherwise.
-- New client-facing Delivery section.
-- Description shortened from 626 to under 450 characters, with explicit Do NOT use routing (jail-strategy, jail-rate).
-- New `references/example-pool-subscription.md`: full pre-revenue run with JAIL-HANDOFF.
+## 1.4.3 — 2026-11-12
+- Content reverted to 1.3.0. 1.4.x did not beat 1.3.0 in blind live tests (0.27 batch 2: 8/8 → 7/8; round-1 fix 6/8 → 5/8). Owner decision: stop test rounds and keep the version that scored best.
 
 ## 1.3.0 — 2026-07-25 (plugin 0.25.0)
 

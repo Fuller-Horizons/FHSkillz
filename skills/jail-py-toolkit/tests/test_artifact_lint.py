@@ -3,8 +3,8 @@ import tempfile
 import unittest
 from _helper import run
 
-EXAMPLE = os.path.join(os.path.dirname(__file__), "..", "..", "jail-prototype", "references",
-                       "example-scorecard-layouts.html")
+EXAMPLE = os.path.join(os.path.dirname(__file__), "fixtures",
+                       "review-page-good.html")
 GOOD = open(EXAMPLE, encoding="utf-8").read()
 
 
