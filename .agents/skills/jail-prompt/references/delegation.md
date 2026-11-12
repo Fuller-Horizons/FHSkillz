@@ -140,13 +140,13 @@ pick each step's model by test, not by table:
    trial isn't repeated until the model, the brief or the inputs change:
 
 ```json
-"selected_by": {
+{"selected_by": {
   "date": "2026-11-12",
   "items": 4,
   "candidates": ["haiku", "sonnet", "opus"],
   "scores": {"haiku": "16/16", "sonnet": "16/16", "opus": "16/16"},
   "grader": "fresh opus agent, blind"
-}
+}}
 ```
 
 Re-run the selection when a new model generation ships (e.g. Fable 5.1 → 5.2)
