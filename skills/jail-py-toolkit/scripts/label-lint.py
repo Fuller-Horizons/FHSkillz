@@ -25,6 +25,13 @@ import argparse
 CANON = {"fact", "user-provided", "inference", "estimate", "judgment",
          "assumption", "unknown"}
 DOMAIN = {"validated", "hypothesis"}
+# Only these legacy / competing label spellings are flagged. Ordinary bold
+# phrases that merely contain a claim word ("Fact bias", "When evidence is
+# thin") are headings, not labels, and are ignored (0.27 false-positive fix).
+LEGACY = {"known", "✓known", "infer", "~infer", "?unknown", "inferred",
+          "source-backed inference", "analyst judgment", "missing evidence",
+          "verified fact", "expert judgment", "speculation", "opinion",
+          "verified", "user provided"}
 VOCAB = re.compile(
     r"(?i)\b(fact|known|infer|inferred|inference|infers|judg(?:e)?ment|"
     r"verified|evidence|estimate|assumption|unknown|speculation|hypothesis|"
@@ -57,6 +64,8 @@ def lint_text(text, require_evidence=False):
             if key in CANON or key in DOMAIN:
                 if key == "fact" and require_evidence and not CITE.search(line):
                     errs.append((n, "Fact label without a [n] citation"))
+                continue
+            if key not in LEGACY:
                 continue
             errs.append((n, f"non-canonical label: {label!r} "
                             "(use Fact, User-provided, Inference, Estimate, Judgment, "

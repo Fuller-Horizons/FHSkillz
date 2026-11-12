@@ -14,3 +14,6 @@ NODE A-red-team | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 141
 NOTE heldout | 12 held-out cases authored by orchestrator after specs, stored outside repo until test time (authors never saw them)
 NODE A-summarize | STATUS: verified | ARTIFACT: desc/handoff checks OK; toolkit tests 48 OK; readability.py added
 VERIFY research-example-urls | cbp.html OK, nonemployer-statistics.html OK, bls.gov/cew OK (WebFetch 2026-11-12); census.gov/naics/ fetch error — unverified
+NODE A-prompt | STATUS: verified | ARTIFACT: desc/handoff OK; 1,649 words (from 3,072); key rules present inline (grep audit); toolkit tests 57 OK
+NODE A-strategy | STATUS: verified | ARTIFACT: desc/handoff/label OK; 154 lines; COMPETITIVE lane added
+FIX label-lint | flag only known legacy labels (false positives on headings like 'Fact bias' removed); tests 57 OK

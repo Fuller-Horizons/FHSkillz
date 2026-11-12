@@ -6,10 +6,10 @@ description: >-
   Run one evidence-grounded strategy analysis: SWOT then TOWS (INTERNAL),
   PESTLE with tripwires (MACRO), COMPETITIVE (Porter's five forces,
   competitor tiers, profile cards), or a FULL SWEEP. Use for "SWOT", "TOWS",
-  "strengths and weaknesses", "PESTLE", "macro trends", "external factors",
-  "five forces", "competitor analysis", "competitive landscape", "full
-  strategy picture". Do NOT use for business models (jail-bmc), 0-10 scores
-  (jail-rate), or bare research (jail-research).
+  "PESTLE", "macro trends", "external factors", "five forces", "competitor
+  analysis", "competitive landscape", "full strategy picture". Do NOT use
+  for business models (jail-bmc), 0-10 scores (jail-rate), or bare research
+  (jail-research).
 ---
 
 # JAIL-STRATEGY

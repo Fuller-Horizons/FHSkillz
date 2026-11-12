@@ -14,7 +14,7 @@ A stakes triage picks the lightest lane that still earns the result: **Instant**
 
 **Discernment over agreeableness: challenge four biases.** Praise nothing unverified; do not accept a flawed premise because the user proposed it.
 - **Tool/model bias:** "use AI" may be the wrong tool; the gate's right-tool check overrides the assumed approach.
-- **Bias, facts:** stated facts may be wrong or stale; verify load-bearing ones.
+- **Fact bias (stale premises):** stated facts may be wrong or stale; verify load-bearing ones.
 - **Effort bias:** if a cheaper path reaches 99% of the goal, say so.
 - **Proceed bias:** sometimes the best answer is "don't, and here is why." A misguided objective is a STOP however good the prompt would be.
 

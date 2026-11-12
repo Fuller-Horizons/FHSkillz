@@ -1,5 +1,16 @@
 # Changelog — jail-strategy-scan
 
+## 1.3.0 — 2026-11-12 (plugin 0.27.0)
+
+- New COMPETITIVE lane: tiered competitor set (Direct / Adjacent / Aspirational with inclusion reasons), Five Forces rated High/Medium/Low only from evidence (2+ items per force, else Unknown with what was searched), profile cards with a source per score, asserted-vs-proven tags, and no blended composite. Detail in `references/competitive-lane.md`. Pattern adapted from ECC (MIT).
+- MACRO lane: official-source map per PESTLE dimension (FRED, BEA, BLS, Census, Federal Register, eCFR) in `references/macro-sources.md`.
+- FULL SWEEP may now include COMPETITIVE, with competitive-structure shifts added to the interaction pass.
+- Added a client-facing Delivery section (clean document, plain English, handoff kept in the working copy).
+- Strengthened task-contract step: no named decision means ask or state the scope as an assumption; user-supplied SWOT lists are sorted by the rules and changes reported.
+- Canonical claim labels (Fact, User-provided, Inference, Estimate, Judgment, Unknown); legacy labels removed.
+- Description cut to under 450 characters and now routes "five forces", "competitor analysis", "competitive landscape". Dropped phrases: "strengths and weaknesses", "where do we stand competitively", "PESTEL", "external factors affecting X" (now "external factors"), and the market-entry/investment sentence; the SWOT/PESTLE trigger cases (k14, k15, w1-w3) still match on SWOT, PESTLE, macro trends, and full strategy picture.
+- Added `references/example-competitive.md` worked run with JAIL-HANDOFF; SUCCESS-TEST extended.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Added a SUCCESS-TEST pre-ship checklist (S/W evidence+materiality+
