@@ -1,5 +1,9 @@
 # Changelog — jail-py-toolkit
 
+## 1.7.0 — 2026-11-12
+
+- **artifact-lint.py**: single-file HTML review pages (prototype marking, viewport, explicit background, no outside requests or local asset files, unique review ids, exactly 3 variants + 1 switch, answer controls need a copy button, revisions legend). 10 tests.
+
 ## 1.6.0 — 2026-11-12
 
 - handoff-lint: optional `tested` key after `checks` (tested | untested | n/a); +1 test.

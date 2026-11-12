@@ -150,6 +150,20 @@ def run_toolkit_checks(repo_root):
                     if r.returncode != 0:
                         errors.append(f"chain-lint --strict failed for skills/{d}/references/{f} json #{i}: "
                                       + (r.stdout + r.stderr).strip()[:300])
+    # 4b — HTML worked examples (review pages) must pass artifact-lint --strict (blocking)
+    alint = os.path.join(scripts, "artifact-lint.py")
+    if os.path.isfile(alint):
+        for d in sorted(os.listdir(skills_dir)):
+            refs = os.path.join(skills_dir, d, "references")
+            if not os.path.isdir(refs):
+                continue
+            for f in sorted(os.listdir(refs)):
+                if f.startswith("example-") and f.endswith(".html"):
+                    r = subprocess.run([sys.executable, alint, "--strict", os.path.join(refs, f)],
+                                       capture_output=True, text=True)
+                    if r.returncode != 0:
+                        errors.append(f"artifact-lint --strict failed for skills/{d}/references/{f}: "
+                                      + (r.stdout + r.stderr).strip()[:300])
     # 5 — dated fact files: warn when "Last verified: YYYY-MM-DD" is over 60 days old
     import datetime as _dt
     for root, _dirs, files in os.walk(skills_dir):

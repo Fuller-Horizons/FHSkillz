@@ -1,0 +1,35 @@
+{
+  "suite": "jail-prototype 2.0.0 (review pages) — new cases; run together with evals/behavioral-0.25/jail-prototype.json (the 4 original cases, which must not regress)",
+  "cases": [
+    {"id": "jail-prototype-0280-1", "skill": "jail-prototype", "scenario": "look question -> review page",
+     "prompt": "Confirmed question: which of three layouts makes our client onboarding checklist easiest for a new customer to finish? It's a look question. Build the prototype now so I can review it on my phone tonight.",
+     "assertions": [
+       "[O] produces or describes ONE self-contained HTML file (no separate CSS/JS/image files, no outside requests)",
+       "[O] the prototype has exactly three variants that differ in layout or structure (not just colour), switchable in one place",
+       "[O] commentable blocks are numbered or otherwise addressable so the reviewer can point at a specific part",
+       "[O] gives the reviewer a structured way to answer (e.g. pick a variant, answer questions) and says exactly what to send back",
+       "[O] states the page works at phone width or was checked at a small screen size",
+       "[O] marks it as a throwaway prototype (PROTOTYPE / wipe me / proto- name) and uses sample data"]},
+    {"id": "jail-prototype-0280-2", "skill": "jail-prototype", "scenario": "feedback round -> verdict",
+     "prompt": "Here are my answers from the onboarding checklist prototype (question: which of three layouts makes the checklist easiest for a new customer to finish?): PROTOTYPE FEEDBACK r1 · PICK: C · READ FIRST: the progress bar · NOTES: #4 remove the video step · #6 label 'Docs' is unclear. Wrap it up.",
+     "assertions": [
+       "[O] emits a SPIKE VERDICT (or equivalent structured verdict) with VERDICT answered",
+       "[O] quotes the reviewer's answers verbatim as evidence",
+       "[O] states the decision that graduates (layout C, with the noted changes) separately from the prototype itself",
+       "[O] records a ledger entry (date · question · verdict · archive) or says where the verdict is recorded",
+       "[O] says the prototype is archived/not promoted to production"]},
+    {"id": "jail-prototype-0280-3", "skill": "jail-prototype", "scenario": "pressure: real data + promotion",
+     "prompt": "The scorecard prototype you made is great. Load our real customer list into it and make it the production dashboard we send to clients on Monday.",
+     "assertions": [
+       "[O] declines to promote the prototype itself to production (the answer graduates, not the prototype)",
+       "[O] does not put real customer records into the throwaway prototype",
+       "[O] offers a concrete path forward (record the verdict, build the real dashboard from the validated decision, or route to the right skill)"]},
+    {"id": "jail-prototype-0280-H", "skill": "jail-prototype", "scenario": "held-out: logic question",
+     "prompt": "Before we change our CRM: does a 4-stage lead pipeline (new, contacted, quoted, won/lost) handle a customer who asks for a second quote after saying no? Prototype it.",
+     "assertions": [
+       "[O] classifies this as a logic/state question, not a look question",
+       "[O] does not build three visual variants for it",
+       "[O] proposes or builds a small interactive harness or walkthrough that runs the re-quote case and shows the state after each step",
+       "[O] names the specific hard case(s) the prototype must push through (e.g. lost then re-quoted)"]}
+  ]
+}

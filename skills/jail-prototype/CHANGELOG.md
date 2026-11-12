@@ -1,5 +1,13 @@
 # Changelog — jail-prototype
 
+## 2.0.0 — 2026-11-12
+
+- **Review pages** for look questions (and anything easier judged by looking): one self-contained HTML file with three switchable variants, numbered review points, answer controls and a Copy-my-answers button whose pasted text is the verdict's evidence; explicit background, viewport, phone-width layout, no outside requests, sample data only. Review channel: lavish-axi on the user's computer → Claude app artifact → local file + pasted answers. Each round regenerates the file with a revisions legend. Review-loop ideas adapted from lavish-axi (github.com/kunchenguid/lavish-axi, MIT, © 2026 Kun Chen). New `references/review-pages.md` (rules + six templates).
+- **Ledger check moved to Step 0** (before naming the shape); design direction chosen and stated; SPIKE VERDICT gains DESIGN and ANSWER lines and counts rounds; SHIP GATE clause 6 (artifact-lint) and evidence must be reviewer answers or surfaced state, never the builder's opinion.
+- **artifact-lint.py** (jail-py-toolkit) checks review pages; repo validation runs it on HTML worked examples.
+- Worked example: `references/example-scorecard-layouts.html` (lint-clean, browser-checked at desktop and 360px) + `references/example-review-round.md`. JAIL-HANDOFF with `tested:`. Description 447 chars with "Do NOT use"; core 137 lines.
+- New behavioral cases `evals/behavioral-0.28/jail-prototype.json` (review page, feedback round, promotion pressure, held-out logic question).
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Step N now ships one fixed SPIKE VERDICT block (QUESTION · SHAPE · TIMEBOX set→actual · LEDGER-CHECK · quoted EVIDENCE · VERDICT · ARCHIVE · CONSUMER) plus a canonical ledger line, replacing prose bullets — the deliverable is now the same shape every run.

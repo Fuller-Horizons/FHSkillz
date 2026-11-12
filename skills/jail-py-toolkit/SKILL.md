@@ -1,7 +1,7 @@
 ---
 name: jail-py-toolkit
 metadata:
-  version: 1.6.0
+  version: 1.7.0
 description: >-
   Runnable machine checks for FHSkillz (Python 3.8+, stdlib). Use when a skill
   asks for a machine check, or to scan for secrets or personal data, lint a
@@ -51,6 +51,7 @@ release).
 | `scripts/pii-scan.py` | jail-quarantine | PII classes (SSN, card+Luhn, ABA routing, DOB, email+phone); prints class + line only, never the value. | 0 clean · 1 found · 2 IO |
 | `scripts/desc-check.py` | Skill hygiene | Description ≤ 450 chars with `Do NOT use`, core ≤ 160 lines, `metadata.version` present. | 0 pass · 1 fail · 2 IO |
 | `scripts/score-check.py` | jail-rate / jail-prospect | Weights sum to 100, scores in range, Overall = Σ(score×weight) to 1 decimal. | 0 pass · 1 fail · 2 IO |
+| `scripts/artifact-lint.py` | jail-prototype review pages | Single-file HTML review page checks: PROTOTYPE marking, viewport, explicit background, no outside requests or local asset files, unique `data-review-id`, exactly 3 variants + 1 switch (look), answer controls with a copy button, revisions legend. | 0 pass · 1 fail · 2 IO |
 | `scripts/quote-check.py` | jail-prompt / jail-research quote-before-claim | Every Fact claim's verbatim quote appears in its saved source (ignores case, spacing, quote/dash style, HTML tags and entities); flags Facts with no quote, unknown sources, quotes too short to prove anything. Never prints source text beyond the quote. | 0 pass · 1 fail · 2 IO |
 | `scripts/select-models.py` | jail-prompt model selection | Runs one prompt on 2+ candidate models over the same test items, grades every output blind with a separate grader model, prints the `selected_by` record (top score wins; tie → cheaper). Calls `claude -p`; `--dry-run` shows the call count. | 0 chosen · 1 none passed · 2 usage/IO/run |
 | `scripts/readability.py` | jail-summarize | Flesch-Kincaid grade + longest sentences; fails above `--max-grade` (default 9 for owner/client briefs). | 0 pass · 1 fail · 2 IO |
