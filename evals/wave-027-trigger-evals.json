@@ -1,0 +1,21 @@
+{
+  "suite": "0.27 triggering — new lanes + phrases dropped by description diets (regression guard); authored 2026-11-12",
+  "should_trigger": [
+    {"id": "x1", "prompt": "Run a Porter's five forces on the residential solar install market in New Jersey.", "expect": "jail-strategy (COMPETITIVE lane, new)"},
+    {"id": "x2", "prompt": "Who are our real competitors and how do we stack up against them? We're a 15-person IT managed-services shop.", "expect": "jail-strategy (COMPETITIVE)"},
+    {"id": "x3", "prompt": "What are our strengths and weaknesses compared to the other print shops in town?", "expect": "jail-strategy (INTERNAL — dropped phrase)"},
+    {"id": "x4", "prompt": "Research this company for me: Greenleaf Lawn & Garden in Smithtown — would the owner sell?", "expect": "jail-prospect (dropped phrase 'research this company')"},
+    {"id": "x5", "prompt": "We're about to sign a 3-year deal with this payroll vendor. Are they solid enough to sign with?", "expect": "jail-prospect (SNAPSHOT — dropped phrase)"},
+    {"id": "x6", "prompt": "Score my results for the quarter against the commitments I set in September.", "expect": "jail-cpr (DEBRIEF of a COMMIT period — dropped phrase)"},
+    {"id": "x7", "prompt": "Build me a personal CPR for the next 12 weeks covering work, fitness and family.", "expect": "jail-cpr (COMMIT — dropped phrase)"},
+    {"id": "x8", "prompt": "Steelman the other side of our decision to drop our lowest-margin product line.", "expect": "jail-red-team (dropped phrase)"},
+    {"id": "x9", "prompt": "Draft the scope of work for a 6-week sales-process diagnostic so the client and I agree on what's in and out.", "expect": "jail-task-contract (ENGAGEMENT preset, new)"},
+    {"id": "x10", "prompt": "Rewrite this summary so the shop owner can read it in two minutes and decide what to fund.", "expect": "jail-summarize"}
+  ],
+  "near_misses": [
+    {"id": "xn1", "prompt": "Compute the average of these 12 monthly sales figures.", "expect": "none (plain arithmetic)"},
+    {"id": "xn2", "prompt": "Find me 20 landscaping companies in Suffolk County with their phone numbers.", "expect": "none (list-building, not a prospect decision)"},
+    {"id": "xn3", "prompt": "Proofread this paragraph for typos.", "expect": "none"},
+    {"id": "xn4", "prompt": "Score this AI skill directory on the 10-category matrix.", "expect": "jail-rate-skill, NOT jail-rate"}
+  ]
+}
