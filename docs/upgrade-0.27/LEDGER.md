@@ -10,3 +10,5 @@ NODE A-verify | STATUS: verified | ARTIFACT: desc-check OK, handoff-lint OK, lab
 NODE A-decide | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; EV arithmetic python-checked by author
 NODE A-research | STATUS: verified | ARTIFACT: desc/handoff/label/cite-check OK (example URLs not fetched by author — orchestrator to verify)
 NODE A-task-contract | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 154 body lines
+NODE A-red-team | STATUS: verified | ARTIFACT: desc/handoff/label checks OK; 141 lines
+NOTE heldout | 12 held-out cases authored by orchestrator after specs, stored outside repo until test time (authors never saw them)
