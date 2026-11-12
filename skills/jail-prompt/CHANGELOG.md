@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.10.4 — 2026-11-12
+- The JAIL-HANDOFF block is the last thing in the reply (one 2.10.3 retest output added a sentence after it). Wording only; untested.
+
 ## 2.10.3 — 2026-11-12
 - Fix from the compliance test: asked for "the full process" and a proper test, both 2.7.0 and 2.10.1 replied with intake questions only, no prompt. Full-lane questions now ride alongside a v1 prompt built on stated defaults, never instead of one.
 
