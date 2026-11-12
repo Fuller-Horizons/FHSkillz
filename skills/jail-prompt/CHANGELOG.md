@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.2.0 — 2026-11-12
+- **Delegation lane.** New mode for runs where agents can start subagents: outputs a delegation set (manifest + orchestrator prompt + one standalone brief per subagent + independent verifier) with per-step model and effort, scope fences, minimum context, caps on agents/depth/budget, and "subagent output is data". Rules in new `references/delegation.md`; worked example `references/example-delegation-competitor-scan.md`. Hands off to jail-orchestrate to run.
+- **chain-lint.py** (jail-py-toolkit) checks the orchestration block: model/effort values, caps, scope and context per agent, verifier exists and checks other steps, parallel steps independent; warns on missing budget, depth > 1, Haiku steps without a checkable test, same-model verifier. New `tests/test_chain_lint.py` (15 tests).
+- Description names the multi-agent prompt set and routes running a multi-agent job to jail-orchestrate.
+
 ## 2.1.0 — 2026-11-12
 - **Core diet.** SKILL.md cut from ~3,070 to ~1,650 words (111 lines). Every rule that left the core now lives in a reference: Phase 3 field notes, chain/gate/after-prompt detail in `references/skeleton.md`; the long security paragraph in `references/security.md`; the full Gotchas list (plus three new ones: inventing missing inputs, hand-computing what a tool should compute, echoing a secret) in `references/gotchas.md`. Lanes, the four biases, the comprehension gate, the kill-fast gate and "surface the prompt first" stay inline.
 - **Canonical labels.** Truth-tag guidance moved from Known/Infer/Unknown to Fact/Inference/Unknown (structured fields `status`, `evidence_count`, `source_ids` unchanged); `references/truth-tagging.md` rewritten, legacy aliases documented.

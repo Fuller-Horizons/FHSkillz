@@ -26,3 +26,4 @@ FINDING natural-arm | b1: 96 runs, 0 errors, $5.02; skill auto-invoked in only 1
 NODE T-live-b1 | STATUS: verified | ARTIFACT: evals/results/2026-11-12-0.27-waveA-b1-forced/ — 96 forced runs, 0 errors, $6.28; 2 blind Sonnet graders + 14 blind Opus tie-breaks (grades/resolved.jsonl)
 RESULT b1 | KEEP decide 8/8 vs 7/8 · research 5/8 vs 3/8 · summarize 6/8 vs 5/8 · task-contract 6/8 vs 4/8 | TIE red-team 7/8, verify 6/8 (rule says REVERT; owner call pending)
 RESULT b1-heldout | new 10/12 vs old 8/12 cases (46/48 vs 42/48 assertions) — no overfitting signal
+NODE A-prompt-deleg | STATUS: verified | ARTIFACT: jail-prompt 2.2.0 delegation lane (references/delegation.md, example-delegation-competitor-scan.md); chain-lint orchestration checks + tests/test_chain_lint.py 15 OK; toolkit 72 OK; desc 448 chars; core 113 lines; codex projections in sync; live A/B queued (evals/behavioral-0.27/jail-prompt-delegation.json, 4 cases, old = 2.1.0 snapshot)

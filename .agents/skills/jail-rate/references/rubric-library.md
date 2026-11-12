@@ -41,7 +41,7 @@ is next-worst (25%).
 equal to performance; serviceability matters because it sets total cost of
 ownership.
 
-## Person — professional/public role ONLY (see SKILL.md boundaries first)
+## Person — professional/public role ONLY (see SKILL.md and people-boundaries.md first)
 | Dimension | Weight | Evidence to seek (public only) |
 |---|:---:|---|
 | Role competence & track record | 35% | Documented outcomes, shipped work, published results, tenure milestones |
@@ -94,6 +94,52 @@ significance and feasibility lead equally.
 | Clarity & craft | 20% | Structure, prose/production quality, audience fit |
 | Originality | 15% | What it adds beyond existing work on the topic |
 | Usefulness/actionability | 15% | Can the audience do something with it |
+
+## Small business (diagnostic) — owner-run SMB, for an owner, buyer, or advisor
+| Dimension | Weight | Evidence to seek |
+|---|:---:|---|
+| Financial health | 20% | Owner financials (P&L, balance sheet, tax returns, 3 years), margin and cash trend, customer concentration, receivables; compare to industry benchmarks (Census/BLS data; RMA ratios where licensed) |
+| Sales & marketing engine | 20% | CRM or lead log, pipeline and win rate, lead sources, review platforms (themes, count, recency), website and search presence, referral share |
+| Operations | 15% | Process documentation, capacity vs demand, fulfillment record, key-person and key-technician dependence, supplier terms |
+| People & leadership | 15% | Org chart, tenure and turnover, owner hours and delegation, hiring pipeline, succession depth |
+| Technology & data | 15% | Systems inventory (CRM, accounting, scheduling), data quality, integrations, backups, how much runs from the owner's head |
+| Risk & compliance | 15% | Customer/supplier concentration, licenses and insurance, contracts, legal or regulatory findings, single points of failure |
+
+*Why:* money and the engine that refills it lead (20% each). The rest decide
+whether the business survives losing a person, a customer, or a system. A
+material concentration or key-person risk is a critical flaw: cap the
+dimension it hits at 4.0 and say which fact triggered it. For a buyer, say so
+in the declared rubric; for an owner, keep weights as listed. Owner financials
+without statements or returns are **User-provided**; confidence Low until
+corroborated. This rubric is for a diagnostic rating; a pursue/pass sell-side
+call is jail-prospect.
+
+## Sales & marketing function (a team, system, or program inside a business)
+| Dimension | Weight | Evidence to seek |
+|---|:---:|---|
+| Strategy & positioning | 15% | Defined target customer, offer, message; competitor comparison |
+| Pipeline & lead generation | 20% | Lead volume by source, cost per lead, pipeline coverage vs target |
+| Conversion & sales process | 20% | Stage definitions, win rate, cycle length, follow-up speed, proposal quality |
+| Brand, reputation & content | 15% | Reviews, case studies, content cadence and reach, message consistency |
+| Retention & expansion | 15% | Repeat rate, churn, referral share, account growth |
+| Measurement & tooling | 15% | CRM hygiene, attribution, a report someone reads every week |
+
+*Why:* pipeline and conversion are where revenue is made (20% each). Claimed
+numbers (win rate, "leads per month") without an export or report are
+**User-provided**; downgrade until seen.
+
+## Leadership team — professional role ONLY (see SKILL.md boundaries first)
+| Dimension | Weight | Evidence to seek (documented, role-related) |
+|---|:---:|---|
+| Results vs role goals | 30% | Targets set for the role vs results delivered; board or owner reports |
+| Strategic clarity | 20% | Written plan, priorities that match resource use, decisions explained |
+| Team development & retention | 20% | Promotions, turnover, hiring record, engagement data |
+| Decision quality & accountability | 15% | Decisions and their outcomes, how misses were handled, cadence of reviews |
+| Bench & succession | 15% | Named deputies, delegation, what happens if the leader leaves |
+
+*Why:* delivery against the role's own goals dominates. Never score personal
+traits, health, or private life; see
+[people-boundaries.md](people-boundaries.md).
 
 ## Deriving a rubric for an unlisted type (meta-procedure)
 1. **State the subject's purpose** in one sentence — what does success look

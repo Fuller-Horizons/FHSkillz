@@ -1,7 +1,7 @@
 ---
 name: jail-py-toolkit
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 description: >-
   JAIL-PY machine checks for prompts AND ratings — the runnable companion to
   jail-prompt and jail-rate-skill in one toolkit. Use when either skill calls
@@ -46,6 +46,23 @@ release).
 | `scripts/save-rating.py` | Rule 7 — persist | Validates, appends to `${CLAUDE_PLUGIN_DATA}/rating-history.jsonl` (fallback `~/.rate-skill/`), prints Overall delta vs previous. | 0 pass · non-zero fail |
 | `scripts/variance-check.py` | Rule 3 — determinism | 2+ records of the same skill; per-category mean ± stddev; fails on drift > ±0.2. | 0 pass · non-zero drift |
 | `scripts/validate-skill-structure.py` | Structure | Skill dir lint: SKILL.md present, frontmatter name+description, folder==name. | 0 pass · non-zero fail |
+
+## Output-contract checks (back the 0.27 kernel: labels, handoff, gates, scores)
+
+| Script | Backs | What it does | Exit |
+|---|---|---|---|
+| `scripts/handoff-lint.py` | JAIL-HANDOFF | Every ```yaml `JAIL-HANDOFF:` block vs the schema: required keys, enums, allowed keys, canonical key order. | 0 pass · 1 fail · 2 IO |
+| `scripts/label-lint.py` | Claim labels | Bracketed/bold labels are canonical (or VALIDATED/HYPOTHESIS); `--require-evidence` demands `[n]` on every Fact. | 0 pass · 1 fail · 2 IO |
+| `scripts/cite-check.py` | Citations | Every `[n]` resolves to a source line, every source is cited, each has URL/ref + ISO date. | 0 pass · 1 fail · 2 IO |
+| `scripts/gate-record-lint.py` | jail-approval-gate | GATE-RECORD lines carry action, tier, approver, ISO ts, result in their enums. | 0 pass · 1 fail · 2 IO |
+| `scripts/pii-scan.py` | jail-quarantine | PII classes (SSN, card+Luhn, ABA routing, DOB, email+phone); prints class + line only, never the value. | 0 clean · 1 found · 2 IO |
+| `scripts/desc-check.py` | Skill hygiene | Description ≤ 450 chars with `Do NOT use`, core ≤ 160 lines, `metadata.version` present. | 0 pass · 1 fail · 2 IO |
+| `scripts/score-check.py` | jail-rate / jail-prospect | Weights sum to 100, scores in range, Overall = Σ(score×weight) to 1 decimal. | 0 pass · 1 fail · 2 IO |
+| `scripts/readability.py` | jail-summarize | Flesch-Kincaid grade + longest sentences; fails above `--max-grade` (default 9 for owner/client briefs). | 0 pass · 1 fail · 2 IO |
+
+`scripts/fh_patterns.py` is the shared detection library (secrets + PII) used
+by `secret-scan.py`, `pii-scan.py` and the enforcement hooks; results never
+contain matched values.
 
 ## Handoff shape
 Calling skills record results in their own JAIL-HANDOFF block as

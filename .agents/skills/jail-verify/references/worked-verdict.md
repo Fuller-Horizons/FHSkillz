@@ -65,7 +65,7 @@ Evidence examined: q3-churn-brief.md (full), churn-by-cohort.csv (full),
   cohort_check.py run log (this session, exit 0), 5 warehouse query refs
 ```
 
-```
+```yaml
 JAIL-HANDOFF:
   skill: jail-verify
   status: complete

@@ -12,6 +12,10 @@ Errors (exit 1):
   - duplicate step ids
   - a step has no `produces` (it can't hand anything off)
   - manifest is not the expected shape
+  - delegation manifests (an `orchestration` block, see jail-prompt
+    references/delegation.md): bad model/effort value, missing or too-small
+    caps, an agent step with no scope or context, a missing or non-checking
+    verifier, parallel steps that need each other's output
 
 Warnings (exit 0 unless --strict):
   - a step has no machine-verifiable `success_test`
@@ -19,6 +23,9 @@ Warnings (exit 0 unless --strict):
   - a produced key is never consumed (and isn't the final step's output)
   - a step declares `on_fail: retry` while a later step depends on it
     (retry-forever risk; cap at one then stop)
+  - delegation: no budget, max_depth > 1, a haiku step without a
+    machine-verifiable success_test, a verifier on the same model as the
+    only producer it checks
 
 Usage:
   chain-lint.py FILE        # lint manifest in FILE
@@ -54,6 +61,8 @@ except (OSError, ImportError, AttributeError) as e:
     sys.exit(2)
 
 VALID_ON_FAIL = {"retry", "stop", "rollback", "human"}
+VALID_MODELS = {"haiku", "sonnet", "opus", "inherit"}
+VALID_EFFORT = {"low", "medium", "high"}
 
 
 def as_keys(v):
@@ -161,6 +170,91 @@ def lint(manifest):
         if src not in ("inputs",) and k not in consumed and k not in final_prods:
             warnings.append(f"key {k!r} produced by {src!r} is never consumed")
 
+    if "orchestration" in manifest:
+        e2, w2 = lint_orchestration(manifest, steps)
+        errors += e2
+        warnings += w2
+
+    return errors, warnings
+
+
+def lint_orchestration(manifest, steps):
+    """Checks for a delegation (multi-agent) manifest."""
+    errors, warnings = [], []
+    orch = manifest.get("orchestration")
+    if not isinstance(orch, dict):
+        return ["orchestration must be a JSON object"], []
+    by_id = {}
+    for i, st in enumerate(steps, 1):
+        if isinstance(st, dict):
+            by_id[str(st.get("id") or f"#{i}").strip()] = st
+    agent_steps = [sid for sid, st in by_id.items() if "agent" in st]
+    if not agent_steps:
+        errors.append("orchestration present but no step has an agent block")
+
+    ma = orch.get("max_agents")
+    if not isinstance(ma, int) or isinstance(ma, bool) or ma < 1:
+        errors.append("orchestration.max_agents must be a positive whole number")
+    elif ma < len(agent_steps):
+        errors.append(f"orchestration.max_agents={ma} is below the {len(agent_steps)} agent steps")
+    md = orch.get("max_depth")
+    if not isinstance(md, int) or isinstance(md, bool) or not 0 <= md <= 2:
+        errors.append("orchestration.max_depth must be a whole number 0-2 (default 1)")
+    elif md > 1:
+        warnings.append("orchestration.max_depth > 1 lets subagents start their own agents")
+    if not str(orch.get("budget") or "").strip():
+        warnings.append("orchestration.budget missing (time/tokens/dollars and what happens when it runs out)")
+
+    produced = {}
+    for sid, st in by_id.items():
+        for k in as_keys(st.get("produces")) or []:
+            produced.setdefault(k, set()).add(sid)
+
+    for sid in agent_steps:
+        ag = by_id[sid]["agent"]
+        if not isinstance(ag, dict):
+            errors.append(f"step {sid!r}: agent must be a JSON object")
+            continue
+        if ag.get("model") not in VALID_MODELS:
+            errors.append(f"step {sid!r}: agent.model {ag.get('model')!r} not one of {sorted(VALID_MODELS)}")
+        if "effort" in ag and ag.get("effort") not in VALID_EFFORT:
+            errors.append(f"step {sid!r}: agent.effort {ag.get('effort')!r} not one of {sorted(VALID_EFFORT)}")
+        if not str(ag.get("scope") or "").strip():
+            errors.append(f"step {sid!r}: agent.scope missing (what it owns and must not touch)")
+        ctx = as_keys(ag.get("context"))
+        if not ctx:
+            errors.append(f"step {sid!r}: agent.context missing (list the exact inputs it receives)")
+        elif any(c.lower() in ("conversation", "the conversation", "all", "everything") for c in ctx):
+            errors.append(f"step {sid!r}: agent.context must list specific inputs, not the whole conversation")
+        if ag.get("model") == "haiku" and not VERIFIABLE.search(str(by_id[sid].get("success_test") or "")):
+            warnings.append(f"step {sid!r}: haiku step needs a machine-verifiable success_test to catch cheap misses")
+
+    vid = str(orch.get("verifier") or "").strip()
+    if not vid:
+        errors.append("orchestration.verifier missing (id of the independent check step)")
+    elif vid not in by_id:
+        errors.append(f"orchestration.verifier {vid!r} is not a step id")
+    else:
+        vreqs = as_keys(by_id[vid].get("requires")) or []
+        checked = {p for k in vreqs for p in produced.get(k, set()) if p != vid}
+        if not checked:
+            errors.append(f"verifier {vid!r} requires no output of another step, so it checks nothing")
+        vm = (by_id[vid].get("agent") or {}).get("model") if isinstance(by_id[vid].get("agent"), dict) else None
+        pm = {(by_id[c].get("agent") or {}).get("model") for c in checked if isinstance(by_id[c].get("agent"), dict)}
+        if vm and pm == {vm} and vm != "inherit":
+            warnings.append(f"verifier {vid!r} uses the same model as everything it checks; prefer a different model")
+
+    groups = {}
+    for sid, st in by_id.items():
+        g = st.get("parallel_group")
+        if g:
+            groups.setdefault(str(g), []).append(sid)
+    for g, members in groups.items():
+        outs = {k: sid for sid in members for k in as_keys(by_id[sid].get("produces")) or []}
+        for sid in members:
+            for r in as_keys(by_id[sid].get("requires")) or []:
+                if r in outs and outs[r] != sid:
+                    errors.append(f"parallel_group {g!r}: {sid!r} needs {r!r} from {outs[r]!r}; that is sequential, not parallel")
     return errors, warnings
 
 

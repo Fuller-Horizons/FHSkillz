@@ -1,8 +1,8 @@
 ---
 name: jail-prompt
 metadata:
-  version: 2.1.0
-description: Turn a vague goal into an engineered, verifiable prompt, or a STOP when AI is the wrong tool. Use when the user states an outcome but has no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", "use AI correctly / without wasting tokens", or pastes a rough goal. Do NOT use for running a finished prompt verbatim, proofreading one, or plain chat (just do it), or for doing the research itself (jail-research).
+  version: 2.2.0
+description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
 # JAIL-PROMPT
@@ -10,7 +10,7 @@ description: Turn a vague goal into an engineered, verifiable prompt, or a STOP 
 Jonathan's Actually Intelligent Logic for Prompting. Turn a half-formed goal into either a STOP or an engineered prompt that is grounded, verifiable, and lean. Kill bad-fit tasks early; make good ones succeed on the first run.
 
 A stakes triage picks the lightest lane that still earns the result: **Instant**, **Lite**, or **Full** (Frame, Viability gate, Engineer). Machine checks live in the companion **jail-py-toolkit** skill; each names a manual fallback. Detail loads only when needed:
-[skeleton.md](references/skeleton.md) · [security.md](references/security.md) · [gotchas.md](references/gotchas.md) · [templates.md](references/templates.md) · [examples.md](references/examples.md) · [example-qb-cost-drivers.md](references/example-qb-cost-drivers.md) · [sources.md](references/sources.md) · [antipatterns.md](references/antipatterns.md) · [chaining.md](references/chaining.md) · [truth-tagging.md](references/truth-tagging.md) · [generation-settings.md](references/generation-settings.md) · [meta-prompt.md](references/meta-prompt.md) (install-free, for a bare chat).
+[skeleton.md](references/skeleton.md) · [security.md](references/security.md) · [gotchas.md](references/gotchas.md) · [templates.md](references/templates.md) · [examples.md](references/examples.md) · [example-qb-cost-drivers.md](references/example-qb-cost-drivers.md) · [sources.md](references/sources.md) · [antipatterns.md](references/antipatterns.md) · [chaining.md](references/chaining.md) · [delegation.md](references/delegation.md) · [truth-tagging.md](references/truth-tagging.md) · [generation-settings.md](references/generation-settings.md) · [meta-prompt.md](references/meta-prompt.md) (install-free, for a bare chat).
 
 **Discernment over agreeableness: challenge four biases.** Praise nothing unverified; do not accept a flawed premise because the user proposed it.
 - **Tool/model bias:** "use AI" may be the wrong tool; the gate's right-tool check overrides the assumed approach.
@@ -64,6 +64,8 @@ Optimize for **goal-driven framing** ("add validation" becomes "write tests for 
 
 If one prompt cannot do the job, give a **chain** of 2-4 prompts with handoffs and human checkpoints. Chain only when stages need different expertise, separate verification, or human judgment. Load [chaining.md](references/chaining.md), emit a manifest (every `requires` key must be produced earlier or declared in `inputs`; per-step and chain-level SUCCESS TESTs required) and lint it (`chain-lint.py`; fallback: walk the manifest by hand).
 
+**Delegation lane (subagents).** When the run will happen where agents can start subagents (Claude Code, the Claude app, the Agent SDK) and the work has independent streams, needs a checker who never saw the work, or exceeds one context window, output a **delegation set** instead of a plain chain: a manifest, an orchestrator prompt, and one standalone brief per subagent. Each brief: one scope with its fence, only the inputs it needs, the cheapest model and effort that pass its SUCCESS TEST (Haiku only behind a machine-checkable test), a fixed output shape, and "do not start other agents". Set caps (agents, depth, budget) and an independent verifier that gets the merged result and sources, never worker transcripts. Say in one line why delegating beats one prompt; if it doesn't, don't. Load [delegation.md](references/delegation.md); `chain-lint.py` also checks the orchestration block (fallback: by hand). Hand off to **jail-orchestrate** to run it with a ledger.
+
 **Surface the engineered prompt first, in every lane.** Output the copyable block before acting, even if you plan to run it. Exceptions: a STOP, or an explicit "just do it" (state OBJECTIVE and SUCCESS TEST, then proceed). Missing inputs (an unattached file) are listed as inputs to attach; never invent their contents.
 
 Skeleton (omit lines that do not apply; field-by-field notes in [skeleton.md](references/skeleton.md)):
@@ -98,7 +100,7 @@ JAIL-HANDOFF:
   status: complete | partial | blocked | stop
   assumptions: [...]
   unknowns: [...]
-  outputs: [engineered prompt | chain manifest | STOP]
+  outputs: [engineered prompt | chain manifest | delegation set | STOP]
   next: <skill or action>
   approval_required: [...]
 ```
