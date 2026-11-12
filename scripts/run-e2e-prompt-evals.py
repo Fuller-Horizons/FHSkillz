@@ -6,6 +6,10 @@ For each case (a task + its input data) and each final-run model:
   new arm ("jp"):   stage 1 asks jail-prompt (the plugin at --plugin) for an
                     engineered prompt for the task; stage 2 runs that prompt
                     + the same inputs on the same final model and settings.
+                    With --library MAP.json ({case_id: prompt_file}) the new arm
+                    instead runs a saved library prompt (stage 1 skipped);
+                    "{{INPUT}}" in the prompt is replaced by the inputs, else
+                    they are appended in <input> tags.
 Outputs land as outputs/<case>/<model>/<A|B>.md with a blind key in
 private/key.json, so `run-live-evals.py grade-pack` and `score` grade them
 exactly like the skill A/B runs (old = raw request, new = jail-prompt).
@@ -71,7 +75,8 @@ def extract_block(text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cases", required=True)
-    ap.add_argument("--plugin", required=True, help="plugin dir holding jail-prompt")
+    ap.add_argument("--plugin", default=None, help="plugin dir holding jail-prompt (stage-1 mode)")
+    ap.add_argument("--library", default=None, help="JSON map case_id -> saved prompt file (library mode)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--models", default="sonnet,haiku", help="final-run models")
     ap.add_argument("--effort", default="medium", help="final-run effort")
@@ -84,7 +89,16 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args()
 
+    if bool(a.plugin) == bool(a.library):
+        rle.die("give exactly one of --plugin (stage-1 mode) or --library (library mode)")
+    library = {}
+    if a.library:
+        base = os.path.dirname(os.path.abspath(a.library))
+        for cid, f in rle.read_json(a.library, {}).items():
+            library[cid] = open(os.path.join(base, f), encoding="utf-8").read().strip()
     cases = rle.read_json(a.cases, {})["cases"]
+    if library:
+        cases = [c for c in cases if c["id"] in library]
     os.makedirs(a.out, exist_ok=True)
     rle.write_json(os.path.join(a.out, "cases.json"),
                    {"cases": [{"id": c["id"], "skill": c["skill"], "assertions": c["assertions"],
@@ -105,6 +119,11 @@ def main():
         if arm == "raw":
             info = call(c["task"] + "\n\n" + inputs, model, a.effort, None, a.timeout,
                         raw("raw"), a.tools)
+        elif library:
+            body = library[c["id"]]
+            full = body.replace("{{INPUT}}", c["inputs"]) if "{{INPUT}}" in body else body + "\n\n" + inputs
+            rec["prompt_extracted"] = True
+            info = call(full, model, a.effort, None, a.timeout, raw("lib"), a.tools)
         else:
             s1 = call(STAGE1.format(prefix=a.prefix, task=c["task"], input_desc=c["input_desc"]),
                       a.jp_model, a.jp_effort, a.plugin, a.timeout, raw(f"jp1-{model}"), a.tools)
