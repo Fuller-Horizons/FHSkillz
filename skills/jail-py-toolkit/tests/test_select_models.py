@@ -63,6 +63,15 @@ class TestSelectModels(unittest.TestCase):
         with self.assertRaises(ValueError):
             m.parse_grades('{"A": [true]}', ["A"], 2)
 
+    def test_repeats_counts_calls_and_records(self):
+        rc, _, err = sel("", "--candidates", "haiku,opus", "--dry-run", "--repeats", "3")
+        self.assertIn("× 3 repeats = 27 calls", err)
+        rc, out, err = sel("haiku,opus", "--candidates", "haiku,opus", "--repeats", "3")
+        self.assertEqual(rc, 0, err)
+        rec = json.loads(out)
+        self.assertEqual(rec["selected_by"]["repeats"], 3)
+        self.assertEqual(rec["selected_by"]["scores"]["haiku"], "9/9")
+
 
 if __name__ == "__main__":
     unittest.main()

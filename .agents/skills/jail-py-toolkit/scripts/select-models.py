@@ -17,6 +17,9 @@ Inputs:
   --grader MODEL     grader model (default claude-opus-5-5; use one not under test when possible)
   --mode MODE        quality-first (default: a cheaper model must TIE the strongest
                      candidate to be chosen) or cost-first (cheapest at the top score)
+  --repeats K        run every item K times per candidate; a check counts as
+                     passed only if it passes in all K runs (pass^K). Default 1;
+                     use 3 for prompts that will be reused or shipped
   --out FILE         also write the record + per-item detail as JSON
   --dry-run          print the plan and call count, run nothing
 
@@ -135,6 +138,7 @@ def main():
     ap.add_argument("--grader", default="claude-opus-5-5")
     ap.add_argument("--mode", default="quality-first", choices=["quality-first", "cost-first"])
     ap.add_argument("--out", default=None)
+    ap.add_argument("--repeats", type=int, default=1)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--dry-run", action="store_true")
@@ -154,9 +158,10 @@ def main():
     if a.grader in cands:
         print(f"warning: grader {a.grader} is also a candidate; prefer a model not under test", file=sys.stderr)
 
-    calls = len(items) * len(cands) + len(items)
-    print(f"[select] {len(items)} items × {len(cands)} candidates + {len(items)} grading calls = {calls} calls",
-          file=sys.stderr)
+    k = max(1, a.repeats)
+    calls = (len(items) * len(cands) + len(items)) * k
+    print(f"[select] {len(items)} items × {len(cands)} candidates + {len(items)} grading calls"
+          f"{f' × {k} repeats' if k > 1 else ''} = {calls} calls", file=sys.stderr)
     if a.dry_run:
         return 0
 
@@ -165,33 +170,37 @@ def main():
     detail, cost = [], 0.0
     labels_all = [chr(ord("A") + i) for i in range(len(cands))]
     for it in items:
-        outs = {}
-        for c in cands:
+        merged = {c: [True] * len(checks) for c in cands}
+        for rep_i in range(k):
+            outs = {}
+            for c in cands:
+                try:
+                    text, cst = run_claude(prompt + "\n\n<input>\n" + it["input"] + "\n</input>",
+                                           c, a.effort, a.timeout)
+                except (RuntimeError, subprocess.TimeoutExpired) as e:
+                    print(f"error: run failed on item {it['id']}: {e}", file=sys.stderr)
+                    return 2
+                outs[c] = text
+                cost += cst
+            order = cands[:]
+            rng.shuffle(order)
+            lab = dict(zip(labels_all, order))  # label -> model (never shown to the grader)
+            block = "\n\n".join(f"<output label=\"{l}\">\n{outs[m]}\n</output>" for l, m in lab.items())
+            gp = GRADER_PROMPT.format(checks="\n".join(f"{i+1}. {c}" for i, c in enumerate(checks)),
+                                      item=it["input"], outputs=block)
             try:
-                text, cst = run_claude(prompt + "\n\n<input>\n" + it["input"] + "\n</input>",
-                                       c, a.effort, a.timeout)
-            except (RuntimeError, subprocess.TimeoutExpired) as e:
-                print(f"error: run failed on item {it['id']}: {e}", file=sys.stderr)
+                gtext, gcost = run_claude(gp, a.grader, "medium", a.timeout)
+                grades = parse_grades(gtext, list(lab), len(checks))
+            except (RuntimeError, ValueError, subprocess.TimeoutExpired) as e:
+                print(f"error: grading failed on item {it['id']}: {e}", file=sys.stderr)
                 return 2
-            outs[c] = text
-            cost += cst
-        order = cands[:]
-        rng.shuffle(order)
-        lab = dict(zip(labels_all, order))  # label -> model (never shown to the grader)
-        block = "\n\n".join(f"<output label=\"{l}\">\n{outs[m]}\n</output>" for l, m in lab.items())
-        gp = GRADER_PROMPT.format(checks="\n".join(f"{i+1}. {c}" for i, c in enumerate(checks)),
-                                  item=it["input"], outputs=block)
-        try:
-            gtext, gcost = run_claude(gp, a.grader, "medium", a.timeout)
-            grades = parse_grades(gtext, list(lab), len(checks))
-        except (RuntimeError, ValueError, subprocess.TimeoutExpired) as e:
-            print(f"error: grading failed on item {it['id']}: {e}", file=sys.stderr)
-            return 2
-        cost += gcost
-        for l, m in lab.items():
-            scores[m][0] += sum(grades[l])
+            cost += gcost
+            for l, m in lab.items():
+                merged[m] = [x and y for x, y in zip(merged[m], grades[l])]
+        for m in cands:
+            scores[m][0] += sum(merged[m])
             scores[m][1] += len(checks)
-        detail.append({"item": it["id"], "results": {lab[l]: grades[l] for l in lab}})
+        detail.append({"item": it["id"], "results": merged})
 
     if all(p == 0 for p, _ in scores.values()):
         print("error: no candidate passed any check; fix the prompt before picking a model", file=sys.stderr)
@@ -203,6 +212,7 @@ def main():
         "candidates": cands,
         "scores": {m: f"{p}/{t}" for m, (p, t) in scores.items()},
         "grader": f"{a.grader}, blind",
+        "repeats": k,
         "effort": a.effort,
         "mode": a.mode},
         "chosen": chosen, "reason": reason, "cost_usd": round(cost, 4)}
