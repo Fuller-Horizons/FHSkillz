@@ -1,0 +1,36 @@
+{
+  "suite": "jail-task-contract behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-task-contract-0270-1",
+      "skill": "jail-task-contract",
+      "scenario": "S1",
+      "prompt": "A landscaping company owner wants help \"fixing marketing\". Budget about $6k, wants results before spring. Draft the scope so we agree before I start.",
+      "assertions": [
+        "[O] contains an explicit out-of-scope list with at least 3 items",
+        "[O] completion criteria are testable (each can fail), not \"report delivered\"",
+        "[O] surfaces the vague goal (\"fixing marketing\") as an assumption or blocking question rather than silently defining it",
+        "[O] lists inputs the client must provide"
+      ]
+    },
+    {
+      "id": "jail-task-contract-0270-2",
+      "skill": "jail-task-contract",
+      "scenario": "S2",
+      "prompt": "Here's the contract we've been working under for a client:\n\nTASK CONTRACT (approved Nov 3)\nObjective: Produce a 90-day lead-generation plan for Greenline Pool Supply (Ronkonkoma).\nDeliverables: (1) one 8-page plan document; (2) a 30-minute walkthrough call.\nConstraints: fixed fee $4,500; delivery by Dec 1; uses only Greenline's existing Google Analytics and CRM export.\nNon-goals: no ad account management; no website changes.\nSuccess: plan includes 3 channels with a budget and a target cost per lead for each; client signs off in writing.\nApproval-required: any contact with Greenline's customers.\n\nAlso, can you rebuild their website while you're at it? Their current one is awful.",
+      "assertions": [
+        "[O] treats the website rebuild as a new/child contract or change order, not a silent addition",
+        "[O] states what changed (goal/deliverable) in one line"
+      ]
+    },
+    {
+      "id": "jail-task-contract-0270-3",
+      "skill": "jail-task-contract",
+      "scenario": "S3",
+      "prompt": "rename these 5 files to lowercase: Report_Q3.PDF, Invoice-0042.PDF, NOTES.txt, Budget2026.XLSX, ReadMe.MD",
+      "assertions": [
+        "[O] does not produce a full 14-field contract (proportionate response / just does it or says trivial)"
+      ]
+    }
+  ]
+}

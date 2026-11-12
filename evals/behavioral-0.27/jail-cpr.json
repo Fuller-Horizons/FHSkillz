@@ -1,0 +1,38 @@
+{
+  "suite": "jail-cpr behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-cpr-0270-1",
+      "skill": "jail-cpr",
+      "scenario": "S1",
+      "prompt": "Build the agenda for a 60-minute meeting with a client (owner + ops manager) to decide which of 3 CRM options to adopt; I need a decision by the end.",
+      "assertions": [
+        "[O] Results section states the decision that must exist by the end, testably",
+        "[O] every agenda item has an owner, time and expected output, and times sum to ≤ 60 min",
+        "[O] includes pre-work so the decision inputs exist before the meeting"
+      ]
+    },
+    {
+      "id": "jail-cpr-0270-2",
+      "skill": "jail-cpr",
+      "scenario": "S2",
+      "prompt": "Here's the transcript from yesterday's call with a client. Can you pull out what was decided and the action items? I need to send a recap today.\n\n1 Dana (owner): Okay, thanks for joining. Main things today are the quoting delays and the new truck.\n2 Rob (ops mgr): Quoting is taking us four days. Customers go elsewhere.\n3 Jon (consultant): What would a good turnaround look like?\n4 Dana: Same day, honestly.\n5 Rob: We can do same day if estimators stop doing their own scheduling.\n6 Dana: Fine. Decision: effective Monday, the office coordinator does all scheduling and estimators only quote.\n7 Jon: Great, that's decided then.\n8 Rob: Who tells the estimators?\n9 Dana: I'll tell them at the Friday huddle.\n10 Jon: Next, the truck. Lease or buy?\n11 Rob: Lease is $1,150 a month, buying is $58,000 cash.\n12 Dana: Cash is tight until the March invoices clear.\n13 Dana: Let's lease it. Final answer, we lease the truck.\n14 Rob: I'll call the dealer for the lease paperwork by Wednesday.\n15 Jon: Good. Now, the website form that sends leads to a dead inbox.\n16 Dana: Yeah, that's been broken since summer.\n17 Rob: Somebody needs to fix the form routing.\n18 Dana: Right, somebody should.\n19 Jon: Let's not leave that hanging.\n20 Dana: We'll see who has time.\n21 Jon: Moving on. Crew software. You were looking at two vendors.\n22 Rob: I liked the second one better.\n23 Dana: I think we landed on the second one, but let's see what the price looks like first.\n24 Rob: They haven't sent a quote yet.\n25 Dana: Okay. We'll circle back.\n26 Jon: I'll send you a one-page comparison of the two vendors by next Friday.\n27 Dana: Perfect.\n28 Rob: Also my guys want a holiday schedule.\n29 Dana: Sure, normal stuff.\n30 Jon: Anything else on quoting?\n31 Rob: Just that I want the coordinator trained on the estimating sheet.\n32 Dana: Yep, that makes sense.\n33 Jon: Okay, so to recap the decisions and who has what.\n34 Dana: Sounds right.\n35 Rob: Yes.\n36 Jon: I'll get the recap out tomorrow.\n37 Dana: Thanks, everyone.\n38 Rob: Talk next week.\n39 Jon: Thanks all.\n40 (call ends)",
+      "assertions": [
+        "[O] the vague item is flagged, not promoted to a decision",
+        "[O] the ownerless action is listed as unowned/needs assignment, not given an invented owner",
+        "[O] decisions carry quotes or line references"
+      ]
+    },
+    {
+      "id": "jail-cpr-0270-3",
+      "skill": "jail-cpr",
+      "scenario": "S3",
+      "prompt": "Write my 12-week commitment contract: business, health, family. I want to 'get healthier' and 'be more present'.",
+      "assertions": [
+        "[O] vague qualifiers (\"healthier\", \"more present\") are turned into testable results with numbers/dates/cadence",
+        "[O] states an explicit end-date deadline",
+        "[O] contains no meeting agenda items"
+      ]
+    }
+  ]
+}

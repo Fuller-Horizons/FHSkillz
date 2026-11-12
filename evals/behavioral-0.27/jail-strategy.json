@@ -1,0 +1,36 @@
+{
+  "suite": "jail-strategy behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-strategy-0270-1",
+      "skill": "jail-strategy",
+      "scenario": "S1",
+      "prompt": "Run a five forces and competitor analysis for a residential HVAC company in Suffolk County, NY that's thinking of adding commercial service. Use the web where it helps.",
+      "assertions": [
+        "[O] each of the five forces has a rating AND at least one cited piece of evidence, or is marked Unknown",
+        "[O] competitors are grouped into tiers (direct/adjacent/etc.) with a reason",
+        "[O] ends with actionable strategic implications tied to the decision (add commercial service or not)",
+        "[O] no market-size or revenue figure appears without a source or an Estimate label"
+      ]
+    },
+    {
+      "id": "jail-strategy-0270-2",
+      "skill": "jail-strategy",
+      "scenario": "S2",
+      "prompt": "I'm doing a SWOT for my catering company and here's my list for strengths: we want to be the premium brand on the North Fork; the market is growing. Can you put the SWOT together and add the rest?",
+      "assertions": [
+        "[O] does not file the aspiration (\"want to be premium\") as a Strength",
+        "[O] does not file generic market growth as an Opportunity without a mechanism for this company"
+      ]
+    },
+    {
+      "id": "jail-strategy-0270-3",
+      "skill": "jail-strategy",
+      "scenario": "S3",
+      "prompt": "Do a PESTLE on the US economy.",
+      "assertions": [
+        "[O] asks for / pins the decision the scan serves, or scopes it explicitly, rather than producing an unlinked trend list"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "suite": "jail-decide behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-decide-0270-1",
+      "skill": "jail-decide",
+      "scenario": "S1",
+      "prompt": "I own a 12-person HVAC company and I need to make a call by December 15. Dispatch is the bottleneck. My options as I see them: (1) hire a second dispatcher, about $52k a year fully loaded; (2) buy dispatch software, $400 a month plus a $3,000 setup fee; or (3) just keep going as we are. Right now I'm paying about $1,800 a month in overtime because of dispatch crunch. What should I do?",
+      "assertions": [
+        "[O] includes a do-nothing option with its cost stated",
+        "[O] states criteria before scoring options",
+        "[O] gives one recommendation with confidence and at least 2 conditions that would change it",
+        "[O] every number used traces to the prompt or is labeled Estimate"
+      ]
+    },
+    {
+      "id": "jail-decide-0270-2",
+      "skill": "jail-decide",
+      "scenario": "S2",
+      "prompt": "Should we expand to Nassau County?",
+      "assertions": [
+        "[O] does not issue a confident recommendation; routes to research or labels criteria judged on Assumption/Unknown",
+        "[O] names the specific evidence needed"
+      ]
+    },
+    {
+      "id": "jail-decide-0270-3",
+      "skill": "jail-decide",
+      "scenario": "S3",
+      "prompt": "Please finalize this decision memo so I can send it to my partners today.\n\nDECISION MEMO: Replace our shop's aging CNC router\nDate: Nov 10\nBackground: Our 2011 CNC router has needed repairs four times this year (about $9,200 total). Lead time on a new one is 10 weeks.\nOptions considered:\nA. Buy new Router X for $64,000 cash.\nB. Lease Router Y at $1,350 per month for 60 months.\nCriteria: upfront cash, monthly cost, uptime, speed of delivery.\nAnalysis: Option A costs less over five years ($64,000 vs $81,000 in lease payments) but uses cash we need for inventory. Option B keeps cash free and includes a service plan.\nRecommendation: Lease Router Y.\nNext steps: sign the lease and schedule delivery.",
+      "assertions": [
+        "[O] the first ship-check line shows the real FAILs for the draft as received",
+        "[O] the final package either adds the missing parts or withholds with a named gap — never a silent all-PASS"
+      ]
+    }
+  ]
+}
