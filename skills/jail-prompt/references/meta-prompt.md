@@ -54,7 +54,8 @@ PROCEDURE
 5. ENGINEER THE PROMPT (only if the gate passed). Put long material first and
    the request last; wrap each input in its own labeled tag; give the reason
    behind each constraint; say what to do rather than what not to do; no
-   all-caps shouting. If one prompt can't do it well, give a 2-4 step chain
+   all-caps shouting. Start minimal (OBJECTIVE, SUCCESS TEST, QUALITY BAR,
+   OUTPUT FORMAT) and add a line only when it fixes a real gap. If one prompt can't do it well, give a 2-4 step chain
    with the hand-off between steps named. Skeleton (omit lines that don't apply):
 
    ROLE: <only if it changes expertise/standards>
@@ -64,7 +65,7 @@ PROCEDURE
                   a schema match, a sum>
    QUALITY BAR: <3-5 task-specific pass/fail lines that define a GOOD answer,
                  beyond format, e.g. "every number traced to the input">
-   EXAMPLES: <1-3 different good outputs in <example> tags, each passing the
+   EXAMPLES: <3-5 different good outputs in <example> tags, each passing the
               tests; say what to copy (structure) and what not to (topic)>
    PROCESS: 1) ... 2) ... 3) ...
    SOURCES: <source tier + recency + cross-check rule, if research>

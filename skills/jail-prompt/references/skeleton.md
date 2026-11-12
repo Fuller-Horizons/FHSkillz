@@ -1,6 +1,6 @@
 # Phase 3 skeleton: field-by-field notes
 
-Load this when writing the prompt block. SKILL.md carries the one-line version of each field; this file carries the full rule for each. Omit lines that do not apply, but never omit a section the SUCCESS TEST depends on.
+Load this when writing the prompt block. **Minimal first:** every prompt starts with the core (inputs in tags, OBJECTIVE, SUCCESS TEST, QUALITY BAR, OUTPUT FORMAT, RUN SETTINGS). Every other field is added only when its trigger below applies or a test input fails without it, and the reason is named in TEST RESULTS. A long prompt is not a better prompt: each extra rule is something the model can over-apply.
 
 ## Fields
 
@@ -10,14 +10,14 @@ Load this when writing the prompt block. SKILL.md carries the one-line version o
 - **OBJECTIVE.** One sentence. If you want depth or initiative beyond the literal ask, say so here; current Claude models do what is asked, at the level asked.
 - **SUCCESS TEST.** How the output is judged, from Phase 1. It must include at least one programmatic, machine-checkable check (a test suite run, a script, a count, a schema parse) and must not rely only on subjective review. If the output is rendered or executed downstream, add the malicious-sample assertion from [security.md](security.md).
 - **QUALITY BAR.** 3–5 task-specific lines that define a good answer, beyond format: "every number sourced or marked Unknown", "recommendation in the first sentence", "written for an owner, not an engineer". Each line is pass/fail, so it can be graded on the test set ([prompt-testing.md](prompt-testing.md)). Generic lines ("high quality", "clear") don't count.
-- **EXAMPLES.** 1–3 good outputs in `<example>` tags, each different from the others, each passing the SUCCESS TEST and QUALITY BAR. Prefer the user's own past work; label written ones "illustrative". Say what to copy (structure, depth) and what not to (topic). Omit when the format is trivial. Rules: [claude-prompting.md](claude-prompting.md).
-- **PROCESS.** Numbered steps. Constrain outcomes, not keystrokes.
+- **EXAMPLES.** 3–5 good outputs in `<example>` tags (inside `<examples>`), each different from the others, each passing the SUCCESS TEST and QUALITY BAR. Prefer the user's own past work; label written ones "illustrative". Say what to copy (structure, depth) and what not to (topic). Omit when the format is trivial. Rules: [claude-prompting.md](claude-prompting.md).
+- **PROCESS.** Only when the order of steps matters; otherwise state the goal and let the model plan (current models plan well, and scripted steps can make them rigid). Numbered steps. Constrain outcomes, not keystrokes.
 - **SOURCES.** Tier, recency, and cross-check rule, if research is involved. Name the retrieval capability the prompt has (live search, connector, document store); see [sources.md](sources.md).
 - **OUTPUT FORMAT.** Show the exact shape, not just its name: a filled mini-example, a header row, or a schema the model copies (pre-engineered schemas in [templates.md](templates.md)). Mandate a strict JSON Schema when structural predictability matters. For factual or research output, tag each material claim Fact / Inference / Unknown as structured fields (`status`, `evidence_count`, `source_ids`), not prose, so a checker can reject an unevidenced Fact. Prefer Unknown to a confident guess. Details: [truth-tagging.md](truth-tagging.md).
-- **CONSTRAINTS.** Scope; length limits (include explicit token budgets or character limits to prevent context bloat); client-portability requirements (stay plaintext or Markdown, avoid proprietary IDE commands); things to avoid.
+- **CONSTRAINTS.** Each with its reason ("under 150 words, because it is read on a phone"). Scope; length limits (include explicit token budgets or character limits to prevent context bloat); client-portability requirements (stay plaintext or Markdown, avoid proprietary IDE commands); things to avoid.
 - **VERIFICATION PLAN.** What to check next. Mark each step [AUTO] (a tool or second model runs it) or [HUMAN]. Lead with the check most likely to falsify the output, not the easiest confirmation. If [AUTO] checks disagree, mark the result provisional.
 - **RUN SETTINGS.** One line: model, effort, tools, and for API runs `max_tokens` with room for thinking. Never ask a Claude 5 model to write out its reasoning; effort sets thinking depth. Cheapest setting that passes the test set; never temperature/top_p for current Claude models. Table: [generation-settings.md](generation-settings.md).
-- **BEFORE RETURNING.** Self-check against the SUCCESS TEST; 1-5 self-score on grounded / verifiable / scoped / format-matched plus confidence (0-100%); flag gaps and assumptions; then surface the one or two knobs the user can turn for a different cut (shorter, more sources, regrouped). That is a bounded revision handle, not an open loop.
+- **BEFORE RETURNING.** Add only when tests show the model skips its own check; models that already verify well tend to over-verify when told to. Self-check against the SUCCESS TEST; 1-5 self-score on grounded / verifiable / scoped / format-matched plus confidence (0-100%); flag gaps and assumptions; then surface the one or two knobs the user can turn for a different cut (shorter, more sources, regrouped). That is a bounded revision handle, not an open loop.
 
 ## Chains
 

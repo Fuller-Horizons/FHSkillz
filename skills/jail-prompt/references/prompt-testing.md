@@ -27,6 +27,10 @@ that only reads well.
 
 ## 3. Fix one thing, re-run, keep only improvements
 
+- Minimal-first: the usual fix is adding one field (an example, a CONTEXT
+  fact, a PROCESS order) for the failure you saw. Name it in TEST RESULTS.
+  Also try removing a line that tests show does nothing; shorter wins ties.
+
 - Name the single change most likely to fix the most failures: usually
   missing context, a vague QUALITY BAR line, a missing example, or a format
   the model can't hold. A bigger model is the last resort, not the first.

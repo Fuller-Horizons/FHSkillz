@@ -105,6 +105,17 @@ class TestPromptLint(unittest.TestCase):
         self.assertIn("use effort instead", err)
         self.assertIn("prefill", err)
 
+    def test_minimal_core_passes_strict(self):
+        core = """<pnl>data</pnl>
+OBJECTIVE: List the five biggest cost drivers in <pnl>.
+SUCCESS TEST: 5-row table parses; each amount equals its P&L line (match check).
+QUALITY BAR: exact line names; amounts copied exactly; one owner question per driver
+OUTPUT FORMAT: | Rank | Line | Amount | Question |
+RUN SETTINGS: model sonnet · effort medium · tools: none
+"""
+        rc, _, err = lint(core, "--strict")
+        self.assertEqual(rc, 0, err)
+
 
 if __name__ == "__main__":
     unittest.main()

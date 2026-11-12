@@ -17,8 +17,8 @@ Stdlib only.
 """
 import sys, re, json, argparse
 
-REQUIRED = ["OBJECTIVE", "SUCCESS TEST", "PROCESS", "OUTPUT FORMAT", "CONSTRAINTS"]
-OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "QUALITY BAR", "EXAMPLES", "SOURCES",
+REQUIRED = ["OBJECTIVE", "SUCCESS TEST", "OUTPUT FORMAT"]  # minimal-first core (2.8.0)
+OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "QUALITY BAR", "EXAMPLES", "PROCESS", "SOURCES", "CONSTRAINTS",
             "VERIFICATION PLAN", "RUN SETTINGS", "BEFORE RETURNING"]
 # Sampling knobs current Claude models reject or the Messages API lacks.
 REJECTED_SETTINGS = re.compile(r"(?i)\b(temperature|top[_ -]?p|top[_ -]?k|seed|presence[_ -]penalty|frequency[_ -]penalty|logprobs)\b")
@@ -78,8 +78,6 @@ def lint(text):
         except json.JSONDecodeError as e:
             errors.append(f"embedded ```json block #{i} does not parse: {e}")
 
-    if "BEFORE RETURNING" not in sec:
-        warnings.append("no BEFORE RETURNING: self-check section (recommended)")
 
     qb = sec.get("QUALITY BAR")
     if qb is None:

@@ -3,7 +3,7 @@ name: jail-prompt
 model: claude-opus-5-5
 effort: medium
 metadata:
-  version: 2.7.0
+  version: 2.8.0
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
@@ -54,22 +54,19 @@ Kill fast; STOP on the first decisive failure.
 - **Subagents** (the run can start them, and streams are independent, need an unbiased checker, or exceed one context window): emit a **delegation set**: manifest, lead prompt, one standalone brief per subagent, an independent checker. **Quality-first by default:** merge and check on strong models (the check on a different one); a cheaper model keeps a step only with a recorded trial showing it ties the strong model; cost-first only on request. Spend tokens only where judgment lives: batched agents, pointers not pasted context, capped returns, cheap-first with failures escalated. Research and document subagents quote before they claim; quotes are script-checked against saved sources (`quote-check.py`) before the merge. Say why delegating beats one prompt, or don't delegate. Rules: [delegation.md](references/delegation.md), [model-selection.md](references/model-selection.md). Run it with **jail-orchestrate**.
 - **Surface the prompt first** as a copyable block, in every lane, before running it. Exceptions: STOP, or an explicit "just do it". Missing inputs are listed, never invented.
 
+**Minimal first, then earn every line** (Anthropic: start minimal, add instructions only to fix observed failures). Every prompt starts as the core:
 ```
-METADATA: inputs: · outputs: · params: · requires: · produces:   (keep every key, even "none")
-ROLE: only if it shifts expertise or standards
-CONTEXT: user facts, constraints, environment, what was tried
-OBJECTIVE: one sentence
-SUCCESS TEST: at least one machine-checkable check (count, parse, schema, test run)
-QUALITY BAR: 3-5 task-specific pass/fail lines defining a good answer, beyond format
-EXAMPLES: 1-3 varied good outputs in <example> tags that pass the tests (omit if format is trivial)
-PROCESS: 1) … 2) … 3) …
-SOURCES: tier + recency + cross-check rule, if research
-OUTPUT FORMAT: exact shape (filled example or schema); claims tagged Fact / Inference / Unknown as fields; Unknown beats a guess
-CONSTRAINTS: scope, length or token budget, things to avoid
-VERIFICATION PLAN: [AUTO] / [HUMAN] steps, most-likely-to-falsify first
-RUN SETTINGS: model · effort · tools · thinking (never temperature/top_p on current Claude)
-BEFORE RETURNING: self-check vs SUCCESS TEST and QUALITY BAR; confidence 0-100%; gaps; 1-2 knobs
+<inputs, each in its own labeled tag, long material first>
+OBJECTIVE: one sentence (say if you want depth beyond the literal ask)
+SUCCESS TEST: at least one machine-checkable check (count, parse, schema, sum)
+QUALITY BAR: 3-5 task-specific pass/fail lines defining a good answer
+OUTPUT FORMAT: exact shape (filled example or schema); Fact / Inference / Unknown as fields
+RUN SETTINGS: model · effort · tools (API: max_tokens with room for thinking)
 ```
+Add a field only when a fixed trigger applies or a test input fails without it, and name the reason in TEST RESULTS ("added PROCESS: test 2 skipped the restatement"):
+- **CONTEXT** user facts the model can't infer · **ROLE** only if it changes the standard · **EXAMPLES** 3-5 varied, canonical good outputs, instead of lists of edge-case rules
+- **PROCESS** only when order matters · **SOURCES** research · **CONSTRAINTS** with the reason for each · **VERIFICATION PLAN** high-stakes
+- **METADATA** a program or chain will read it · **BEFORE RETURNING** a self-check the tests show is needed (models that already verify well over-verify)
 Field notes: [skeleton.md](references/skeleton.md). Consulting analysis: start from the evidence-first template in [templates.md](references/templates.md).
 
 **Check before surfacing:** `prompt-lint.py --strict` (fallback by hand: sections present, checkable SUCCESS TEST, concrete OUTPUT FORMAT, QUALITY BAR, RUN SETTINGS); `truth-lint.py` for tagged claims; [antipatterns.md](references/antipatterns.md). One round of self-critique, on a second model when available. High-stakes: dry-run a mock output against the format (`dry-run.py`).

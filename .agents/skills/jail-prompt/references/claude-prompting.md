@@ -33,8 +33,9 @@ the end; re-check them when a new model generation ships.
 
 ## Examples (few-shot)
 
-- 1–3 examples of a GOOD output, in `<example>` tags, each different from the
-  others (different input, length, edge case). Examples steer format and
+- 3–5 examples of a GOOD output (Anthropic's recommended range), in
+  `<example>` tags inside `<examples>`, each different from the others
+  (different input, length, edge case). Examples steer format and
   quality more than instructions do.
 - Each example must pass the prompt's own SUCCESS TEST and QUALITY BAR. A
   flawed example teaches the flaw.

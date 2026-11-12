@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.8.0 — 2026-11-12
+- **Claude 5 conformance** (Anthropic best practices + per-model guides): never ask Claude 5 models to write out reasoning (may be refused as reasoning extraction); effort, not wording, sets thinking; no "think carefully" lines; `max_tokens` headroom for thinking; effort changes break the cache; no prefill. prompt-lint warns on all three patterns for Claude 5 targets.
+- **Per-model guides** (`references/model-guides.md`): Opus 5.5, Sonnet 5.5, Sonnet 5, Haiku 5.5, Fable 5.2 — blocks to add, lines to remove, effort notes. `models.md` corrected: API default effort is `high` on Sonnet 5.5 and Fable 5.2 (`medium` in Claude Code / apps).
+- **Minimal-first prompts**: every prompt starts as a 5-field core (inputs in tags, OBJECTIVE, SUCCESS TEST, QUALITY BAR, OUTPUT FORMAT, RUN SETTINGS); other fields are added only by trigger or when a test fails without them, with the reason named in TEST RESULTS. Examples 3–5 (was 1–3), canonical examples instead of edge-case rule lists, PROCESS only when order matters, BEFORE RETURNING only when tests show it's needed. prompt-lint: required = OBJECTIVE, SUCCESS TEST, OUTPUT FORMAT. To be measured against 2.7.0 (full template) on the end-to-end tests.
+
 ## 2.7.0 — 2026-11-12
 - **Quote-before-claim** for document and research subagents: every Fact carries a verbatim quote (25 words or fewer) and a source id; sources are saved once to `sources/`; the lead agent runs `quote-check.py` before merging, and a quote not found sends that claim back as Unknown. In `delegation.md`, the subagent brief template, `claude-prompting.md`, the core, and the worked example.
 - **Portable meta-prompt rebuilt** for any model: gather-first, security gate, Claude-style structure rules, QUALITY BAR, EXAMPLES, quote-before-claim, RUN SETTINGS by tier, test plan and the TEST RESULTS / UNTESTED line.
