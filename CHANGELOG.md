@@ -2,6 +2,10 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.28.1] — 2026-11-12
+
+- **jail-prompt 2.13.0:** multiple-choice questions with a recommended default and an always-present "add more context" option; new context always allows another round; 97% comprehension and 99% readiness gates restored. Untested.
+
 ## [plugin 0.28.0] — 2026-11-12
 
 **Measured fixes, owner-approved reverts, and the 2026-11-12 recommendations.** 25 skills (jail-py-lab merged into jail-py-toolkit).

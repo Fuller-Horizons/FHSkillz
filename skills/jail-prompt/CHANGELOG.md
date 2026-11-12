@@ -2,6 +2,12 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.13.0 — 2026-11-12
+- Questions are multiple choice (at most 3 per round, 2-4 options, recommended first), always with a last option to add more context; clickable where the app supports it, lettered text otherwise.
+- New context from the user always allows another questioning round, regardless of how many came before; no new context, no new round. Each round updates the v1 draft.
+- Restored the comprehension gate (97% understanding of the goal) and the readiness gate (99%), which the 2.11.0 trim had dropped.
+- Untested.
+
 ## 2.12.0 — 2026-11-12
 - Layered grading for prompt tests (idea from JEV / jevals, Openlayer, Sept 2026; no code or model adopted): code checks first, then one cheap typed call per output (pass/fail + confidence + note per check), then a strong grader for failures, anything under 0.9 confidence, and math/logic/tone checks; cut-off calibrated on the first test. Cuts grading tokens on Full-lane tests.
 - Agent prompts get three standard QUALITY BAR lines: grounded, in scope, injection-proof.
