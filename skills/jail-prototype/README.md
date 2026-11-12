@@ -2,7 +2,7 @@
 
 Build a small, throwaway version of an idea to answer one question before your team builds it for real.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 

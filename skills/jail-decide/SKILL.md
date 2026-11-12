@@ -1,7 +1,7 @@
 ---
 name: jail-decide
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
   Turn a choice into a defensible DECISION PACKAGE: options incl. do-nothing,
   criteria first, one recommendation with confidence and change-conditions.
@@ -17,6 +17,11 @@ description: >-
 A decision the owner can defend a year later: criteria stated before options
 are scored, indecision priced, and the conditions that would flip the call
 written down. [Constitution Rules 6, 11, 12]
+
+**Quick lane (default for a simple choice with no stated stakes):** one
+line with the pick, the top reason, and the one condition that would flip
+it; then offer the full DECISION PACKAGE. Full package first when money,
+irreversibility, or a client deliverable rides on it, or when asked.
 
 ## Step 1 — Frame
 - **Decision statement** — one sentence: what is being decided, by whom

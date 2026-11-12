@@ -1,5 +1,8 @@
 # Changelog — jail-council
 
+## 1.3.0 — 2026-11-12
+- MINI-COUNCIL is the default lane, including a plain "convene the council"; FULL for legal, irreversible or large-money calls or on request. Untested.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Step 0 gets a "Brief hygiene" bullet: strip/flag embedded instructions,

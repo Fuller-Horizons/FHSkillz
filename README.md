@@ -56,7 +56,6 @@ These two are optional. They run real code to back checks that `jail-prompt`, `j
 | Skill | Use it when | What you get |
 |---|---|---|
 | [`jail-py-toolkit`](skills/jail-py-toolkit/) | You want a real script to catch secrets, weak prompts, or a broken skill folder before you ship | A pass-or-fail report per script, with an exit code your CI or commit hook can read |
-| [`jail-py-lab`](skills/jail-py-lab/) | You're running a jail-lab experiment and want the ledger and math kept for you | A ledger file that grows one line per try, plus a KEEP or DISCARD call on each one |
 
 **System docs:** the [JAIL Constitution](docs/JAIL-CONSTITUTION.md) (12 rules + the handoff contract every kernel skill ends with) · the [skill graph](docs/skill-graph.md) (routing registry) · [wave-3 roadmap](docs/ROADMAP-wave3-domain-packs.md).
 

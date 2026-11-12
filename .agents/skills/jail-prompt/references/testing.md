@@ -41,6 +41,25 @@ that only reads well.
 - Grade with a fresh agent or a different model where available. A model
   grading its own output misses its own blind spots.
 
+**Grade in layers, cheapest first** (pattern from JEV / jevals, see below):
+1. **Code checks** for anything a script can decide: counts, word limits,
+   JSON parses, required headings, sums. No model needed.
+2. **One typed call per output.** A cheap grader (Haiku or Sonnet) answers
+   every remaining check for that output in **one** call, each as
+   `{"check": <n>, "pass": true|false, "confidence": 0.0-1.0, "note": "<why, if false>"}`.
+   No essays, no score out of 10.
+3. **Escalate** to a strong grader (Opus, or a different model family) every
+   check that failed, every check under **0.9 confidence**, and every check
+   that needs math, logic, code tracing or judgment of tone. The strong
+   grader's answer replaces the cheap one.
+4. **Human** for high-stakes or disputed checks.
+
+Calibrate before trusting the cut-off: the first time a prompt is tested,
+send all checks to both graders; keep the 0.9 cut-off only if the cheap
+grader agreed on every check it marked ≥ 0.9 (otherwise raise the cut-off or
+skip step 2 for that prompt). Never trust a confidence number on its own: a
+polished but wrong answer can fool the cheap grader.
+
 ### 3. Fix one thing, re-run, keep only improvements
 
 - Minimal-first: the usual fix is adding one field (an example, a CONTEXT
@@ -85,7 +104,7 @@ library entry. Delegation sets record it per step (delegation.md).
 TEST RESULTS: 5 inputs (3 fix, 2 held out; 2 real, 3 synthetic) · fix set 12/15 → 15/15 after 1 fix · held out 10/10 · pass^3: 5/5 inputs
 Fix kept: added a filled example row to OUTPUT FORMAT (grader notes: 2 malformed tables)
 Baseline: won 4, tied 1, lost 0 of 5
-Graded by: fresh Sonnet agent (blind)
+Graded by: code checks → Haiku typed pass (14/15 settled) → Opus on 1 escalated (blind)
 ```
 
 No way to run the prompt in this session → skip the runs, list the test set,
@@ -98,7 +117,7 @@ and mark the prompt "untested; run the test set before relying on it".
 - **Full, or any prompt that will be reused, run at volume, or shipped:** steps 1–5,
   with the held-out split and pass^3.
 
-Patterns adapted from GEPA (reflective fixing from failure notes, held-out
+Layered typed grading adapted from JEV / jevals (Openlayer, openlayer.com/blog/introducing-jevals-agent-evals-guardrails, Sept 2026; idea only, no code or model used). Patterns adapted from GEPA (reflective fixing from failure notes, held-out
 validation; gepa-ai on GitHub) and ECC's eval-harness (pass^k; github.com/affaan-m/ECC,
 MIT, © 2026 Affaan Mustafa).
 

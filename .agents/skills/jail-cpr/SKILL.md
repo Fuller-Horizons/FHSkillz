@@ -1,7 +1,7 @@
 ---
 name: jail-cpr
 metadata:
-  version: 1.6.0
+  version: 1.6.2
 description: >-
   Build a CPR (Context, Purpose, Results) as a DOCX/PDF. DESIGN: build or
   design an agenda, prep a meeting. COMMIT: personal or team commitment
@@ -43,8 +43,9 @@ after the fact).
    information | assigned action). An item with no expected output is cut
    or demoted to pre-work.
 5. **jail-verify** — the closing gate, hard: **FAIL any check** — every
-   Result covered by ≥1 item; every item traces to a Result; time
-   allocations sum to the duration (with buffer); decisions have their
+   Result covered by ≥1 item; every item traces to a Result; item times
+   plus buffer add up to no more than the meeting length, with the sum
+   written out (`5+10+15+10 = 40 + 5 buffer = 45 of 45`); decisions have their
    needed inputs in pre-work; owners are named people — **→ fix or flag
    inline; do not render the document.**
 
@@ -110,25 +111,14 @@ on" read, flagged as such):
    next session's or next period's carry-forward → this skill's DESIGN or
    COMMIT lane (step 2 pulls it).
 
-## Output fields (full templates: [references/templates.md](references/templates.md))
-**DESIGN:** MEETING (title · date · duration) · PARTICIPANTS (name — role) ·
-CONTEXT · PURPOSE (one sentence) · RESULTS R1… (each testable) · PRE-WORK
-(item · owner · due) · REQUIRED INPUTS · AGENDA (# · topic · owner · time ·
-objective · expected output → Result#) · PARKING LOT · ACTION ITEMS ·
-FOLLOW-UP.
-**COMMIT:** DEADLINE (end date · start · length) · CONTEXT · PURPOSE ·
-RESULTS (R# — domain — testable statement) · CARRY-FORWARD · CHECK-IN
-CADENCE. No agenda, no owners other than the person.
-**DEBRIEF:** DECISIONS · FLAGGED (not decisions) · ACTIONS · UNOWNED ·
-COMMITMENTS / OPEN QUESTIONS · RESULTS AUDIT · ROUTING.
+## Output fields
+Field lists and full templates for DESIGN, COMMIT and DEBRIEF:
+[references/templates.md](references/templates.md).
 
 ## Labels (canonical)
-Tag every statement: **Fact** (source or artifact ref) ·
-**User-provided** (who said it) · **Inference** (one-line reasoning) ·
-**Estimate** (method + inputs) · **Judgment** · **Unknown** (what resolves
-it). Premises go in the handoff `assumptions:` list. In DEBRIEF, an
-attendee's own statement is **User-provided**; a "landed on" read is
-**Inference** and is flagged.
+Tag every statement Fact · User-provided · Inference · Estimate · Judgment ·
+Unknown; premises go in the handoff `assumptions:`. In DEBRIEF an attendee's
+own statement is User-provided; a "landed on" read is Inference, flagged.
 
 ## JAIL-HANDOFF
 End the chat/working copy with the block below (keys in this order; `status`,
@@ -149,17 +139,11 @@ JAIL-HANDOFF:
 ```
 
 ## Deliverable — a document, not chat text
-Render the settled content as **DOCX** (default; read the **docx** skill) or
-**PDF** on request (**pdf** skill): title block, CPR/debrief sections as
-headings, agenda/actions/Results as tables with a fillable owner/deadline
-column (COMMIT: a check-in column). No docx/pdf capability: deliver the same
-content as clean Markdown in chat — full-fidelity, not degraded.
-
-## Delivery (client-facing)
-When the document goes to a client: render it as a clean document (docx
-skill or a Docs artifact when available; otherwise clean Markdown), plain
-9th-grade English, claim labels kept, no YAML in the client copy. The
-JAIL-HANDOFF stays in the chat/working copy.
+Render as **DOCX** (default; **docx** skill) or **PDF** on request: title
+block, sections as headings, agenda/actions/Results as tables with an owner/
+deadline column (COMMIT: check-in column). No docx/pdf: clean Markdown, full
+fidelity. Client copies: plain 9th-grade English, labels kept, no YAML; the
+JAIL-HANDOFF stays in the working copy.
 
 Examples: [design](references/example-design.md) · [commit](references/example-commit.md).
 ## Related skills

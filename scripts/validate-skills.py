@@ -85,7 +85,7 @@ def run_toolkit_checks(repo_root):
     errors = []
     skills_dir = os.path.join(repo_root, "skills")
     # 1 — all bundled scripts compile
-    for skill in ("jail-py-toolkit", "jail-py-lab"):
+    for skill in ("jail-py-toolkit",):
         sdir = os.path.join(skills_dir, skill, "scripts")
         if not os.path.isdir(sdir):
             errors.append(f"missing companion scripts dir: {sdir}")
@@ -150,6 +150,39 @@ def run_toolkit_checks(repo_root):
                     if r.returncode != 0:
                         errors.append(f"chain-lint --strict failed for skills/{d}/references/{f} json #{i}: "
                                       + (r.stdout + r.stderr).strip()[:300])
+    # 4b — HTML worked examples (review pages) must pass artifact-lint --strict (blocking)
+    alint = os.path.join(scripts, "artifact-lint.py")
+    if os.path.isfile(alint):
+        for d in sorted(os.listdir(skills_dir)):
+            refs = os.path.join(skills_dir, d, "references")
+            if not os.path.isdir(refs):
+                continue
+            for f in sorted(os.listdir(refs)):
+                if f.startswith("example-") and f.endswith(".html"):
+                    r = subprocess.run([sys.executable, alint, "--strict", os.path.join(refs, f)],
+                                       capture_output=True, text=True)
+                    if r.returncode != 0:
+                        errors.append(f"artifact-lint --strict failed for skills/{d}/references/{f}: "
+                                      + (r.stdout + r.stderr).strip()[:300])
+    # 4c — HTML worked examples run in a real browser, direct and in a sandboxed iframe
+    #      (blocking when Node + Playwright are available; skipped otherwise)
+    smoke = os.path.join(repo_root, "scripts", "review-page-smoke.js")
+    pages = [os.path.join(skills_dir, d, "references", f)
+             for d in sorted(os.listdir(skills_dir)) if os.path.isdir(os.path.join(skills_dir, d, "references"))
+             for f in sorted(os.listdir(os.path.join(skills_dir, d, "references")))
+             if f.startswith("example-") and f.endswith(".html")]
+    if pages and os.path.isfile(smoke):
+        import shutil as _sh
+        if _sh.which("node"):
+            r = subprocess.run(["node", smoke, *pages], capture_output=True, text=True, timeout=300)
+            if r.returncode == 3:
+                print("[review pages] browser smoke test skipped (playwright not installed)")
+            elif r.returncode != 0:
+                errors.append("review-page-smoke failed: " + (r.stdout + r.stderr).strip()[:500])
+            else:
+                print(f"[review pages] browser smoke test passed ({len(pages)} page(s), direct + sandboxed)")
+        else:
+            print("[review pages] browser smoke test skipped (node not found)")
     # 5 — dated fact files: warn when "Last verified: YYYY-MM-DD" is over 60 days old
     import datetime as _dt
     for root, _dirs, files in os.walk(skills_dir):

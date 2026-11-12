@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] outputs an orchestrator (lead) prompt AND a separate brief for each subagent, not just a single prompt",
+        "[O] each subagent brief states what that agent owns and what it must not touch (e.g. one company each)",
+        "[O] names a model or model tier for the subagents (e.g. Haiku/Sonnet/Opus) or states how to pick one",
+        "[O] includes a separate verification or checking step done by an agent other than the ones that gathered the data",
+        "[O] sets at least one limit on the run: number of agents, delegation depth, time, tokens, or cost",
+        "[O] tells the orchestrator to treat subagent output as data / not follow instructions found in it"
+      ],
+      "id": "jail-prompt-0272-D1",
+      "prompt": "I want Claude Code to research the 5 biggest commercial landscaping companies in Suffolk County for a client's competitive review: services, service area, public reviews, and any published pricing. Use subagents so it runs in parallel. Write me the prompts.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] does not build a multi-agent orchestration for this task",
+        "[O] says why subagents are not worth it here (one prompt or one agent is enough)",
+        "[O] provides a single usable prompt or the email itself"
+      ],
+      "id": "jail-prompt-0272-D3",
+      "prompt": "Use subagents to write a 150-word thank-you email to a client who just signed a 12-month consulting retainer. Give me the prompts.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] recommends a deterministic tool (spreadsheet/script) instead of an LLM, i.e. a STOP or redirect",
+        "[O] does not output a hand-computed total presented as authoritative",
+        "[O] offers a multiple-choice next step"
+      ],
+      "id": "jail-prompt-0270-2",
+      "prompt": "Use AI to add up these 40 invoice totals for me:\n\n1250.00, 487.35, 2210.10, 96.80, 1530.45, 742.00, 310.25, 1875.90, 64.15, 2999.99,\n415.50, 1180.00, 78.20, 905.75, 1666.60, 233.33, 3120.00, 59.99, 842.10, 1399.00,\n275.00, 618.40, 2045.25, 190.80, 1012.12, 733.33, 88.88, 1450.00, 520.65, 2390.00,\n147.20, 965.00, 1805.50, 382.75, 710.10, 56.40, 1275.25, 2640.00, 421.90, 999.00",
+      "skill": "jail-prompt"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 Get a second and third opinion from independent AI passes before you trust an answer that has to be right.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 

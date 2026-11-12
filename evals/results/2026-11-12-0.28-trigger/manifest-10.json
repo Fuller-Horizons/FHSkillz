@@ -1,0 +1,114 @@
+{
+ "skills": [
+  {
+   "name": "jail-approval-gate",
+   "description": "Classify every intended action into approval tiers BEFORE acting \u2014 never / per-action approval / batchable approval / auto-allowed \u2014 and fail closed: irreversible, external, durable, spend, or sensitive-data actions pause for a human with a proper approval request (what, why, blast radius, reversibility, safer alternative). Use at the start of any agentic run that will act on the world (send, publish, deploy, delete, buy, write durable memory, contact someone), when the user asks \"what will you do without asking me\", or when another skill's plan contains approval_required items. Do NOT use for pure analysis/drafting tasks that touch nothing external."
+  },
+  {
+   "name": "jail-bmc",
+   "description": "Build or evaluate a nine-block Business Model Canvas: \"business model canvas\", \"BMC\", \"map the business model\", pressure-test how a venture or product idea makes money. Marks every element validated vs hypothesis, checks unit economics (CAC, LTV, payback), ranks the riskiest assumptions with tests. Do NOT use for SWOT/PESTLE or macro scans (jail-strategy), 0-10 scoring (jail-rate), or entity/legal-structure questions."
+  },
+  {
+   "name": "jail-council",
+   "description": "Convene an LLM COUNCIL for maximum-accuracy answers to consequential or contested questions: 3\u20135 independent models answer blind, adversarially review each other's ANONYMIZED answers, disputed facts get a targeted verification round, and a chairman synthesizes by evidence \u2014 never by vote \u2014 preserving dissent. Two lanes: FULL protocol for maximum stakes, and a MINI-COUNCIL (3 blind answers + one anonymized review round) for everyday contested calls. Cost is disclosed, never a gate. Use when the user says \"convene the council\", \"ask multiple models\", \"get a second/third opinion\", \"maximum accuracy\", \"I need this answer to be right\", \"quick council\" / \"mini council\" / \"council-check this\", or when jail-verify / jail-decide / jail-rate / jail-prompt escalate a high-stakes contested call. Do NOT use for parallel division of labor across different subtasks (jail-orchestrate) or for questions with no knowable answer (STOP those)."
+  },
+  {
+   "name": "jail-cpr",
+   "description": "Build a CPR (Context, Purpose, Results) as a DOCX/PDF. DESIGN: build or design an agenda, prep a meeting. COMMIT: personal or team commitment contract for a quarter or \"tour\", no meeting. DEBRIEF: pull decisions, action items, \"what did we decide\" and \"who owes what\" from a transcript; score a period. Do NOT use for generic task/owner scoping (jail-task-contract) or turning a decision into a process (jail-plan)."
+  },
+  {
+   "name": "jail-decide",
+   "description": "Turn a choice into a defensible DECISION PACKAGE: options incl. do-nothing, criteria first, one recommendation with confidence and change-conditions. Use for \"which should we pick\", \"should we do X or Y\", \"build vs buy\", \"is this worth doing\", \"help me decide\", \"run the numbers on A vs B and pick one\", \"cheaper over N years\". Do NOT use to score one subject 0-10 (jail-rate), gather evidence (jail-research), or attack an option (jail-red-team)."
+  },
+  {
+   "name": "jail-diagnose",
+   "description": "Feedback-loop-first diagnosis of hard defects \u2014 bugs, performance regressions, failing workflows, broken pipelines, \"it sometimes doesn't work\": build a tight red-capable reproduction signal BEFORE any hypothesizing, then minimize \u2192 hypothesize \u2192 instrument \u2192 fix \u2192 prove with a mandatory regression case. Use when the user says \"debug this\", \"diagnose\", reports something broken/throwing/failing/slow/flaky, or when a fix attempt failed and the cause is unclear. Do NOT use to verify a finished deliverable (jail-verify) or to iterate a working thing toward a better metric (jail-lab)."
+  },
+  {
+   "name": "jail-handoff",
+   "description": "Compact the current session into a BATON \u2014 a handoff document a fresh agent (or tomorrow's session, or a smaller-context model) can pick up and continue from without re-reading everything: state of work, decisions with why, live references to artifacts (never duplicated), next actions, and which skills to invoke. Use when context is filling up, a session is ending mid-work, the user says \"hand this off\", \"save where we are\", \"continue this later/elsewhere\", or work must move to another agent/model \u2014 and OFFER it proactively on context-pressure signals (long session, approaching compaction, recall degrading) instead of waiting to be asked. Do NOT use for the in-run structured handoff between skills (the JAIL-HANDOFF block) or for storing durable lessons (jail-memory)."
+  },
+  {
+   "name": "jail-lab",
+   "description": "Run a metric-driven EXPERIMENT LOOP on anything improvable \u2014 a prompt, a skill, code, content, a workflow, a landing page: declare one metric and a budget, then propose \u2192 bounded run \u2192 measure \u2192 keep/discard \u2192 log every experiment in an append-only audit ledger with cited evidence. Use when the user wants to \"iterate until it's better\", \"optimize this\", \"run experiments\", \"A/B this\", \"tune it\", improve something measurable, or turn a vague \"make it better\" into disciplined trials. Do NOT use when no measurable metric can exist (taste-only judgments \u2014 use jail-rate for a scored assessment) or for one-shot verification (jail-verify)."
+  },
+  {
+   "name": "jail-memory",
+   "description": "Govern what enters, stays in, and leaves durable memory or organizational knowledge \u2014 provenance-checked, deduplicated, classified, superseded-not- deleted \u2014 and run the LEARNING POSTMORTEM ritual that turns finished work into stored lessons. Implemented as a MARKDOWN MEMORY SYSTEM: a MEMORY.md index plus one dated, provenance-headed .md file per entry, written to the project workspace so it travels, diffs in git, and works on any platform. Use when saving lessons/decisions/context for future sessions (\"remember this\", \"save that for next time\"), when retrieving prior context for a new task, after completed or failed projects (\"what did we learn\"), or when another skill proposes a durable write. Do NOT use for in-conversation working notes, or for the adoption review of raw inbound data (jail-quarantine \u2014 that gate runs first)."
+  },
+  {
+   "name": "jail-orchestrate",
+   "description": "Run long or parallel work as one coordinated system \u2014 decide when delegation earns its cost, assign non-overlapping scopes with minimum sufficient context, keep a dependency graph and resume ledger, audit progress against real tool results, reconcile conflicts by evidence, and integrate one final result. Includes a SOLO lane: the same ledger discipline for ONE agent on long multi-part work (no subagents needed). Use when work splits across parallel agents or research streams (\"fan this out\", \"use subagents\", \"divide this up\"), for long-horizon multi-part execution (\"keep a resume ledger\", \"track this build so we can resume\"), or when jail-research/jail-task-contract hands off a parallelizable plan. Do NOT use for short single-sitting tasks or for defining the human-run process itself (jail-plan)."
+  },
+  {
+   "name": "jail-plan",
+   "description": "Turn intent into an executable plan \u2014 two lanes. OPERATE: convert a decision, recommendation, or idea into a runnable OPERATING WORKFLOW (trigger, inputs, actions, tool, owner, approval, output, evidence, metric, frequency, risk, testable completion). MAP: navigate work too big and foggy for one session by charting a MAP of DECISION TICKETS and resolving them one at a time until the path to a named destination is clear. Use when analysis stops at \"you should\u2026\" and someone must actually run it (\"make this operational\", \"turn this into a process\", \"who does what\", \"how do we actually do this\"), OR when a loose, months-long idea arrives with no clear path (\"we should overhaul X\", \"figure out how to enter Y\", \"no idea where to start\"). Do NOT use to scope a single up-front task (jail-task-contract) or to coordinate a multi-agent run (jail-orchestrate)."
+  },
+  {
+   "name": "jail-prompt",
+   "description": "Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says \"make this prompt better\", \"write me a prompt\", \"is AI the right tool\", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate)."
+  },
+  {
+   "name": "jail-prospect",
+   "description": "Screen a US private company from free public sources. PROSPECT lane: sell-side brokering plus consulting brief, two 0-100 scores. SNAPSHOT lane: vendor, competitor or partner vetting. Never invents financials. Triggers: \"prospect brief\", \"good brokerage prospect\", \"should I approach this owner\", \"vet this vendor\", \"due diligence on X\", \"competitor read\". Do NOT use for 0-10 ratings (jail-rate) or general research (jail-research)."
+  },
+  {
+   "name": "jail-prototype",
+   "description": "Build a throwaway prototype that answers one named design question; keep the answer, discard the build. Look questions become a single-file HTML review page: 3 switchable variants, numbered review points, answer controls the reviewer copies back. Ends in a SPIKE VERDICT and ledger entry. Use for \"mock this up\", \"which layout works\", \"try it first\". Do NOT use for production builds, metric tuning (jail-lab), or checking done work (jail-verify)."
+  },
+  {
+   "name": "jail-py-lab",
+   "description": "JAIL-PY machine bookkeeping for jail-lab experiment loops \u2014 runnable Python that appends measured experiments to an append-only JSONL ledger, computes keep/discard verdicts against the best-so-far, reports the trajectory, and compares ledgers or spans (A/B, wave-over-wave regression checks). Use when jail-lab is running and code execution is available: \"log this experiment\", \"what's the best so far\", \"summarize the lab ledger\", \"compare this run to the last one\", or to wire a metric command so measurement is automatic. Requires code execution (Python 3.8+, stdlib only). Not for deciding WHAT to try \u2014 that's jail-lab's discipline."
+  },
+  {
+   "name": "jail-py-toolkit",
+   "description": "Runnable machine checks for FHSkillz (Python 3.8+, stdlib). Use when a skill asks for a machine check, or to scan for secrets or personal data, lint a prompt, chain or delegation manifest, dry-run an output format, check citations, quotes, labels or handoffs, verify score math, pick a model by blind trial, lint a skill's structure, or validate, save or variance-check a rating. Do NOT use to write prompts (jail-prompt) or make ratings (jail-rate)."
+  },
+  {
+   "name": "jail-quarantine",
+   "description": "Two-sided data discipline: (1) ADOPTION GATE \u2014 discovered, scraped, bulk- captured, or extracted data lands as quarantined draft and never flows into decisions, memory, or outputs until reviewed and adopted; (2) SENSITIVE HALT \u2014 on detecting protected data (credentials, keys, tokens, PII, PHI, CUI, client-confidential, regulated, IP), stop processing that item and fail closed rather than degrade to an unsafe path. Includes an INLINE SCAN lane for everyday small pastes (\"quick check this before we use it\"). Use when ingesting external/bulk content (scrapes, imports, brain-dumps, inboxes, transcripts, found files), when pasting third-party content into the conversation (vendor emails, forwarded threads, snippets), when handling anything that might contain secrets or regulated data, or when another skill flags sensitive inputs. Do NOT use for the user's own directly-supplied working text they've asked you to edit."
+  },
+  {
+   "name": "jail-rate-skill",
+   "description": "Evaluate and rate another AI skill (its SKILL.md and support files) using the standardized 10-category Skill Rating Matrix, IDE Compatibility Matrix, and CLI Compatibility Matrix. Triggers: \"/jail-rate-skill\", \"rate this skill\", \"evaluate this skill\", \"score this skill\"."
+  },
+  {
+   "name": "jail-rate",
+   "description": "Rate, score, grade, judge, or evaluate ANY named subject 0.0-10.0 (software, code, hardware, small business, idea, plan, program, content, a person's public work role) with a weighted rubric, cited evidence, ranked fixes, and current to projected scores. Triggers: \"rate this\", \"give it a 0-10\", \"how would you grade\", \"is this idea any good\". Do NOT use for AI skill folders (jail-rate-skill), prospect calls (jail-prospect), SWOT (jail-strategy)."
+  },
+  {
+   "name": "jail-red-team",
+   "description": "Pressure-test a plan, recommendation, design, or belief before it ships: steelman it, then find hidden assumptions, missing stakeholders, dependency failures and second-order effects, each with a cheapest falsifier and a verdict. Use for \"poke holes in this\", \"what am I missing\", \"devil's advocate\", \"pre-mortem this\", irreversible calls. Do NOT use to check a finished deliverable (jail-verify) or for trivial choices."
+  },
+  {
+   "name": "jail-research",
+   "description": "Research a question into two paired outputs: a cited synthesized answer plus an auditable evidence packet (tiered dated sources, contradictions, honest gaps). Use for \"research X\", \"find evidence for\", \"what does the data say\", \"verify this claim\", or when jail-decide, jail-strategy, or jail-rate need grounding. Do NOT use for US private-company sell-side screens (jail-prospect) or when the user already has all facts (jail-summarize)."
+  },
+  {
+   "name": "jail-skill-miner",
+   "description": "Mine a codebase, chat history, or document set for plugin-worthy SKILLS \u2014 reusable disciplines, not app features \u2014 then dedupe candidates against the installed plugin before authoring anything. Also the suite's SELF- MAINTENANCE loop: failed eval cases and corrections repeated across sessions auto-nominate skill fixes/deltas. Use when the user asks to \"extract skills from\", \"mine this repo/history for skills\", \"what disciplines does this codebase enforce\", \"should this become a skill\", when evaluating candidate-skill lists from other tools/models, or when an eval failure / repeated correction needs turning into a skill change. Do NOT use to author an already-approved skill from scratch (follow repo conventions directly) or to rate an existing skill (jail-rate-skill)."
+  },
+  {
+   "name": "jail-strategy",
+   "description": "Run one evidence-grounded strategy analysis: SWOT then TOWS (INTERNAL), PESTLE with tripwires (MACRO), COMPETITIVE (Porter's five forces, competitor tiers, profile cards), or a FULL SWEEP. Use for \"SWOT\", \"TOWS\", \"PESTLE\", \"macro trends\", \"external factors\", \"five forces\", \"competitor analysis\", \"competitive landscape\", \"full strategy picture\". Do NOT use for business models (jail-bmc), 0-10 scores (jail-rate), or bare research (jail-research)."
+  },
+  {
+   "name": "jail-summarize",
+   "description": "Turn analysis or technical findings into a decision-forcing brief for a board, CEO, owner, or client: lead with the answer, translate tech to business cost and risk, end on one recommendation. Use for \"summarize this for the board/CEO/owner\", \"make this executive-ready\", \"translate this technical finding\", decision memos. Do NOT use for working notes, raw research (jail-research), full option analysis (jail-decide), meeting recaps (jail-cpr)."
+  },
+  {
+   "name": "jail-task-contract",
+   "description": "Turn an ambiguous, multithreaded, or high-stakes request into a 14-field TASK CONTRACT with testable acceptance criteria before work starts, and guard scope after: a material change in goal, audience, data class, output, or authority is a NEW contract. Use for scoping a task or client engagement, \"make sure we're aligned\", drifting revisions. Do NOT use to engineer a prompt (jail-prompt), run a process (jail-plan), or for trivial one-step asks."
+  },
+  {
+   "name": "jail-verify",
+   "description": "Independently verify a finished output against its task contract, with artifacts from the current run, BEFORE it ships. Use when work claims done: \"verify this\", \"check before we send\", \"is this actually complete\", \"agent says it's done, check\", after multi-agent runs, or before consequential deliverables. Do NOT use to score 0-10 (jail-rate), rate a skill directory (jail-rate-skill), or red-team a forming plan (jail-red-team)."
+  }
+ ],
+ "queries": [
+  {
+   "id": "wave2-trigger-evals.json::wn5",
+   "prompt": "Score my business idea 0 to 10, be honest."
+  }
+ ]
+}

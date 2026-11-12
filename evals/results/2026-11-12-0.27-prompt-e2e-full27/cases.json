@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] lists exactly five cost drivers, each with its dollar amount matching the P&L",
+        "[O] the five are the largest lines on the basis it states: operating expenses only (Payroll - Technicians 198,500; Payroll - Office 71,200; Payroll Taxes & Benefits 49,800; Rent 42,000; Vehicle Fuel 38,900) or all costs including COGS - Equipment 231,900; or it groups lines and shows the grouping math",
+        "[O] treats Cost of Goods Sold separately from operating expenses (or states how it handled it)",
+        "[O] notes the business has a net operating loss (-55,500)",
+        "[O] gives each driver a short business meaning or question for the owner",
+        "[O] invents no numbers that are not in the P&L or derived from it with the math shown"
+      ],
+      "id": "jp-e2e-1",
+      "prompt": "Pull the five biggest cost drivers out of this P&L for a client meeting with the owner on Thursday.\n\n<input>\nAccount,Amount\nSales - Installation,612400\nSales - Service Plans,188300\nTotal Income,800700\nCOGS - Equipment,231900\nCOGS - Subcontractors,64800\nTotal COGS,296700\nGross Profit,504000\nPayroll - Technicians,198500\nPayroll - Office,71200\nPayroll Taxes & Benefits,49800\nVehicle Fuel,38900\nVehicle Lease,33600\nVehicle Repairs,14200\nRent,42000\nInsurance - General Liability,21700\nInsurance - Workers Comp,18400\nMarketing - Google Ads,26300\nMarketing - Print,4100\nSoftware Subscriptions,9800\nUtilities,7300\nOffice Supplies,3900\nProfessional Fees,8600\nBank & Card Fees,11200\nTotal Expenses,559500\nNet Operating Income,-55500\n</input>",
+      "skill": "jail-prompt-e2e"
+    },
+    {
+      "assertions": [
+        "[O] identifies late or unpredictable arrival / no notice as the most frequent complaint (raised by 3 of 4)",
+        "[O] identifies inconsistent team (different cleaners each visit) as a complaint",
+        "[O] each complaint listed carries at least one direct quote taken word for word from the notes",
+        "[O] shows how many interviews raised each complaint",
+        "[O] does not present one-off issues (double billing, bathroom spots) as widespread",
+        "[O] ends with which complaint to fix first and why"
+      ],
+      "id": "jp-e2e-2",
+      "prompt": "From these customer interview notes, give me the top complaints, with quotes, so I can decide what to fix first.\n\n<input>\nInterview 1 (Dana, weekly client 2 yrs): Cleaners are great but arrival window is a mess. \"They said 9 to 11 and showed up at 1:40.\" Has to text the office to find out. Billing fine.\nInterview 2 (Marcus, biweekly 8 months): Missed spots in bathrooms twice. \"I'm paying for a deep clean and the shower glass still had spots.\" Arrival times also vary. Would pay more for same team every time.\nInterview 3 (Priya, monthly 3 months): New team every visit. \"I have to explain the alarm code and the dog every single time.\" Likes the online booking.\nInterview 4 (Tom, weekly 1 yr): \"Nobody tells me when they're running late.\" Was double-charged once in March, refunded after two calls. Happy with quality.\n</input>",
+      "skill": "jail-prompt-e2e"
+    },
+    {
+      "assertions": [
+        "[O] under 150 words in the body",
+        "[O] references at least one specific fact about Harbor Point (e.g. callback-delay reviews, hiring, truck count) accurately",
+        "[O] does not invent facts, results, or numbers beyond the inputs",
+        "[O] has one clear, low-effort call to action (e.g. a short call)",
+        "[O] includes a subject line"
+      ],
+      "id": "jp-e2e-3",
+      "prompt": "Write a cold email to this HVAC company owner offering my business-diagnostic consulting. Keep it short.\n\n<input>\nProspect: Harbor Point Heating & Air, Patchogue NY. Owner: Rick Valente (founded 2004). ~14 trucks. Google reviews 4.3 (212 reviews); several recent reviews mention long waits for a callback. Hiring 2 technicians per their website.\nMe: Jonathan, Fuller Horizons. Offer: a 2-week Alignment Audit for owner-run service businesses: dispatch/callback process, pricing, and hiring. Fixed fee. One past result I can cite: a 9-truck plumbing company cut callback time from next-day to same-day.\n</input>",
+      "skill": "jail-prompt-e2e"
+    },
+    {
+      "assertions": [
+        "[O] computes a cost over a common period for both quotes with the arithmetic shown or checkable",
+        "[O] includes call recording in Quote B's cost since the user wants it",
+        "[O] includes the desk phone costs for both quotes (A purchase 11 x 189 = 2,079; B rental 11 x 6/month)",
+        "[O] weighs the 36-month contract against the possible move in ~18 months (termination risk)",
+        "[O] makes one clear recommendation with the condition that would change it"
+      ],
+      "id": "jp-e2e-4",
+      "prompt": "Compare these two quotes for a new phone system and tell me which to pick for my 11-person office.\n\n<input>\nQuote A (VoiceLine Pro): $27/user/month, 11 users, 36-month contract, $0 setup, desk phones $189 each (11 needed), call recording included, 2 auto-attendants, early termination: remaining months due.\nQuote B (OfficeRing): $34/user/month, 11 users, month-to-month, $450 one-time setup, desk phones included as rental at $6/phone/month, call recording +$4/user/month, unlimited auto-attendants, no termination fee.\nWe want call recording. We may move offices in about 18 months.\n</input>",
+      "skill": "jail-prompt-e2e"
+    }
+  ]
+}

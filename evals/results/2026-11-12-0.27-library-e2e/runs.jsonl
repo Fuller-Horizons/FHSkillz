@@ -1,0 +1,16 @@
+{"case": "jp-e2e-1", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-1__sonnet__new", "label": "B", "cost": 0.05163, "is_error": false}
+{"case": "jp-e2e-1", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "old", "run_id": "jp-e2e-1__sonnet__old", "label": "A", "cost": 0.04267, "is_error": false}
+{"case": "jp-e2e-1", "skill": "jail-prompt-e2e", "model": "haiku", "version": "old", "run_id": "jp-e2e-1__haiku__old", "label": "A", "cost": 0.00275, "is_error": false}
+{"case": "jp-e2e-1", "skill": "jail-prompt-e2e", "model": "haiku", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-1__haiku__new", "label": "B", "cost": 0.00384, "is_error": false}
+{"case": "jp-e2e-2", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "old", "run_id": "jp-e2e-2__sonnet__old", "label": "A", "cost": 0.03425, "is_error": false}
+{"case": "jp-e2e-2", "skill": "jail-prompt-e2e", "model": "haiku", "version": "old", "run_id": "jp-e2e-2__haiku__old", "label": "A", "cost": 0.00221, "is_error": false}
+{"case": "jp-e2e-2", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-2__sonnet__new", "label": "B", "cost": 0.05784, "is_error": false}
+{"case": "jp-e2e-3", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "old", "run_id": "jp-e2e-3__sonnet__old", "label": "B", "cost": 0.03051, "is_error": false}
+{"case": "jp-e2e-2", "skill": "jail-prompt-e2e", "model": "haiku", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-2__haiku__new", "label": "B", "cost": 0.00398, "is_error": false}
+{"case": "jp-e2e-3", "skill": "jail-prompt-e2e", "model": "haiku", "version": "old", "run_id": "jp-e2e-3__haiku__old", "label": "B", "cost": 0.0018, "is_error": false}
+{"case": "jp-e2e-3", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-3__sonnet__new", "label": "A", "cost": 0.04933, "is_error": false}
+{"case": "jp-e2e-3", "skill": "jail-prompt-e2e", "model": "haiku", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-3__haiku__new", "label": "A", "cost": 0.0032, "is_error": false}
+{"case": "jp-e2e-4", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "old", "run_id": "jp-e2e-4__sonnet__old", "label": "A", "cost": 0.04126, "is_error": false}
+{"case": "jp-e2e-4", "skill": "jail-prompt-e2e", "model": "sonnet", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-4__sonnet__new", "label": "B", "cost": 0.04812, "is_error": false}
+{"case": "jp-e2e-4", "skill": "jail-prompt-e2e", "model": "haiku", "version": "old", "run_id": "jp-e2e-4__haiku__old", "label": "A", "cost": 0.00302, "is_error": false}
+{"case": "jp-e2e-4", "skill": "jail-prompt-e2e", "model": "haiku", "version": "new", "prompt_extracted": true, "run_id": "jp-e2e-4__haiku__new", "label": "B", "cost": 0.00445, "is_error": false}

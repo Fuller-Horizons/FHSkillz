@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.3.0 — 2026-11-12
+- Quick one-line answer (score, why, strongest evidence, top fix) is the default for plain "rate this" asks; the full scorecard on request or when stakes are stated. Untested.
+
 ## 2.2.0 — 2026-11-12
 
 - Core diet: SKILL.md cut from 171 to 140 lines; output template moved to `references/output-format.md`, people rules to `references/people-boundaries.md` (4-line summary stays inline).

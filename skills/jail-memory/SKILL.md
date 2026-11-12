@@ -1,10 +1,10 @@
 ---
 name: jail-memory
 metadata:
-  version: 1.4.0
+  version: 1.5.0
 description: >-
-  Govern what enters, stays in, and leaves durable memory or organizational
-  knowledge — provenance-checked, deduplicated, classified, superseded-not-
+  Govern project decision logs, verdict ledgers and lessons: what enters,
+  stays in, and leaves durable project knowledge — provenance-checked, deduplicated, classified, superseded-not-
   deleted — and run the LEARNING POSTMORTEM ritual that turns finished work
   into stored lessons. Implemented as a MARKDOWN MEMORY SYSTEM: a MEMORY.md
   index plus one dated, provenance-headed .md file per entry, written to the
@@ -18,6 +18,10 @@ description: >-
 ---
 
 # JAIL-MEMORY
+
+**Scope:** decision logs, spike/verdict ledgers, and project lessons kept as
+files in the workspace. Personal facts and preferences belong to the app's
+built-in memory; don't duplicate them here.
 
 Memory is leverage only when it's true, current, and findable. Stale or
 duplicated memory actively distorts future work — governing what does NOT

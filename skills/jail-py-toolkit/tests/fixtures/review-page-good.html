@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTOTYPE — wipe me · Weekly scorecard layouts</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5b6470; --line:#d9dee5; --accent:#1f4e79; --good:#2e7d32; --warn:#b26a00; --bad:#b3261e; }
+  html, body { background:#ffffff; color:var(--ink); margin:0; }
+  body { font:16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding:16px; max-width:880px; margin:0 auto; }
+  .banner { background:#fff4e5; border:1px solid #f0c27a; padding:8px 12px; border-radius:6px; font-size:14px; }
+  h1 { font-size:20px; margin:16px 0 4px; } .q { color:var(--muted); margin:0 0 12px; }
+  .switch { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
+  .switch button { border:1px solid var(--line); background:#fff; color:var(--ink); padding:8px 14px; border-radius:6px; cursor:pointer; font:inherit; }
+  .switch button[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+  [data-variant] { display:none; border:1px solid var(--line); border-radius:8px; padding:16px; }
+  [data-variant].on { display:block; }
+  .pt { position:relative; } .pt::before { content:"#" attr(data-review-id); position:absolute; top:-10px; right:-6px; font-size:11px; background:var(--accent); color:#fff; border-radius:10px; padding:1px 6px; }
+  .row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); gap:12px; }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:12px 0; }
+  .tile { border:1px solid var(--line); border-radius:8px; padding:12px; } .big { font-size:28px; font-weight:700; }
+  .small { color:var(--muted); font-size:14px; } table { width:100%; border-collapse:collapse; font-size:14px; }
+  td { padding:6px 0; border-bottom:1px solid var(--line); } td:last-child { text-align:right; }
+  fieldset { border:1px solid var(--line); border-radius:8px; margin:16px 0; padding:12px; } legend { font-weight:600; }
+  textarea { width:100%; box-sizing:border-box; min-height:64px; font:inherit; }
+  .copy { background:var(--accent); color:#fff; border:0; padding:10px 16px; border-radius:6px; font:inherit; cursor:pointer; }
+  pre { white-space:pre-wrap; background:#f5f7fa; padding:8px; border-radius:6px; }
+  footer { color:var(--muted); font-size:13px; margin-top:16px; }
+</style>
+</head>
+<body>
+<p class="banner">PROTOTYPE — wipe me. Sample data only. Revision r1.</p>
+<h1>Which weekly scorecard layout lets an owner see what needs attention in 30 seconds?</h1>
+<p class="q">Shape: look · Timebox: 1 session (1 extension declared) · Pick one variant below, answer the questions, press <b>Copy my answers</b>, paste into the chat.</p>
+
+<div class="switch" data-variant-switch>
+  <button type="button" data-show="A" aria-pressed="true">A · Traffic-light list</button>
+  <button type="button" data-show="B" aria-pressed="false">B · Headline + 3 tiles</button>
+  <button type="button" data-show="C" aria-pressed="false">C · Six-week trends</button>
+</div>
+
+<section data-variant="A" class="on" aria-label="Variant A">
+  <div class="pt" data-review-id="1"><b>Week of Nov 2 · Harbor Point Heating &amp; Air (sample)</b></div>
+  <div class="pt" data-review-id="2">
+    <div class="row"><span><span class="dot" style="background:var(--warn)"></span>Revenue</span><span>$48,200 of $52,000 target</span></div>
+    <div class="row"><span><span class="dot" style="background:var(--bad)"></span>Callbacks within 2 hours</span><span>72% (target 90%)</span></div>
+    <div class="row"><span><span class="dot" style="background:var(--bad)"></span>Overdue invoices</span><span>$11,300</span></div>
+    <div class="row"><span><span class="dot" style="background:var(--good)"></span>Jobs completed</span><span>61</span></div>
+    <div class="row"><span><span class="dot" style="background:var(--good)"></span>Close rate</span><span>41%</span></div>
+  </div>
+</section>
+
+<section data-variant="B" aria-label="Variant B">
+  <p class="pt" data-review-id="3"><b>This week: revenue is 7% under target because callbacks slipped to 72%; $11,300 is overdue.</b></p>
+  <div class="tiles pt" data-review-id="4">
+    <div class="tile"><div class="small">Revenue vs target</div><div class="big">−7%</div><div class="small">$48,200 / $52,000</div></div>
+    <div class="tile"><div class="small">Callbacks in 2 h</div><div class="big">72%</div><div class="small">target 90%</div></div>
+    <div class="tile"><div class="small">Overdue invoices</div><div class="big">$11.3k</div><div class="small">oldest 41 days</div></div>
+  </div>
+  <table class="pt" data-review-id="5"><tr><td>Jobs completed</td><td>61</td></tr><tr><td>Average ticket</td><td>$790</td></tr><tr><td>New inquiries</td><td>34</td></tr><tr><td>Close rate</td><td>41%</td></tr></table>
+</section>
+
+<section data-variant="C" aria-label="Variant C">
+  <div class="pt" data-review-id="6">
+    <div class="row"><span>Revenue ($k)</span><svg width="140" height="28" viewBox="0 0 140 28" aria-label="trend falling"><polyline fill="none" stroke="#1f4e79" stroke-width="2" points="0,8 28,6 56,10 84,12 112,16 140,18"/></svg><span>48.2</span></div>
+    <div class="row"><span>Callbacks in 2 h (%)</span><svg width="140" height="28" viewBox="0 0 140 28" aria-label="trend falling"><polyline fill="none" stroke="#b3261e" stroke-width="2" points="0,4 28,5 56,8 84,12 112,18 140,22"/></svg><span>72</span></div>
+    <div class="row"><span>Overdue ($k)</span><svg width="140" height="28" viewBox="0 0 140 28" aria-label="trend rising"><polyline fill="none" stroke="#b3261e" stroke-width="2" points="0,22 28,20 56,18 84,14 112,10 140,6"/></svg><span>11.3</span></div>
+  </div>
+  <p class="small pt" data-review-id="7">Lines show the last six weeks; red = moving the wrong way.</p>
+</section>
+
+<fieldset>
+  <legend>Your answers</legend>
+  <p data-question="pick">Which variant shows what needs attention fastest?<br>
+    <label><input type="radio" name="pick" value="A"> A</label>
+    <label><input type="radio" name="pick" value="B"> B</label>
+    <label><input type="radio" name="pick" value="C"> C</label>
+    <label><input type="radio" name="pick" value="none"> None of them</label></p>
+  <p data-question="first-read">What did you read first?<br><input type="text" name="first-read" style="width:100%"></p>
+  <p data-question="notes">Notes by point number (e.g. "#3 too long"):<br><textarea name="notes"></textarea></p>
+  <button type="button" class="copy" data-copy-feedback>Copy my answers</button>
+  <pre id="out" hidden></pre>
+</fieldset>
+
+<footer>Design direction: plain owner-report style (white page, one accent colour, system fonts), chosen because no client brand files were provided. Inline only; no outside requests.</footer>
+
+<script type="application/json" data-revisions>[{"id":"r1","summary":"First round: three layouts for the weekly scorecard question"}]</script>
+<script>
+  const show = v => {
+    document.querySelectorAll('[data-variant]').forEach(s => s.classList.toggle('on', s.dataset.variant === v));
+    document.querySelectorAll('[data-show]').forEach(b => b.setAttribute('aria-pressed', b.dataset.show === v));
+    // Deep link only where the host allows it; sandboxed previews (Claude app, srcdoc frames) block history.
+    try { if (location.protocol !== 'about:') history.replaceState(null, '', '#variant-' + v); } catch (e) { /* not allowed here */ }
+  };
+  document.querySelectorAll('[data-show]').forEach(b => b.addEventListener('click', () => show(b.dataset.show)));
+  let h = null; try { h = location.hash.match(/^#variant-([ABC])$/); } catch (e) { /* no location access */ } if (h) show(h[1]);
+  document.querySelector('[data-copy-feedback]').addEventListener('click', async () => {
+    const pick = (document.querySelector('input[name=pick]:checked') || {}).value || '(none)';
+    const first = document.querySelector('input[name=first-read]').value.trim() || '(blank)';
+    const notes = document.querySelector('textarea[name=notes]').value.trim().replace(/\n+/g, ' · ') || '(none)';
+    const text = `PROTOTYPE FEEDBACK r1 · PICK: ${pick} · READ FIRST: ${first} · NOTES: ${notes}`;
+    const out = document.getElementById('out'); out.textContent = text; out.hidden = false;
+    try { await navigator.clipboard.writeText(text); } catch (e) { /* shown above for manual copy */ }
+  });
+</script>
+</body>
+</html>

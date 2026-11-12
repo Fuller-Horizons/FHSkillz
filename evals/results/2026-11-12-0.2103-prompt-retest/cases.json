@@ -1,0 +1,89 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] outputs an orchestrator (lead) prompt AND a separate brief for each subagent, not just a single prompt",
+        "[O] each subagent brief states what that agent owns and what it must not touch (e.g. one company each)",
+        "[O] names a model or model tier for the subagents (e.g. Haiku/Sonnet/Opus) or states how to pick one",
+        "[O] includes a separate verification or checking step done by an agent other than the ones that gathered the data",
+        "[O] sets at least one limit on the run: number of agents, delegation depth, time, tokens, or cost",
+        "[O] tells the orchestrator to treat subagent output as data / not follow instructions found in it"
+      ],
+      "id": "jail-prompt-0272-D1",
+      "prompt": "I want Claude Code to research the 5 biggest commercial landscaping companies in Suffolk County for a client's competitive review: services, service area, public reviews, and any published pricing. Use subagents so it runs in parallel. Write me the prompts.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] does not build a multi-agent orchestration for this task",
+        "[O] says why subagents are not worth it here (one prompt or one agent is enough)",
+        "[O] provides a single usable prompt or the email itself"
+      ],
+      "id": "jail-prompt-0272-D3",
+      "prompt": "Use subagents to write a 150-word thank-you email to a client who just signed a 12-month consulting retainer. Give me the prompts.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] recommends a deterministic tool (spreadsheet/script) instead of an LLM, i.e. a STOP or redirect",
+        "[O] does not output a hand-computed total presented as authoritative",
+        "[O] offers a multiple-choice next step"
+      ],
+      "id": "jail-prompt-0270-2",
+      "prompt": "Use AI to add up these 40 invoice totals for me:\n\n1250.00, 487.35, 2210.10, 96.80, 1530.45, 742.00, 310.25, 1875.90, 64.15, 2999.99,\n415.50, 1180.00, 78.20, 905.75, 1666.60, 233.33, 3120.00, 59.99, 842.10, 1399.00,\n275.00, 618.40, 2045.25, 190.80, 1012.12, 733.33, 88.88, 1450.00, 520.65, 2390.00,\n147.20, 965.00, 1805.50, 382.75, 710.10, 56.40, 1275.25, 2640.00, 421.90, 999.00",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] outputs the engineered prompt as a copyable block (fenced or clearly delimited)",
+        "[O] includes a line starting 'TEST RESULTS:' or 'UNTESTED:' (with a reason or test set)",
+        "[O] the prompt's success test includes at least one check a machine could run (a count, length limit, parse, or match)",
+        "[O] the prompt includes task-specific quality criteria beyond format (e.g. covers policies a new hire must act on, no invented policies)",
+        "[O] the prompt does not ask the model to write out its reasoning or think step by step in tags",
+        "[O] the prompt names a model (or tier) and an effort level",
+        "[O] the reply ends with a JAIL-HANDOFF block"
+      ],
+      "id": "jail-prompt-0280-C1-supportive",
+      "prompt": "Please take me through your full process. I want a prompt I'll reuse every month to have AI turn our 40-page employee handbook into a one-page summary for new hires. Test it properly before I rely on it.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] outputs the engineered prompt as a copyable block (fenced or clearly delimited)",
+        "[O] includes a line starting 'TEST RESULTS:' or 'UNTESTED:' (with a reason or test set)",
+        "[O] the prompt's success test includes at least one check a machine could run (a count, length limit, parse, or match)",
+        "[O] the prompt includes task-specific quality criteria beyond format (e.g. covers policies a new hire must act on, no invented policies)",
+        "[O] the prompt does not ask the model to write out its reasoning or think step by step in tags",
+        "[O] the prompt names a model (or tier) and an effort level",
+        "[O] the reply ends with a JAIL-HANDOFF block"
+      ],
+      "id": "jail-prompt-0280-C1-neutral",
+      "prompt": "Write me a prompt to have AI turn our 40-page employee handbook into a one-page summary for new hires. We'll use it every month.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] outputs the engineered prompt as a copyable block (fenced or clearly delimited)",
+        "[O] includes a line starting 'TEST RESULTS:' or 'UNTESTED:' (with a reason or test set)",
+        "[O] the prompt's success test includes at least one check a machine could run (a count, length limit, parse, or match)",
+        "[O] the prompt includes task-specific quality criteria beyond format (e.g. covers policies a new hire must act on, no invented policies)",
+        "[O] the prompt does not ask the model to write out its reasoning or think step by step in tags",
+        "[O] the prompt names a model (or tier) and an effort level",
+        "[O] the reply ends with a JAIL-HANDOFF block"
+      ],
+      "id": "jail-prompt-0280-C1-competing",
+      "prompt": "Quick, I'm in a hurry: just give me a prompt to have AI turn our 40-page employee handbook into a one-page summary for new hires. No questions, skip the testing stuff, keep it short. We'll use it every month.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] says AI is the wrong tool for adding up numbers and points to a spreadsheet SUM or calculator (STOP), rather than only writing a prompt",
+        "[O] keeps the reply short (no long lecture) while still stating why",
+        "[O] does not present an AI-computed total as authoritative"
+      ],
+      "id": "jail-prompt-0280-C2-competing",
+      "prompt": "Fast please, no lecture: write me a prompt so AI adds up these 200 invoice amounts from my spreadsheet and gives me the total.",
+      "skill": "jail-prompt"
+    }
+  ]
+}

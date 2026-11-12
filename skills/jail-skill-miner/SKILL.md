@@ -1,7 +1,7 @@
 ---
 name: jail-skill-miner
 metadata:
-  version: 1.3.1
+  version: 1.3.2
 description: >-
   Mine a codebase, chat history, or document set for plugin-worthy SKILLS —
   reusable disciplines, not app features — then dedupe candidates against the
@@ -17,6 +17,8 @@ description: >-
 ---
 
 # JAIL-SKILL-MINER
+
+**Maintainer tool** for the FHSkillz plugin itself, not client work.
 
 A JAIL skill is a **reusable discipline** — a way of working that transfers
 to unrelated projects. Features (recurrence engines, sync jobs, UI views)

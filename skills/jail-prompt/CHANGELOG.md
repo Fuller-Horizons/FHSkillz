@@ -2,6 +2,26 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.12.0 — 2026-11-12
+- Layered grading for prompt tests (idea from JEV / jevals, Openlayer, Sept 2026; no code or model adopted): code checks first, then one cheap typed call per output (pass/fail + confidence + note per check), then a strong grader for failures, anything under 0.9 confidence, and math/logic/tone checks; cut-off calibrated on the first test. Cuts grading tokens on Full-lane tests.
+- Agent prompts get three standard QUALITY BAR lines: grounded, in scope, injection-proof.
+- Untested.
+
+## 2.11.0 — 2026-11-12
+- Core cut about 30% (1,748 → 1,223 words), same rules. Model by lane: Full lane and delegation sets on Opus 5.5 medium; Instant and Lite on Sonnet 5.5 medium (about a tenth of the cost). The frontmatter no longer pins Opus, so the session's model runs it; effort stays medium. Untested.
+
+## 2.10.4 — 2026-11-12
+- The JAIL-HANDOFF block is the last thing in the reply (one 2.10.3 retest output added a sentence after it). Wording only; untested.
+
+## 2.10.3 — 2026-11-12
+- Fix from the compliance test: asked for "the full process" and a proper test, both 2.7.0 and 2.10.1 replied with intake questions only, no prompt. Full-lane questions now ride alongside a v1 prompt built on stated defaults, never instead of one.
+
+## 2.10.2 — 2026-11-12
+- Fix from the 2.10.1 retest: the thank-you-email case (subagents requested for a one-pass task) turned into a full STOP with questions and no prompt. Now: when only the method fails the gate, say so in one line and deliver the right prompt in the same reply on stated defaults; the lettered choice is only for a whole-task STOP. Lane card: Full is for reused / at-volume / client-decision work; a short one-off client note is Lite; proceed on stated defaults instead of waiting.
+
+## 2.10.1 — 2026-11-12
+- Fixes from the blind old-vs-new test (2.1.0 vs 2.10.0, Opus 5.5): (1) the prompt must appear in the reply itself, never only in a saved file; a delegation set shows the lead prompt and every brief (or the lead prompt, one full brief, and each other brief's scope and model). In the test, 2.10.0 wrote a strong delegation set to `prompts.md` and showed only a summary. (2) A STOP ends with a lettered choice (non-AI tool / reframe / proceed with caveats / drop); 2.10.0 dropped it.
+
 ## 2.10.0 — 2026-11-12
 - **References merged 20 → 14 files**: `writing.md` (skeleton + Claude style), `models.md` (models + run settings + model choice), `evidence.md` (sources + claim labels), `testing.md` (testing + prompt library), `antipatterns.md` (+ gotchas). Links updated across the skill, jail-py-toolkit (truth-lint), jail-rate (evidence-standards), evals.json, and the Project's prompt library doc. Validation's link check passes.
 - **Lane card**: one table in the core showing exactly what Instant / Lite / Full do for questions, gate, prompt shape, testing and the test line; anything reused, at volume or client-facing is Full; the test line is never skipped, even under time pressure.

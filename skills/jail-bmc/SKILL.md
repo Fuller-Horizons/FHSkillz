@@ -1,14 +1,17 @@
 ---
 name: jail-bmc
 metadata:
-  version: 1.4.0
+  version: 1.5.0
 description: >-
-  Build or evaluate a nine-block Business Model Canvas: "business model
-  canvas", "BMC", "map the business model", pressure-test how a venture or
-  product idea makes money. Marks every element validated vs hypothesis,
-  checks unit economics (CAC, LTV, payback), ranks the riskiest assumptions
-  with tests. Do NOT use for SWOT/PESTLE or macro scans (jail-strategy),
-  0-10 scoring (jail-rate), or entity/legal-structure questions.
+  Build or evaluate a nine-block Business Model Canvas (customer segments,
+  value propositions, channels, customer relationships, revenue streams, key
+  resources, key activities, key partnerships, cost structure) using
+  evidence — every material element marked validated vs hypothesis, with the
+  riskiest assumptions and the experiments to test them. Use when asked for
+  a "business model canvas", "BMC", "map the business model", evaluating a
+  venture/product idea's model, or pressure-testing how a business makes
+  money. Do NOT use for macro scans or competitive
+  self-assessment (jail-strategy), or entity/legal-structure questions.
 ---
 
 # JAIL-BMC
@@ -17,12 +20,11 @@ A canvas full of hopes is brainstorming with borders. This skill's contract:
 **validated information and hypotheses never wear the same clothes**, and
 the riskiest assumption leaves with an experiment attached.
 
-**Label mapping (declared once).** This skill keeps two domain labels:
-**VALIDATED** = a Fact-backed element (it carries a checkable evidence
-ref); **HYPOTHESIS** = an Assumption (it goes in the handoff
-`assumptions:` list). Any prose claim outside the canvas table uses the
-canonical labels: Fact · User-provided · Inference · Estimate · Judgment ·
-Unknown.
+**Wrong-lane check first.** Asked for a SWOT, TOWS, PESTLE, five forces or
+competitor scan? Say in one line that it's **jail-strategy**'s job and hand
+off by name, or (if unavailable) write it now in that shape from what was
+given; questions come after. Never force a canvas or reply with questions
+only.
 
 ## Chain
 1. **jail-task-contract** — pin the venture/product, its stage (idea vs
@@ -35,11 +37,14 @@ Unknown.
    cite-or-label per the constitution.)*
 3. **Populate the nine blocks.** Every material element carries:
    statement · **VALIDATED** (evidence ref: real transactions, signed
-   customers, measured data) **or else HYPOTHESIS** (assumption label +
+   customers, measured data) **or HYPOTHESIS** (assumption label +
    evidence strength: none/weak/comparable-based) · confidence.
    **Fail closed:** VALIDATED needs a checkable evidence ref (dated
    citation, transaction, signed commitment) or it defaults to
-   HYPOTHESIS; step 4 may not start until every element is labeled.
+   HYPOTHESIS. An operating owner's own current figures (customers, prices,
+   costs, volumes) are VALIDATED with ref `User-provided: owner, <date>` and a
+   spot-check note; forecasts and plans stay HYPOTHESIS. Step 4 may not start
+   until every element is labeled.
    **Fixed schema**, blocks always in this order (customer segments,
    value propositions, channels, customer relationships, revenue
    streams, key resources, key activities, key partnerships, cost
@@ -52,13 +57,7 @@ Unknown.
      the payer into its own segment.
    - **Unit-economic dependency:** revenue per customer vs cost to acquire
      + serve — name the numbers or name the hypothesis. A model whose
-     economics only work at unstated scale says so. Fill the worksheet in
-     [references/unit-economics.md](references/unit-economics.md): CAC by
-     channel, margin, churn, lifetime, LTV, LTV:CAC, payback, contribution
-     margin; every input labeled VALIDATED (evidence ref) or HYPOTHESIS.
-     *(Fallback: if the reference is unavailable, compute CAC = spend ÷ new
-     customers; margin = price − cost to serve; lifetime = 1 ÷ monthly
-     churn; LTV = margin × lifetime; payback = CAC ÷ margin.)*
+     economics only work at unstated scale says so.
    - Key activities/resources ↔ value proposition: the thing you must be
      good at is listed, and it's evidenced or flagged.
    Contradictions between blocks are findings, not footnotes.
@@ -98,19 +97,6 @@ inconsistencies found → unit-economic dependencies → top risky assumptions
 with their experiments and sequence → customer validation questions →
 strategic implications + next actions. Sources appendix. JAIL-HANDOFF.
 
-**Visual canvas (optional).** If an artifact, HTML, or Design tool is
-available, render the nine blocks as a one-page grid in the standard BMC
-layout with V/H badges, following
-[references/canvas-render.md](references/canvas-render.md). Otherwise use
-the fixed table from step 3. Same content either way.
-
-## Delivery
-When the canvas goes to a client, render it as a clean document (docx
-skill or a Docs artifact when available; otherwise clean Markdown).
-Plain 9th-grade English, short sentences, few or no analogies. Keep the
-V/H labels and the canonical claim labels. No YAML in the client copy;
-the JAIL-HANDOFF stays in the chat or working copy.
-
 ## SUCCESS-TEST (run before shipping)
 Gates the JAIL-HANDOFF; a fail sends it back to the failing step, not out
 the door.
@@ -119,10 +105,7 @@ the door.
 - Top 3–5 assumptions carry a jail-lab-spec experiment, cheapest-first.
 - No VALIDATED element lacks a checkable evidence ref.
 
-Worked examples: [references/worked-canvas.md](references/worked-canvas.md)
-(operating business) and
-[references/example-pool-subscription.md](references/example-pool-subscription.md)
-(pre-revenue, full run with JAIL-HANDOFF).
+Worked canvas: `references/worked-canvas.md`.
 
 ## Gotchas
 - **Invented validation.** "Customers love it" pre-revenue. VALIDATED means
@@ -131,7 +114,7 @@ Worked examples: [references/worked-canvas.md](references/worked-canvas.md)
   segment, it's a hedge. Segments are specific enough to name a channel.
 - **Coherence skipped.** Nine beautiful blocks that contradict each other —
   step 4 is where canvases earn their keep.
-- **Ranking dodged.** Ten assumptions listed flat. The top-3
+- **Assumption ranking dodged.** Ten assumptions listed flat. The top-3
   ranking + experiments is the deliverable investors actually use.
 - **Costless models.** Cost structure as an afterthought while revenue gets
   three colors. Unit economics or hypothesis-labeled — both sides.

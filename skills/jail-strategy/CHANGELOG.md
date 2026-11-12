@@ -1,5 +1,8 @@
 # Changelog — jail-strategy-scan
 
+## 1.3.1 — 2026-11-12
+- Every rate, fee or market number, including those in worked examples, needs a source or an Estimate / "my assumption" label (blind test: an unsourced card-fee rate and a "32% effective commission" example). Untested.
+
 ## 1.3.0 — 2026-11-12 (plugin 0.27.0)
 
 - New COMPETITIVE lane: tiered competitor set (Direct / Adjacent / Aspirational with inclusion reasons), Five Forces rated High/Medium/Low only from evidence (2+ items per force, else Unknown with what was searched), profile cards with a source per score, asserted-vs-proven tags, and no blended composite. Detail in `references/competitive-lane.md`. Pattern adapted from ECC (MIT).

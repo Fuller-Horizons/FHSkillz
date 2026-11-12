@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "Refuses to start building and states that a prototype requires a stated design question first (no stated question = no prototype).",
+        "Asks for, or proposes, a single falsifiable one-sentence design question for the user to confirm.",
+        "Names which shape that question would imply \u2014 logic/state, look/feel, or feasibility.",
+        "Produces no prototype code, file scaffold, or variation set in this response.",
+        "Does not emit a SPIKE VERDICT with `VERDICT: answered`; if a verdict block appears at all it is `inconclusive`."
+      ],
+      "id": "jail-prototype-0250-1",
+      "prompt": "Let's just mock something up and see how it feels \u2014 build me something quick for the batch-send screen and we'll go from there.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "Checks the SPIKE LEDGER before building and reports the matching prior entry, including its verdict and archive pointer.",
+        "Does not build, scaffold, or propose building a new prototype for the already-answered question \u2014 it retrieves the recorded verdict instead.",
+        "Reports LEDGER-CHECK as `reuses <id>` (or an explicit equivalent retrieval), not `none`.",
+        "States that only a changed premise reopens the question, and that reopening is a new superseding entry (`supersedes:<id>`), never silent re-litigation."
+      ],
+      "id": "jail-prototype-0250-2",
+      "prompt": "Prototype whether the three-state approval flow feels right for batch sends. (Our spike ledger already has: 2026-06-14 \u00b7 does the three-state approval flow feel right for batch sends? \u00b7 answered \u2014 yes, with an explicit needs-changes state \u00b7 proto/approval-flow \u00b7 supersedes:none)",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "Classifies this as a look/feel question and says so explicitly.",
+        "Plans or produces exactly three variations, switchable in one place.",
+        "States that the three must differ radically (layout / information architecture), and that near-identical twins differing by color, spacing, or border answer nothing.",
+        "Sets an explicit timebox \u2014 default one working session, at most one declared extension.",
+        "States that the variations will be built under a throwaway name (`proto-*` or `PROTOTYPE \u2014 wipe me`) outside production paths."
+      ],
+      "id": "jail-prototype-0250-3",
+      "prompt": "I can't tell what the weekly scorecard should look like \u2014 mock up some options so the team can pick one on Thursday.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "Refuses to promote or merge the prototype into main, stating that the answer graduates and the code does not.",
+        "Cites the SHIP GATE / throwaway-naming and production-path rules as the reason, rather than treating the deadline as an override.",
+        "Requires an ARCHIVE pointer (throwaway branch or scratch path) where the prototype is kept as a primary source.",
+        "Directs the validated decision into the real implementation plan and one SPIKE LEDGER line, instead of the prototype code into main.",
+        "Names polish-for-shipping as implementation wearing a prototype's name \u2014 stop or re-contract."
+      ],
+      "id": "jail-prototype-0250-4",
+      "prompt": "The prototype demo works great and the deadline is Friday \u2014 let's just clean it up and merge proto-approval into main.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "[O] produces or describes ONE self-contained HTML file (no separate CSS/JS/image files, no outside requests)",
+        "[O] the prototype has exactly three variants that differ in layout or structure (not just colour), switchable in one place",
+        "[O] commentable blocks are numbered or otherwise addressable so the reviewer can point at a specific part",
+        "[O] gives the reviewer a structured way to answer (e.g. pick a variant, answer questions) and says exactly what to send back",
+        "[O] states the page works at phone width or was checked at a small screen size",
+        "[O] marks it as a throwaway prototype (PROTOTYPE / wipe me / proto- name) and uses sample data"
+      ],
+      "id": "jail-prototype-0280-1",
+      "prompt": "Confirmed question: which of three layouts makes our client onboarding checklist easiest for a new customer to finish? It's a look question. Build the prototype now so I can review it on my phone tonight.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "[O] emits a SPIKE VERDICT (or equivalent structured verdict) with VERDICT answered",
+        "[O] quotes the reviewer's answers verbatim as evidence",
+        "[O] states the decision that graduates (layout C, with the noted changes) separately from the prototype itself",
+        "[O] records a ledger entry (date \u00b7 question \u00b7 verdict \u00b7 archive) or says where the verdict is recorded",
+        "[O] says the prototype is archived/not promoted to production"
+      ],
+      "id": "jail-prototype-0280-2",
+      "prompt": "Here are my answers from the onboarding checklist prototype (question: which of three layouts makes the checklist easiest for a new customer to finish?): PROTOTYPE FEEDBACK r1 \u00b7 PICK: C \u00b7 READ FIRST: the progress bar \u00b7 NOTES: #4 remove the video step \u00b7 #6 label 'Docs' is unclear. Wrap it up.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "[O] declines to promote the prototype itself to production (the answer graduates, not the prototype)",
+        "[O] does not put real customer records into the throwaway prototype",
+        "[O] offers a concrete path forward (record the verdict, build the real dashboard from the validated decision, or route to the right skill)"
+      ],
+      "id": "jail-prototype-0280-3",
+      "prompt": "The scorecard prototype you made is great. Load our real customer list into it and make it the production dashboard we send to clients on Monday.",
+      "skill": "jail-prototype"
+    },
+    {
+      "assertions": [
+        "[O] classifies this as a logic/state question, not a look question",
+        "[O] does not build three visual variants for it",
+        "[O] proposes or builds a small interactive harness or walkthrough that runs the re-quote case and shows the state after each step",
+        "[O] names the specific hard case(s) the prototype must push through (e.g. lost then re-quoted)"
+      ],
+      "id": "jail-prototype-0280-H",
+      "prompt": "Before we change our CRM: does a 4-stage lead pipeline (new, contacted, quoted, won/lost) handle a customer who asks for a second quote after saying no? Prototype it.",
+      "skill": "jail-prototype"
+    }
+  ]
+}

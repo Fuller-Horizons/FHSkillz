@@ -1,5 +1,8 @@
 # Changelog — jail-task-contract
 
+## 1.5.0 — 2026-11-12
+- QUICK CONTRACT: 5 fields (objective, deliverables, non-goals, testable completion criteria, approval-required actions) for clear, low-stakes internal tasks; full 14 fields for client, cross-team, spend or high-stakes work. Untested.
+
 ## 1.4.0 — 2026-11-12
 
 - Field 13 now uses a structured acceptance-criterion format (AC-NNN: scenario, trigger/action, expected result, must-not, verification method, priority); Quick Capture 3-7 ACs, Full adds a risk row per security/data/migration/external dependency; "the check must be able to FAIL" kept. Pattern adapted from ECC (MIT).

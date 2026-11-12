@@ -1,5 +1,8 @@
 # Changelog — jail-decide
 
+## 1.4.0 — 2026-11-12
+- Quick lane: one-line pick + top reason + flip condition is the default for simple, low-stakes choices; the full package on request or when stakes are stated. Untested.
+
 ## 1.3.0 — 2026-11-12
 
 - Description shortened from 854 to under 450 characters, router style; kept the "build vs buy", "which should we pick", "run the numbers ... pick one" and "cheaper over N years" triggers and the three Do NOT use clauses.

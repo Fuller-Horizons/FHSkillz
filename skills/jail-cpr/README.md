@@ -2,7 +2,7 @@
 
 This skill turns a meeting idea into an agenda that must produce something, a personal or team commitment into a dated Results contract with no meeting at all, or a transcript/check-in into a scored record of what actually got decided.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.6.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.6.2.
 
 ## What it does
 

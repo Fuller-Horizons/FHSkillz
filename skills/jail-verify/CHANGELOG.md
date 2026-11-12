@@ -1,5 +1,9 @@
 # Changelog — jail-verify
 
+## 1.4.0 — 2026-11-12
+- New verdict UNVERIFIED when the main claim's own proof is missing (blind test: "migration finished, 1,200 records" came back PASS-WITH-FLAGS).
+- A fail needs an observed defect; unlabeled inferences, unconfirmable claims and wording issues are flags (blind test: a correct sales summary with one overreaching sentence came back FAIL on both models).
+
 ## 1.3.0 — 2026-11-12
 
 - New `references/deliverable-checks.md`: per-type check lists (financial model, deck, report/memo, plan/workflow, research packet, code change); SKILL.md says to pick the matching list and name it.

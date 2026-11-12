@@ -1,0 +1,16 @@
+{"case": "jp-e2e-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, false, false], "notes": "No per-driver meaning for each of five; payroll tax stated as 33% of base payroll, wrong (18.5%), payroll base misstated."}
+{"case": "jp-e2e-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, false, false], "notes": "Drivers lack individual meanings; vague 6-7% cut claim not derived from shown math."}
+{"case": "jp-e2e-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, false, true, true, true], "notes": "Billing complaint has no quote."}
+{"case": "jp-e2e-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "Invents email address and prioritized fix list deliverable."}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, false, true, true], "notes": "Says twenty years (founded 2004) and invents owner holding dispatch together."}
+{"case": "jp-e2e-4", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}
+{"case": "jp-e2e-4", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true], "notes": ""}

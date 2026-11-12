@@ -183,7 +183,8 @@ def execute_one(job, args, key, lock, done_ids):
             "--setting-sources", "project",
             "--plugin-dir", os.path.abspath(job["dir"]),
             "--output-format", "stream-json", "--verbose",
-            "--allowedTools", args.allowed_tools]
+            "--allowedTools", args.allowed_tools,
+            *(["--disallowedTools", args.disallowed_tools] if getattr(args, "disallowed_tools", "") else [])]
         ws = tempfile.mkdtemp(prefix="fhlive-")
         out_text = ""
         try:
@@ -445,6 +446,8 @@ def main(argv=None):
     r.add_argument("--max-cases-per-skill", type=int, default=None)
     r.add_argument("--skills", default=None, help="comma list filter")
     r.add_argument("--allowed-tools", default="Skill,Read,Glob,Grep,WebSearch,WebFetch")
+    r.add_argument("--disallowed-tools", default="Projects",
+                   help="tools the run may not use; default blocks the session's Project docs so runs can't read live ledgers or libraries")
     r.add_argument("--timeout", type=int, default=600)
     r.add_argument("--effort", default=None, help="claude --effort level for every run (low|medium|high|xhigh|max)")
     r.add_argument("--seed", type=int, default=0)

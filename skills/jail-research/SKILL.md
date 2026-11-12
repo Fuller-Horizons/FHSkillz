@@ -1,7 +1,7 @@
 ---
 name: jail-research
 metadata:
-  version: 1.4.0
+  version: 1.5.0
 description: >-
   Research a question into two paired outputs: a cited synthesized answer plus
   an auditable evidence packet (tiered dated sources, contradictions, honest
@@ -51,6 +51,10 @@ copy, SEO farms, undated pages, uncited AI text). Rules:
 - Run independent question-streams in parallel (subagents where available);
   give each ONE question and require the citation format back.
 - Log the **limitations** of each source (age, scope, conflict of interest).
+- **Quote before claim:** each Fact rests on a saved verbatim quote, checked
+  with `quote-check.py` (fallback: re-open and match); no quote → Inference
+  or cut. The answer cites the **≤8 strongest** sources; the rest stay in the
+  packet.
 
 **RETRIEVAL BUDGET:** default **≤12 fetches total / ≤3 per question**. Retain
 only the excerpt that evidences the claim plus its locator — never the whole
@@ -120,17 +124,15 @@ Then the JAIL-HANDOFF block — `next` is usually the consuming skill
 (jail-decide, jail-verify, a framework skill, or jail-summarize).
 
 ## PRE-SHIP CHECK — all six YES or the output does not ship
-1. Every **[n]** in Part 1 resolves to a numbered source in Part 2.
-2. Every source listed in Part 2 is cited **≥1×** in Part 1.
+1. Every **[n]** in Part 1 resolves in Part 2. 2. Every Part 2 source is cited **≥1×**.
 3. Every source line carries source · claim-it-backs · URL · date-accessed.
 4. Every Q has an Answer with **label + confidence**.
 5. Every volatile claim names the **freshness window** applied.
 6. Every gap names its **resolver**.
 
-Machine check with **jail-py-toolkit**: `cite-check.py` covers assertions
-1–3; `label-lint.py --require-evidence` covers assertion 4 (every Fact carries
-a [n]). Assertions 5–6 are walked by hand. **Manual fallback:** without the
-scripts, walk all 6 assertions by hand and report the count checked.
+Machine check (**jail-py-toolkit**): `cite-check.py` for 1–3,
+`label-lint.py --require-evidence` for 4; 5–6 by hand. No scripts: walk all
+six by hand and report the count checked.
 
 ## Delivery (client-facing)
 The synthesized answer often goes to a client. Render it as a clean document
@@ -141,21 +143,18 @@ JAIL-HANDOFF stays in the chat or working copy.
 Worked example: [references/example-packet.md](references/example-packet.md).
 
 ## Related skills
-Company sell-side screen → **jail-prospect**. Rate the researched
-subject → **jail-rate**. Contract unclear → **jail-task-contract** first.
-A deep-research tool/agent, when present, may serve as the Step-2 engine —
-its output still must be reformatted into the packet and its citations
-spot-verified.
+Company screen → **jail-prospect** · rating → **jail-rate** · unclear ask →
+**jail-task-contract**. A deep-research tool may run Step 2; its output still
+goes into the packet, citations spot-verified.
 
 ## Gotchas
 - **Search-then-rationalize.** Answer first, agreeable sources second. The
   Step 1 question list prevents this.
 - **Citation decoration.** URLs pasted next to claims they don't actually
   support. Each citation names the specific claim it backs.
-- **Recency worship.** Newest ≠ strongest.
-- **Averaged contradictions.** Weigh, pick, preserve the loser.
+- **Recency worship / averaged contradictions.** Newest ≠ strongest; weigh,
+  pick, preserve the loser.
 - **Fabricated confidence.** Can't retrieve it: Unknown, never "from memory."
 - **Packet skipped under time pressure.** No packet = the research didn't happen.
-- **Answer without traceability.** A fluent synthesis whose claims don't map
-  to numbered sources is just confident prose. Every load-bearing sentence
-  in Part 1 carries its [n]; an uncited claim is a Judgment, labeled.
+- **Answer without traceability.** Every load-bearing sentence in Part 1
+  carries its [n]; an uncited claim is a Judgment, labeled.

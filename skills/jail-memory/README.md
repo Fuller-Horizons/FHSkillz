@@ -2,7 +2,7 @@
 
 It decides what is worth saving to long-term memory, and what is not.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.5.0.
 
 ## What it does
 

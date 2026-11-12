@@ -1,7 +1,7 @@
 ---
 name: jail-prototype
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   Build a THROWAWAY prototype whose only job is to answer a stated design
   question — "does this logic/state model feel right?", "what should this
@@ -37,6 +37,16 @@ question = no prototype — that's just building without a contract
   variants answer nothing.
 - **Feasibility question** → the thinnest end-to-end spike through the
   riskiest part only.
+
+## Open every build reply with the PROTOTYPE BRIEF
+```
+QUESTION:  <one sentence>
+SHAPE:     look | logic | feasibility, and why in a clause
+TIMEBOX:   one working session + at most one declared extension
+BUILD:     proto-<slug> (PROTOTYPE, wipe me), outside production paths, sample data
+VARIANTS:  how each differs in layout or structure, one switch (look only)
+SEND BACK: <exactly what the reviewer should reply with>
+```
 
 ## Rules (all of them, every prototype)
 1. **Throwaway from day one, visibly marked.** Named so no casual reader

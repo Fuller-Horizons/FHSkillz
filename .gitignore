@@ -39,3 +39,4 @@ _to_delete/
 
 # WIP — not part of the plugin (no SKILL.md); un-ignore when ready to publish
 systems/
+.pytest_cache/

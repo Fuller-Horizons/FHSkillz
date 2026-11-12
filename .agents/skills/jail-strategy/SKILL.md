@@ -1,7 +1,7 @@
 ---
 name: jail-strategy
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 description: >-
   Run one evidence-grounded strategy analysis: SWOT then TOWS (INTERNAL),
   PESTLE with tripwires (MACRO), COMPETITIVE (Porter's five forces,
@@ -80,8 +80,10 @@ link), and **competitor lists with no frame** (names, no tiers, no scores).
    - Bias controls: calibrate scores side by side; do not over-score rivals
      you admire or under-score quiet ones; check for survivorship (visible
      firms are not the whole market).
-   - Any market-size, share, or revenue number needs a cited source or an
-     **Estimate** label (method + inputs). Otherwise leave it out.
+   - Any market-size, share, rate, fee, or revenue number needs a cited
+     source or an **Estimate** label (method + inputs), including numbers
+     used in worked examples ("2.9% + $0.30 card fee" needs a source or "my
+     assumption"). Otherwise leave it out.
 6. **Interaction pass (FULL SWEEP)** — macro factors that flip internal
    entries (a Legal shift that expires a Strength; an Economic turn that
    turns a Weakness into a W×T vulnerability); competitive structure

@@ -1,5 +1,8 @@
 # Changelog — jail-skill-miner
 
+## 1.3.2 — 2026-11-12
+- Marked as a maintainer tool for the plugin itself (kept, not retired).
+
 ## 1.3.1 — 2026-07-26 (plugin 0.25.0)
 
 - Fixed a self-contradiction in 1.3.0's Budget & determinism block: "exactly

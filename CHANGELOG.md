@@ -2,6 +2,16 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.28.0] — 2026-11-12
+
+**Measured fixes, owner-approved reverts, and the 2026-11-12 recommendations.** 25 skills (jail-py-lab merged into jail-py-toolkit).
+
+- **Tested and kept:** jail-prompt (2.10.3 blind retest 6/7 cases vs 2/7 for 2.1.0; 2.11.0 trims the core 30% and runs Instant/Lite on Sonnet, Full on Opus); 2.12.0 adds layered typed grading (cheap grader with confidence, strong grader for failures and low confidence; idea from JEV / jevals) and three standard checks for agent prompts · jail-cpr (agenda times must fit the meeting; 8/8).
+- **Reverted after blind tests:** jail-prototype back to 1.2.0 content (2.0 lost 4/16 vs 7/16); jail-bmc and jail-prospect back to their 0.26 content (newer versions didn't beat them).
+- **Recommendations applied (untested):** jail-prospect inline per-fact citations · jail-research quote-before-claim + 8-source cap · jail-strategy sources or labels for every rate in examples · jail-summarize readability on every brief · jail-decide / jail-rate quick one-line default · jail-verify UNVERIFIED verdict and no FAIL without an observed defect · jail-bmc wrong-lane check and owner figures as evidence · jail-task-contract 5-field quick contract · jail-red-team top-5 cap · jail-council mini lane by default · jail-memory narrowed to project logs · jail-prototype PROTOTYPE BRIEF · jail-rate-skill trimmed · jail-skill-miner marked maintainer-only.
+- **Eval harness:** live runs block the claude.ai Project by default (`--disallowed-tools Projects`); an earlier run had read the real spike ledger and prospect briefs.
+- **Routing gate:** 3 judges, 109/109 unanimous, 100% fire / 0% false-fire after the description changes.
+
 ## [plugin 0.27.0] — 2026-11-12
 
 **Wave A: 12 consulting skills rewritten, plus the shared test and enforcement foundation.** Released before the 2026-11-12 live tests on the second six skills were graded (owner's call); fixes from those results ship as 0.27.1.

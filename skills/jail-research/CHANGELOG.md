@@ -1,5 +1,8 @@
 # Changelog — jail-research
 
+## 1.5.0 — 2026-11-12
+- Quote before claim (verbatim quote per Fact, checked with quote-check.py) and a cap of 8 cited sources in the answer. Untested.
+
 ## 1.4.0 — 2026-11-12
 
 - Added `references/us-official-sources.md`: claim class to best-source map for US business research (official Tier 2 sources, licensed benchmarks flagged, client first-party data).
