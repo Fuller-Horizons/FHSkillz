@@ -1,5 +1,12 @@
 # Changelog — jail-py-toolkit
 
+## 1.3.0 — 2026-11-12
+
+- **select-models.py**: pick a step's model by blind, measured trial (candidates × test items, separate grader model, `selected_by` record; tie → cheaper; quality-first / cost-first). 7 tests with an offline stand-in for `claude`.
+- **chain-lint.py**: delegation manifests — orchestration block, agent model/effort/scope/context, verifier independence, parallel independence, Fable + full model IDs, escalation targets, output caps, batching, quality-first mode, `selected_by` validation. New `test_chain_lint.py` (35 tests).
+- **prompt-lint.py**: QUALITY BAR, EXAMPLES, VERIFICATION PLAN, RUN SETTINGS sections; warns on missing QUALITY BAR / RUN SETTINGS, a Claude model without effort, sampling knobs on Claude; `--reply` mode requires a TEST RESULTS or UNTESTED line. New `test_prompt_lint.py` (11 tests).
+- Toolkit tests: 110.
+
 ## 1.2.0 — 2026-11-12
 
 - Added fh_patterns.py (shared secret + PII detectors, value-free results) and handoff-lint, label-lint, cite-check, gate-record-lint, pii-scan, desc-check, score-check; secret-scan.py now uses fh_patterns and prints file:line: kind only; unit tests + fixtures added.

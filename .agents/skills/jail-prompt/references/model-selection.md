@@ -37,6 +37,7 @@ pick each step's model by test, not by table:
    step's SUCCESS TEST and QUALITY BAR, pass/fail per check.
 4. Choose the highest score. A tie goes to the cheaper model. In quality-first
    mode a cheaper model must **tie the strong model**, not just pass.
+   With **jail-py-toolkit**: `select-models.py --prompt brief.md --items items.jsonl --checks checks.txt --candidates haiku,sonnet,opus --grader claude-fable-5-2` runs steps 2-4 and prints the record (`--dry-run` first to see the call count). Fallback: run and grade by hand as above.
 5. Record it on the step and save it with the prompt in the library, so the
    trial isn't repeated until the model, the brief or the inputs change:
 

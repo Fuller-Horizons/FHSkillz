@@ -1,7 +1,7 @@
 ---
 name: jail-py-toolkit
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   JAIL-PY machine checks for prompts AND ratings — the runnable companion to
   jail-prompt and jail-rate-skill in one toolkit. Use when either skill calls
@@ -57,6 +57,7 @@ release).
 | `scripts/pii-scan.py` | jail-quarantine | PII classes (SSN, card+Luhn, ABA routing, DOB, email+phone); prints class + line only, never the value. | 0 clean · 1 found · 2 IO |
 | `scripts/desc-check.py` | Skill hygiene | Description ≤ 450 chars with `Do NOT use`, core ≤ 160 lines, `metadata.version` present. | 0 pass · 1 fail · 2 IO |
 | `scripts/score-check.py` | jail-rate / jail-prospect | Weights sum to 100, scores in range, Overall = Σ(score×weight) to 1 decimal. | 0 pass · 1 fail · 2 IO |
+| `scripts/select-models.py` | jail-prompt model selection | Runs one prompt on 2+ candidate models over the same test items, grades every output blind with a separate grader model, prints the `selected_by` record (top score wins; tie → cheaper). Calls `claude -p`; `--dry-run` shows the call count. | 0 chosen · 1 none passed · 2 usage/IO/run |
 | `scripts/readability.py` | jail-summarize | Flesch-Kincaid grade + longest sentences; fails above `--max-grade` (default 9 for owner/client briefs). | 0 pass · 1 fail · 2 IO |
 
 `scripts/fh_patterns.py` is the shared detection library (secrets + PII) used
