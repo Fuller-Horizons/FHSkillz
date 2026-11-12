@@ -93,11 +93,11 @@ def lint(text):
     if rs is None:
         warnings.append("no RUN SETTINGS: line (model · effort · tools)")
     else:
-        if not re.search(r"(?i)\b(haiku|sonnet|opus|claude-|gpt|gemini|model)\b", rs):
+        if not re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-|gpt|gemini|model)\b", rs):
             warnings.append("RUN SETTINGS names no model")
-        if not re.search(r"(?i)\beffort\b", rs) and re.search(r"(?i)\b(haiku|sonnet|opus|claude-)", rs):
+        if not re.search(r"(?i)\beffort\b", rs) and re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-)", rs):
             warnings.append("RUN SETTINGS names a Claude model but no effort level")
-        if re.search(r"(?i)\b(haiku|sonnet|opus|claude)", rs) and REJECTED_SETTINGS.search(rs):
+        if re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude)", rs) and REJECTED_SETTINGS.search(rs):
             warnings.append("RUN SETTINGS sets " + REJECTED_SETTINGS.search(rs).group(1) +
                             " for a Claude model; current models reject sampling knobs - use effort")
 

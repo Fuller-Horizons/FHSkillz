@@ -62,6 +62,11 @@ class TestPromptLint(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("fewer than 2 criteria", err)
 
+    def test_fable_without_effort_warns(self):
+        rc, _, err = lint(FULL.replace("model sonnet · effort medium", "model claude-fable-5-2"), "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("no effort level", err)
+
 
 if __name__ == "__main__":
     unittest.main()

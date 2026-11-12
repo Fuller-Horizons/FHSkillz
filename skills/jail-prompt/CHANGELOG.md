@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.3.1 — 2026-11-12
+- **Fable support.** Delegation manifests accept `fable` and full model IDs (`claude-opus-5-5`, `claude-fable-5-2`); `chain-lint.py` warns on the bare `fable` alias (resolves to Fable 5.1 in Claude Code docs, Fable 5 on gateways) and asks for a pinned ID. Fable rows added to the model tables.
+- **Fable version rule** (`references/generation-settings.md`): Fable only after Opus 5.5 fails the test set or for the highest-stakes merge/check; default `claude-fable-5-2` (released 2026-11-09); `claude-fable-5-1` only when 5.2 isn't served or a tested prompt was validated on 5.1; Opus 5.5 directly for security-testing steps (Fable blocks and reroutes them).
+- Tests: chain-lint +4, prompt-lint +1 (toolkit 84).
+
 ## 2.3.0 — 2026-11-12
 - **Runs on Opus 5.5 at medium effort.** Frontmatter `model: claude-opus-5-5`, `effort: medium` (honored by Claude Code); the core tells the agent to flag a different model/effort where frontmatter isn't honored.
 - **Claude-specific prompting** (`references/claude-prompting.md`): inputs in labeled tags, long material first and the ask last, reasons behind constraints, say what to do, no all-caps, examples, thinking, output control.

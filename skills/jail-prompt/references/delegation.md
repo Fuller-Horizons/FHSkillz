@@ -58,7 +58,7 @@ Fields:
 | `orchestration.max_depth` | 0–2. Default **1**: subagents never spawn their own agents. |
 | `orchestration.budget` | Time, tokens, or dollars, plus what happens when it runs out. |
 | `orchestration.verifier` | The id of the independent check step. |
-| `agent.model` | `haiku` · `sonnet` · `opus` · `inherit`. |
+| `agent.model` | `haiku` · `sonnet` · `opus` · `fable` · `inherit`, or a full ID (`claude-opus-5-5`, `claude-fable-5-2`). Pin Fable by full ID; the bare alias resolves to different versions per host. |
 | `agent.effort` | `low` · `medium` · `high`. |
 | `agent.scope` | One sentence: what this agent owns AND what it must not touch. |
 | `agent.context` | The exact inputs it receives. Never "the conversation". |
@@ -113,7 +113,10 @@ not guarantees:
 | Extract, classify, scan, reformat to a fixed schema | Haiku | low |
 | Draft, analyze, compare, grade against a rubric | Sonnet | medium |
 | Orchestrate and merge, contested judgment, final synthesis for a client | Opus | medium–high |
+| Lead agent or final check on the hardest, highest-stakes job, after Opus failed the test set | Fable 5.2 (`claude-fable-5-2`) | medium |
 | Independent verification | A different model from the producer when possible (else a fresh agent), Sonnet or better | medium |
+
+Fable version rule (5.2 by default, 5.1 only when 5.2 isn't served or a tested prompt was validated on 5.1), and why not to use Fable for security-testing steps: [generation-settings.md](generation-settings.md).
 
 A Haiku step must have a machine-checkable SUCCESS TEST, so a cheap miss is
 caught. Before a large run, try one sample per cheap step; move it up a tier

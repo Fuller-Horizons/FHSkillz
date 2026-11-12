@@ -3,7 +3,7 @@ name: jail-prompt
 model: claude-opus-5-5
 effort: medium
 metadata:
-  version: 2.3.0
+  version: 2.3.1
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 

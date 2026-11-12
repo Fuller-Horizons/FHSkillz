@@ -35,7 +35,7 @@ Usage:
 
 Exit codes: 0 = pass, 1 = errors, 2 = usage/IO/parse error. Stdlib only.
 """
-import sys, os, json, argparse
+import sys, os, re, json, argparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -61,7 +61,13 @@ except (OSError, ImportError, AttributeError) as e:
     sys.exit(2)
 
 VALID_ON_FAIL = {"retry", "stop", "rollback", "human"}
-VALID_MODELS = {"haiku", "sonnet", "opus", "inherit"}
+VALID_MODELS = {"haiku", "sonnet", "opus", "fable", "inherit"}
+# Full model IDs (claude-<family>-<version>), e.g. claude-opus-5-5, claude-fable-5-2.
+MODEL_ID = re.compile(r"^claude-(haiku|sonnet|opus|fable)-\d+(-\d+)*(\[1m\])?$")
+# Version-sensitive families: the bare alias resolves differently per host
+# (Claude Code docs, 2026-11-12: `fable` -> Fable 5.1; gateway -> Fable 5),
+# so a delegation set pins the full ID. Update when Anthropic moves the alias.
+PIN_FAMILIES = {"fable": "claude-fable-5-2"}
 VALID_EFFORT = {"low", "medium", "high"}
 
 
@@ -215,8 +221,13 @@ def lint_orchestration(manifest, steps):
         if not isinstance(ag, dict):
             errors.append(f"step {sid!r}: agent must be a JSON object")
             continue
-        if ag.get("model") not in VALID_MODELS:
-            errors.append(f"step {sid!r}: agent.model {ag.get('model')!r} not one of {sorted(VALID_MODELS)}")
+        model = ag.get("model")
+        if model not in VALID_MODELS and not (isinstance(model, str) and MODEL_ID.match(model)):
+            errors.append(f"step {sid!r}: agent.model {model!r} not one of {sorted(VALID_MODELS)} "
+                          "or a full model ID like claude-opus-5-5")
+        elif model in PIN_FAMILIES:
+            warnings.append(f"step {sid!r}: agent.model {model!r} resolves to a different version per host; "
+                            f"pin the full ID (e.g. {PIN_FAMILIES[model]})")
         if "effort" in ag and ag.get("effort") not in VALID_EFFORT:
             errors.append(f"step {sid!r}: agent.effort {ag.get('effort')!r} not one of {sorted(VALID_EFFORT)}")
         if not str(ag.get("scope") or "").strip():
@@ -226,7 +237,7 @@ def lint_orchestration(manifest, steps):
             errors.append(f"step {sid!r}: agent.context missing (list the exact inputs it receives)")
         elif any(c.lower() in ("conversation", "the conversation", "all", "everything") for c in ctx):
             errors.append(f"step {sid!r}: agent.context must list specific inputs, not the whole conversation")
-        if ag.get("model") == "haiku" and not VERIFIABLE.search(str(by_id[sid].get("success_test") or "")):
+        if str(ag.get("model") or "").startswith(("haiku", "claude-haiku")) and not VERIFIABLE.search(str(by_id[sid].get("success_test") or "")):
             warnings.append(f"step {sid!r}: haiku step needs a machine-verifiable success_test to catch cheap misses")
 
     vid = str(orch.get("verifier") or "").strip()

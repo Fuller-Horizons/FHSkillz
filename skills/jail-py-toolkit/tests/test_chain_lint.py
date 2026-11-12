@@ -124,6 +124,33 @@ class TestChainLintDelegation(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("budget missing", err)
 
+    def test_full_model_ids_accepted(self):
+        def f(m):
+            step(m, "compare")["agent"]["model"] = "claude-sonnet-5-5"
+            step(m, "verify")["agent"]["model"] = "claude-fable-5-2"
+        rc, _, err = lint(mutate(f), "--strict")
+        self.assertEqual(rc, 0, err)
+
+    def test_fable_alias_warns_to_pin(self):
+        m = mutate(lambda m: step(m, "verify")["agent"].update(model="fable"))
+        self.assertEqual(lint(m)[0], 0)
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("claude-fable-5-2", err)
+
+    def test_bad_model_id_rejected(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "verify")["agent"].update(model="claude-fable")))
+        self.assertEqual(rc, 1)
+        self.assertIn("full model ID", err)
+
+    def test_haiku_full_id_still_needs_checkable_test(self):
+        def f(m):
+            step(m, "scan-a")["agent"]["model"] = "claude-haiku-5-5"
+            step(m, "scan-a")["success_test"] = "looks right"
+        rc, _, err = lint(mutate(f), "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("haiku step needs", err)
+
 
 if __name__ == "__main__":
     unittest.main()
