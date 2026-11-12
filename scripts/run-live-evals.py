@@ -152,7 +152,9 @@ def raw_has_result(path):
     if not os.path.exists(path):
         return False
     with open(path, encoding="utf-8", errors="replace") as f:
-        return parse_stream(f.read())["has_result"]
+        info = parse_stream(f.read())
+    # an errored result (usage limit, API error) is not a finished run: re-run it on resume
+    return info["has_result"] and not info["is_error"]
 
 
 # ---------------------------------------------------------------- run
