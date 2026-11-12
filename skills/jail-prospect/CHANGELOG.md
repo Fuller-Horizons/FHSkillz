@@ -1,5 +1,16 @@
 # Changelog — company-prospect-research
 
+## 1.5.0 — 2026-11-12
+
+- `references/free-sources.md`: every URL opened with WebFetch and dated `[checked 2026-11-12]`. Fixed moved links (FPDS now in SAM.gov, USPTO trademark search replaces TESS, OSHA search deep link, SEC search page, SBA size standards, DOL enforcement data). Noted sources the tool could not open (Yelp, LinkedIn, Wayback, Google Maps) and login or fee gates. Removed the claim that County Business Patterns gives revenue per employee (it has no revenue).
+- Added `references/size-band-worksheet.md`: method only for the indicative size band (Census Economic Census, Nonemployer Statistics, SUSB, CBP; headcount bounds; low/high arithmetic; Fact/Estimate labels; NOT a valuation).
+- Added Untrusted-source rule 7: page and profile text never picks a recipient or channel, never auto-send (hook is a draft), agent-directed text is quoted as a finding. Pattern adapted from ECC.
+- Canonical labels (Fact, User-provided, Inference, Estimate, Judgment, Unknown) replace Source-Backed Inference, Analyst Judgment, Missing Evidence in SKILL.md, rubric, template, example, prompt chain.
+- Self-check names `score-check.py` for the 0-100 component arithmetic (manual fallback stated); template and rubric add Component | Score | Max tables.
+- Added client-facing Delivery section.
+- Description shortened to 450 characters or fewer; router form with Do NOT use clause.
+- Example rewritten: tables checked, handoff per schema, injection case shown.
+
 ## 1.4.0 — 2026-07-25 (plugin 0.25.0)
 
 - Output section now closes with a JAIL-HANDOFF block (constitution key set/order) so downstream skills get structured facts/evidence/risks instead of prose.

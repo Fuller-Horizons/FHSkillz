@@ -1,0 +1,16 @@
+{"case": "jail-decide-0270-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, false], "notes": "Unlabeled external number (1-3 months to productive)."}
+{"case": "jail-decide-0270-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-decide-0270-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-decide-0270-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-decide-0270-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-decide-0270-H", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, false, true, true], "notes": "Says cloud cheaper over 5 years ($20.5k vs $13k); comparison muddled."}
+{"case": "jail-decide-0270-H", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-decide-0270-H", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-decide-0270-H", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}

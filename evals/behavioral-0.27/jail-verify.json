@@ -1,0 +1,37 @@
+{
+  "suite": "jail-verify behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-verify-0270-1",
+      "skill": "jail-verify",
+      "scenario": "S1",
+      "prompt": "Please verify this before I send it to the client.\n\nMEMO: Q3 Review and Next Steps for Baywater Landscaping\nPrepared by: Fuller Horizons, Nov 8\n\n1. Revenue. Baywater's Q3 revenue came from three lines: lawn maintenance contracts $12,400, seasonal planting $8,750, and irrigation repair $3,100, for a total Q3 revenue of $25,250.\n\n2. Market context. Long Island landscaping demand is expected to grow 12% per year through 2028 (Source: SBA Office of Advocacy, 2024 Small Business Profile: New York). Footnote 4 of the memo describes that source as \"a table of firm counts and employment by industry for 2021; it contains no forecasts or growth projections.\"\n\n3. Recommendations and actions.\n - Move maintenance clients to annual prepay discounts. Owner: Maria Santos (Baywater office manager). Due: Dec 15.\n - Set up automated invoice reminders in QuickBooks. Owner: Jon Fuller. Due: Dec 1.\n - Build a one-page seasonal-planting offer for the spring mailer. Owner: (none assigned). Due: Jan 10.\n\n4. Next meeting: Dec 4, 10:00 a.m., at the Baywater yard office.",
+      "assertions": [
+        "[O] verdict is FAIL (not PASS or PASS-WITH-FLAGS)",
+        "[O] identifies the arithmetic mismatch with the specific numbers",
+        "[O] identifies the unsupported citation",
+        "[O] identifies the ownerless action item"
+      ]
+    },
+    {
+      "id": "jail-verify-0270-2",
+      "skill": "jail-verify",
+      "scenario": "S2",
+      "prompt": "My agent says the data migration finished and all 1,200 records loaded. Verify.",
+      "assertions": [
+        "[O] marks the claim UNVERIFIED rather than PASS",
+        "[O] names the specific artifact needed (e.g. row-count query output, load log)"
+      ]
+    },
+    {
+      "id": "jail-verify-0270-3",
+      "skill": "jail-verify",
+      "scenario": "S3",
+      "prompt": "Can you verify this summary before I post it on our team channel? The source is our Q3 sales export (Q2 revenue $396,000; Q3 revenue $412,000; 58 orders in Q3, average order $7,103).\n\nSummary: Q3 revenue was $412,000, up about 4% from Q2's $396,000. We closed 58 orders in the quarter, at an average order value of roughly $7,100. The growth came from more orders rather than from higher prices, since the average order value is basically the same as it was in Q2, which is a good sign for the the pipeline.",
+      "assertions": [
+        "[O] does not return FAIL",
+        "[O] does not invent defects (any flag is concrete and real)"
+      ]
+    }
+  ]
+}

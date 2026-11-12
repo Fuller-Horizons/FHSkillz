@@ -17,8 +17,11 @@ Stdlib only.
 """
 import sys, re, json, argparse
 
-REQUIRED = ["OBJECTIVE", "SUCCESS TEST", "PROCESS", "OUTPUT FORMAT", "CONSTRAINTS"]
-OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "SOURCES", "BEFORE RETURNING"]
+REQUIRED = ["OBJECTIVE", "SUCCESS TEST", "OUTPUT FORMAT"]  # minimal-first core (2.8.0)
+OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "QUALITY BAR", "EXAMPLES", "PROCESS", "SOURCES", "CONSTRAINTS",
+            "VERIFICATION PLAN", "RUN SETTINGS", "BEFORE RETURNING"]
+# Sampling knobs current Claude models reject or the Messages API lacks.
+REJECTED_SETTINGS = re.compile(r"(?i)\b(temperature|top[_ -]?p|top[_ -]?k|seed|presence[_ -]penalty|frequency[_ -]penalty|logprobs)\b")
 ALL_SECTIONS = REQUIRED + OPTIONAL
 
 # A SUCCESS TEST is machine-verifiable if it names a runnable/automatable check.
@@ -75,9 +78,61 @@ def lint(text):
         except json.JSONDecodeError as e:
             errors.append(f"embedded ```json block #{i} does not parse: {e}")
 
-    if "BEFORE RETURNING" not in sec:
-        warnings.append("no BEFORE RETURNING: self-check section (recommended)")
 
+    qb = sec.get("QUALITY BAR")
+    if qb is None:
+        warnings.append("no QUALITY BAR: (3-5 task-specific pass/fail lines that define a good answer)")
+    else:
+        lines = [l for l in re.split(r"\n|;|·", qb) if l.strip(" -*\t")]
+        if len(lines) < 2:
+            warnings.append("QUALITY BAR has fewer than 2 criteria")
+
+    # Claude 5 family: visible-reasoning requests may be refused; prefill unsupported.
+    claude5 = re.search(r"(?i)\b(opus|sonnet|haiku|fable|claude-(opus|sonnet|haiku|fable)-5)", sec.get("RUN SETTINGS") or "")
+    if claude5:
+        if re.search(r"(?i)(<thinking>|show (your|the) (reasoning|thinking|work)|think step[- ]by[- ]step|"
+                     r"write (out )?your reasoning|explain your reasoning before)", text):
+            warnings.append("asks a Claude 5 model to write out its reasoning; it may be refused as reasoning "
+                            "extraction - set effort instead and read summarized thinking")
+        if re.search(r"(?i)\bprefill", text):
+            warnings.append("uses prefill; current Claude models don't support prefilled replies")
+        if re.search(r"(?i)\b(think (very )?carefully|think hard|do not think|don't think)\b", text):
+            warnings.append("tells the model how much to think; on Claude 5 use effort instead")
+
+    rs = sec.get("RUN SETTINGS")
+    if rs is None:
+        warnings.append("no RUN SETTINGS: line (model · effort · tools)")
+    else:
+        if not re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-|gpt|gemini|model|tier)\b", rs):
+            warnings.append("RUN SETTINGS names no model")
+        if not re.search(r"(?i)\beffort\b", rs) and re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude-)", rs):
+            warnings.append("RUN SETTINGS names a Claude model but no effort level")
+        if re.search(r"(?i)\b(haiku|sonnet|opus|fable|claude)", rs) and REJECTED_SETTINGS.search(rs):
+            warnings.append("RUN SETTINGS sets " + REJECTED_SETTINGS.search(rs).group(1) +
+                            " for a Claude model; current models reject sampling knobs - use effort")
+
+    return errors, warnings
+
+
+TEST_LINE = re.compile(r"(?m)^\W{0,3}(TEST RESULTS|UNTESTED)\W{0,3}:\s*\S")
+
+
+def lint_reply(text):
+    """Lint a whole jail-prompt reply: every fenced prompt block, plus the
+    TEST RESULTS / UNTESTED line. Full prompts (blocks with METADATA:) get
+    warnings; standalone subagent briefs get errors only."""
+    errors, warnings = [], []
+    blocks = [b for b in re.findall(r"```[a-zA-Z]*\n(.*?)```", text, flags=re.S)
+              if re.search(r"(?m)^\s*OBJECTIVE\s*:", b) and re.search(r"(?m)^\s*SUCCESS TEST\s*:", b)]
+    if not blocks:
+        return errors, ["no engineered prompt block found (fine for a STOP reply)"]
+    for i, b in enumerate(blocks, 1):
+        e, w = lint(b)
+        errors += [f"prompt block #{i}: {x}" for x in e]
+        if re.search(r"(?m)^\s*METADATA\s*:", b):
+            warnings += [f"prompt block #{i}: {x}" for x in w]
+    if not TEST_LINE.search(text):
+        errors.append("reply has no 'TEST RESULTS:' or 'UNTESTED: <reason>' line")
     return errors, warnings
 
 
@@ -85,6 +140,8 @@ def main():
     ap = argparse.ArgumentParser(description="Lint a JAIL-PROMPT engineered-prompt block.")
     ap.add_argument("file", nargs="?", default="-", help="file to lint; - or omit for stdin")
     ap.add_argument("--strict", action="store_true", help="treat warnings as failures")
+    ap.add_argument("--reply", action="store_true",
+                    help="lint a whole reply: all prompt blocks + the TEST RESULTS/UNTESTED line")
     args = ap.parse_args()
 
     try:
@@ -93,7 +150,7 @@ def main():
         print(f"error: cannot read {args.file}: {e}", file=sys.stderr)
         return 2
 
-    errors, warnings = lint(text)
+    errors, warnings = (lint_reply if args.reply else lint)(text)
     for w in warnings:
         print(f"warning: {w}", file=sys.stderr)
     for e in errors:

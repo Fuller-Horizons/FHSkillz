@@ -1,5 +1,14 @@
 # Changelog — cpr-agenda-builder
 
+## 1.6.0 — 2026-11-12
+
+- Description cut from 1,386 to under 450 characters; one trigger phrase per lane plus two Do-NOT clauses.
+- Core trimmed to 160 lines or fewer; full DESIGN/COMMIT/DEBRIEF templates moved to `references/templates.md`, field lists kept inline.
+- Added worked examples `references/example-design.md` (90-minute client session, agenda sums to duration) and `references/example-commit.md` (12-week, four-domain contract).
+- DEBRIEF: each decision and action now carries a quote or line reference, speaker, and canonical label (User-provided for attendee statements; Inference for flagged "landed on" reads).
+- Canonical claim labels section added; JAIL-HANDOFF block added per schema.
+- Added client-facing Delivery section (plain English, no YAML in client copy).
+
 ## 1.5.0 — 2026-07-27 (plugin 0.26.0)
 
 - **New COMMIT lane.** A third lane for a personal or team commitment

@@ -1,0 +1,3 @@
+- parses as JSON
+- every price has a source
+- no invented numbers

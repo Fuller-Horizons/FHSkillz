@@ -19,7 +19,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-decide | evidence packet / analysis | decision package | jail-research (gaps), jail-red-team (contested) | frameworks, jail-plan | low | thin evidence → assumption-labeled or route back |
 | jail-red-team | draft plan/claim/analysis | ranked findings + verdict | — | jail-decide, frameworks, jail-prompt (high-stakes) | low | nothing found → "holds" is valid |
 | jail-council | consequential/contested question | evidence-decided synthesis + dissent register + audit appendix | jail-research (verification round), jail-verify (post-synthesis check) | jail-verify, jail-decide, jail-rate, jail-prompt (high-stakes escalations) | low | <2 independent members → declare Tier C or stop; unanswerable → STOP |
-| jail-orchestrate | parallelizable plan | integrated result + ledger | jail-research (per stream), jail-verify (merge) | jail-task-contract, jail-research | inherits streams' | node unverified → not complete; resume from ledger |
+| jail-orchestrate | parallelizable plan | integrated result + ledger | jail-research (per stream), jail-verify (merge) | jail-task-contract, jail-research, jail-prompt (delegation set) | inherits streams' | node unverified → not complete; resume from ledger |
 | jail-approval-gate | intended actions | tiered inventory + approvals | jail-quarantine (sensitive classes) | any acting skill | high | unclassified → PER-ACTION; no response → not approved |
 | jail-quarantine | inbound/bulk/sensitive data | adopted data + halt report | jail-approval-gate | jail-research, jail-memory, extraction tasks | high | safe path unavailable → skip (fail closed) |
 | jail-memory | lessons/decisions/context | governed memory entries | jail-approval-gate (durable writes) | jail-task-contract (retrieval), jail-cpr | medium | gate fails → don't store + say why |
@@ -29,7 +29,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | jail-handoff | ending/overflowing session | handoff doc (state, decisions, refs, next, skills) | jail-memory (durable lessons), jail-quarantine (redaction classes) | user, jail-plan, jail-orchestrate | medium (travels) | secrets present → redact before write |
 | jail-plan | decision/recommendation (OPERATE) OR foggy multi-session goal (MAP) | OPERATE: 13-field operating workflow · MAP: decision-ticket map → cleared way | jail-verify (readiness), jail-lab (metric), jail-research, jail-prototype, jail-decide, jail-council, jail-handoff | jail-decide, frameworks, user | low | destination unnameable → jail-red-team/jail-prompt |
 | jail-skill-miner | codebase/history | candidate table → skills | jail-rate-skill (QA), jail-approval-gate (author stop) | user | low | unverified citation → dropped |
-| jail-prompt | vague goal | engineered prompt / STOP | jail-py-toolkit, any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
+| jail-prompt | vague goal | engineered prompt / delegation set / STOP | jail-py-toolkit, jail-orchestrate (runs a delegation set), any skill via auto-triage | jail-task-contract | low | flawed premise → STOP |
 
 ## Layer 2 — Workflow skills
 

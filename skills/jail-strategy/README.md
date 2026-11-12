@@ -2,11 +2,11 @@
 
 Turn a business situation into one strategy call you can act on.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 
-This skill runs one strategy analysis in three lanes. The **INTERNAL** lane sorts your strengths and weaknesses against outside chances and threats. That is a SWOT. It then turns the SWOT into moves you can act on, called a TOWS. The **MACRO** lane scans six outside forces: political, economic, social, tech, legal, and environmental. That is a PESTLE. Each force must tie to your actual decision, not just be a trend. The **FULL SWEEP** lane runs both off one shared set of facts, then checks where they collide.
+This skill runs one strategy analysis in four lanes. The **INTERNAL** lane sorts your strengths and weaknesses against outside chances and threats. That is a SWOT. It then turns the SWOT into moves you can act on, called a TOWS. The **MACRO** lane scans six outside forces: political, economic, social, tech, legal, and environmental. That is a PESTLE. Each force must tie to your actual decision, not just be a trend. The **COMPETITIVE** lane maps who you compete with and rates Porter's Five Forces from evidence, with scored profile cards. The **FULL SWEEP** lane runs the lanes off one shared set of facts, then checks where they collide.
 
 ## Use it when
 

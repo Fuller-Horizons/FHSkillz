@@ -73,8 +73,8 @@ For business or research briefs:
 [2-3 sentences max]
 
 ## Findings
-* **Fact**: [Claim] · *Source: [Link Title](file:///path/or/url) (Access Date)*
-* **Inference**: [Claim] · *Source-Backed*
+* **Fact**: [Claim] [1] · *Source: [Link Title](file:///path/or/url) (Access Date)*
+* **Inference**: [Claim] · *Reasoned from [1]; premise stated*
 
 ## Technical Details
 ```
@@ -96,40 +96,18 @@ For reading and condensing large datasets or codebase files:
 ---
 
 ## 6. Programmatic Assertion Check Helpers
-For writing machine-verifiable exit tests in bash/python:
+For writing machine-verifiable exit tests. Name the assertions in the SUCCESS TEST so a script or reviewer can run them; typical set:
 
-### Python Validator Snippet:
-```python
-# Save in scratch/verify_run.py
-import json, sys
+| Assertion | Pass condition |
+| :--- | :--- |
+| File present | the named output file exists |
+| Parses | output is valid JSON / CSV / Markdown table |
+| Required keys | every object has the keys the schema lists (for example `id`, `confidence`) |
+| Bounds | numeric fields sit in range (for example confidence between 0.0 and 1.0) |
+| Counts | item count or word count falls in the stated range |
+| Traceability | every claim carries at least one source id |
 
-def assert_schema_and_content():
-    try:
-        with open('output.json', 'r') as f:
-            data = json.load(f)
-        assert "items" in data, "Missing 'items' key"
-        for item in data["items"]:
-            assert "id" in item, "Item missing 'id'"
-            assert 0.0 <= item["confidence"] <= 1.0, "Confidence out of bounds"
-        print("[+] Verification Succeeded!")
-        sys.exit(0)
-    except AssertionError as e:
-        print(f"[!] Verification Failed: {e}")
-        sys.exit(1)
-
-if __name__ == '__main__':
-    assert_schema_and_content()
-```
-
-### Bash Validator Snippet:
-```bash
-# Verify outputs in terminal
-echo "Checking output file presence..."
-[ -f "output.json" ] || { echo "File not found!"; exit 1; }
-echo "Checking JSON schema..."
-python -m json.tool output.json > /dev/null || { echo "Invalid JSON syntax!"; exit 1; }
-echo "[+] Validated!"
-```
+Run with whatever the environment has (a test runner, a short script, or a spreadsheet formula); exit code 0 means pass, anything else fails the step. Manual fallback: walk the table by hand against the output.
 
 ---
 
@@ -145,24 +123,17 @@ For maintaining client portability when translating commands to different IDE en
 
 ---
 
-## 8. PII & Secret Redaction Regex Patterns
-For scrubbing sensitive parameters from dry-run inputs and logs:
+## 8. PII & Secret Redaction Patterns
+For scrubbing sensitive values from dry-run inputs and logs. Replace each match with a placeholder, never a partial value:
 
-### Python Redactor Script:
-```python
-import re
+| Pattern to find | Replace with |
+| :--- | :--- |
+| e-mail addresses | `[REDACTED_EMAIL]` |
+| phone numbers (with or without country code) | `[REDACTED_PHONE]` |
+| `api_key`, `secret`, `password`, `token`, `bearer` followed by `:` or `=` and a long value (12+ characters) | `[REDACTED_SECRET]` |
+| IPv4 addresses | `[REDACTED_IP]` |
 
-def redact_sensitive_data(text):
-    # E-mails
-    text = re.sub(r'[\w\.-]+@[\w\.-]+\.\w+', '[REDACTED_EMAIL]', text)
-    # Phone Numbers
-    text = re.sub(r'\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}', '[REDACTED_PHONE]', text)
-    # API Keys / Secrets (High Entropy Strings)
-    text = re.sub(r'(?i)(api_key|secret|password|passwd|token|auth_token|bearer)\s*[:=]\s*["\']?[A-Za-z0-9_\-\.]{12,}["\']?', r'\1: "[REDACTED_SECRET]"', text)
-    # IPv4 Addresses
-    text = re.sub(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b', '[REDACTED_IP]', text)
-    return text
-```
+For a machine pass use jail-py-toolkit `secret-scan.py` and `pii-scan.py`; manual fallback: search the text for each pattern above before it goes into a prompt.
 
 ---
 
@@ -191,3 +162,36 @@ For chaining multiple prompts with structured state handoffs:
 ```
 
 
+
+---
+
+## 10. Evidence-first consulting prompt
+For analysis over a client's supplied data where numbers will be presented to someone else (a P&L, a pipeline export, a survey, a vendor quote). Fill the brackets; keep the footer verbatim.
+
+```
+METADATA: inputs: [<attached files>] · outputs: [<deliverable>] · params: {temperature: 0.2} · requires: none · produces: [<deliverable>]
+ROLE: <only if it shifts standards, e.g. "management consultant reviewing a client's books">
+OBJECTIVE: <one sentence: what the client decision is and what this output feeds>
+
+INPUTS (attach):
+- <file 1: name, period, source system>
+- <file 2 ...>
+If an input is missing, say so under Data Gaps and stop that part of the analysis. Do not reconstruct it.
+
+EXTERNAL EVIDENCE (tiered sources, only if the question needs outside benchmarks):
+- Tier 1: official or primary (government statistics, regulator filings, vendor documentation)
+- Tier 2: peer-reviewed or industry-body publications
+- Tier 3: reputable secondary press
+Use the highest tier available; give publisher, page, and access date for each source. If no source exists, write Unknown.
+
+OUTPUT: <exact shape: table columns / sections / schema, with one filled example row>
+
+RULES:
+- Cite a source for every number (an attached file and cell/section, or an external source id).
+- Tag each claim Fact / Inference / Unknown. Fact needs a source; Inference states its reasoning in one line.
+- Show calculations (inputs, formula, result) next to each derived figure.
+- Never invent a figure. List anything you cannot source under Data Gaps.
+- End with three sections: Data Gaps | Assumptions | Confidence (high / medium / low, with the reason).
+
+SUCCESS TEST: [AUTO] every number in OUTPUT appears in an attached file or carries a source id; [AUTO] the three closing sections exist; [HUMAN] a second person can re-derive each calculation from the shown inputs.
+```

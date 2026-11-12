@@ -1,20 +1,15 @@
 ---
 name: jail-summarize
 metadata:
-  version: 1.3.1
+  version: 1.4.0
 description: >-
-  Convert complex material — analysis, research, technical findings, project
-  state — into concise, DECISION-FORCING executive communication that leads
-  with the answer, translates technical issues into business consequences
-  (revenue, liability, resilience, competitive position, cost, control,
-  timing), and ends with the decision it exists to force — no FYI briefs.
-  Use for "summarize this for the board/CEO/client", "make this
-  executive-ready", "translate this technical finding", briefing packs,
-  decision memos, and as the final voice of a kernel chain. Do NOT use for
-  internal working notes, raw research packets (jail-research), full
-  decision analysis (jail-decide — this skill presents it), or plain
-  recaps of meetings/threads with no executive audience (that's direct
-  summarization or jail-cpr's debrief).
+  Turn analysis or technical findings into a decision-forcing brief
+  for a board, CEO, owner, or client: lead with the answer, translate tech to
+  business cost and risk, end on one recommendation. Use for "summarize this
+  for the board/CEO/owner", "make this executive-ready", "translate this
+  technical finding", decision memos. Do NOT use for working notes, raw
+  research (jail-research), full option analysis (jail-decide), meeting
+  recaps (jail-cpr).
 ---
 
 # JAIL-SUMMARIZE
@@ -25,8 +20,9 @@ that changes the decision, cut everything else. [Constitution Rules 1, 6]
 ## The seven-part structure (default; compress, don't reorder)
 1. **Outcome / central finding** — the answer, first sentence, no wind-up.
 2. **Material facts** — the few facts the decision rests on, labels intact
-   (fact vs analysis stays visible even here — an inference presented as
-   fact in a board memo is a Rule-1 violation with consequences).
+   (Fact, User-provided, Inference, Estimate, Judgment, Unknown stay visible
+   even here — an Inference presented as a Fact in a board memo is a Rule-1
+   violation with consequences).
 3. **Assumptions & uncertainties** — what we're taking on faith + honest
    Unknowns. Executives respect a named unknown; they punish a hidden one.
 4. **Risks & constraints** — material only, each with its consequence.
@@ -58,6 +54,15 @@ the default.
 | Board / CEO | one page, hard cap | the decision + recommendation | full business-consequence; tech IDs to appendix |
 | Operating exec | brief + appendix | finding + what changes this quarter | business-first, operator detail preserved in appendix |
 | Line manager | half page | the action needed from their team | light — they speak the domain |
+| Owner / client (non-technical) | one page | the decision, in plain words | full; no unexplained terms; grade ≤ 9 |
+
+## Readability gate (client and owner audiences)
+Target Flesch-Kincaid grade ≤ 9 for the brief body (board/CEO row may go to
+≤ 11 when terms of art are required; appendix exempt). Check:
+`python3 skills/jail-py-toolkit/scripts/readability.py --max-grade 9 brief.md`
+and rewrite the longest sentences it lists. **Manual fallback** (no code
+execution): sentences ≤ 20 words, short common words, and every acronym
+(CVE, MFA, VPN) either explained in a few words or replaced by what it does.
 
 ## Craft rules
 - **Scale depth to the audience** per the table above; the appendix holds
@@ -74,15 +79,23 @@ the default.
 Close with the JAIL-HANDOFF block only when feeding another skill; a brief
 delivered to a human ends at next actions — humans don't need YAML.
 
+## Delivery (client-facing)
+When the brief goes to a client or owner, render it as a clean document
+(docx skill or a Docs artifact when available; otherwise clean Markdown).
+Use plain 9th-grade English, keep the claim labels, and leave YAML out of the
+client copy — the JAIL-HANDOFF block stays in the chat or working copy.
+Worked example: [references/example-brief.md](references/example-brief.md).
+
 ## Pre-ship check
-Before sending, confirm all seven — fail-closed, none skippable:
+Before sending, confirm all eight — fail-closed, none skippable:
 1. Sentence one states the answer (Outcome / central finding).
-2. Every fact carries its fact vs analysis label (Material facts).
+2. Every claim carries its label: Fact, User-provided, Inference, Estimate, Judgment, or Unknown (Material facts).
 3. Every risk names its consequence (Risks & constraints).
 4. Exactly one recommendation stands, alternatives priced not hedged (Recommendation).
 5. Every next action has an owner and a date (Immediate next actions).
 6. The audience-calibration row used is named, not implied (Audience calibration).
 7. No confidential/PII/embargoed detail crosses to a wider audience than the source cleared — redact or generalize it; never silently drop the classification.
+8. For owner/client audiences, the brief body passes the readability gate (grade ≤ 9, or the manual fallback).
 
 Item 7 binds every artifact the skill emits, not only the shipped brief: a refusal, hold notice, or gap list explaining why nothing shipped is itself a disclosure surface. Name the class ("customer PII", "regulated identifiers"), never the specific value, in that rationale exactly as in the brief.
 
@@ -97,8 +110,8 @@ the brief → **jail-research** packet. Meeting around the brief →
 ## Gotchas
 - **Burying the lede.** Three paragraphs of context before the answer. The
   answer IS sentence one; context follows only as needed.
-- **Fact-analysis blending.** "The migration will save $400K" — measured, or
-  hoped? The label survives compression or the brief misleads.
+- **Blending claim types.** "The migration will save $400K" — Fact, or
+  Estimate? The label survives compression or the brief misleads.
 - **Jargon smuggling.** Acronyms and stack names the reader must decode.
   Translate or cut.
 - **Completeness compulsion.** Shipping everything you know. The appendix

@@ -2,7 +2,7 @@
 
 Turn a business idea into a nine-block map that separates proof from guesswork.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
 
 ## What it does
 

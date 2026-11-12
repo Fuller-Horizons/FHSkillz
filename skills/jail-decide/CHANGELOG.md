@@ -1,5 +1,16 @@
 # Changelog — jail-decide
 
+## 1.3.0 — 2026-11-12
+
+- Description shortened from 854 to under 450 characters, router style; kept the "build vs buy", "which should we pick", "run the numbers ... pick one" and "cheaper over N years" triggers and the three Do NOT use clauses.
+- New `references/expected-value.md`: quantified-lane worksheet (EV as a range, cost of delay per month, payback, break-even) with one checked numeric example; every input labeled Fact/User-provided/Estimate with a source.
+- New `references/example-package.md`: complete worked run (ship-check line first, package under 450 words, JAIL-HANDOFF).
+- Thin-evidence rule in Step 1: no confident recommendation when deciding criteria rest on assumptions; confidence capped at low, evidence named, route to jail-research.
+- Optional decision-log line for jail-memory in ADR shape (context, decision, consequences, status).
+- Client-facing Delivery section (clean document, plain English, no YAML in client copy).
+- Canonical claim labels; version bumped.
+- Eval fix: `evals/behavioral-0.25/jail-decide.json` case jail-decide-0250-2, assertions 4 and 5 no longer contradict (unnameable owner means package withheld with the owner-named FAIL).
+
 ## 1.2.1 — 2026-07-26 (plugin 0.25.0)
 
 - Ship-check fix (behavioral gate defect): when the input is an existing

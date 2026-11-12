@@ -1,0 +1,16 @@
+{"case": "jail-research-0270-1", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-research-0270-1", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [false, true, true, true], "notes": "No official government source cited with URL."}
+{"case": "jail-research-0270-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [false, true, true, true], "notes": "No official government source cited with URL; only unverified leads."}
+{"case": "jail-research-0270-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [false, true, true, true], "notes": "No official government source cited with URL."}
+{"case": "jail-research-0270-2", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [false, false, true], "notes": "Contradiction not stated explicitly; user figures not labeled User-provided."}
+{"case": "jail-research-0270-2", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [false, false, true], "notes": "Contradiction not stated explicitly; user figures not labeled User-provided."}
+{"case": "jail-research-0270-2", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true, true], "notes": ""}
+{"case": "jail-research-0270-2", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, false, true], "notes": "Figures labeled Unknown, not User-provided."}
+{"case": "jail-research-0270-3", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-research-0270-3", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-research-0270-3", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-research-0270-3", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true], "notes": ""}
+{"case": "jail-research-0270-H", "model": "haiku", "label": "A", "grader": "g2", "assertion_results": [true, false, true, true], "notes": "NY figure cited only to HiveDesk, not an official NYS source."}
+{"case": "jail-research-0270-H", "model": "haiku", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-research-0270-H", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [true, false, true, true], "notes": "$17.00 cited only to law-firm blogs, not official NYS source."}
+{"case": "jail-research-0270-H", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true], "notes": ""}

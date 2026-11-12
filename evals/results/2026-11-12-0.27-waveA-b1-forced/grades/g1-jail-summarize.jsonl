@@ -1,0 +1,16 @@
+{"case": "jail-summarize-0270-1", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-summarize-0270-1", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-summarize-0270-1", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, false], "notes": "Body uses CVE unexplained"}
+{"case": "jail-summarize-0270-1", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, false], "notes": "MFA and VPN used in body without explanation"}
+{"case": "jail-summarize-0270-2", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [false], "notes": "FYI justification only a bracketed placeholder, not stated"}
+{"case": "jail-summarize-0270-2", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-2", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-2", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-3", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-3", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-3", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-3", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true], "notes": ""}
+{"case": "jail-summarize-0270-H", "model": "haiku", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-summarize-0270-H", "model": "haiku", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-summarize-0270-H", "model": "sonnet", "label": "A", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}
+{"case": "jail-summarize-0270-H", "model": "sonnet", "label": "B", "grader": "g1", "assertion_results": [true, true, true, true], "notes": ""}

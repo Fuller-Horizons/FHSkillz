@@ -1,19 +1,14 @@
 ---
 name: jail-red-team
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
-  Adversarially pressure-test a plan, recommendation, analysis, design, or
-  belief BEFORE it ships — hidden assumptions, bias patterns, missing
-  stakeholders, dependency failures, second-order effects, and the conditions
-  that would invalidate it; every finding carries its cheapest falsifier
-  (the test that would disprove or confirm it). Three effort lanes down to a
-  10-minute PRE-MORTEM-LITE for ordinary drafts. Use when someone says "poke
-  holes in this", "what am I missing", "steelman the other side", "devil's
-  advocate", "pre-mortem this", before consequential or irreversible
-  decisions, or when jail-decide/jail-verify routes a contested call here.
-  Do NOT use to verify a finished deliverable's completeness (jail-verify)
-  or to invent objections against a trivial, low-stakes choice.
+  Pressure-test a plan, recommendation, design, or belief before it ships:
+  steelman it, then find hidden assumptions, missing stakeholders, dependency
+  failures and second-order effects, each with a cheapest falsifier and a
+  verdict. Use for "poke holes in this", "what am I missing", "devil's
+  advocate", "pre-mortem this", irreversible calls. Do NOT use to check a
+  finished deliverable (jail-verify) or for trivial choices.
 ---
 
 # JAIL-RED-TEAM
@@ -32,13 +27,19 @@ is its own form of dishonesty.
   and this failed — why?" Top 3–5 causes ranked by likelihood, one-line
   mitigation each, no sweep. **THREE LENSES** (modest stakes): the lenses
   below. **FULL SWEEP** (consequential + contested): lenses + the sweep.
+- **Proportionality.** A trivial, reversible choice (colors, wording, a
+  signature) gets a one- or two-line answer: "low stakes, either works, here
+  is the one thing that would change that." No severity ranking, no sweep,
+  no critical finding. Say so instead of padding.
 - **Falsifier-first rule (all lanes):** a finding without the cheapest test
   that would disprove or confirm it is an opinion. Name the falsifier per
   finding, then close the loop — tag `RUN-NOW` (answerable from evidence in
   hand: run it now, append `→ result: confirmed|disproved|inconclusive`) or
   `HANDOFF` (needs data, access, or time you lack: name the owner + jail-lab
   spec). Neither run nor assigned → the finding demotes to an **open
-  question**, not a finding.
+  question**, not a finding. Pick the test from the
+  [falsifier library](references/falsifier-library.md) by finding type; each
+  entry says what result confirms and what disproves.
 
 ## Rules of engagement
 - **Artifact, not the system.** No live probing, exploit code, or credentials;
@@ -78,10 +79,25 @@ is its own form of dishonesty.
 - **Invalidation conditions** — the observable events that would prove this
   wrong. No conditions = unfalsifiable = flag it.
 
+## Fix-and-re-attack loop (FULL SWEEP only)
+Pattern adapted from ECC (github.com/affaan-m/ECC, MIT, © 2026 Affaan Mustafa).
+A single pass finds problems; it does not prove the fixes worked.
+1. The producer fixes the critical and major findings. Fix only what was
+   flagged; no new scope.
+2. Re-run the sweep on the FIXED version with a fresh reviewer (a new
+   session or agent, no memory of round 1, same lenses). Reusing the
+   round-1 reviewer anchors it. Check that old findings are closed and that
+   the fixes did not create new ones.
+3. Maximum 2 re-attack rounds. Anything still open after round 2 goes to the
+   decision owner by name, with the verdict **RETHINK** (the plan's core is
+   the problem) or **PROCEED-WITH-FIXES** (residual items are bounded and
+   owned). Never loop a third time; never quietly drop an open item.
+4. Log each round in one line: round · findings closed · findings new · open.
+
 ## Output
 ```
 RED-TEAM FINDINGS (ranked by severity × likelihood)
-1. <finding> — severity: critical|major|minor · basis: <evidence/reasoning>
+1. <finding> — severity: critical|major|minor · basis: Fact [n] | Inference: <one-line reasoning> | Judgment
    → fix, mitigation, or the question that must be answered
    → falsifier: <the cheapest test that would disprove/confirm this>
      · falsifier-status: RUN-NOW → result: <…> | HANDOFF → <owner + lab spec>
@@ -89,15 +105,23 @@ RED-TEAM FINDINGS (ranked by severity × likelihood)
 Survives the attack: <what held up, said once, without padding>
 Verdict: PROCEED | PROCEED-WITH-FIXES | RETHINK — one sentence why
 ```
+Basis rule: every finding's `basis` carries one canonical label (Fact with a
+`[n]` ref, Inference with its reasoning, or Judgment); user-stated premises are
+User-provided. A finding resting on **Judgment** alone cannot be ranked `critical` unless
+its falsifier is `RUN-NOW` with `→ result: confirmed`; otherwise cap it at
+`major`. Gaps in the artifact are Unknown, not findings.
+
 Then the JAIL-HANDOFF block — `next:` producer (fixes), jail-decide
 (re-decide with findings), or jail-verify (post-fix check).
 
 ## SUCCESS-TEST (run before emitting)
 Lane named · steelman above the findings · every finding: severity ∈ {critical,
-major, minor} + basis + handle + falsifier + falsifier-status · verdict ∈
+major, minor} + labeled basis (no critical resting on Judgment alone) + handle + falsifier + falsifier-status · verdict ∈
 {PROCEED, PROCEED-WITH-FIXES, RETHINK} · ties break by severity, then by order
 of appearance in the source artifact. Any box unchecked = fix before shipping,
 never a caveat.
+
+Worked example: [example-full-sweep.md](references/example-full-sweep.md).
 
 ## Related skills
 Finished-deliverable completeness → **jail-verify**. Re-choosing after

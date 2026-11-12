@@ -2,6 +2,17 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.27.0] — 2026-11-12
+
+**Wave A: 12 consulting skills rewritten, plus the shared test and enforcement foundation.** Released before the 2026-11-12 live tests on the second six skills were graded (owner's call); fixes from those results ship as 0.27.1.
+
+- **Foundation:** canonical claim labels (Fact · User-provided · Inference · Estimate · Judgment · Unknown) and a JSON schema for the JAIL-HANDOFF block (new optional `tested:` field); opt-in enforcement hooks (quarantine, approval, verify, handoff; off by default, `FHSKILLZ_HOOKS=warn|block`); Codex host projections (`.agents/skills/`); live A/B and end-to-end eval runners (`scripts/run-live-evals.py`, `scripts/run-e2e-prompt-evals.py`).
+- **jail-py-toolkit 1.6.0:** handoff-lint, label-lint, cite-check, quote-check, gate-record-lint, pii-scan, desc-check, score-check, readability, select-models (blind measured model choice), chain-lint for delegation manifests, prompt-lint Claude 5 checks; 122 unit tests; examples linted on every validation.
+- **Wave-A skills:** jail-prompt 2.10.0, jail-research 1.4.0, jail-verify 1.3.0, jail-decide 1.3.0, jail-task-contract 1.4.0, jail-red-team 1.3.0, jail-summarize 1.4.0, jail-rate 2.2.0, jail-prospect 1.5.0, jail-strategy 1.3.0, jail-bmc 1.4.0, jail-cpr 1.6.0. Each has a description of 450 characters or less with negative triggers, a core of 160 lines or less, and a worked example.
+- **jail-prompt highlights:** runs on Opus 5.5 at medium effort; minimal-first prompts; Claude 5 conformance and per-model guides; quality bar, examples and run settings; test before trusting (held-out inputs, pass^3, baseline vs the plain request) with a required TEST RESULTS / UNTESTED line; multi-agent prompt sets (quality-first, measured model selection, quote-before-claim, Fable 5.2 vs 5.1 rule); prompt library; portable meta-prompt.
+- **Measured:** routing 100% fire / 0% false-fire on 109 cases (3 judges); batch-1 forced blind A/B: decide 8/8 vs 7/8, research 5/8 vs 3/8, summarize 6/8 vs 5/8, task-contract 6/8 vs 4/8; red-team and verify tied and are kept (owner's call); held-out cases 10/12 new vs 8/12 old.
+- **Pending at release:** graded results for prompt, strategy, prospect, rate, bmc, cpr; the jail-prompt end-to-end, library, minimal-first and compliance tests; the jail-verify false-FAIL fix. Wave B (14 skills) not yet upgraded.
+
 ## [plugin 0.24.1] — 2026-07-22
 
 **Full-plugin build-quality rating + two defect fixes.**

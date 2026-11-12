@@ -38,6 +38,32 @@ full set. A skill may add strictness; none may subtract it.
 12. **Indecision is an option with costs.** Doing nothing has risks and
     consequences; evaluate it alongside the active choices.
 
+## Canonical claim labels (0.27.0 — one set, every skill)
+
+Rule 1's taxonomy, compressed to the six labels every skill's OUTPUT uses.
+Pick the label that matches how the claim is supported — not how confident
+it sounds.
+
+| Label | Meaning | Must carry |
+|---|---|---|
+| **Fact** | Supported by a source opened this session, or a verified observation | a `[n]` citation or artifact ref |
+| **User-provided** | Stated by the user/client; not independently verified | who said it |
+| **Inference** | Reasoned from cited Facts | the reasoning, one line |
+| **Estimate** | A number derived by a stated method | method + inputs |
+| **Judgment** | Expert read with no direct source | caps that item's confidence at Low |
+| **Unknown** | Not answerable from the evidence in hand | what would resolve it |
+
+**Assumption** is not a claim label — it is a premise taken for planning and
+lives in the `assumptions:` list of the handoff (and in contracts). A
+**Recommendation** is a section, not a label.
+
+**Legacy → canonical** (older outputs and skills map as follows):
+Verified fact / Known / ✓Known → Fact · Source-Backed Inference / Infer /
+~Infer → Inference · Analyst Judgment → Judgment · Missing Evidence / ?Unknown
+→ Unknown. Domain skills may keep domain labels only with a declared mapping:
+jail-bmc `VALIDATED` → Fact-backed element, `HYPOTHESIS` → Assumption.
+Checked mechanically by **jail-py-toolkit** `label-lint.py`.
+
 ## The JAIL handoff contract
 
 Every kernel skill ends its output with this compact block so downstream
@@ -59,7 +85,14 @@ JAIL-HANDOFF:
 ```
 
 Omit empty keys **except** `status`, `unknowns`, and `approval_required` —
-those three must always appear (an empty list is itself a claim).
+those three must always appear (an empty list is itself a claim). Keys
+appear in the order above; two optional keys may follow `approval_required`,
+in this order: `checks: {<script>: pass|fail|error|n/a}` (results from
+jail-py-toolkit), then `tested: <tested … | untested: <reason> | n/a>` (whether
+the output was run against test inputs, e.g. `tested: 5 inputs, pass^3 5/5,
+baseline won 4/5`). Downstream skills read `tested` instead of parsing prose.
+Machine form: [schemas/jail-handoff.schema.json](schemas/jail-handoff.schema.json),
+checked by **jail-py-toolkit** `handoff-lint.py`.
 
 ## The three layers
 

@@ -2,7 +2,7 @@
 
 You give it a plan, and it attacks that plan on purpose, before it ships, so real flaws show up now instead of later.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 

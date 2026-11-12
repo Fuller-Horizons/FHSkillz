@@ -1,5 +1,14 @@
 # Changelog — business-model-canvas
 
+## 1.4.0 — 2026-11-12
+
+- New `references/unit-economics.md`: worksheet for the step-4 unit-economic dependency (CAC by channel, margin, churn, lifetime, LTV with discounting, LTV:CAC, payback, contribution margin; inputs labeled VALIDATED/HYPOTHESIS) with a checked numeric example.
+- Declared label mapping stated once in SKILL.md (VALIDATED = Fact-backed element, HYPOTHESIS = Assumption); prose claims use canonical labels.
+- New optional visual canvas: `references/canvas-render.md` (layout only) for a one-page BMC grid with V/H badges; fixed table otherwise.
+- New client-facing Delivery section.
+- Description shortened from 626 to under 450 characters, with explicit Do NOT use routing (jail-strategy, jail-rate).
+- New `references/example-pool-subscription.md`: full pre-revenue run with JAIL-HANDOFF.
+
 ## 1.3.0 — 2026-07-25 (plugin 0.25.0)
 
 - Chain: every named call (jail-task-contract, jail-research, jail-red-team, jail-lab, jail-decide, jail-summarize, jail-verify) now carries an inline manual fallback so the skill degrades gracefully without its companions.

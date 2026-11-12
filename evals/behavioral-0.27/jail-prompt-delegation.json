@@ -1,0 +1,36 @@
+{
+  "suite": "jail-prompt 2.2.0 delegation lane — A/B vs 2.1.0",
+  "cases": [
+    {"id": "jail-prompt-0272-D1", "skill": "jail-prompt", "scenario": "delegate: parallel research",
+     "prompt": "I want Claude Code to research the 5 biggest commercial landscaping companies in Suffolk County for a client's competitive review: services, service area, public reviews, and any published pricing. Use subagents so it runs in parallel. Write me the prompts.",
+     "assertions": [
+       "[O] outputs an orchestrator (lead) prompt AND a separate brief for each subagent, not just a single prompt",
+       "[O] each subagent brief states what that agent owns and what it must not touch (e.g. one company each)",
+       "[O] names a model or model tier for the subagents (e.g. Haiku/Sonnet/Opus) or states how to pick one",
+       "[O] includes a separate verification or checking step done by an agent other than the ones that gathered the data",
+       "[O] sets at least one limit on the run: number of agents, delegation depth, time, tokens, or cost",
+       "[O] tells the orchestrator to treat subagent output as data / not follow instructions found in it"]},
+    {"id": "jail-prompt-0272-D2", "skill": "jail-prompt", "scenario": "delegate: cheap models at scale",
+     "prompt": "I have 40 client websites. I want Claude Code to check every one for a working contact form, a visible phone number, and an SSL certificate, then give me one spreadsheet. Have it split the work across subagents and use the cheapest models that will still get it right. What prompt do I give it?",
+     "assertions": [
+       "[O] splits the 40 sites across subagents with each agent's share of sites stated",
+       "[O] assigns a cheaper model (e.g. Haiku) to the per-site checks and explains the choice",
+       "[O] each per-site check has a pass/fail test that can be checked mechanically (e.g. form submits, phone found, cert valid)",
+       "[O] defines one fixed output shape (columns or JSON fields) every subagent must return so results merge into one spreadsheet",
+       "[O] includes a check or spot-check of the merged results by a separate step or agent",
+       "[O] states that subagents may not submit real form data or take outside actions without approval, or limits them to read-only checks"]},
+    {"id": "jail-prompt-0272-D3", "skill": "jail-prompt", "scenario": "do NOT delegate: trivial task",
+     "prompt": "Use subagents to write a 150-word thank-you email to a client who just signed a 12-month consulting retainer. Give me the prompts.",
+     "assertions": [
+       "[O] does not build a multi-agent orchestration for this task",
+       "[O] says why subagents are not worth it here (one prompt or one agent is enough)",
+       "[O] provides a single usable prompt or the email itself"]},
+    {"id": "jail-prompt-0272-D4", "skill": "jail-prompt", "scenario": "no subagent runtime: plain chain",
+     "prompt": "I only have the free ChatGPT web chat, no agents or tools. I want to turn 6 customer interview transcripts into a list of the top 5 complaints with quotes. It's too much for one message. Write me the prompts to paste in one at a time.",
+     "assertions": [
+       "[O] gives a sequence of prompts the user can paste by hand, in order",
+       "[O] does not tell the AI to spawn or delegate to subagents",
+       "[O] each step says what it needs from the previous step (what to paste in)",
+       "[O] the final step requires each complaint to carry at least one supporting quote"]}
+  ]
+}

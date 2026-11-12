@@ -1,0 +1,3 @@
+The working directory, `/tmp/fhlive-zbo5ozfz`, is empty. None of the five files (`Report_Q3.PDF`, `Invoice-0042.PDF`, `NOTES.txt`, `Budget2026.XLSX`, `ReadMe.MD`) are there, so I renamed nothing.
+
+Tell me which directory they're in and I'll rename them to `report_q3.pdf`, `invoice-0042.pdf`, `notes.txt`, `budget2026.xlsx` and `readme.md`. I'll skip any file whose lowercase name already exists, so nothing gets overwritten.

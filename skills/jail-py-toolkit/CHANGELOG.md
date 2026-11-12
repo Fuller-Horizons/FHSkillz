@@ -1,5 +1,31 @@
 # Changelog — jail-py-toolkit
 
+## 1.6.0 — 2026-11-12
+
+- handoff-lint: optional `tested` key after `checks` (tested | untested | n/a); +1 test.
+
+## 1.5.0 — 2026-11-12
+
+- prompt-lint: Claude 5 checks (written-out reasoning requests, "think carefully"/"don't think", prefill); minimal-first required sections (OBJECTIVE, SUCCESS TEST, OUTPUT FORMAT); +4 tests.
+- select-models: `--repeats K` (pass^K per candidate); +1 test.
+
+## 1.4.0 — 2026-11-12
+
+- **quote-check.py**: verifies each Fact's verbatim quote appears in its saved source (normalizes case, spacing, quote/dash/hyphen variants, HTML tags and entities); flags Facts with no quote, unknown sources, quotes of 3 words or fewer; warns over 40 words. 6 tests.
+- prompt-lint accepts tool-neutral tiers in RUN SETTINGS (+1 test).
+- Description rewritten to 450 chars with a "Do NOT use" line (was 838) and the new checks; keeps the "scan for secrets" / "lint" / "dry-run" / "skill structure" / rating triggers.
+
+## 1.3.0 — 2026-11-12
+
+- **select-models.py**: pick a step's model by blind, measured trial (candidates × test items, separate grader model, `selected_by` record; tie → cheaper; quality-first / cost-first). 7 tests with an offline stand-in for `claude`.
+- **chain-lint.py**: delegation manifests — orchestration block, agent model/effort/scope/context, verifier independence, parallel independence, Fable + full model IDs, escalation targets, output caps, batching, quality-first mode, `selected_by` validation. New `test_chain_lint.py` (35 tests).
+- **prompt-lint.py**: QUALITY BAR, EXAMPLES, VERIFICATION PLAN, RUN SETTINGS sections; warns on missing QUALITY BAR / RUN SETTINGS, a Claude model without effort, sampling knobs on Claude; `--reply` mode requires a TEST RESULTS or UNTESTED line. New `test_prompt_lint.py` (11 tests).
+- Toolkit tests: 110.
+
+## 1.2.0 — 2026-11-12
+
+- Added fh_patterns.py (shared secret + PII detectors, value-free results) and handoff-lint, label-lint, cite-check, gate-record-lint, pii-scan, desc-check, score-check; secret-scan.py now uses fh_patterns and prints file:line: kind only; unit tests + fixtures added.
+
 ## 1.1.0 — 2026-07-25 (plugin 0.25.0)
 
 - De-duplicated the `VERIFIABLE` regex: chain-lint.py now imports it from

@@ -78,7 +78,7 @@ def validate_skill_file(filepath):
 def run_toolkit_checks(repo_root):
     """Release-loop wiring (0.23.0): run the jail-py-toolkit / jail-py-lab
     machine checks on every validation run, not only on request.
-    Checks: (1) every bundled script byte-compiles; (2) jail-py-toolkit's
+    Checks: (1) every bundled script byte-compiles (incl. fh_patterns + new linters); (2) jail-py-toolkit's
     validate-skill-structure.py passes on every skills/* directory."""
     import py_compile
     import subprocess
@@ -108,6 +108,68 @@ def run_toolkit_checks(repo_root):
                 if r.returncode != 0:
                     errors.append(f"structure lint failed for skills/{d}: "
                                   f"{(r.stdout + r.stderr).strip()[:200]}")
+    # 3 — desc-check over skills/ (WARN-only until skills are upgraded)
+    desc = os.path.join(skills_dir, "jail-py-toolkit", "scripts", "desc-check.py")
+    if os.path.isfile(desc) and os.path.isdir(skills_dir):
+        r = subprocess.run([sys.executable, desc, skills_dir],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            findings = [l for l in r.stderr.splitlines() if l.strip()]
+            print(f"WARN desc-check: {len(findings)} finding(s) (non-blocking):")
+            for l in findings[:40]:
+                print(f"  WARN {l}")
+            if len(findings) > 40:
+                print(f"  WARN ... {len(findings) - 40} more")
+    # 4 — worked examples must pass their own linters (blocking)
+    import re as _re
+    import tempfile as _tf
+    scripts = os.path.join(skills_dir, "jail-py-toolkit", "scripts")
+    plint, clint = os.path.join(scripts, "prompt-lint.py"), os.path.join(scripts, "chain-lint.py")
+    for d in sorted(os.listdir(skills_dir)) if os.path.isdir(skills_dir) else []:
+        refs = os.path.join(skills_dir, d, "references")
+        if not os.path.isdir(refs):
+            continue
+        for f in sorted(os.listdir(refs)):
+            if not (f.startswith("example-") and f.endswith(".md")):
+                continue
+            path = os.path.join(refs, f)
+            text = open(path, encoding="utf-8").read()
+            if os.path.isfile(plint) and _re.search(r"(?m)^\s*OBJECTIVE\s*:", text):
+                r = subprocess.run([sys.executable, plint, "--reply", "--strict", path],
+                                   capture_output=True, text=True)
+                if r.returncode != 0:
+                    errors.append(f"prompt-lint --reply --strict failed for skills/{d}/references/{f}: "
+                                  + (r.stdout + r.stderr).strip()[:300])
+            for i, blk in enumerate(_re.findall(r"```json\s*(.*?)```", text, flags=_re.S), 1):
+                if '"steps"' in blk and '"requires"' in blk and os.path.isfile(clint):
+                    with _tf.NamedTemporaryFile("w", suffix=".json", delete=False) as tmp:
+                        tmp.write(blk)
+                    r = subprocess.run([sys.executable, clint, "--strict", tmp.name],
+                                       capture_output=True, text=True)
+                    os.unlink(tmp.name)
+                    if r.returncode != 0:
+                        errors.append(f"chain-lint --strict failed for skills/{d}/references/{f} json #{i}: "
+                                      + (r.stdout + r.stderr).strip()[:300])
+    # 5 — dated fact files: warn when "Last verified: YYYY-MM-DD" is over 60 days old
+    import datetime as _dt
+    for root, _dirs, files in os.walk(skills_dir):
+        for f in files:
+            if f.endswith(".md"):
+                m = _re.search(r"(?m)^Last verified:\s*(\d{4}-\d{2}-\d{2})",
+                               open(os.path.join(root, f), encoding="utf-8").read())
+                if m:
+                    age = (_dt.date.today() - _dt.date.fromisoformat(m.group(1))).days
+                    if age > 60:
+                        print(f"WARN stale facts: {os.path.relpath(os.path.join(root, f), repo_root)} "
+                              f"last verified {m.group(1)} ({age} days); re-verify model facts")
+    # 6 — jail-py-toolkit unit tests (fail on test failure)
+    tests = os.path.join(skills_dir, "jail-py-toolkit", "tests")
+    if os.path.isdir(tests):
+        r = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", tests],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            errors.append("jail-py-toolkit unit tests failed: "
+                          + (r.stdout + r.stderr).strip()[-400:])
     return errors
 
 

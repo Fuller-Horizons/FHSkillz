@@ -1,0 +1,201 @@
+{
+  "chain": "competitor-pricing-scan",
+  "inputs": [
+    "competitor-list",
+    "client-price-sheet"
+  ],
+  "success_test": "pricing-table.csv parses; exactly 3 competitor rows; every price cell cites a source id or reads Unknown; verdict.json shows PASS or UNVERIFIED per check, no FAIL",
+  "orchestration": {
+    "runtime": "claude-code",
+    "max_agents": 5,
+    "max_depth": 1,
+    "budget": "45 minutes wall clock; on overrun stop and return finished rows plus gaps",
+    "verifier": "verify",
+    "check_policy": "risk",
+    "mode": "quality-first"
+  },
+  "steps": [
+    {
+      "id": "scan-a",
+      "parallel_group": "scan",
+      "requires": [
+        "competitor-list"
+      ],
+      "produces": [
+        "prices-a"
+      ],
+      "success_test": "prices-a.json parses; every price has source_url and accessed date, or status Unknown",
+      "on_fail": "stop",
+      "agent": {
+        "model": "haiku",
+        "effort": "low",
+        "tools": [
+          "web_search",
+          "web_fetch"
+        ],
+        "scope": "Competitor A public pricing pages only; do not research B or C",
+        "context": [
+          "competitor-list row A"
+        ],
+        "escalate_to": "sonnet",
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
+      }
+    },
+    {
+      "id": "scan-b",
+      "parallel_group": "scan",
+      "requires": [
+        "competitor-list"
+      ],
+      "produces": [
+        "prices-b"
+      ],
+      "success_test": "prices-b.json parses; every price has source_url and accessed date, or status Unknown",
+      "on_fail": "stop",
+      "agent": {
+        "model": "haiku",
+        "effort": "low",
+        "tools": [
+          "web_search",
+          "web_fetch"
+        ],
+        "scope": "Competitor B public pricing pages only; do not research A or C",
+        "context": [
+          "competitor-list row B"
+        ],
+        "escalate_to": "sonnet",
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
+      }
+    },
+    {
+      "id": "scan-c",
+      "parallel_group": "scan",
+      "requires": [
+        "competitor-list"
+      ],
+      "produces": [
+        "prices-c"
+      ],
+      "success_test": "prices-c.json parses; every price has source_url and accessed date, or status Unknown",
+      "on_fail": "stop",
+      "agent": {
+        "model": "haiku",
+        "effort": "low",
+        "tools": [
+          "web_search",
+          "web_fetch"
+        ],
+        "scope": "Competitor C public pricing pages only; do not research A or B",
+        "context": [
+          "competitor-list row C"
+        ],
+        "escalate_to": "sonnet",
+        "max_output": "JSON only, 400 tokens",
+        "selected_by": {
+          "date": "2026-11-12",
+          "items": 4,
+          "candidates": [
+            "haiku",
+            "sonnet",
+            "opus"
+          ],
+          "scores": {
+            "haiku": "12/12",
+            "sonnet": "12/12",
+            "opus": "12/12"
+          },
+          "grader": "fresh opus agent, blind"
+        }
+      }
+    },
+    {
+      "id": "compare",
+      "requires": [
+        "prices-a",
+        "prices-b",
+        "prices-c",
+        "client-price-sheet"
+      ],
+      "produces": [
+        "pricing-table",
+        "gaps"
+      ],
+      "success_test": "pricing-table.csv parses with 3 rows and columns service, client_price, competitor, competitor_price, source_id; gaps.md lists every Unknown",
+      "on_fail": "stop",
+      "agent": {
+        "model": "opus",
+        "effort": "medium",
+        "tools": [],
+        "scope": "Merge the three scans with the client sheet; no new research",
+        "context": [
+          "prices-a",
+          "prices-b",
+          "prices-c",
+          "client-price-sheet"
+        ],
+        "max_output": "CSV + gaps list, 600 tokens"
+      }
+    },
+    {
+      "id": "verify",
+      "requires": [
+        "pricing-table",
+        "gaps",
+        "prices-a",
+        "prices-b",
+        "prices-c"
+      ],
+      "produces": [
+        "verdict"
+      ],
+      "success_test": "verdict.json parses; one PASS, FAIL or UNVERIFIED entry per pricing-table row with the evidence used",
+      "on_fail": "human",
+      "agent": {
+        "model": "claude-fable-5-2",
+        "effort": "medium",
+        "tools": [
+          "web_fetch"
+        ],
+        "scope": "Check the table against its cited sources; do not rewrite it",
+        "context": [
+          "pricing-table",
+          "gaps",
+          "prices-a source_urls",
+          "prices-b source_urls",
+          "prices-c source_urls"
+        ],
+        "max_output": "verdict JSON, 600 tokens"
+      }
+    }
+  ]
+}

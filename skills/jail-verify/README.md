@@ -2,7 +2,7 @@
 
 It checks finished work against what was actually asked for, using real evidence, before you ship it.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 

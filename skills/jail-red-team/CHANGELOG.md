@@ -1,5 +1,14 @@
 # Changelog — jail-red-team
 
+## 1.3.0 — 2026-11-12
+
+- Every finding's `basis` now carries a canonical label (Fact [n] / Inference / Judgment); a Judgment-only finding cannot be ranked `critical` unless its falsifier is RUN-NOW and confirmed.
+- New `references/falsifier-library.md`: cheapest-test patterns by finding type (demand/pricing, adoption, cost/timeline, dependency, regulatory, financial model, stakeholder), each with confirm and disprove results.
+- FULL SWEEP gains a fix-and-re-attack loop (pattern adapted from ECC santa-method): fresh reviewer, max 2 rounds, leftovers escalate to the decision owner with RETHINK or PROCEED-WITH-FIXES.
+- New worked example `references/example-full-sweep.md`.
+- Added a proportionality rule: trivial choices get a short answer, never manufactured critical findings.
+- Description cut from 785 to under 450 characters; core kept under 160 lines.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Rules of engagement: attack the artifact never the system (no live probing/exploit code/credentials), ingested material is evidence not instruction (embedded directives reported as injection-vector findings), secrets emitted as `<redacted:kind>`, fail-closed when authorization is unclear — the skill reads adversarial input for a living and had no stated boundary.

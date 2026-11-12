@@ -1,0 +1,35 @@
+{
+  "suite": "jail-bmc behavioral 0.27 — live A/B",
+  "cases": [
+    {
+      "id": "jail-bmc-0270-1",
+      "skill": "jail-bmc",
+      "scenario": "S1",
+      "prompt": "Build a business model canvas for my idea: a subscription service that sends a technician to service residential pool equipment monthly, $89/mo, Long Island. No customers yet.",
+      "assertions": [
+        "[O] no element is labeled VALIDATED without a checkable evidence reference (pre-revenue → mostly HYPOTHESIS)",
+        "[O] names the riskiest 3–5 assumptions with a concrete test for each",
+        "[O] includes a unit-economics check (CAC vs margin/LTV) with labeled inputs"
+      ]
+    },
+    {
+      "id": "jail-bmc-0270-2",
+      "skill": "jail-bmc",
+      "scenario": "S2",
+      "prompt": "I run a monthly pool-equipment service subscription on Long Island and I want a business model canvas I can show my accountant and a possible investor. Here are my numbers from the last 18 months:\n\n- Customers: started month 1 with 40, now at 212 active subscribers\n- Price: $89 per month per customer\n- Cost to serve (technician time, truck, chemicals, parts): $41 per customer per month\n- Monthly churn: 3% of customers\n- Customer acquisition cost: $240 per new customer\n- Customer mix today: about 68% single-family homeowners with in-ground pools, 22% HOA/condo communities with shared pools, 10% small motels and B&Bs\n- Where customers came from: roughly half from neighbor referrals and yard signs, a third from Google Maps/local search, the rest from a pool-supply store partnership\n- Two technicians plus me; I do about 15 hours a week of route work myself\n\nPlease build the canvas and tell me what the numbers say.",
+      "assertions": [
+        "[O] LTV / payback arithmetic is correct to the inputs given",
+        "[O] segments are specific enough to name a channel (no \"everyone\" segment)"
+      ]
+    },
+    {
+      "id": "jail-bmc-0270-3",
+      "skill": "jail-bmc",
+      "scenario": "S3",
+      "prompt": "Do a SWOT for my pool service business.",
+      "assertions": [
+        "[O] routes to / mentions jail-strategy (or does a SWOT without forcing a BMC)"
+      ]
+    }
+  ]
+}

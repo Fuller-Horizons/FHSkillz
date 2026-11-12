@@ -1,5 +1,14 @@
 # Changelog — jail-verify
 
+## 1.3.0 — 2026-11-12
+
+- New `references/deliverable-checks.md`: per-type check lists (financial model, deck, report/memo, plan/workflow, research packet, code change); SKILL.md says to pick the matching list and name it.
+- Added DUAL lane for high-stakes deliverables: two independent reviewers, both must pass, max 2 fix rounds then human escalation. Pattern adapted from ECC (MIT).
+- Verdict now ends with a `VERDICT-JSON` machine line derivable from the counts.
+- Related skills mention the opt-in `verify_gate.py` Stop hook.
+- Canonical claim labels in checks 4 and 8.
+- Description trimmed to under 450 characters; new worked example `references/example-client-memo.md`.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Added a `## Budget` block (≈12 artifacts/logs, verdict ≤25 lines, triage to the 3 highest-consequence deliverables when over) so verification stops sprawling across every artifact it can reach.

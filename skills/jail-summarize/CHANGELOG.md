@@ -1,6 +1,13 @@
 # Changelog — jail-exec-brief
 
-## 1.3.1 — 2026-07-26 (plugin 0.25.0)
+## 1.4.0 — 2026-11-12
+
+- Added a readability gate for owner/client audiences (Flesch-Kincaid grade ≤ 9; board/CEO may reach ≤ 11) with `jail-py-toolkit/scripts/readability.py` and a manual fallback; new Owner/client row in the audience table and pre-ship item 8.
+- Added a client-facing Delivery section (clean document, plain English, labels kept, no YAML in client copy).
+- Pre-ship check item 2 now uses the canonical labels (Fact, User-provided, Inference, Estimate, Judgment, Unknown).
+- Added worked example `references/example-brief.md` (no-MFA accounting finding to owner decision).
+- Description shortened from 808 to under 450 characters; router phrases and Do NOT use clauses kept.
+ — 2026-07-26 (plugin 0.25.0)
 
 - Fixed defect found by the behavioral gate: a refusal rationale restated a confidential specific verbatim (raw SSN count) that the shipped brief correctly withheld. Pre-ship check item 7 now explicitly binds every emitted artifact — refusal, hold notice, gap list — not only the shipped brief; name the class of sensitive detail, never the specific, in the rationale.
 

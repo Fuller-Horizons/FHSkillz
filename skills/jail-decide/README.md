@@ -2,7 +2,7 @@
 
 Turn a choice and the facts you have into one clear, defensible pick.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.2.1.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
 
 ## What it does
 
