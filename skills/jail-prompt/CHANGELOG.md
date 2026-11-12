@@ -2,6 +2,16 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.1.0 — 2026-11-12
+- **Core diet.** SKILL.md cut from ~3,070 to ~1,650 words (111 lines). Every rule that left the core now lives in a reference: Phase 3 field notes, chain/gate/after-prompt detail in `references/skeleton.md`; the long security paragraph in `references/security.md`; the full Gotchas list (plus three new ones: inventing missing inputs, hand-computing what a tool should compute, echoing a secret) in `references/gotchas.md`. Lanes, the four biases, the comprehension gate, the kill-fast gate and "surface the prompt first" stay inline.
+- **Canonical labels.** Truth-tag guidance moved from Known/Infer/Unknown to Fact/Inference/Unknown (structured fields `status`, `evidence_count`, `source_ids` unchanged); `references/truth-tagging.md` rewritten, legacy aliases documented.
+- **truth-lint.py** (jail-py-toolkit) accepts canonical labels and the legacy aliases (Known, Infer, ✓Known, ~Infer, ?Unknown); new `tests/test_truth_lint.py`.
+- **JAIL-HANDOFF block** added to the end of every engineered-prompt reply (`outputs: [engineered prompt | chain manifest | STOP]`, `next:`).
+- **Evidence-first consulting prompt** template added to `references/templates.md` (section 10).
+- `templates.md`: runnable Python/Bash snippets replaced by assertion and redaction-pattern tables (code-free references).
+- New worked example `references/example-qb-cost-drivers.md` (Lite lane, missing input, handoff).
+- Description shortened to 450 characters or fewer and given a `Do NOT use for` router clause.
+
 ## 2.0.0
 - **Instruction-only core (code-free policy).** All bundled Python moved out: the five machine checks (`secret-scan.py`, `prompt-lint.py`, `dry-run.py`, `chain-lint.py`, `truth-lint.py`) now live in the companion **jail-py-prompt-tools** skill; `validate-skills.py` moved to repo `scripts/` (maintenance tooling). Every checkpoint that invoked a script now names the companion-skill run *and* a manual fallback, so the workflow degrades gracefully where code can't run.
 - References updated to match (meta-prompt, chaining, truth-tagging); README rewritten to current structure and version.

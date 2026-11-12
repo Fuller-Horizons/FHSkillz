@@ -31,11 +31,35 @@ is labeled so. Never invent a source, URL, or figure; a fabricated citation is
 worse than an honest gap.
 
 ## Claim labels
+Canonical set (docs/JAIL-CONSTITUTION.md): pick the label by how the claim is
+supported, not by how sure it sounds.
 - **Fact** — directly supported by a Tier 1–2 source (or a Tier 3 source whose
-  underlying source you checked).
-- **Inference** — reasoned from cited evidence; the reasoning is stated.
-- **Judgment** — expert read with no direct source; allowed, but labeled, and
-  it caps that dimension's confidence at Low.
+  underlying source you checked). Carries a `[n]` citation.
+- **User-provided** — stated by the owner, client, or vendor; not independently
+  verified. Name who said it. Cannot lift a dimension above Low confidence alone.
+- **Inference** — reasoned from cited Facts; the reasoning is stated.
+- **Estimate** — a number from a stated method and inputs (projections).
+- **Judgment** — expert read with no direct source; allowed, labeled, and it
+  caps that dimension's confidence at Low.
+- **Unknown** — not answerable from the evidence in hand; say what would resolve it.
+
+## Bias controls (asserted vs proven)
+Pattern adapted from ECC (github.com/affaan-m/ECC, MIT, © 2026 Affaan Mustafa).
+- **Asserted vs proven.** A claim is *proven* when a Tier 1–2 source or a
+  document you opened shows it (a filing, an export, a measurement). It is
+  *asserted* when it comes from the subject's own copy, badge, pitch, or owner
+  statement. Asserted claims are reported as claims, labeled User-provided,
+  and score lower than proven ones until corroborated.
+- **Aesthetic bias.** Do not let a polished site, deck, or UI stand in for
+  substance. Score craft and substance as separate evidence.
+- **Recency bias.** A recent launch, award, or news cycle does not replace the
+  long record. Check the full history before scoring.
+- **Survivorship.** Rated comparables are usually the survivors. Look for the
+  quiet, failed, or discontinued ones before calling something "best in class".
+- **Calibration across a set.** When rating several subjects, use one rubric,
+  re-read all scores side by side before finalizing, and adjust outliers so the
+  same evidence earns the same number. Report per-dimension scores for every
+  subject; never show only a blended composite.
 
 ## Recency
 Date every time-sensitive citation and judge staleness against the subject's

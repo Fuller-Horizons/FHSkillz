@@ -17,3 +17,13 @@
 - **Wrong skill.** AI skill directory → jail-rate-skill. Prospect decision →
   jail-prospect. Engineering the prompt to run a rating elsewhere →
   jail-prompt.
+- **Asserted treated as proven.** "4.7 stars", "#1 rated", "99.99% uptime", an
+  owner's revenue figure. Label User-provided, seek corroboration, lower the
+  confidence. A set of claims with no outside evidence never earns High.
+- **Composite-only comparisons.** Ranking several subjects by one blended
+  number hides where they differ. Show per-dimension scores.
+- **Concentration ignored.** One customer, one supplier, or one person carrying
+  a large share is a material risk; apply the critical-flaw cap to the
+  dimension it hits.
+- **Personal allegations repeated.** When declining a character rating, do not
+  restate or weigh the allegation. Offer the role assessment.

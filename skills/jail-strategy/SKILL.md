@@ -1,114 +1,154 @@
 ---
 name: jail-strategy
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
-  One evidence-grounded strategy analysis with three lanes — INTERNAL (SWOT
-  with enforced sorting rules → TOWS strategy combinations), MACRO (PESTLE:
-  Political/Economic/Social/Technological/Legal/Environmental factors scored
-  and tied to a decision, each with an early-warning tripwire), or FULL SWEEP
-  (both + cross-lane interactions). Use when asked for "SWOT", "TOWS",
-  "strengths and weaknesses", "where do we stand competitively", "PESTLE",
-  "PESTEL", "macro-environment analysis", "external factors affecting X", or
-  a full strategic-landscape read before a market entry, investment, or
-  planning cycle. Do NOT use for business-model design (jail-bmc), rating a
-  named subject 0-10 (jail-rate), or bare evidence-gathering with no
-  strategy output (jail-research).
+  Run one evidence-grounded strategy analysis: SWOT then TOWS (INTERNAL),
+  PESTLE with tripwires (MACRO), COMPETITIVE (Porter's five forces,
+  competitor tiers, profile cards), or a FULL SWEEP. Use for "SWOT", "TOWS",
+  "strengths and weaknesses", "PESTLE", "macro trends", "external factors",
+  "five forces", "competitor analysis", "competitive landscape", "full
+  strategy picture". Do NOT use for business models (jail-bmc), 0-10 scores
+  (jail-rate), or bare research (jail-research).
 ---
 
 # JAIL-STRATEGY
 
-Successor to jail-swot + jail-pestle (merged 0.23.0 — one entry point, shared
-evidence base, no duplicate research). The two failure modes it exists to
-kill: **wishful sorting** (aspirations filed as strengths, market weather
-filed as opportunity) and **trend listicles** (macro factors with no link to
-a decision).
+Successor to jail-swot + jail-pestle (merged 0.23.0), now with a COMPETITIVE
+lane (1.3.0). One entry point, one shared evidence base. The failure modes it
+kills: **wishful sorting** (aspirations filed as strengths, market weather
+filed as opportunity), **trend listicles** (macro factors with no decision
+link), and **competitor lists with no frame** (names, no tiers, no scores).
 
 ## Lane pick (say which)
 - **INTERNAL** — subject-controlled capabilities vs external conditions →
-  SWOT + TOWS. For "where do we stand / what should we do about it".
-- **MACRO** — environment scan for a defined subject + decision → six
-  PESTLE dimensions + tripwires. For "what's coming at us".
-- **FULL SWEEP** — both lanes off one evidence base + the interaction pass.
-  Default when the ask is "the whole strategy picture".
+  SWOT + TOWS. "Where do we stand / what should we do about it."
+- **MACRO** — environment scan for a defined subject + decision → six PESTLE
+  dimensions + tripwires. "What's coming at us."
+- **COMPETITIVE** — industry structure + rivals → Five Forces, tiered
+  competitor set, profile cards, implications. "Who do we compete with and
+  how attractive is this market." Detail: [competitive-lane](references/competitive-lane.md).
+- **FULL SWEEP** — INTERNAL + MACRO (+ COMPETITIVE when rivals or market
+  structure matter to the decision) off one evidence base + interaction
+  pass. Default for "the whole strategy picture".
 
-## Chain (both lanes share 1–2, 6–8)
+## Chain (all lanes share 1–2, 6–8)
 1. **jail-task-contract** — pin subject, the decision this serves, scope,
-   geography/industry, horizon. No decision named = scope smell; ask.
+   geography/industry, horizon. **No decision named = scope smell: ask, or
+   state the scope you are assuming (in `assumptions:`) before analyzing.**
+   A "PESTLE on the US economy" with no decision becomes a question first.
    *(Fallback: capture inline.)*
-2. **jail-research** — ONE evidence sweep serving both lanes: internal
-   record (results, capabilities, churn, delivery) + external (market,
-   competitors, regulation, macro). Tiered dated sources; user-provided
-   facts labeled. *(Fallback: cite-or-label per the constitution.)*
+2. **jail-research** — ONE evidence sweep for all lanes: internal record
+   (results, capabilities, churn, delivery) + external (market, competitors,
+   regulation, macro). Tiered dated sources; user-provided facts labeled.
+   Official-source map for macro and industry data:
+   [macro-sources](references/macro-sources.md). *(Fallback: cite-or-label
+   per the constitution.)*
 3. **INTERNAL classify** — sorting rules enforced:
-   - **S/W = internal + evidenced + controlled.** An aspiration is not a
-     strength; a known unfixed defect is a weakness even when uncomfortable.
+   - **S/W = internal + evidenced + controlled.** An aspiration ("we want to
+     be the premium brand") is not a strength; a known unfixed defect is a
+     weakness even when uncomfortable.
    - **O/T = external + specific mechanism for THIS subject.** "Market is
-     growing" qualifies only with the link.
+     growing" qualifies only with the link; without it, cut it.
    - Symptom vs root cause: classify the evidenced cause, not the symptom.
    - One point, one quadrant — ties broken by the more proximate causal
      mechanism, stated in the entry; never split or duplicate. Per entry:
      statement · evidence ref · materiality (H/M/L) · confidence.
+   - User-supplied lists are **User-provided** claims: sort them by these
+     rules, and say which entries were moved or cut and why.
 4. **MACRO classify** — per factor: finding (Fact/Inference/Estimate) ·
    evidence ref · trend direction · likelihood (H/M/L) · magnitude (H/M/L) ·
    time-to-impact (<1y / 1–3y / 3y+) · opportunity-or-threat · confidence.
    No defensible link to the decision = cut, not kept for completeness.
    Empty dimension = "nothing material found (searched: …)", never filler.
    A factor spanning two dimensions files once, under the more proximate
-   causal mechanism — never split or duplicated (same rule as INTERNAL).
-5. **Interaction pass (FULL SWEEP)** — macro factors that flip internal
+   causal mechanism.
+5. **COMPETITIVE classify** (rules inline; templates in the reference):
+   - Scope the set in tiers — **Direct** (same offer, same buyers) ·
+     **Adjacent** (partial overlap) · **Aspirational** (sets the bar) —
+     each with a one-line inclusion reason. Note substitutes as a threat
+     vector, not a profiled rival.
+   - **Five Forces** (new entrants · supplier power · buyer power ·
+     substitutes · rivalry): rate each High / Medium / Low **only from
+     evidence — 2+ evidence items per force**, else the force is
+     `Unknown (searched: …)`. Never rate from intuition.
+   - **Profile cards**: same dimensions for every rival, a 1–5 score per
+     dimension with a source per score, each claim tagged **asserted**
+     (their own marketing) or **proven** (corroborated). **No blended
+     composite score** — it hides the asymmetry that matters.
+   - Bias controls: calibrate scores side by side; do not over-score rivals
+     you admire or under-score quiet ones; check for survivorship (visible
+     firms are not the whole market).
+   - Any market-size, share, or revenue number needs a cited source or an
+     **Estimate** label (method + inputs). Otherwise leave it out.
+6. **Interaction pass (FULL SWEEP)** — macro factors that flip internal
    entries (a Legal shift that expires a Strength; an Economic turn that
-   converts a Weakness into a W×T vulnerability); cross-dimensional macro
-   interactions.
-6. **jail-red-team** — attack the sort: flattering misclassifications, the
+   turns a Weakness into a W×T vulnerability); competitive structure
+   shifts caused by macro factors; cross-dimensional macro interactions.
+7. **jail-red-team** — attack the sort: flattering misclassifications, the
    competitor nobody named, expired strengths, true-but-immaterial factors,
    survivorship in sources. *(Fallback: three lenses inline.)*
-7. **Strategy step (mandatory — boxes alone are inventory):**
+8. **Strategy step (mandatory — boxes alone are inventory):**
    - INTERNAL → **TOWS**: S×O · W×O · S×T · W×T (the vulnerability list),
      2–4 per cell, each traceable to specific entries.
-   - MACRO → strategic implications + priority actions for the decision,
-     plus **tripwires**: every high-magnitude factor gets its observable
-     early-warning indicator (hand to jail-memory as monitored entries so
-     future sessions check them).
-8. **jail-decide** → strategic choices; **jail-summarize** for voice;
-   **jail-verify** (rules held, entries evidenced/labeled, TOWS/tripwires
-   traceable, gaps declared).
+   - MACRO → implications + priority actions for the decision, plus
+     **tripwires**: each high-magnitude factor gets an observable
+     early-warning indicator (hand to jail-memory as monitored entries).
+   - COMPETITIVE → implications tied to the decision (go / no-go / how),
+     the white space or exposed flank, and a watch-list of rival moves.
+   Then **jail-decide** for strategic choices, **jail-summarize** for
+   voice, **jail-verify** (rules held, entries evidenced/labeled,
+   traceable strategy, gaps declared).
+
+## Claim labels
+Use the canonical set: **Fact** (cited `[n]`) · **User-provided** (say who) ·
+**Inference** (one-line reasoning) · **Estimate** (method + inputs) ·
+**Judgment** (caps confidence at Low) · **Unknown** (what would resolve it).
+Premises go in the handoff `assumptions:` list.
 
 ## Output
-Scope + lane + horizon → classified tables (per lane, fields above) →
-interactions (full sweep) → vulnerabilities (W×T) → TOWS strategies and/or
-implications + priority actions → tripwires → validation requirements →
-dated sources appendix → JAIL-HANDOFF block.
-Tables sort materiality (INTERNAL) / magnitude (MACRO) descending, then
-alphabetical — identical evidence reproduces identical tables on re-run.
+Scope + lane + horizon → classified tables per lane → (competitive) tier
+table, force table, profile cards → interactions (full sweep) →
+vulnerabilities (W×T) → TOWS and/or implications + priority actions →
+tripwires → validation requirements → dated sources appendix →
+JAIL-HANDOFF block. Sort materiality / magnitude descending, then
+alphabetical, so identical evidence reproduces identical tables.
+
+## Delivery (client-facing)
+When the output goes to a client, render it as a clean document (docx skill
+or a Docs artifact when available; otherwise clean Markdown). Plain 9th-grade
+English, short sentences, tables kept, labels kept. No YAML in the client
+copy: the JAIL-HANDOFF stays in the chat or working copy. Mark CONFIDENTIAL
+sources before sending.
 
 ## Gotchas
 - **Aspirations as strengths / weather as opportunity.** Demonstrated and
   mechanism-linked, or cut. The sorting rules are the skill.
-- **Trend listicle drift.** A factor that survives with no decision link
-  means step 1 was skipped.
+- **Trend listicle drift.** A factor with no decision link means step 1 was
+  skipped.
+- **Forces rated by gut.** A High/Medium/Low with no evidence is decoration.
+  Mark it Unknown.
+- **Unsourced market numbers.** No size, share, or revenue figure without a
+  citation or an Estimate label.
 - **Quadrant duplication.** Same fact as S and O double-counts; pick where
-  it's causal.
-- **Boxes without strategy.** TOWS / implications are mandatory; a scan
-  that can't say "so do this" isn't finished.
-- **Missing tripwires.** Analysis that can't tell the reader what to WATCH
-  is a photo, not a forecast.
-- **Double research.** Running separate sweeps per lane duplicates cost —
-  one evidence base serves both; that's why the merge exists.
+  it is causal.
+- **Boxes without strategy.** TOWS / implications are mandatory.
+- **Missing tripwires.** Analysis that cannot say what to WATCH is a photo.
+- **Double research.** One evidence base serves every lane.
 - **Sensitive inputs.** Competitive intel, confidential financials, and
-  unannounced plans are marked CONFIDENTIAL in the sources appendix; never
-  fabricate a specific to fill an evidence gap; fail closed — when
-  materiality can't be sourced, flag it unverified rather than guessing.
+  unannounced plans are marked CONFIDENTIAL; never fabricate a specific to
+  fill a gap; when materiality cannot be sourced, flag it unverified.
 
 ## SUCCESS-TEST (run before shipping)
-- Every S/W entry carries evidence ref + materiality (H/M/L) + confidence.
-- Every O/T entry states its mechanism for this subject, not a bare trend.
-- Every kept MACRO factor has a stated decision-link, or was cut — not kept
-  for completeness.
-- TOWS cells and/or MACRO implications are present, each traceable to
-  specific entries by ref.
-- Every high-magnitude MACRO factor carries a stated tripwire.
-- Every source in the appendix is dated.
+- Every S/W entry has evidence ref + materiality + confidence.
+- Every O/T entry states its mechanism for this subject.
+- Every kept MACRO factor has a decision-link; every high-magnitude one a
+  tripwire.
+- Every Five Forces rating has 2+ cited evidence items or is Unknown.
+- Competitors sit in tiers with reasons; no blended composite score.
+- No market number without a source or Estimate label.
+- TOWS / implications trace to entries by ref and end in a decision step.
+- Every source is dated.
 
-Worked FULL SWEEP example with this checklist applied:
-`references/example.md`.
+Worked examples: FULL SWEEP [example](references/example.md) · COMPETITIVE
+[example-competitive](references/example-competitive.md).

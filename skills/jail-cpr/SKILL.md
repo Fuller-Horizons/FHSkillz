@@ -1,28 +1,14 @@
 ---
 name: jail-cpr
 metadata:
-  version: 1.5.0
+  version: 1.6.0
 description: >-
-  The CPR skill (Context · Purpose · Results), three lanes, delivered as a
-  polished DOCX (preferred) or PDF document: DESIGN — build a meeting's CPR
-  and an execution-oriented agenda where every item produces information,
-  alignment, a decision, or an assigned action; COMMIT — build a personal or
-  team commitment contract for a defined period (a quarter, a "tour," a
-  fixed number of weeks) with no meeting and no agenda — its own Purpose (an
-  identity-level why, not one sentence) and Results that must be
-  self-contained testable across whatever domains the person names (business,
-  health, relationships, family, community); DEBRIEF — process a meeting, or
-  score a COMMIT period, AFTER it happened: extract decisions, owned actions,
-  and commitments from a transcript, notes, or a period check-in, score them
-  against the planned Results, and route follow-through. Use when asked to
-  "build an agenda", "prep this meeting", "create a CPR", "structure this
-  board/client/team session", "build a personal CPR", "write my quarterly
-  goals contract", "set up my commitment contract for this tour/quarter" —
-  or "what did we decide", "pull the action items from this transcript",
-  "score my results for the quarter", "summarize the decisions from
-  yesterday's meeting". Do NOT use for generic non-CPR task scoping
-  (jail-task-contract) or turning a decision into a runnable operating
-  process (jail-plan).
+  Build a CPR (Context, Purpose, Results) as a DOCX/PDF. DESIGN: build or
+  design an agenda, prep a meeting. COMMIT: personal or team commitment
+  contract for a quarter or "tour", no meeting. DEBRIEF: pull decisions,
+  action items, "what did we decide" and "who owes what" from a transcript;
+  score a period. Do NOT use for generic task/owner scoping
+  (jail-task-contract) or turning a decision into a process (jail-plan).
 ---
 
 # JAIL-CPR
