@@ -22,7 +22,7 @@ You hand it a finished piece of work and the request behind it. It never trusts 
 
 ## What you get
 
-One verdict — PASS, FAIL, or PASS-WITH-FLAGS — with the count of checks behind it, the specific failures ranked by importance, any flags that don't block shipping, and a handoff block for whatever runs next.
+One verdict — PASS, FAIL, PASS-WITH-FLAGS, or UNVERIFIED (the main claim has no proof to check) — with the count of checks behind it, the specific failures ranked by importance, any flags that don't block shipping, and a handoff block for whatever runs next.
 
 ## Example
 

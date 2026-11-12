@@ -1,7 +1,7 @@
 ---
 name: jail-verify
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
   Independently verify a finished output against its task contract, with
   artifacts from the current run, BEFORE it ships. Use when work claims done:
@@ -104,13 +104,13 @@ deliverables first, mark the rest UNVERIFIED rather than skimming all of them.
 
 ## Verdict
 ```
-VERIFICATION: PASS | FAIL | PASS-WITH-FLAGS
+VERIFICATION: PASS | FAIL | PASS-WITH-FLAGS | UNVERIFIED
 Checks: <n> run · <n> pass · <n> fail · <n> unverified
 Failures (ranked): check · the failing observation · required fix
 Flags: concerns that don't block shipping, stated plainly
 Evidence examined: <artifacts, logs, citations opened>
 Checklist used: <which deliverable list>
-VERDICT-JSON: {"verdict":"PASS|FAIL|PASS-WITH-FLAGS","run":n,"pass":n,"fail":n,"unverified":n,"lane":"single|dual"}
+VERDICT-JSON: {"verdict":"PASS|FAIL|PASS-WITH-FLAGS|UNVERIFIED","run":n,"pass":n,"fail":n,"unverified":n,"lane":"single|dual"}
 ```
 The VERDICT-JSON line sits right after the block, matches the `Checks:` counts
 exactly (`pass + fail + unverified = run`), and its label must follow from
@@ -119,8 +119,15 @@ the merged verdict with `"lane":"dual"`. Then the JAIL-HANDOFF block. FAIL → `
 ranked fixes; PASS → `next:` ship / jail-summarize.
 
 **Computed, not judged.** Run at temperature 0. Any fail on checks 1, 2, 4, 6,
-or 9 → FAIL; else any fail or UNVERIFIED → PASS-WITH-FLAGS; all 10 pass with
-artifacts in hand → PASS. Same evidence must yield the same verdict twice —
+or 9 → FAIL; else the main claim's own proof (check 2 or 6) is missing →
+**UNVERIFIED** ("agent says it loaded" with no log or count is not a pass
+with flags); else any fail or UNVERIFIED → PASS-WITH-FLAGS; all 10 pass with
+artifacts in hand → PASS.
+**A fail needs an observed defect:** a wrong number, a missing deliverable, a
+source that doesn't exist or contradicts the claim, a broken constraint. An
+unlabeled inference, a claim the source can't confirm either way, a typo or
+wording issue is a **flag**, never a fail. Correct figures with one
+overreaching sentence → PASS-WITH-FLAGS with that sentence named. Same evidence must yield the same verdict twice —
 state the `Checks:` counts line before the label so the label is derivable from
 it. Worked example: [worked-verdict.md](references/worked-verdict.md).
 

@@ -1,7 +1,7 @@
 ---
 name: jail-prospect
 metadata:
-  version: 1.5.3
+  version: 1.6.0
 description: >-
   Screen a US private company from FREE, authoritative sources — two lanes:
   PROSPECT (business-brokering sell-side + consulting lens, scored brief with
@@ -28,7 +28,7 @@ Turn a company name + website into a decision: **pursue as a brokerage prospect 
 1. **Free sources only.** No PitchBook, ZoomInfo, paid databases, or paywalled data. The catalog is in `references/free-sources.md`. If a fact is only available behind a paywall, mark it **Missing Evidence**.
 2. **Label every line.** Each claim is one of: **Fact** (cited primary/official source) · **Source-Backed Inference** (cited, but interpreted) · **Analyst Judgment** (your read, no direct source) · **Missing Evidence** (unknown).
 3. **No fabricated financials, ever.** Private SMB revenue/EBITDA/owner comp are not public. Never invent them. Provide only an **indicative size band** built from disclosed/derivable proxies (headcount × industry revenue-per-employee, federal awards, facility footprint), and state every assumption. This is triangulation, **not a valuation**.
-4. **Cite or omit.** Every Fact and Inference carries a source URL + date accessed. No citation → it's Analyst Judgment or it's cut.
+4. **Cite or omit, inline.** Every Fact and Inference carries its citation **right next to it** (`[n]` → appendix entry with URL + date accessed), not only in the appendix. No citation → it's Analyst Judgment or it's cut. Same-name businesses elsewhere and named competitors follow the same rule. Before delivery, scan the brief: any Fact without its `[n]` is cut.
 5. **Owner privacy / compliance.** B2B prospecting only. Capture business-relevant facts about the owner (tenure, public role, public statements), not personal data unrelated to the engagement. No scraping behind logins, no intrusive technical testing.
 6. **Recency matters.** Note the date of every time-sensitive claim (reviews, news, filings). Flag anything older than ~24 months as potentially stale.
 

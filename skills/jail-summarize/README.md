@@ -2,7 +2,7 @@
 
 Turn technical findings or a status update into a short brief a busy executive can act on.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.1.
 
 ## What it does
 

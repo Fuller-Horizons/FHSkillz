@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.11.0 — 2026-11-12
+- Core cut about 30% (1,748 → 1,223 words), same rules. Model by lane: Full lane and delegation sets on Opus 5.5 medium; Instant and Lite on Sonnet 5.5 medium (about a tenth of the cost). The frontmatter no longer pins Opus, so the session's model runs it; effort stays medium. Untested.
+
 ## 2.10.4 — 2026-11-12
 - The JAIL-HANDOFF block is the last thing in the reply (one 2.10.3 retest output added a sentence after it). Wording only; untested.
 

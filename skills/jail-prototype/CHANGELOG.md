@@ -1,5 +1,8 @@
 # Changelog — jail-prototype
 
+## 1.3.0 — 2026-11-12
+- On the 1.2.0 base: every build reply opens with a short PROTOTYPE BRIEF (question, shape, timebox, throwaway name, how variants differ, what to send back). This was the one 2.0 change aimed at what failed in the blind test. Untested.
+
 ## 1.2.0 — 2026-07-25 (plugin 0.25.0)
 
 - Step N now ships one fixed SPIKE VERDICT block (QUESTION · SHAPE · TIMEBOX set→actual · LEDGER-CHECK · quoted EVIDENCE · VERDICT · ARCHIVE · CONSUMER) plus a canonical ledger line, replacing prose bullets — the deliverable is now the same shape every run.

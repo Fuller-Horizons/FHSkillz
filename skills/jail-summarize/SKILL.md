@@ -1,7 +1,7 @@
 ---
 name: jail-summarize
 metadata:
-  version: 1.4.0
+  version: 1.4.1
 description: >-
   Turn analysis or technical findings into a decision-forcing brief
   for a board, CEO, owner, or client: lead with the answer, translate tech to
@@ -56,9 +56,10 @@ the default.
 | Line manager | half page | the action needed from their team | light — they speak the domain |
 | Owner / client (non-technical) | one page | the decision, in plain words | full; no unexplained terms; grade ≤ 9 |
 
-## Readability gate (client and owner audiences)
+## Readability gate (every brief, by default)
 Target Flesch-Kincaid grade ≤ 9 for the brief body (board/CEO row may go to
-≤ 11 when terms of art are required; appendix exempt). Check:
+≤ 11 when terms of art are required; appendix exempt). Run it on every brief,
+not only client ones, and report the grade in the handoff. Check:
 `python3 skills/jail-py-toolkit/scripts/readability.py --max-grade 9 brief.md`
 and rewrite the longest sentences it lists. **Manual fallback** (no code
 execution): sentences ≤ 20 words, short common words, and every acronym

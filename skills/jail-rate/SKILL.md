@@ -1,7 +1,7 @@
 ---
 name: jail-rate
 metadata:
-  version: 2.2.0
+  version: 2.3.0
 description: >-
   Rate, score, grade, judge, or evaluate ANY named subject 0.0-10.0 (software,
   code, hardware, small business, idea, plan, program, content, a person's
@@ -87,7 +87,10 @@ Headline, declared rubric, scorecard (Now and Projected as separate columns),
 why, ranked recommendations, projected rating, sources, confidence. Exact
 template: [references/output-format.md](references/output-format.md). Worked
 small-business run: [references/example-scorecard.md](references/example-scorecard.md).
-Quick ask → one line (`X.X/10 — why + evidence`), offer the full scorecard.
+**Default to the quick answer** when the ask is a plain "rate this" with no
+stated stakes: one line (`X.X/10 — why + strongest evidence`) plus the top
+fix, then offer the full scorecard. Full scorecard first when the user asks
+for detail, a rubric, a comparison, or money rides on it.
 
 ## Self-check before delivering (all must pass)
 - Weights shown, sum to 100%; rubric declared **before** any score.

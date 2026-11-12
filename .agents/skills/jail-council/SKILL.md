@@ -1,7 +1,7 @@
 ---
 name: jail-council
 metadata:
-  version: 1.2.0
+  version: 1.3.0
 description: >-
   Convene an LLM COUNCIL for maximum-accuracy answers to consequential or
   contested questions: 3–5 independent models answer blind, adversarially
@@ -35,9 +35,11 @@ or the user declines Tier C when nothing stronger is available.
 
 ## Lane pick (declare it)
 - **FULL** — the complete protocol below (rebuttal round available, 5
-  members for maximum stakes). Default for "convene the council", legal /
-  irreversible / money calls, and skill escalations marked existential.
-- **MINI-COUNCIL** — the affordable everyday lane: 3 members, blind first
+  members for maximum stakes). Use for legal / irreversible / large-money
+  calls, skill escalations marked existential, or when the user asks for
+  the full council.
+- **MINI-COUNCIL (default)** — the affordable everyday lane, including a
+  plain "convene the council": 3 members, blind first
   answers, ONE anonymized review round, chairman synthesis; verification
   round fires only if a load-bearing fact is disputed; no rebuttal round.
   ≈ half the cost of FULL. For contested-but-not-existential calls ("quick

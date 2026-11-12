@@ -1,7 +1,7 @@
 ---
 name: jail-red-team
 metadata:
-  version: 1.3.0
+  version: 1.4.0
 description: >-
   Pressure-test a plan, recommendation, design, or belief before it ships:
   steelman it, then find hidden assumptions, missing stakeholders, dependency
@@ -96,7 +96,7 @@ A single pass finds problems; it does not prove the fixes worked.
 
 ## Output
 ```
-RED-TEAM FINDINGS (ranked by severity × likelihood)
+RED-TEAM FINDINGS (ranked by severity × likelihood; top 5 only)
 1. <finding> — severity: critical|major|minor · basis: Fact [n] | Inference: <one-line reasoning> | Judgment
    → fix, mitigation, or the question that must be answered
    → falsifier: <the cheapest test that would disprove/confirm this>
@@ -105,6 +105,9 @@ RED-TEAM FINDINGS (ranked by severity × likelihood)
 Survives the attack: <what held up, said once, without padding>
 Verdict: PROCEED | PROCEED-WITH-FIXES | RETHINK — one sentence why
 ```
+**Cap: top 5 findings.** List any others in one line ("also noted: …") with
+no falsifier; more than 5 critical findings means the verdict is RETHINK.
+
 Basis rule: every finding's `basis` carries one canonical label (Fact with a
 `[n]` ref, Inference with its reasoning, or Judgment); user-stated premises are
 User-provided. A finding resting on **Judgment** alone cannot be ranked `critical` unless

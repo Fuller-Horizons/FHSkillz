@@ -6,7 +6,7 @@ Part of the **[FHSkillz](../../README.md)** collection. Version 1.1.0.
 
 ## What it does
 
-You give it one metric and a budget before you start. It runs one change at a time and measures the result. Each try gets compared to your best result so far — keep it, or throw it away. Every try goes into a ledger (a running log you never edit by hand), so failed tries count as evidence too, not wasted effort. If you have Python, the companion skill [`jail-py-lab`](../jail-py-lab/) can keep that ledger for you. This skill works fine by hand as well.
+You give it one metric and a budget before you start. It runs one change at a time and measures the result. Each try gets compared to your best result so far — keep it, or throw it away. Every try goes into a ledger (a running log you never edit by hand), so failed tries count as evidence too, not wasted effort. If you have Python, the companion skill [`jail-py-toolkit`](../jail-py-toolkit/) (its lab scripts) can keep that ledger for you. This skill works fine by hand as well.
 
 ## Use it when
 

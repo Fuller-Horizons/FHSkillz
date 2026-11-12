@@ -2,7 +2,7 @@
 
 Turn a vague request into a clear contract before work starts.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.5.0.
 
 ## What it does
 

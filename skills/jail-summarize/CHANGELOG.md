@@ -1,5 +1,8 @@
 # Changelog — jail-exec-brief
 
+## 1.4.1 — 2026-11-12
+- Readability gate runs on every brief by default and the grade is reported in the handoff. Untested.
+
 ## 1.4.0 — 2026-11-12
 
 - Added a readability gate for owner/client audiences (Flesch-Kincaid grade ≤ 9; board/CEO may reach ≤ 11) with `jail-py-toolkit/scripts/readability.py` and a manual fallback; new Owner/client row in the audience table and pre-ship item 8.

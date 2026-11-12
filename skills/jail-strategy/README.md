@@ -2,7 +2,7 @@
 
 Turn a business situation into one strategy call you can act on.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.3.1.
 
 ## What it does
 

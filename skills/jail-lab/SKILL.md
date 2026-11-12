@@ -68,7 +68,7 @@ In plain language, fix five things — they don't change mid-run:
    Blast radius rule · `unknowns` per the envelope (empty list if none).
 
 ## Running it
-- **With the companion skill `jail-py-lab` installed** (needs code
+- **With the companion skill `jail-py-toolkit` (lab scripts) installed** (needs code
   execution): `lab-run.py` appends measured entries and computes verdicts;
   `lab-report.py` summarizes the ledger. Plain-language flow: tell it what
   you changed, why, and the number — it does the bookkeeping.

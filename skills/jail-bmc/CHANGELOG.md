@@ -1,5 +1,8 @@
 # Changelog — business-model-canvas
 
+## 1.5.0 — 2026-11-12
+- On the 1.3.0 base: wrong-lane check (SWOT/PESTLE → jail-strategy, or write it now; never questions only) and an operating owner's current figures count as VALIDATED with a User-provided ref (both 1.3.0 and 1.4.x failed that case). Untested.
+
 ## 1.4.3 — 2026-11-12
 - Content reverted to 1.3.0. 1.4.x did not beat 1.3.0 in blind live tests (0.27 batch 2: 8/8 → 7/8; round-1 fix 6/8 → 5/8). Owner decision: stop test rounds and keep the version that scored best.
 

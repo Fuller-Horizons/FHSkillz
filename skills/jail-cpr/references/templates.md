@@ -1,3 +1,15 @@
+## Field lists (moved from SKILL.md)
+**DESIGN:** MEETING (title · date · duration) · PARTICIPANTS (name — role) ·
+CONTEXT · PURPOSE (one sentence) · RESULTS R1… (each testable) · PRE-WORK
+(item · owner · due) · REQUIRED INPUTS · AGENDA (# · topic · owner · time ·
+objective · expected output → Result#) · PARKING LOT · ACTION ITEMS ·
+FOLLOW-UP.
+**COMMIT:** DEADLINE (end date · start · length) · CONTEXT · PURPOSE ·
+RESULTS (R# — domain — testable statement) · CARRY-FORWARD · CHECK-IN
+CADENCE. No agenda, no owners other than the person.
+**DEBRIEF:** DECISIONS · FLAGGED (not decisions) · ACTIONS · UNOWNED ·
+COMMITMENTS / OPEN QUESTIONS · RESULTS AUDIT · ROUTING.
+
 # Output templates — jail-cpr
 
 **DESIGN**

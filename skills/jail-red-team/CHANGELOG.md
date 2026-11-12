@@ -1,5 +1,8 @@
 # Changelog — jail-red-team
 
+## 1.4.0 — 2026-11-12
+- Output capped at the top 5 findings; extras go on one "also noted" line. Untested.
+
 ## 1.3.0 — 2026-11-12
 
 - Every finding's `basis` now carries a canonical label (Fact [n] / Inference / Judgment); a Judgment-only finding cannot be ranked `critical` unless its falsifier is RUN-NOW and confirmed.

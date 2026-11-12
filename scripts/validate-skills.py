@@ -85,7 +85,7 @@ def run_toolkit_checks(repo_root):
     errors = []
     skills_dir = os.path.join(repo_root, "skills")
     # 1 — all bundled scripts compile
-    for skill in ("jail-py-toolkit", "jail-py-lab"):
+    for skill in ("jail-py-toolkit",):
         sdir = os.path.join(skills_dir, skill, "scripts")
         if not os.path.isdir(sdir):
             errors.append(f"missing companion scripts dir: {sdir}")

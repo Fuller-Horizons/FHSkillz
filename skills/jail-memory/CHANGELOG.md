@@ -1,5 +1,8 @@
 # Changelog — jail-memory
 
+## 1.5.0 — 2026-11-12
+- Narrowed to project decision logs, verdict ledgers and lessons kept as workspace files; personal facts and preferences are left to the app's built-in memory. Untested.
+
 ## 1.4.0 — 2026-07-25 (plugin 0.25.0)
 
 - **SUCCESS-TEST** after the six-check gate: all 8 frontmatter keys present, `id` recomputed fresh as MEMORY.md's current max + 1 (never carried from memory/session), `type`/`status` in the real vocab — any failure names which check failed and refuses the write.

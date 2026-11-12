@@ -1,7 +1,7 @@
 ---
 name: jail-bmc
 metadata:
-  version: 1.4.3
+  version: 1.5.0
 description: >-
   Build or evaluate a nine-block Business Model Canvas (customer segments,
   value propositions, channels, customer relationships, revenue streams, key
@@ -21,6 +21,12 @@ A canvas full of hopes is brainstorming with borders. This skill's contract:
 **validated information and hypotheses never wear the same clothes**, and
 the riskiest assumption leaves with an experiment attached.
 
+**Wrong-lane check first.** Asked for a SWOT, TOWS, PESTLE, five forces or
+competitor scan? Say in one line that it's **jail-strategy**'s job and hand
+off by name, or (if unavailable) write it now in that shape from what was
+given; questions come after. Never force a canvas or reply with questions
+only.
+
 ## Chain
 1. **jail-task-contract** — pin the venture/product, its stage (idea vs
    operating), the decision the canvas serves (invest? pivot? launch?), and
@@ -36,7 +42,10 @@ the riskiest assumption leaves with an experiment attached.
    evidence strength: none/weak/comparable-based) · confidence.
    **Fail closed:** VALIDATED needs a checkable evidence ref (dated
    citation, transaction, signed commitment) or it defaults to
-   HYPOTHESIS; step 4 may not start until every element is labeled.
+   HYPOTHESIS. An operating owner's own current figures (customers, prices,
+   costs, volumes) are VALIDATED with ref `User-provided: owner, <date>` and a
+   spot-check note; forecasts and plans stay HYPOTHESIS. Step 4 may not start
+   until every element is labeled.
    **Fixed schema**, blocks always in this order (customer segments,
    value propositions, channels, customer relationships, revenue
    streams, key resources, key activities, key partnerships, cost

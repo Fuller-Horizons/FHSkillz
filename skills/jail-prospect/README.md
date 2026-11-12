@@ -2,7 +2,7 @@
 
 Research a private company before you approach it, buy from it, or partner with it.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.4.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.6.0.
 
 ## What it does
 

@@ -1,5 +1,8 @@
 # Changelog — company-prospect-research
 
+## 1.6.0 — 2026-11-12
+- Every Fact and Inference carries an inline `[n]` citation (URL + date in the appendix); uncited Facts are cut before delivery. Blind tests showed both 1.4.0 and 1.5.x stating facts without per-fact sources. Untested.
+
 ## 1.5.3 — 2026-11-12
 - Content reverted to 1.4.0. 1.5.x did not beat 1.4.0 in blind live tests (0.27 batch 2: tie 6/8; round-1 fix 6/8 → 5/8). Owner decision: stop test rounds and keep the version that scored best.
 

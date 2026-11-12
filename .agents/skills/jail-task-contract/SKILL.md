@@ -1,7 +1,7 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.4.0
+  version: 1.5.0
 description: >-
   Turn an ambiguous, multithreaded, or high-stakes request into a 14-field TASK
   CONTRACT with testable acceptance criteria before work starts, and guard scope
@@ -20,6 +20,10 @@ another model, an agent team, or a human.
 
 **Proportion first.** A trivial single-step ask (rename files, fix a typo)
 gets no contract: do it, or say "trivial — no contract needed."
+
+**QUICK CONTRACT** (clear, low-stakes, internal): Objective · Deliverables ·
+Non-goals · testable Completion criteria · Approval-required actions. Full 14
+fields for client, cross-team, spend or high-stakes work; say which you used.
 
 ## Step 1 — Cross-examine (staged, not an interrogation)
 **Look up facts; ask only decisions.** Anything discoverable from the
@@ -134,33 +138,23 @@ AC-001 — <scenario: the starting condition>
 - Secrets/PII/client-confidential inputs are named *by class* in field 5 and
   never pasted as raw values into the contract or the handoff.
 
-## Delivery (client-facing)
-When the contract goes to a client (always for ENGAGEMENT), render it as a
-clean document: the docx skill or a Docs artifact when available, otherwise
-clean Markdown. Plain 9th-grade English, short sentences, no jargon, claim
-labels kept. No YAML in the client copy — the JAIL-HANDOFF stays in the chat
-or working copy.
-
-## Handoff
-End with the JAIL-HANDOFF block (docs/JAIL-CONSTITUTION.md): status,
-facts/assumptions/unknowns, outputs (the contract), `next` (usually
-jail-research, jail-plan, or direct execution), and approval_required carried
-from field 14. Worked example:
+## Delivery and handoff
+Client copies (always for ENGAGEMENT): a clean document (docx skill or Docs
+artifact, else Markdown), plain 9th-grade English, labels kept, no YAML. End
+the working copy with the JAIL-HANDOFF block: status, facts/assumptions/
+unknowns, outputs, `next` (jail-research, jail-plan, or execution),
+approval_required from field 14. Example:
 [references/example-engagement-contract.md](references/example-engagement-contract.md).
 
 ## Related skills
-Deliverable is a *prompt* → **jail-prompt**. Contract complete and research
-needed → **jail-research**. Turning the contract into a runnable process →
-**jail-plan**. Multi-agent execution → **jail-orchestrate**. Verify the
-finished work against this contract → **jail-verify**.
+Prompt → **jail-prompt** · research → **jail-research** · runnable process →
+**jail-plan** · multi-agent → **jail-orchestrate** · check → **jail-verify**.
 
 ## Gotchas
 - **Question fatigue.** Default lane: round 3 = marked assumptions, shown.
   Grill mode is exempt, but even grilling asks decisions, never facts.
-- **Contract theater.** Filling all 14 fields with restated request text. Each
-  field must add information the request didn't state.
-- **Untestable done.** "Completion: report delivered" fails Rule 7. What check
-  would FAIL if the report were bad or incomplete?
+- **Contract theater.** Fields that restate the request add nothing.
+- **Untestable done.** "Report delivered" fails Rule 7: name the check that fails on a bad report.
 - **Silent scope creep.** Absorbing "one more thing" into a running contract.
   Additions touch field 4 → note them; touch fields 1–3 → new contract.
 - **Laundered assumptions.** An assumption that survives two rounds unmarked

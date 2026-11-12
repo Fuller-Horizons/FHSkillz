@@ -1,5 +1,8 @@
 # Changelog — rate-skill
 
+## 2.3.1 — 2026-11-12
+- Trimmed: See also, Validation & history and Gotchas condensed (rules unchanged); marked as a maintainer tool.
+
 ## 2.3.0 — 2026-07-25 (plugin 0.25.0)
 
 - Fixed README's stale "Version 2.0.0" stamp (line 5) to match SKILL.md frontmatter and this changelog's top entry.
