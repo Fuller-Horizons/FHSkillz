@@ -4,16 +4,19 @@ Load this when writing the prompt block. SKILL.md carries the one-line version o
 
 ## Fields
 
-- **METADATA.** Use YAML with a fixed key set so downstream agents can parse the handoff: `inputs:` `outputs:` `params:` (for example `temperature: 0.0` for idempotent structure) `requires:` `produces:`. Keep every key, even when the value is "none".
+- **METADATA.** Use YAML with a fixed key set so downstream agents can parse the handoff: `inputs:` `outputs:` `params:` (for example `strict-schema: true` for idempotent structure) `requires:` `produces:`. Keep every key, even when the value is "none".
 - **ROLE.** Expert framing, only if it changes expertise or standards. Otherwise drop it (see role cosplay in [antipatterns.md](antipatterns.md)).
 - **CONTEXT.** User-specific facts, constraints, environment, and what has been tried, all taken from Phase 1.
-- **OBJECTIVE.** One sentence.
+- **OBJECTIVE.** One sentence. If you want depth or initiative beyond the literal ask, say so here; current Claude models do what is asked, at the level asked.
 - **SUCCESS TEST.** How the output is judged, from Phase 1. It must include at least one programmatic, machine-checkable check (a test suite run, a script, a count, a schema parse) and must not rely only on subjective review. If the output is rendered or executed downstream, add the malicious-sample assertion from [security.md](security.md).
+- **QUALITY BAR.** 3–5 task-specific lines that define a good answer, beyond format: "every number sourced or marked Unknown", "recommendation in the first sentence", "written for an owner, not an engineer". Each line is pass/fail, so it can be graded on the test set ([prompt-testing.md](prompt-testing.md)). Generic lines ("high quality", "clear") don't count.
+- **EXAMPLES.** 1–3 good outputs in `<example>` tags, each different from the others, each passing the SUCCESS TEST and QUALITY BAR. Prefer the user's own past work; label written ones "illustrative". Say what to copy (structure, depth) and what not to (topic). Omit when the format is trivial. Rules: [claude-prompting.md](claude-prompting.md).
 - **PROCESS.** Numbered steps. Constrain outcomes, not keystrokes.
 - **SOURCES.** Tier, recency, and cross-check rule, if research is involved. Name the retrieval capability the prompt has (live search, connector, document store); see [sources.md](sources.md).
 - **OUTPUT FORMAT.** Show the exact shape, not just its name: a filled mini-example, a header row, or a schema the model copies (pre-engineered schemas in [templates.md](templates.md)). Mandate a strict JSON Schema when structural predictability matters. For factual or research output, tag each material claim Fact / Inference / Unknown as structured fields (`status`, `evidence_count`, `source_ids`), not prose, so a checker can reject an unevidenced Fact. Prefer Unknown to a confident guess. Details: [truth-tagging.md](truth-tagging.md).
 - **CONSTRAINTS.** Scope; length limits (include explicit token budgets or character limits to prevent context bloat); client-portability requirements (stay plaintext or Markdown, avoid proprietary IDE commands); things to avoid.
 - **VERIFICATION PLAN.** What to check next. Mark each step [AUTO] (a tool or second model runs it) or [HUMAN]. Lead with the check most likely to falsify the output, not the easiest confirmation. If [AUTO] checks disagree, mark the result provisional.
+- **RUN SETTINGS.** One line: model, effort, tools, thinking (API). Cheapest setting that passes the test set; never temperature/top_p for current Claude models. Table: [generation-settings.md](generation-settings.md).
 - **BEFORE RETURNING.** Self-check against the SUCCESS TEST; 1-5 self-score on grounded / verifiable / scoped / format-matched plus confidence (0-100%); flag gaps and assumptions; then surface the one or two knobs the user can turn for a different cut (shorter, more sources, regrouped). That is a bounded revision handle, not an open loop.
 
 ## Chains
@@ -31,6 +34,6 @@ Even when the user asks for "one prompt", if one cannot do the job well, give th
 
 - Sanity-check against [antipatterns.md](antipatterns.md) (over-constraining, fake precision, leading the witness, unverifiable tests), then lint.
 - Self-critique, one round. Where a second model or a retrieval tool exists, send the critique and any citation check there; same-model critique is the fallback. Where this skill cannot run (another model, a bare chat), hand over [meta-prompt.md](meta-prompt.md).
-- Offer to save the approved prompt to a project-local `prompts.json` or a file under `prompts/` for reuse, then offer to run it. If accepted, execute with the tools Phase 2 identified. If declined, stop cleanly.
-- Post-run tighten loop, one pass: grade the actual output against the SUCCESS TEST; if it falls short, name the single highest-impact change, apply it, re-grade once. One targeted fix beats five cosmetic ones.
-- Dry run (high-stakes prompts): draft a mock output and confirm the declared OUTPUT FORMAT holds it. Determinism self-test: for prompts that declare `temperature: 0.0` and a strict schema, generate against the same mock twice and diff the structures. Identical structure confirms the idempotency METADATA promises; a diff means the schema is not pinning the output.
+- Test it per lane ([prompt-testing.md](prompt-testing.md)): Lite runs once on the user's input; Full or reusable prompts run a 3–5 input test set, fix one thing per round, keep only improvements, and compare against the plain request.
+- Offer to save a tested prompt to the library ([prompt-library.md](prompt-library.md)), then offer to run it. If accepted, execute with the tools Phase 2 identified. If declined, stop cleanly.
+- Dry run (high-stakes prompts): draft a mock output and confirm the declared OUTPUT FORMAT holds it. Determinism self-test: for prompts that pin the model ID and effort and declare a strict schema, generate against the same mock twice and diff the structures. Identical structure confirms the idempotency METADATA promises; a diff means the schema is not pinning the output.

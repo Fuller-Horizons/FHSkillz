@@ -1,58 +1,68 @@
-# Per-mode generation settings
+# Run settings: model, effort, tools
 
-Load this when the prompt will run somewhere you control inference parameters (an
-API, SDK, or playground). The Phase 3 prompt shapes behavior through *words*;
-these knobs shape the same behavior through *configuration* — the layer beneath
-the prompt.
+Load this when writing the RUN SETTINGS line. The prompt shapes behavior
+through words; run settings shape it through configuration. **A control set as
+a setting beats the same control asked for in words**, so push controls down
+here wherever the host allows.
 
-## The principle
+## What exists on current Claude models (checked 2026-11-12)
 
-**A control you set as a parameter beats the same control asked for in a prompt**
-— the model can't talk its way around a limit it runs under. A factual prompt
-pinned at `temperature 0` literally can't wander as far as one merely *told* not
-to. Push controls down to this layer wherever the platform allows; where it
-doesn't, the prompt block is the fallback.
+| Control | Where | Notes |
+|---|---|---|
+| **Model** | Claude Code `--model` / `/model`, skill frontmatter `model:`, API `model` | Aliases `haiku`, `sonnet`, `opus` track the latest; pin a full ID (e.g. `claude-opus-5-5`) when reproducibility matters. |
+| **Effort** | Claude Code `--effort` / `/effort`, skill frontmatter `effort:`, API `output_config.effort` | `low` · `medium` · `high` · `xhigh` · `max` (levels vary by model). Default `medium` on Opus 5.5, Sonnet 5.5, Haiku 5.5; `high` on most others. Covers thinking and answer tokens. |
+| **Thinking** | API `thinking` (`adaptive` recommended; `enabled` with `budget_tokens` on models that still accept budgets) | Sonnet 5.5 rejects thinking budgets; use effort. |
+| **Structured output** | Tool / JSON schema where the host enforces it | The strongest format control: malformed output is rejected, not hoped against. |
+| **Stop sequences** | API `stop_sequences` | End output at a known tag. |
+| **Tools** | Host tool settings, skill `allowed-tools` | Least privilege: only what the PROCESS needs. |
 
-This connects to the epistemic mode declared in Phase 1: each mode wants a
-different configuration.
+**Not available or not accepted:** `temperature`, `top_p`, `top_k` return an
+error on Sonnet 5.5, and Anthropic's migration guidance says to remove them;
+`seed`, presence/frequency penalties and logprobs are not in the Messages API.
+Don't put them in a Claude prompt's settings. On other vendors' models, follow
+that vendor's docs.
 
-## Recommended settings by mode
+## Picking model and effort
 
-| Mode | Temperature | Top-P | Presence pen. | Response format | Seed | Observability |
-|---|---|---|---|---|---|---|
-| **Factual** | 0.0–0.2 | 0.8 | ~0 | Strict JSON schema | Fixed | Logprobs on |
-| **Research** | 0.2–0.4 | 0.9 | ~0.2 | JSON + tool calls | Fixed | Logprobs + retrieval tool |
-| **Brainstorm** | 0.7–1.0 | 0.95 | 0.5–0.7 | Prose OK | None | — (tag claims `Infer`) |
-| **Critique** | 0.3–0.5 | 0.9 | 0.3–0.5 | Structured | Fixed | Route to a *different* model |
+Use the cheapest setting that passes the prompt's SUCCESS TEST and QUALITY BAR
+on the test inputs (prompt-testing.md). Starting points:
 
-Tune temperature *or* top-p, not both. Keep presence penalty near 0 in Factual
-mode — rewarding novelty over accuracy *increases* hallucination; it's only
-useful in the contrary-case step, to push for genuinely different ground.
+| Work | Model | Effort |
+|---|---|---|
+| Extract, classify, reformat to a schema, simple rewrite | Haiku | low |
+| Draft, summarize, analyze supplied data, everyday prompts | Sonnet | medium |
+| Client-facing analysis, research synthesis, judgment calls, writing other prompts | Opus | medium |
+| Contested, high-stakes, multi-step reasoning with many constraints | Opus | high |
+| Long agentic build or debugging session | Opus | high or xhigh |
 
-## What each knob buys the protocol
+Move up one step only when a test input fails because of reasoning depth, not
+because of missing context or a vague prompt. Those are fixed in the prompt,
+not with a bigger model.
 
-- **Temperature / top-p** → the config form of "mode behavior, no drift."
-- **Response format (JSON / schema)** → the single most important knob: it's what
-  turns the truth-tag schema (see [truth-tagging.md](truth-tagging.md)) from
-  free-text theater into something the client rejects when malformed.
-- **Seed** → reproducible audits: change one prompt rule, fix the seed, and see
-  whether *that* change — not random sampling — moved the result. Serves the
-  determinism self-test in Phase 3.
-- **Logprobs** → an external check on self-reported tags: if a claim is tagged
-  `Known` but token confidence is low, flag the mismatch.
-- **Tools / function calling** → how an `[AUTO]` verification step actually
-  *runs* (retrieval, a second-model cross-check) instead of sitting as text.
+## By epistemic mode
 
-## Availability caveat (verify against current docs)
+| Mode | Effort | Format control | Other |
+|---|---|---|---|
+| Factual | medium (high if multi-source) | strict schema | search tool on; Unknown allowed |
+| Research | medium–high | schema + source ids | search/fetch on; cite every Fact |
+| Brainstorm | low–medium | light | ask for range: "12 options, at least 4 unusual" |
+| Critique | medium–high | structured findings | run on a different model from the author when possible |
 
-Provider support varies and changes — confirm before relying on any of these:
+Variety in Brainstorm comes from the prompt (ask for range and contrast), not
+from a temperature setting.
 
-- **OpenAI, xAI** — widest set incl. seed, logprobs, logit bias, structured output.
-- **Anthropic** — temperature, top-p, top-k, stop, tools/structured output;
-  historically no seed, no penalties, no logit bias.
-- **Google Gemini** — temperature, top-p/k, response schema, tools; no seed/penalties.
-- **Perplexity (Sonar)** — temperature, top-p/k, penalties, plus native search
-  grounding (lean on the claim-to-source audit, not the knobs).
-- **Consumer web chat apps (all vendors)** — expose essentially none of these;
-  there the Phase 3 prompt block and [meta-prompt.md](meta-prompt.md) are your
-  only control surface.
+## Reproducibility
+
+There is no seed. For audits: pin the full model ID and effort, use a strict
+output schema, keep the test inputs fixed, and run twice. Structural
+differences mean the schema isn't pinning the output.
+
+## The RUN SETTINGS line
+
+Every engineered prompt ends its block with one line, e.g.:
+
+`RUN SETTINGS: model sonnet · effort medium · tools: web search, file read · thinking: adaptive (API)`
+
+Sources (accessed 2026-11-12): https://code.claude.com/docs/en/skills ·
+https://code.claude.com/docs/en/model-config · https://platform.claude.com/docs/en/build-with-claude/effort ·
+https://platform.claude.com/docs/en/models/sonnet-5/migration-guide

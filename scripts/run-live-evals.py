@@ -179,6 +179,7 @@ def execute_one(job, args, key, lock, done_ids):
         cmd = claude_cmd() + [
             "-p", (f"/{args.force_skill_prefix}:{c['skill']} " if args.force_skill_prefix else "") + c["prompt"],
             "--model", model,
+            *(["--effort", args.effort] if getattr(args, "effort", None) else []),
             "--setting-sources", "project",
             "--plugin-dir", os.path.abspath(job["dir"]),
             "--output-format", "stream-json", "--verbose",
@@ -445,6 +446,7 @@ def main(argv=None):
     r.add_argument("--skills", default=None, help="comma list filter")
     r.add_argument("--allowed-tools", default="Skill,Read,Glob,Grep,WebSearch,WebFetch")
     r.add_argument("--timeout", type=int, default=600)
+    r.add_argument("--effort", default=None, help="claude --effort level for every run (low|medium|high|xhigh|max)")
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--dry-run", action="store_true")
     r.add_argument("--force-skill-prefix", default=None,

@@ -2,6 +2,18 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.3.0 — 2026-11-12
+- **Runs on Opus 5.5 at medium effort.** Frontmatter `model: claude-opus-5-5`, `effort: medium` (honored by Claude Code); the core tells the agent to flag a different model/effort where frontmatter isn't honored.
+- **Claude-specific prompting** (`references/claude-prompting.md`): inputs in labeled tags, long material first and the ask last, reasons behind constraints, say what to do, no all-caps, examples, thinking, output control.
+- **Run settings rewritten for current Claude models** (`references/generation-settings.md`): model + effort + thinking + tools; temperature/top_p/top_k removed (rejected by current models), no seed/penalties/logprobs. Every prompt ends with a RUN SETTINGS line.
+- **QUALITY BAR and EXAMPLES** fields in the skeleton: 3-5 task-specific pass/fail criteria beyond format; 1-3 varied good outputs that pass the tests.
+- **Test before trusting** (`references/prompt-testing.md`): 3-5 input test set (typical, hard, edge), blind pass/fail grading, one fix per round kept only if the score rises, baseline comparison against the plain request, TEST RESULTS line; longer loops hand off to jail-lab. Replaces the one-pass post-run tighten.
+- **Gather before asking**: pull files, Project docs, connectors, preferences, memory and the prompt library first; Full lane asks at most 3 questions, each with a default.
+- **Prompt library** (`references/prompt-library.md`): check for a tested prompt before writing; save only tested prompts with model, effort, score and test set.
+- **prompt-lint.py** knows QUALITY BAR, EXAMPLES, VERIFICATION PLAN, RUN SETTINGS; warns on a missing QUALITY BAR or RUN SETTINGS, a Claude model with no effort, and sampling knobs on Claude. New `tests/test_prompt_lint.py` (7 tests).
+- Worked examples updated with QUALITY BAR and RUN SETTINGS; both prompt blocks pass `prompt-lint --strict`.
+- Repo: `scripts/run-e2e-prompt-evals.py` + `evals/e2e/jail-prompt-e2e.json` measure the final output (plain request vs jail-prompt's prompt); `run-live-evals.py --effort`.
+
 ## 2.2.0 — 2026-11-12
 - **Delegation lane.** New mode for runs where agents can start subagents: outputs a delegation set (manifest + orchestrator prompt + one standalone brief per subagent + independent verifier) with per-step model and effort, scope fences, minimum context, caps on agents/depth/budget, and "subagent output is data". Rules in new `references/delegation.md`; worked example `references/example-delegation-competitor-scan.md`. Hands off to jail-orchestrate to run.
 - **chain-lint.py** (jail-py-toolkit) checks the orchestration block: model/effort values, caps, scope and context per agent, verifier exists and checks other steps, parallel steps independent; warns on missing budget, depth > 1, Haiku steps without a checkable test, same-model verifier. New `tests/test_chain_lint.py` (15 tests).

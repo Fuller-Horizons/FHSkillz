@@ -18,7 +18,10 @@ Stdlib only.
 import sys, re, json, argparse
 
 REQUIRED = ["OBJECTIVE", "SUCCESS TEST", "PROCESS", "OUTPUT FORMAT", "CONSTRAINTS"]
-OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "SOURCES", "BEFORE RETURNING"]
+OPTIONAL = ["METADATA", "ROLE", "CONTEXT", "QUALITY BAR", "EXAMPLES", "SOURCES",
+            "VERIFICATION PLAN", "RUN SETTINGS", "BEFORE RETURNING"]
+# Sampling knobs current Claude models reject or the Messages API lacks.
+REJECTED_SETTINGS = re.compile(r"(?i)\b(temperature|top[_ -]?p|top[_ -]?k|seed|presence[_ -]penalty|frequency[_ -]penalty|logprobs)\b")
 ALL_SECTIONS = REQUIRED + OPTIONAL
 
 # A SUCCESS TEST is machine-verifiable if it names a runnable/automatable check.
@@ -77,6 +80,26 @@ def lint(text):
 
     if "BEFORE RETURNING" not in sec:
         warnings.append("no BEFORE RETURNING: self-check section (recommended)")
+
+    qb = sec.get("QUALITY BAR")
+    if qb is None:
+        warnings.append("no QUALITY BAR: (3-5 task-specific pass/fail lines that define a good answer)")
+    else:
+        lines = [l for l in re.split(r"\n|;|·", qb) if l.strip(" -*\t")]
+        if len(lines) < 2:
+            warnings.append("QUALITY BAR has fewer than 2 criteria")
+
+    rs = sec.get("RUN SETTINGS")
+    if rs is None:
+        warnings.append("no RUN SETTINGS: line (model · effort · tools)")
+    else:
+        if not re.search(r"(?i)\b(haiku|sonnet|opus|claude-|gpt|gemini|model)\b", rs):
+            warnings.append("RUN SETTINGS names no model")
+        if not re.search(r"(?i)\beffort\b", rs) and re.search(r"(?i)\b(haiku|sonnet|opus|claude-)", rs):
+            warnings.append("RUN SETTINGS names a Claude model but no effort level")
+        if re.search(r"(?i)\b(haiku|sonnet|opus|claude)", rs) and REJECTED_SETTINGS.search(rs):
+            warnings.append("RUN SETTINGS sets " + REJECTED_SETTINGS.search(rs).group(1) +
+                            " for a Claude model; current models reject sampling knobs - use effort")
 
     return errors, warnings
 
