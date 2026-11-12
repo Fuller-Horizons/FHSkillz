@@ -151,6 +151,51 @@ class TestChainLintDelegation(unittest.TestCase):
         self.assertEqual(rc, 1)
         self.assertIn("haiku step needs", err)
 
+    def test_escalate_must_be_stronger(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "compare")["agent"].update(escalate_to="haiku")))
+        self.assertEqual(rc, 1)
+        self.assertIn("not stronger", err)
+
+    def test_escalate_must_be_valid(self):
+        rc, _, err = lint(mutate(lambda m: step(m, "scan-a")["agent"].update(escalate_to="gpt-9")))
+        self.assertEqual(rc, 1)
+        self.assertIn("escalate_to", err)
+
+    def test_missing_max_output_warns(self):
+        m = mutate(lambda m: step(m, "compare")["agent"].pop("max_output"))
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("max_output", err)
+
+    def test_cheap_step_without_escalation_warns(self):
+        m = mutate(lambda m: step(m, "scan-b")["agent"].pop("escalate_to"))
+        rc, _, err = lint(m, "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("no agent.escalate_to", err)
+
+    def test_bad_check_policy_and_batch(self):
+        def f(m):
+            m["orchestration"]["check_policy"] = "some"
+            step(m, "scan-a")["agent"]["batch"] = 0
+        rc, _, err = lint(mutate(f))
+        self.assertEqual(rc, 1)
+        self.assertIn("check_policy", err)
+        self.assertIn("agent.batch", err)
+
+    def test_too_many_agents_warns(self):
+        def f(m):
+            base = step(m, "scan-a")
+            for i in range(8):
+                s = copy.deepcopy(base)
+                s["id"] = f"scan-x{i}"
+                s["produces"] = [f"prices-x{i}"]
+                m["steps"].insert(0, s)
+                step(m, "compare")["requires"].append(f"prices-x{i}")
+            m["orchestration"]["max_agents"] = 20
+        rc, _, err = lint(mutate(f), "--strict")
+        self.assertEqual(rc, 1)
+        self.assertIn("batch items into fewer agents", err)
+
 
 if __name__ == "__main__":
     unittest.main()

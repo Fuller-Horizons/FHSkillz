@@ -103,30 +103,94 @@ BEFORE RETURNING: check yourself against the SUCCESS TEST; list gaps
   list. It does **not** get worker transcripts or their "done" claims.
 - It returns PASS / FAIL / UNVERIFIED per check, with the evidence it used.
 
-## Picking the model per step
+## Quality per token: the architecture
 
-Use the cheapest model that passes the step's SUCCESS TEST. Starting points,
-not guarantees:
+Goal: the best output (on goal, authoritative, fewest errors) for the fewest
+tokens. Strong-model tokens go only where they change the result. Each rule
+below cuts tokens without lowering the bar.
 
-| Work in the step | Start with | Effort |
-|---|---|---|
-| Extract, classify, scan, reformat to a fixed schema | Haiku | low |
-| Draft, analyze, compare, grade against a rubric | Sonnet | medium |
-| Orchestrate and merge, contested judgment, final synthesis for a client | Opus | medium–high |
-| Lead agent or final check on the hardest, highest-stakes job, after Opus failed the test set | Fable 5.2 (`claude-fable-5-2`) | medium |
-| Independent verification | A different model from the producer when possible (else a fresh agent), Sonnet or better | medium |
+**1. Fewer, fuller agents.** Every subagent re-reads its system prompt and
+tools before doing anything, so each one carries a fixed overhead. Batch
+items: 40 websites = 4 agents × 10 sites, not 40 agents. Start a separate agent
+only for a different scope, for isolation (the checker), or for parallel speed
+that matters to the user.
 
-Fable version rule (5.2 by default, 5.1 only when 5.2 isn't served or a tested prompt was validated on 5.1), and why not to use Fable for security-testing steps: [generation-settings.md](generation-settings.md).
+**2. Pass pointers, not payloads.** Give a subagent file paths, URLs or row
+ids and let it read only what it needs. Never paste the conversation or a whole
+document "for context".
 
-A Haiku step must have a machine-checkable SUCCESS TEST, so a cheap miss is
-caught. Before a large run, try one sample per cheap step; move it up a tier
-only if it fails its test.
+**3. Same opening, different ending.** Write parallel briefs so the long fixed
+part (rules, output schema, examples) is word-for-word identical and comes
+first, and the part that changes (the item, the inputs) comes last. Hosts with
+prompt caching reuse the identical opening, which costs a fraction of fresh
+input.
+
+**4. Compact, fixed returns.** Subagents return only the JSON fields the next
+step uses: no narration, no restated instructions. Evidence is a source id plus
+a quote of 25 words or fewer, never the full page. Every brief caps its output
+(`agent.max_output`). The lead agent's context stays small, so its merge stays
+sharp.
+
+**5. Cascade: cheap first, escalate only what fails.** A mechanical step runs
+on the cheap model. Items that fail a machine check, come back Unknown, or are
+flagged low confidence re-run on the stronger model (`agent.escalate_to`). Only
+the hard items pay strong-model prices; the bar stays the same because every
+item must pass the same check.
+
+**6. Free checks before paid checks.** Scripts cost no model tokens: schema
+parse, counts, sums, citation resolution (`cite-check.py`), labels
+(`label-lint.py`). Run them first. The model checker then reads only what
+scripts can't judge: does the source actually say this?
+
+**7. Check by risk, not by volume.** The checker verifies every high-risk
+claim (numbers, prices, legal or safety facts, anything client-facing) against
+its source, and a sample of the rest. A failure in the sample means checking
+everything.
+
+**8. Strong models where judgment lives.** The lead agent's merge and the final
+check decide the quality of the whole run, so they get the strong model (Opus
+5.5; Fable 5.2 for the hardest jobs). Extraction and formatting never do.
+
+**9. Effort matches the step.** `low` for mechanical work, `medium` by default,
+`high` only for the merge or check of a high-stakes job. Effort covers the
+model's thinking too, so it is a direct token setting.
+
+**10. Fetch once.** Steps that need the same source share one fetched copy
+(a file the steps read) instead of each fetching it again.
+
+### Picking the model per step
+
+| Work in the step | Model | Effort | Escalate to |
+|---|---|---|---|
+| Extract, classify, scan, reformat to a fixed schema | Haiku | low | Sonnet (failed or Unknown items only) |
+| Draft, analyze, compare, grade against a rubric | Sonnet | medium | Opus |
+| Lead agent: plan, merge, final synthesis for a client | Opus 5.5 | medium (high if high-stakes) | Fable 5.2 if Opus fails the test set |
+| Independent check | A different strong model from the producer (Opus 5.5 or Fable 5.2) | medium | — |
+| Security-testing steps | Opus 5.5 (Fable blocks and reroutes them) | medium | — |
+
+A cheap step must have a machine-checkable SUCCESS TEST, so a miss is caught
+and escalated rather than shipped. For a prompt set that will be reused, try
+each cheap step on 2–3 test items first; if the cheap model fails more than one
+in five, start that step one tier up.
+
+Fable version rule (5.2 by default, 5.1 only when 5.2 isn't served or a tested
+prompt was validated on 5.1): [generation-settings.md](generation-settings.md).
+
+### Manifest fields for this
+
+| Field | Rule |
+|---|---|
+| `agent.max_output` | Output cap per call, e.g. `"800 tokens"` or `"JSON only, 300 words"`. |
+| `agent.escalate_to` | Stronger model for items that fail the check, come back Unknown, or are low confidence. Must be a valid model. |
+| `agent.batch` | Items per agent when one brief covers many items, e.g. `10`. |
+| `orchestration.check_policy` | `"all"`, or `"risk"` = every high-risk claim plus a sample of the rest. |
 
 ## Checks before surfacing
 
 - `chain-lint.py manifest.json` checks the wiring and the orchestration block:
   model and effort values, caps, scope and context on every agent step, the
-  verifier exists and checks other steps' output, parallel steps independent.
+  verifier exists and checks other steps' output, parallel steps independent,
+  output caps and escalation targets, and too many agents for the job.
   Fallback: walk those rules by hand.
 - Each brief passes `prompt-lint.py` like any prompt.
 - One line in the reply says why delegation beats one prompt here.

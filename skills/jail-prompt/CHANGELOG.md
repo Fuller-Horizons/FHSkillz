@@ -2,6 +2,11 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.4.0 — 2026-11-12
+- **Quality-per-token architecture** for delegation sets (`references/delegation.md`): fewer batched agents, pointers instead of pasted context, identical brief openings for cache reuse, capped JSON returns, cheap-first cascade that escalates only failed / Unknown / low-confidence items, script checks before model checks, risk-based checking, strong models only for the merge and the final check, effort per step, fetch-once sources.
+- Manifest fields `agent.max_output`, `agent.escalate_to`, `agent.batch`, `orchestration.check_policy`. `chain-lint.py` errors on an invalid or non-stronger escalation target, bad batch or check policy; warns on a missing output cap, a cheap step with no escalation, and more than 8 agents. +6 tests (toolkit 90).
+- Model table gains an "escalate to" column and a security-testing row (Opus 5.5).
+
 ## 2.3.1 — 2026-11-12
 - **Fable support.** Delegation manifests accept `fable` and full model IDs (`claude-opus-5-5`, `claude-fable-5-2`); `chain-lint.py` warns on the bare `fable` alias (resolves to Fable 5.1 in Claude Code docs, Fable 5 on gateways) and asks for a pinned ID. Fable rows added to the model tables.
 - **Fable version rule** (`references/generation-settings.md`): Fable only after Opus 5.5 fails the test set or for the highest-stakes merge/check; default `claude-fable-5-2` (released 2026-11-09); `claude-fable-5-1` only when 5.2 isn't served or a tested prompt was validated on 5.1; Opus 5.5 directly for security-testing steps (Fable blocks and reroutes them).

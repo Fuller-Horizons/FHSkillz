@@ -68,6 +68,22 @@ MODEL_ID = re.compile(r"^claude-(haiku|sonnet|opus|fable)-\d+(-\d+)*(\[1m\])?$")
 # (Claude Code docs, 2026-11-12: `fable` -> Fable 5.1; gateway -> Fable 5),
 # so a delegation set pins the full ID. Update when Anthropic moves the alias.
 PIN_FAMILIES = {"fable": "claude-fable-5-2"}
+TIER = {"haiku": 1, "sonnet": 2, "opus": 3, "fable": 4}
+VALID_CHECK_POLICY = {"all", "risk"}
+MAX_AGENTS_BEFORE_BATCH_WARNING = 8
+
+
+def tier(model):
+    """Capability rank of a model alias or full ID; None for inherit/unknown."""
+    m = str(model or "")
+    for fam, rank in TIER.items():
+        if m == fam or m.startswith(f"claude-{fam}-"):
+            return rank
+    return None
+
+
+def valid_model(model):
+    return model in VALID_MODELS or (isinstance(model, str) and bool(MODEL_ID.match(model)))
 VALID_EFFORT = {"low", "medium", "high"}
 
 
@@ -222,7 +238,7 @@ def lint_orchestration(manifest, steps):
             errors.append(f"step {sid!r}: agent must be a JSON object")
             continue
         model = ag.get("model")
-        if model not in VALID_MODELS and not (isinstance(model, str) and MODEL_ID.match(model)):
+        if not valid_model(model):
             errors.append(f"step {sid!r}: agent.model {model!r} not one of {sorted(VALID_MODELS)} "
                           "or a full model ID like claude-opus-5-5")
         elif model in PIN_FAMILIES:
@@ -237,8 +253,27 @@ def lint_orchestration(manifest, steps):
             errors.append(f"step {sid!r}: agent.context missing (list the exact inputs it receives)")
         elif any(c.lower() in ("conversation", "the conversation", "all", "everything") for c in ctx):
             errors.append(f"step {sid!r}: agent.context must list specific inputs, not the whole conversation")
+        if "max_output" not in ag:
+            warnings.append(f"step {sid!r}: no agent.max_output (cap the return so the lead agent's context stays small)")
+        if "escalate_to" in ag:
+            esc = ag.get("escalate_to")
+            if not valid_model(esc) or esc == "inherit":
+                errors.append(f"step {sid!r}: agent.escalate_to {esc!r} is not a valid model")
+            elif tier(esc) is not None and tier(model) is not None and tier(esc) <= tier(model):
+                errors.append(f"step {sid!r}: agent.escalate_to {esc!r} is not stronger than {model!r}")
+        elif tier(model) == 1:
+            warnings.append(f"step {sid!r}: cheap step has no agent.escalate_to (failed items will stop the run instead of moving up a tier)")
+        if "batch" in ag and (not isinstance(ag["batch"], int) or isinstance(ag["batch"], bool) or ag["batch"] < 1):
+            errors.append(f"step {sid!r}: agent.batch must be a positive whole number")
         if str(ag.get("model") or "").startswith(("haiku", "claude-haiku")) and not VERIFIABLE.search(str(by_id[sid].get("success_test") or "")):
             warnings.append(f"step {sid!r}: haiku step needs a machine-verifiable success_test to catch cheap misses")
+
+    if len(agent_steps) > MAX_AGENTS_BEFORE_BATCH_WARNING:
+        warnings.append(f"{len(agent_steps)} agent steps: each agent re-loads its instructions and tools; "
+                        "batch items into fewer agents unless isolation or speed requires it")
+    cp = orch.get("check_policy")
+    if cp is not None and cp not in VALID_CHECK_POLICY:
+        errors.append(f"orchestration.check_policy {cp!r} not one of {sorted(VALID_CHECK_POLICY)}")
 
     vid = str(orch.get("verifier") or "").strip()
     if not vid:
