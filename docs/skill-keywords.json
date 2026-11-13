@@ -1,0 +1,464 @@
+{
+  "_about": "Search keywords and use cases for every FHSkillz skill. Hand-maintained; scripts/build-catalogs.py merges it into docs/SKILL-INDEX.md and docs/SEARCH-INDEX.json and fails --check if a skill is missing. category: client | support | maintenance (also: webdesign, engineering, writing, other). keywords: words people type when looking for it. use_cases: short plain-English jobs it does.",
+  "skills": {
+    "jail-prompt": {
+      "category": "client",
+      "keywords": [
+        "prompt",
+        "prompt engineering",
+        "write a prompt",
+        "improve prompt",
+        "system prompt",
+        "subagent",
+        "AI tool choice",
+        "ChatGPT",
+        "Gemini",
+        "Grok",
+        "Perplexity",
+        "Codex"
+      ],
+      "use_cases": [
+        "Turn a goal into a tested prompt",
+        "Decide if AI is the right tool",
+        "Write prompts for a team of AI agents",
+        "Write a prompt for ChatGPT, Gemini, Grok or Perplexity"
+      ]
+    },
+    "jail-decide": {
+      "category": "client",
+      "keywords": [
+        "decision",
+        "choose",
+        "options",
+        "compare",
+        "build vs buy",
+        "lease vs buy",
+        "tradeoff",
+        "recommendation",
+        "pros and cons"
+      ],
+      "use_cases": [
+        "Pick between two or more options",
+        "Build vs buy call",
+        "Defend a choice to an owner or board"
+      ]
+    },
+    "jail-rate": {
+      "category": "client",
+      "keywords": [
+        "rate",
+        "score",
+        "grade",
+        "0-10",
+        "evaluate",
+        "rubric",
+        "assessment",
+        "review a product",
+        "benchmark"
+      ],
+      "use_cases": [
+        "Score a product, plan or business 0-10",
+        "Compare a vendor against a rubric",
+        "List fixes ranked by impact"
+      ]
+    },
+    "jail-summarize": {
+      "category": "client",
+      "keywords": [
+        "summary",
+        "executive summary",
+        "brief",
+        "board memo",
+        "owner brief",
+        "bottom line",
+        "TL;DR",
+        "translate technical"
+      ],
+      "use_cases": [
+        "Brief an owner or board",
+        "Turn a technical finding into business terms",
+        "One-page decision memo"
+      ]
+    },
+    "jail-strategy": {
+      "category": "client",
+      "keywords": [
+        "strategy",
+        "SWOT",
+        "TOWS",
+        "PESTLE",
+        "five forces",
+        "Porter",
+        "competitors",
+        "market analysis",
+        "competitive landscape"
+      ],
+      "use_cases": [
+        "SWOT and TOWS for a client",
+        "PESTLE macro scan",
+        "Competitor analysis for a local market"
+      ]
+    },
+    "jail-research": {
+      "category": "client",
+      "keywords": [
+        "research",
+        "sources",
+        "citations",
+        "evidence",
+        "fact check",
+        "verify a claim",
+        "market data",
+        "statistics"
+      ],
+      "use_cases": [
+        "Cited answer with an evidence packet",
+        "Check a claim before you repeat it",
+        "Ground a decision or rating in sources"
+      ]
+    },
+    "jail-prospect": {
+      "category": "client",
+      "keywords": [
+        "prospect",
+        "company research",
+        "due diligence",
+        "business broker",
+        "sell-side",
+        "owner outreach",
+        "vendor vetting",
+        "OSINT",
+        "private company",
+        "acquisition"
+      ],
+      "use_cases": [
+        "Screen a business before calling the owner",
+        "Likelihood-to-sell score",
+        "Vet a vendor or partner",
+        "Competitor snapshot"
+      ]
+    },
+    "jail-cpr": {
+      "category": "client",
+      "keywords": [
+        "CPR",
+        "meeting",
+        "agenda",
+        "meeting notes",
+        "action items",
+        "who owes what",
+        "transcript",
+        "debrief",
+        "commitment"
+      ],
+      "use_cases": [
+        "Build a meeting agenda",
+        "Pull decisions and owners from a transcript",
+        "Quarterly commitment plan"
+      ]
+    },
+    "jail-questionnaire": {
+      "category": "client",
+      "keywords": [
+        "questionnaire",
+        "intake",
+        "discovery",
+        "survey",
+        "client questions",
+        "what to ask",
+        "interview questions"
+      ],
+      "use_cases": [
+        "Client discovery intake",
+        "Questions for an owner or CFO",
+        "Fill gaps behind a stuck decision"
+      ]
+    },
+    "jail-task-contract": {
+      "category": "client",
+      "keywords": [
+        "scope",
+        "requirements",
+        "acceptance criteria",
+        "task contract",
+        "alignment",
+        "definition of done",
+        "scope creep"
+      ],
+      "use_cases": [
+        "Agree scope before a big job",
+        "Write a testable finish line",
+        "Catch scope creep mid-project"
+      ]
+    },
+    "jail-bmc": {
+      "category": "client",
+      "keywords": [
+        "business model canvas",
+        "BMC",
+        "business model",
+        "revenue streams",
+        "value proposition",
+        "customer segments",
+        "startup idea",
+        "venture"
+      ],
+      "use_cases": [
+        "Map how a business makes money",
+        "Pressure-test a new venture",
+        "Find the riskiest assumptions"
+      ]
+    },
+    "jail-verify": {
+      "category": "support",
+      "keywords": [
+        "verify",
+        "check work",
+        "QA",
+        "quality check",
+        "done",
+        "proof",
+        "before sending",
+        "acceptance test"
+      ],
+      "use_cases": [
+        "Check work before it ships",
+        "Prove an agent's 'done' claim",
+        "Pass/fail verdict with evidence"
+      ]
+    },
+    "jail-red-team": {
+      "category": "support",
+      "keywords": [
+        "red team",
+        "devil's advocate",
+        "poke holes",
+        "pre-mortem",
+        "risks",
+        "assumptions",
+        "what am I missing",
+        "stress test"
+      ],
+      "use_cases": [
+        "Find weak spots in a plan",
+        "Pre-mortem before launch",
+        "Challenge a recommendation"
+      ]
+    },
+    "jail-plan": {
+      "category": "support",
+      "keywords": [
+        "plan",
+        "process",
+        "workflow",
+        "SOP",
+        "operations",
+        "roadmap",
+        "who does what",
+        "implementation",
+        "project plan"
+      ],
+      "use_cases": [
+        "Turn a decision into a runnable process",
+        "Map a foggy multi-month goal",
+        "Owner, tool and metric for each step"
+      ]
+    },
+    "jail-council": {
+      "category": "support",
+      "keywords": [
+        "council",
+        "multiple models",
+        "second opinion",
+        "consensus",
+        "high stakes",
+        "accuracy",
+        "cross-check"
+      ],
+      "use_cases": [
+        "Get several AI models to cross-check an answer",
+        "High-stakes contested question"
+      ]
+    },
+    "jail-orchestrate": {
+      "category": "support",
+      "keywords": [
+        "orchestrate",
+        "subagents",
+        "parallel",
+        "multi-agent",
+        "delegate",
+        "fan out",
+        "long project",
+        "resume"
+      ],
+      "use_cases": [
+        "Split a big job across AI helpers",
+        "Track a long build so it can resume"
+      ]
+    },
+    "jail-handoff": {
+      "category": "support",
+      "keywords": [
+        "handoff",
+        "continue later",
+        "session notes",
+        "context",
+        "baton",
+        "pick up where I left off"
+      ],
+      "use_cases": [
+        "Save where you are before a chat ends",
+        "Hand work to another agent or model"
+      ]
+    },
+    "jail-memory": {
+      "category": "support",
+      "keywords": [
+        "memory",
+        "lessons learned",
+        "decision log",
+        "postmortem",
+        "remember",
+        "knowledge base"
+      ],
+      "use_cases": [
+        "Log a project decision with its source",
+        "Run a lessons-learned postmortem"
+      ]
+    },
+    "jail-quarantine": {
+      "category": "support",
+      "keywords": [
+        "data safety",
+        "PII",
+        "secrets",
+        "passwords",
+        "scraped data",
+        "pasted content",
+        "sensitive data",
+        "regulated data",
+        "CUI"
+      ],
+      "use_cases": [
+        "Check pasted or scraped data before using it",
+        "Stop on secrets or personal data"
+      ]
+    },
+    "jail-approval-gate": {
+      "category": "support",
+      "keywords": [
+        "approval",
+        "permission",
+        "risky actions",
+        "send",
+        "delete",
+        "purchase",
+        "human in the loop",
+        "guardrails"
+      ],
+      "use_cases": [
+        "Pause before AI sends, buys or deletes",
+        "Sort planned actions by risk"
+      ]
+    },
+    "jail-lab": {
+      "category": "support",
+      "keywords": [
+        "experiment",
+        "A/B test",
+        "optimize",
+        "iterate",
+        "metric",
+        "landing page",
+        "conversion",
+        "tune"
+      ],
+      "use_cases": [
+        "Improve something measurable with small experiments",
+        "A/B test a page or prompt"
+      ]
+    },
+    "jail-prototype": {
+      "category": "support",
+      "keywords": [
+        "prototype",
+        "mockup",
+        "wireframe",
+        "proof of concept",
+        "try it first",
+        "design question",
+        "web page mockup"
+      ],
+      "use_cases": [
+        "Quick throwaway mock-up to answer a design question",
+        "Test a page layout before building"
+      ]
+    },
+    "jail-diagnose": {
+      "category": "support",
+      "keywords": [
+        "debug",
+        "bug",
+        "broken",
+        "troubleshoot",
+        "root cause",
+        "flaky",
+        "slow",
+        "error",
+        "not working"
+      ],
+      "use_cases": [
+        "Find why something keeps breaking",
+        "Prove a fix with a regression check"
+      ]
+    },
+    "jail-py-toolkit": {
+      "category": "maintenance",
+      "keywords": [
+        "python",
+        "scripts",
+        "lint",
+        "secret scan",
+        "validation",
+        "citation check",
+        "machine check",
+        "CI"
+      ],
+      "use_cases": [
+        "Run code checks for secrets, prompts and citations",
+        "Validate a skill folder"
+      ]
+    },
+    "jail-rate-skill": {
+      "category": "maintenance",
+      "keywords": [
+        "rate skill",
+        "skill review",
+        "skill quality",
+        "SKILL.md",
+        "plugin quality",
+        "compatibility"
+      ],
+      "use_cases": [
+        "Grade an AI skill's build quality",
+        "Check which tools a skill works in"
+      ]
+    },
+    "jail-skill-miner": {
+      "category": "maintenance",
+      "keywords": [
+        "new skill",
+        "skill ideas",
+        "mine repo",
+        "repeated work",
+        "automation candidates",
+        "skill gaps"
+      ],
+      "use_cases": [
+        "Spot repeated work that should become a skill",
+        "Dedupe skill ideas against the suite"
+      ]
+    }
+  }
+}

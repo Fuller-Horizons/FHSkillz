@@ -21,15 +21,15 @@ def render(d):
          "open the source only when you'll use it. Scores 0.0-10.0 (U usability, N need, E efficiency, "
          "S speed, A accuracy, Sf safety). Platforms: ✓ works, ? partial or unverified, ✕ doesn't.", "",
          "## Items", "",
-         "| Skill | Repo | Date | Category | Used when | U | N | E | S | A | Sf | Avg | Tested | " + " | ".join(P) + " | Type | Verdict | License |",
-         "|" + "---|" * (13 + len(P) + 3)]
+         "| Skill | Repo | Date | Category | Used when | Keywords | U | N | E | S | A | Sf | Avg | Tested | " + " | ".join(P) + " | Type | Verdict | License |",
+         "|" + "---|" * (14 + len(P) + 3)]
     for i in d["items"]:
         sc = i.get("scores", {})
         vals = [sc.get(k) for k in M]
         avg = round(sum(v for v in vals if v is not None) / max(1, sum(v is not None for v in vals)), 1) if any(v is not None for v in vals) else ""
         cp = i.get("compat", {})
         L.append(f"| {i['name']} ({i.get('version','')}) | [{i['repo']}](https://github.com/{i['repo']}/tree/main/{i.get('path','')}) | {i.get('date','')} | "
-                 f"{i.get('category','')} | {i.get('used_when','')} | " + " | ".join("" if v is None else f"{v:.1f}" for v in vals) +
+                 f"{i.get('category','')} | {i.get('used_when','')} | {', '.join(i.get('keywords', []))} | " + " | ".join("" if v is None else f"{v:.1f}" for v in vals) +
                  f" | {avg} | {i.get('tested','read')} | " + " | ".join(ICON.get(cp.get(p, 'q'), '?') for p in P) +
                  f" | {i.get('type','')} | {i.get('verdict','')} | {i.get('license','')} |")
     L += ["", "## Reviews", "", "| Repo | License | Commit | Reviewed | Outcome |", "|---|---|---|---|---|"]
