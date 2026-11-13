@@ -16,3 +16,4 @@ json.dump(mp, open(mp_path, "w"), indent=2)
 open(mp_path, "a").write("\n")
 print(f"Synced {len(arr)} skills into marketplace.json")
 PY
+"$ROOT/scripts/build-catalogs.py"

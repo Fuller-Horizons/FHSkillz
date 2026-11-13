@@ -144,6 +144,8 @@ Full run: [`skills/jail-py-toolkit/README.md`](skills/jail-py-toolkit/README.md)
 
 ## Install
 
+**Stay current everywhere** (claude.ai, Claude app, Claude Code, Codex, OpenCode, ChatGPT): see [docs/AUTO-UPDATE.md](docs/AUTO-UPDATE.md).
+
 **Claude Code or Cowork (loads every skill):**
 
 ```

@@ -1,0 +1,41 @@
+# Publish a GitHub release for every tested plugin version that lands on main.
+# Each release carries one upload-ready zip per skill (for ChatGPT Skills and
+# claude.ai uploads) plus the OpenCode catalog. Claude Code, the Claude app,
+# Codex and OpenCode pull from main directly; this release is for upload-only surfaces.
+name: release
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Read plugin version
+        id: v
+        run: echo "version=$(python3 -c "import json;print(json.load(open('.claude-plugin/marketplace.json'))['plugins'][0]['version'])")" >> "$GITHUB_OUTPUT"
+      - name: Skip if this version is already released
+        id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "v${{ steps.v.outputs.version }}" >/dev/null 2>&1; then echo "skip=true" >> "$GITHUB_OUTPUT"; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Validate (frontmatter, catalogs, toolkit tests)
+        if: steps.exists.outputs.skip == 'false'
+        run: python3 scripts/validate-skills.py
+      - name: Build per-skill zips
+        if: steps.exists.outputs.skip == 'false'
+        run: bash scripts/build-zips.sh
+      - name: Create release
+        if: steps.exists.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v${{ steps.v.outputs.version }}" dist/*.zip skills/index.json \
+            --title "FHSkillz ${{ steps.v.outputs.version }}" \
+            --notes "Tested release from main. Upload-ready skill zips for ChatGPT Skills and claude.ai; see docs/AUTO-UPDATE.md."

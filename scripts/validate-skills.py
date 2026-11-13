@@ -223,6 +223,14 @@ def main():
         if errs:
             all_errors[target] = errs
 
+    if os.path.isdir(target) and os.path.exists(os.path.join(target, "scripts", "build-catalogs.py")):
+        import subprocess
+        r = subprocess.run([sys.executable, os.path.join(target, "scripts", "build-catalogs.py"), "--check"],
+                           capture_output=True, text=True)
+        print(r.stdout.strip())
+        if r.returncode:
+            all_errors["[install catalogs]"] = [r.stdout.strip()]
+
     if os.path.isdir(target):
         toolkit_errors = run_toolkit_checks(target)
         if toolkit_errors:
