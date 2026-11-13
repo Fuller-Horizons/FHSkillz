@@ -16,6 +16,7 @@ The skills sort into four groups below. Every skill name links to its own folder
 |---|---|---|
 | [`jail-prompt`](skills/jail-prompt/) | You have a goal but no real prompt written for it yet | A go/stop verdict, then a copyable prompt with a built-in pass/fail test |
 | [`jail-task-contract`](skills/jail-task-contract/) | A request is vague, risky, or has many threads, and you want scope agreed before work starts | A 14-field contract naming the goal, the risks, and a testable finish line |
+| [`jail-questionnaire`](skills/jail-questionnaire/) | You need answers only someone else has: a client intake before an engagement, or facts behind a stuck decision | A short, plain-English questionnaire, most important questions first, ready to send |
 | [`jail-research`](skills/jail-research/) | You need a real, sourced answer before a decision, not just an opinion | A short cited answer plus an evidence packet listing every source and date |
 | [`jail-verify`](skills/jail-verify/) | Someone says a task is done and you want proof, not their word for it | One verdict — pass, fail, or pass-with-flags — backed by a count of real checks |
 | [`jail-decide`](skills/jail-decide/) | You have to pick between options and need to defend the choice | A decision package with priced options, one pick, and the facts that would flip it |

@@ -1,0 +1,67 @@
+{
+  "disagreements": [
+    {
+      "assertion_indexes": [
+        0,
+        5
+      ],
+      "case": "jail-questionnaire-0290-1",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "sonnet",
+      "version": "old"
+    },
+    {
+      "assertion_indexes": [
+        1
+      ],
+      "case": "jail-questionnaire-0290-1",
+      "case_pass_by_grader": [
+        false,
+        true
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "B",
+      "model": "sonnet",
+      "version": "new"
+    }
+  ],
+  "graded_outputs": 2,
+  "table": {
+    "jail-questionnaire": {
+      "new": {
+        "sonnet": {
+          "assertion_pass_rate": 0.8571,
+          "case_pass_rate": 0.0,
+          "cases": 1
+        }
+      },
+      "old": {
+        "sonnet": {
+          "assertion_pass_rate": 0.1429,
+          "case_pass_rate": 0.0,
+          "cases": 1
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-questionnaire": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.0,
+      "old_case_pass_rate": 0.0,
+      "verdict": "REVERT"
+    }
+  }
+}

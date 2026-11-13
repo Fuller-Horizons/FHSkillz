@@ -14,6 +14,7 @@ bounded loop or a human checkpoint. Handoffs use the JAIL-HANDOFF block
 | Skill | Consumes | Produces | May invoke | Invoked by | Data sensitivity | Failure behavior |
 |---|---|---|---|---|---|---|
 | jail-task-contract | raw request | task contract | jail-prompt (prompt deliverables) | everything | low | blocking ambiguity → stop + ask |
+| jail-questionnaire | facts or decisions only another person holds | questionnaire + coverage map; returned answers as User-provided | jail-quarantine (regulated answers) | jail-task-contract, jail-decide, jail-prospect, jail-bmc | low | recipient or needs unknown → ask about the send; sending needs approval |
 | jail-research | contract / question | evidence packet | jail-orchestrate (parallel streams), jail-quarantine (inbound data) | jail-decide, frameworks, jail-rate | medium (external fetches) | unanswerable → Unknowns in packet |
 | jail-verify | any deliverable + its contract | verdict + ranked fixes | — (terminal check; independence required) | everything | low | missing contract → verify vs request verbatim, flagged |
 | jail-decide | evidence packet / analysis | decision package | jail-research (gaps), jail-red-team (contested) | frameworks, jail-plan | low | thin evidence → assumption-labeled or route back |

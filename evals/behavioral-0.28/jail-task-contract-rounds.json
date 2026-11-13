@@ -1,0 +1,29 @@
+{
+ "suite": "0.29 task-contract rounds",
+ "cases": [
+  {
+   "id": "jail-task-contract-0290-1",
+   "skill": "jail-task-contract",
+   "scenario": "engagement scoping -> frontier MC questions",
+   "prompt": "Scope a new engagement: a landscaping company owner wants help 'getting more organized' before maybe selling in two years. Make sure we're aligned before I quote it.",
+   "assertions": [
+    "[O] asks clarifying questions in rounds (not one long list of more than 5)",
+    "[O] questions are multiple choice with a recommended option",
+    "[O] offers a way to add more context in the user's own words",
+    "[O] does not define 'getting more organized' silently: it is asked about or recorded as an assumption",
+    "[O] questions in the same round do not depend on each other's answers"
+   ]
+  },
+  {
+   "id": "jail-task-contract-0290-2",
+   "skill": "jail-task-contract",
+   "scenario": "new context after two rounds -> another round allowed",
+   "prompt": "We already did two rounds of scoping questions on the landscaping engagement (owner wants to sell in two years; scope is ops cleanup plus financial records). New context: the owner's son runs field crews and may want to buy the business instead of an outside sale. Update the scope.",
+   "assertions": [
+    "[O] updates the scope or contract to cover the possible family/insider buyer",
+    "[O] does not refuse further questions because two rounds already happened (asks a short new round or states assumptions)",
+    "[O] keeps the earlier scope (ops cleanup, financial records, two-year horizon)"
+   ]
+  }
+ ]
+}

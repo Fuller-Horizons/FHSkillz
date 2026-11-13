@@ -12,7 +12,7 @@
       "name": "fh-skillz",
       "source": "./",
       "description": "Every Fuller Horizons skill. Installs all skills in one command.",
-      "version": "0.28.1",
+      "version": "0.29.0",
       "strict": false,
       "skills": [
         "./skills/jail-approval-gate",
@@ -31,6 +31,7 @@
         "./skills/jail-prototype",
         "./skills/jail-py-toolkit",
         "./skills/jail-quarantine",
+        "./skills/jail-questionnaire",
         "./skills/jail-rate",
         "./skills/jail-rate-skill",
         "./skills/jail-red-team",

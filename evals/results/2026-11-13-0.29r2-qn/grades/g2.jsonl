@@ -1,0 +1,2 @@
+{"case": "jail-questionnaire-0290-1", "model": "sonnet", "label": "A", "grader": "g2", "assertion_results": [false, false, false, true, false, true, false], "notes": "Output only describes a file, no questionnaire text; 20-item check over 15 with no split; one-thing and plain-English unverifiable; does not end on anything-else."}
+{"case": "jail-questionnaire-0290-1", "model": "sonnet", "label": "B", "grader": "g2", "assertion_results": [true, true, true, true, true, true, true], "notes": ""}

@@ -1,0 +1,30 @@
+{
+ "suite": "0.29 grilling",
+ "cases": [
+  {
+   "id": "jail-prompt-0290-Q4",
+   "skill": "jail-prompt",
+   "scenario": "dependent questions -> frontier only",
+   "prompt": "I want a reusable prompt that writes a weekly update. It might be for my clients or might be for my own team, I haven't decided. Help me build it.",
+   "assertions": [
+    "[O] asks about the audience (clients vs team) or states an audience assumption",
+    "[O] does not ask in the same round any question whose answer depends on the still-open audience choice (e.g. client-specific tone or team-specific metrics)",
+    "[O] each question offers options with a recommended one, worded so a plain yes accepts the recommendation",
+    "[O] includes an option to add more context",
+    "[O] delivers a first-draft prompt in the same reply"
+   ]
+  },
+  {
+   "id": "jail-prompt-0290-Q5",
+   "skill": "jail-prompt",
+   "scenario": "facts given -> not asked",
+   "prompt": "Write a reusable prompt that turns my discovery-call notes into a one-page summary for HVAC company owners. They read on their phones, want plain English, and I always end with one recommended next step. Notes are usually 1-2 pages of bullets.",
+   "assertions": [
+    "[O] does not ask who the audience is, what reading level to use, how long the notes are, or how the summary should end (all given)",
+    "[O] the prompt includes the given facts: HVAC owners, phone reading, plain English, one recommended next step",
+    "[O] delivers the prompt as a copyable block",
+    "[O] includes a TEST RESULTS or UNTESTED line"
+   ]
+  }
+ ]
+}

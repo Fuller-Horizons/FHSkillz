@@ -1,0 +1,124 @@
+{
+  "disagreements": [
+    {
+      "assertion_indexes": [
+        4
+      ],
+      "case": "jail-task-contract-0290-1",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "sonnet",
+      "version": "old"
+    },
+    {
+      "assertion_indexes": [
+        0,
+        2
+      ],
+      "case": "jail-task-contract-0290-2",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "sonnet",
+      "version": "old"
+    },
+    {
+      "assertion_indexes": [
+        6
+      ],
+      "case": "jail-questionnaire-0290-1",
+      "case_pass_by_grader": [
+        false,
+        false
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "B",
+      "model": "sonnet",
+      "version": "old"
+    },
+    {
+      "assertion_indexes": [
+        3
+      ],
+      "case": "jail-questionnaire-0290-2",
+      "case_pass_by_grader": [
+        false,
+        true
+      ],
+      "graders": [
+        "g1",
+        "g2"
+      ],
+      "label": "A",
+      "model": "sonnet",
+      "version": "old"
+    }
+  ],
+  "graded_outputs": 8,
+  "table": {
+    "jail-questionnaire": {
+      "new": {
+        "sonnet": {
+          "assertion_pass_rate": 0.9167,
+          "case_pass_rate": 0.5,
+          "cases": 2
+        }
+      },
+      "old": {
+        "sonnet": {
+          "assertion_pass_rate": 0.5833,
+          "case_pass_rate": 0.0,
+          "cases": 2
+        }
+      }
+    },
+    "jail-task-contract": {
+      "new": {
+        "sonnet": {
+          "assertion_pass_rate": 1.0,
+          "case_pass_rate": 1.0,
+          "cases": 2
+        }
+      },
+      "old": {
+        "sonnet": {
+          "assertion_pass_rate": 0.375,
+          "case_pass_rate": 0.0,
+          "cases": 2
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-questionnaire": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.5,
+      "old_case_pass_rate": 0.0,
+      "verdict": "KEEP"
+    },
+    "jail-task-contract": {
+      "assertion_regressions": {},
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 1.0,
+      "old_case_pass_rate": 0.0,
+      "verdict": "KEEP"
+    }
+  }
+}

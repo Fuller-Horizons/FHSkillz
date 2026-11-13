@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] produces a questionnaire document (not just a list of topics)",
+        "[O] has at most 15 questions in the required part (or clearly splits required vs optional)",
+        "[O] each question asks one thing (no compound questions joined by 'and' asking for two different facts)",
+        "[O] covers all three needs: goals, where money leaks, readiness for change",
+        "[O] uses plain English suitable for a business owner",
+        "[O] asks for no passwords, account numbers or ID numbers",
+        "[O] ends with an open 'anything else' question"
+      ],
+      "id": "jail-questionnaire-0290-1",
+      "prompt": "Make me a discovery intake questionnaire I can send to a new client before our first diagnostic meeting. The client owns a 20-person HVAC company on Long Island. I need to understand their goals, where money leaks, and how ready they are for change. They'll fill it in on their own.",
+      "skill": "jail-questionnaire"
+    }
+  ]
+}

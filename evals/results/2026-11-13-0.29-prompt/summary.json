@@ -1,0 +1,38 @@
+{
+  "disagreements": [],
+  "graded_outputs": 14,
+  "table": {
+    "jail-prompt": {
+      "new": {
+        "claude-opus-5-5": {
+          "assertion_pass_rate": 0.9375,
+          "case_pass_rate": 0.7143,
+          "cases": 7
+        }
+      },
+      "old": {
+        "claude-opus-5-5": {
+          "assertion_pass_rate": 0.9375,
+          "case_pass_rate": 0.8571,
+          "cases": 7
+        }
+      }
+    }
+  },
+  "verdicts": {
+    "jail-prompt": {
+      "assertion_regressions": {
+        "0": [
+          "jail-prompt-0290-Q5"
+        ],
+        "1": [
+          "jail-prompt-0280-C1-supportive"
+        ]
+      },
+      "blocking_assertion_indexes": [],
+      "new_case_pass_rate": 0.7143,
+      "old_case_pass_rate": 0.8571,
+      "verdict": "REVERT"
+    }
+  }
+}
