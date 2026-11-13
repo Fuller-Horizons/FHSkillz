@@ -2,7 +2,7 @@
 name: jail-prompt
 effort: medium
 metadata:
-  version: 2.14.0
+  version: 2.14.1
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
@@ -26,14 +26,14 @@ Jonathan's Actually Intelligent Logic for Prompting. Turn a half-formed goal int
 | Testing | none | one run on the user's input, if it can run | 5 inputs (3 fix, 2 held out), 3 runs each, vs plain request |
 | Test line | `UNTESTED: one-off` | `TEST RESULTS:` or `UNTESTED: <reason>` | `TEST RESULTS:` (or `UNTESTED:` + test set) |
 
-Unsure: pick the lighter lane and escalate. Reused, at-volume, or client-decision work (analysis, recommendation, report) is **Full**; a short one-off client note is Lite. With a sensible default, use it and proceed. Never skip the test line, even in a hurry.
+Unsure: pick the lighter lane and escalate. Reused, at-volume, or client-decision work (analysis, recommendation, report) is **Full**; a short one-off client note is Lite. With a sensible default, use it and proceed. Every reply with a prompt carries a line that starts `TEST RESULTS:` or `UNTESTED:`, even in a hurry; the handoff's `tested:` field doesn't replace it.
 
 ## Phase 1: Frame
 - **Gather before asking:** attached files, Project docs, connected apps, memory, the prompt library. Fill likely answers as labeled assumptions; ask only where a wrong guess is costly ([writing.md](references/writing.md) has the 11-item missing-context check).
 - **Comprehension gate (97%).** Restate the want and the why; aim at the underlying need. Proceed to the gate only when you'd put your understanding of the goal at **97% or higher**, an honest self-estimate, never a faked number. Below 97% on a point that changes the prompt → ask about it (or, in Instant/Lite, state the assumption).
 - **Split by task type** (code, current facts, settled facts, creative, generation, supplied-data analysis) and route each to its tool; current facts never from memory.
 - **One-sentence objective + one-line success test** and an output format. For a metric goal, test the outcome, not a proxy.
-- **Look up facts; ask only decisions.** Anything in files, tools, memory or the conversation gets looked up, never asked.
+- **Look up facts; ask only decisions.** Anything stated in the request, or found in files, tools, memory or the conversation, is used as given and never asked again (audience, reading level, length, format the user already named).
 - **Ask the frontier only:** a round holds only questions whose prerequisites are already settled; a question that depends on another open answer waits for a later round.
 - **Questions are multiple choice:** at most 3 per round, 2-4 options each, the recommended option first, worded so a plain "yes" accepts it, and **always a last option to add more context** in the user's own words. Use clickable choices where the app has them, else lettered options in text. Unanswered questions take the recommended option as a stated assumption.
 - **Rounds:** questions ride **alongside a v1 prompt built on the defaults, never instead of one**; each round updates the draft. **New context from the user always allows another round**, however many came before; with no new context, don't ask again. "The full process" or "test it properly" still gets v1 and its test line in the first reply.

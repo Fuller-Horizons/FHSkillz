@@ -2,6 +2,9 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## 2.14.1 — 2026-11-13
+- From the 0.29 blind test (2.14.0 won the frontier case but lost two others): facts stated in the request are never asked again; every reply with a prompt carries a TEST RESULTS: or UNTESTED: line (the handoff field doesn't replace it).
+
 ## 2.14.0 — 2026-11-13
 - Question rounds ask only the frontier (questions whose prerequisites are settled), each worded so "yes" accepts the recommended option; facts get looked up, never asked. Writing guide: positive phrasing over bans, co-location, disclose by branch, prune sprawl. Ideas from Matt Pocock's grilling and writing-for-agents skills (github.com/mattpocock/skills, MIT).
 

@@ -1,0 +1,52 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] asks clarifying questions in rounds (not one long list of more than 5)",
+        "[O] questions are multiple choice with a recommended option",
+        "[O] offers a way to add more context in the user's own words",
+        "[O] does not define 'getting more organized' silently: it is asked about or recorded as an assumption",
+        "[O] questions in the same round do not depend on each other's answers"
+      ],
+      "id": "jail-task-contract-0290-1",
+      "prompt": "Scope a new engagement: a landscaping company owner wants help 'getting more organized' before maybe selling in two years. Make sure we're aligned before I quote it.",
+      "skill": "jail-task-contract"
+    },
+    {
+      "assertions": [
+        "[O] updates the scope or contract to cover the possible family/insider buyer",
+        "[O] does not refuse further questions because two rounds already happened (asks a short new round or states assumptions)",
+        "[O] keeps the earlier scope (ops cleanup, financial records, two-year horizon)"
+      ],
+      "id": "jail-task-contract-0290-2",
+      "prompt": "We already did two rounds of scoping questions on the landscaping engagement (owner wants to sell in two years; scope is ops cleanup plus financial records). New context: the owner's son runs field crews and may want to buy the business instead of an outside sale. Update the scope.",
+      "skill": "jail-task-contract"
+    },
+    {
+      "assertions": [
+        "[O] produces a questionnaire document (not just a list of topics)",
+        "[O] has at most 15 questions in the required part (or clearly splits required vs optional)",
+        "[O] each question asks one thing (no compound questions joined by 'and' asking for two different facts)",
+        "[O] covers all three needs: goals, where money leaks, readiness for change",
+        "[O] uses plain English suitable for a business owner",
+        "[O] asks for no passwords, account numbers or ID numbers",
+        "[O] ends with an open 'anything else' question"
+      ],
+      "id": "jail-questionnaire-0290-1",
+      "prompt": "Make me a discovery intake questionnaire I can send to a new client before our first diagnostic meeting. The client owns a 20-person HVAC company on Long Island. I need to understand their goals, where money leaks, and how ready they are for change. They'll fill it in on their own.",
+      "skill": "jail-questionnaire"
+    },
+    {
+      "assertions": [
+        "[O] produces a questionnaire addressed to the owner",
+        "[O] does not ask her how many employees or locations there are as open questions (they may appear only as items to confirm)",
+        "[O] questions target what's needed for a listing decision (e.g. revenue, profit/SDE, add-backs, lease, reason for selling)",
+        "[O] orders questions with the most important first or says it does",
+        "[O] asks for no passwords, account numbers or ID numbers"
+      ],
+      "id": "jail-questionnaire-0290-2",
+      "prompt": "I'm deciding whether to take on listing a bakery for sale at $2.1M. The owner, Maria, has the numbers I don't. I already know they have 14 employees and two locations. What should I send her to fill in before I decide?",
+      "skill": "jail-questionnaire"
+    }
+  ]
+}

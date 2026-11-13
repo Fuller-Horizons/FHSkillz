@@ -1,0 +1,85 @@
+{
+  "cases": [
+    {
+      "assertions": [
+        "[O] asks about the audience (clients vs team) or states an audience assumption",
+        "[O] does not ask in the same round any question whose answer depends on the still-open audience choice (e.g. client-specific tone or team-specific metrics)",
+        "[O] each question offers options with a recommended one, worded so a plain yes accepts the recommendation",
+        "[O] includes an option to add more context",
+        "[O] delivers a first-draft prompt in the same reply"
+      ],
+      "id": "jail-prompt-0290-Q4",
+      "prompt": "I want a reusable prompt that writes a weekly update. It might be for my clients or might be for my own team, I haven't decided. Help me build it.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] does not ask who the audience is, what reading level to use, how long the notes are, or how the summary should end (all given)",
+        "[O] the prompt includes the given facts: HVAC owners, phone reading, plain English, one recommended next step",
+        "[O] delivers the prompt as a copyable block",
+        "[O] includes a TEST RESULTS or UNTESTED line"
+      ],
+      "id": "jail-prompt-0290-Q5",
+      "prompt": "Write a reusable prompt that turns my discovery-call notes into a one-page summary for HVAC company owners. They read on their phones, want plain English, and I always end with one recommended next step. Notes are usually 1-2 pages of bullets.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] asks at most 3 clarifying questions",
+        "[O] each question is multiple choice with 2-4 listed options",
+        "[O] each question marks a recommended option or lists it first as the default",
+        "[O] offers an option or clear invitation to add more context in the user's own words",
+        "[O] delivers a usable first-draft prompt in the same reply (not questions only)",
+        "[O] the reply ends with a JAIL-HANDOFF block"
+      ],
+      "id": "jail-prompt-0281-Q1",
+      "prompt": "Write me a prompt I can reuse every month to turn my consulting clients' numbers into a monthly report for them.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] delivers an updated prompt that adds a rule keeping customer/account names or identifiers out of the report",
+        "[O] does not refuse or skip further questions because of how many rounds already happened (either asks a short new round about the bank context or states its assumptions)",
+        "[O] any questions asked are multiple choice with an option to add more context",
+        "[O] keeps the earlier answers (owners, one page, plain English) in the updated prompt"
+      ],
+      "id": "jail-prompt-0281-Q2",
+      "prompt": "Continuing from before: you already asked me two rounds of questions about the monthly client report prompt and I answered them (owners, one page, plain English). New context: two of these clients are banks, so anything about customer accounts is regulated and must never appear by name in the report. Update the prompt.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] asks no clarifying questions (or only optional ones after the prompt)",
+        "[O] gives the prompt as a copyable block",
+        "[O] includes a TEST RESULTS or UNTESTED line"
+      ],
+      "id": "jail-prompt-0281-Q3",
+      "prompt": "Give me a quick prompt to turn my bullet notes from a client call into a 3-sentence follow-up email. Just for today.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] does not build a multi-agent orchestration for this task",
+        "[O] says why subagents are not worth it here (one prompt or one agent is enough)",
+        "[O] provides a single usable prompt or the email itself"
+      ],
+      "id": "jail-prompt-0272-D3",
+      "prompt": "Use subagents to write a 150-word thank-you email to a client who just signed a 12-month consulting retainer. Give me the prompts.",
+      "skill": "jail-prompt"
+    },
+    {
+      "assertions": [
+        "[O] outputs the engineered prompt as a copyable block (fenced or clearly delimited)",
+        "[O] includes a line starting 'TEST RESULTS:' or 'UNTESTED:' (with a reason or test set)",
+        "[O] the prompt's success test includes at least one check a machine could run (a count, length limit, parse, or match)",
+        "[O] the prompt includes task-specific quality criteria beyond format (e.g. covers policies a new hire must act on, no invented policies)",
+        "[O] the prompt does not ask the model to write out its reasoning or think step by step in tags",
+        "[O] the prompt names a model (or tier) and an effort level",
+        "[O] the reply ends with a JAIL-HANDOFF block"
+      ],
+      "id": "jail-prompt-0280-C1-supportive",
+      "prompt": "Please take me through your full process. I want a prompt I'll reuse every month to have AI turn our 40-page employee handbook into a one-page summary for new hires. Test it properly before I rely on it.",
+      "skill": "jail-prompt"
+    }
+  ]
+}

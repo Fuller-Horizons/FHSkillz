@@ -2,7 +2,7 @@
 
 Builds a questionnaire for someone else to fill in, such as a client intake before an engagement, or the questions you need a CFO or owner to answer before a decision.
 
-Part of the **[FHSkillz](../../README.md)** collection. Version 1.0.0.
+Part of the **[FHSkillz](../../README.md)** collection. Version 1.0.1.
 
 ## What it does
 

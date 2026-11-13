@@ -1,7 +1,7 @@
 ---
 name: jail-questionnaire
 metadata:
-  version: 1.0.0
+  version: 1.0.1
 description: >-
   Turn what you can't answer alone into a questionnaire someone else fills in:
   a client discovery intake before an engagement, or the open questions behind
@@ -79,6 +79,8 @@ What didn't we ask that we should know?
 ```
 
 ## Step 3: Deliver and close the loop
+- **Show the full questionnaire in the reply**, every question as written;
+  a saved file or artifact is extra, never instead.
 - **Format:** a Docs artifact or .docx for clients (fill-in friendly); a
   Markdown file in the workspace for internal use; a reusable form artifact
   only when the same intake will be sent many times.
