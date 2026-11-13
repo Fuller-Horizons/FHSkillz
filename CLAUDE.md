@@ -33,6 +33,11 @@ repo that bundles all of Fuller Horizons' Claude skills as one installable plugi
 - No secrets/keys committed.
 
 ## CONVENTIONS
+- **Learn the suite from `docs/SKILL-INDEX.md`** (generated, one screen). Open a
+  skill's SKILL.md only when changing or running that skill; don't read every skill.
+- **Install channels are generated:** `scripts/build-catalogs.py` (run by
+  `sync-marketplace.sh`, checked by `validate-skills.py`) writes the Codex manifests
+  and the OpenCode catalog `skills/index.json`. Never hand-edit them.
 - **The JAIL Constitution** (`docs/JAIL-CONSTITUTION.md`) binds every skill: 12
   system rules + the JAIL-HANDOFF block kernel skills end with. Routing map:
   `docs/skill-graph.md`. New skills declare their place in the graph.

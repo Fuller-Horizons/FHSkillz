@@ -1,0 +1,267 @@
+{
+  "skills": [
+    {
+      "name": "jail-approval-gate",
+      "version": "1.2.0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-bmc",
+      "version": "1.5.0",
+      "files": [
+        "SKILL.md",
+        "references/worked-canvas.md"
+      ]
+    },
+    {
+      "name": "jail-council",
+      "version": "1.3.0",
+      "files": [
+        "SKILL.md",
+        "references/council-protocol.md",
+        "references/opencode-runbook.md"
+      ]
+    },
+    {
+      "name": "jail-cpr",
+      "version": "1.6.2",
+      "files": [
+        "SKILL.md",
+        "references/example-commit.md",
+        "references/example-design.md",
+        "references/gotchas.md",
+        "references/templates.md"
+      ]
+    },
+    {
+      "name": "jail-decide",
+      "version": "1.4.0",
+      "files": [
+        "SKILL.md",
+        "references/example-package.md",
+        "references/expected-value.md"
+      ]
+    },
+    {
+      "name": "jail-diagnose",
+      "version": "1.1.0",
+      "files": [
+        "SKILL.md",
+        "references/harness-templates.md"
+      ]
+    },
+    {
+      "name": "jail-handoff",
+      "version": "1.3.0",
+      "files": [
+        "SKILL.md",
+        "references/example-baton.md"
+      ]
+    },
+    {
+      "name": "jail-lab",
+      "version": "1.1.0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-memory",
+      "version": "1.5.0",
+      "files": [
+        "SKILL.md",
+        "references/schema.md"
+      ]
+    },
+    {
+      "name": "jail-orchestrate",
+      "version": "1.3.0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-plan",
+      "version": "1.1.0",
+      "files": [
+        "SKILL.md",
+        "references/jail-plan-map.md"
+      ]
+    },
+    {
+      "name": "jail-prompt",
+      "version": "2.13.0",
+      "files": [
+        "SKILL.md",
+        "references/antipatterns.md",
+        "references/chaining.md",
+        "references/delegation.md",
+        "references/evidence.md",
+        "references/example-delegation-competitor-scan.md",
+        "references/example-qb-cost-drivers.md",
+        "references/examples.md",
+        "references/meta-prompt.md",
+        "references/model-guides.md",
+        "references/models.md",
+        "references/security.md",
+        "references/templates.md",
+        "references/testing.md",
+        "references/writing.md"
+      ]
+    },
+    {
+      "name": "jail-prospect",
+      "version": "1.6.0",
+      "files": [
+        "SKILL.md",
+        "assets/brief-template.md",
+        "prompts/prompt-chain.md",
+        "references/example-brief.md",
+        "references/free-sources.md",
+        "references/scoring-rubric.md"
+      ]
+    },
+    {
+      "name": "jail-prototype",
+      "version": "1.3.0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-py-toolkit",
+      "version": "1.8.0",
+      "files": [
+        "SKILL.md",
+        "scripts/_ledger_io.py",
+        "scripts/artifact-lint.py",
+        "scripts/chain-lint.py",
+        "scripts/cite-check.py",
+        "scripts/desc-check.py",
+        "scripts/dry-run.py",
+        "scripts/fh_patterns.py",
+        "scripts/gate-record-lint.py",
+        "scripts/handoff-lint.py",
+        "scripts/lab-compare.py",
+        "scripts/lab-report.py",
+        "scripts/lab-run.py",
+        "scripts/label-lint.py",
+        "scripts/pii-scan.py",
+        "scripts/prompt-lint.py",
+        "scripts/quote-check.py",
+        "scripts/readability.py",
+        "scripts/save-rating.py",
+        "scripts/score-check.py",
+        "scripts/secret-scan.py",
+        "scripts/select-models.py",
+        "scripts/truth-lint.py",
+        "scripts/validate-rating.py",
+        "scripts/validate-skill-structure.py",
+        "scripts/variance-check.py"
+      ]
+    },
+    {
+      "name": "jail-quarantine",
+      "version": "1.2.0",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-questionnaire",
+      "version": "1.0.1",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-rate",
+      "version": "2.3.0",
+      "files": [
+        "SKILL.md",
+        "references/evidence-standards.md",
+        "references/example-scorecard.md",
+        "references/gotchas.md",
+        "references/output-format.md",
+        "references/people-boundaries.md",
+        "references/rubric-library.md"
+      ]
+    },
+    {
+      "name": "jail-rate-skill",
+      "version": "2.3.1",
+      "files": [
+        "SKILL.md",
+        "config.json",
+        "references/examples.md",
+        "references/rubric.md",
+        "references/summarizer-guide.md"
+      ]
+    },
+    {
+      "name": "jail-red-team",
+      "version": "1.4.0",
+      "files": [
+        "SKILL.md",
+        "references/example-full-sweep.md",
+        "references/falsifier-library.md"
+      ]
+    },
+    {
+      "name": "jail-research",
+      "version": "1.5.0",
+      "files": [
+        "SKILL.md",
+        "references/example-packet.md",
+        "references/us-official-sources.md"
+      ]
+    },
+    {
+      "name": "jail-skill-miner",
+      "version": "1.3.2",
+      "files": [
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jail-strategy",
+      "version": "1.3.1",
+      "files": [
+        "SKILL.md",
+        "references/competitive-lane.md",
+        "references/example-competitive.md",
+        "references/example.md",
+        "references/macro-sources.md"
+      ]
+    },
+    {
+      "name": "jail-summarize",
+      "version": "1.4.1",
+      "files": [
+        "SKILL.md",
+        "references/example-brief.md"
+      ]
+    },
+    {
+      "name": "jail-task-contract",
+      "version": "1.6.0",
+      "files": [
+        "SKILL.md",
+        "references/example-engagement-contract.md",
+        "references/presets.md"
+      ]
+    },
+    {
+      "name": "jail-verify",
+      "version": "1.4.0",
+      "files": [
+        "SKILL.md",
+        "references/deliverable-checks.md",
+        "references/example-client-memo.md",
+        "references/worked-verdict.md"
+      ]
+    }
+  ]
+}
