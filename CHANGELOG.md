@@ -2,6 +2,13 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.29.3] — 2026-11-13
+
+No skill content changed.
+- External library items carry the same columns as the FHSkillz directory (category, used when, six scores, tested, platform support for ChatGPT, Codex, Claude, Claude Code, OpenCode); `scripts/build-external-index.py` regenerates `external/INDEX.md` and `validate-skills.py` fails if it is stale.
+- New category: web design (FHSkillz: jail-prototype; external items: `webdesign`).
+- Repo reviews triage each item on Haiku 5.5 (medium) before any full review.
+
 ## [plugin 0.29.2] — 2026-11-13
 
 **External skill library.** No skill content changed.
