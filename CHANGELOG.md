@@ -2,6 +2,14 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.29.0] — 2026-11-13
+
+Ideas from Matt Pocock's skills (github.com/mattpocock/skills, MIT).
+- **New: jail-questionnaire** (26 skills): DISCOVERY and DECISION lanes; interview about the send, gap-only questions, most important first, 15-question async cap, one idea per question, coverage check, answers returned as User-provided.
+- **jail-prompt 2.14.0:** question rounds ask only the frontier, each worded so "yes" accepts the recommended option; facts are looked up, never asked; writing guide adds positive phrasing, co-location, disclose by branch, prune sprawl.
+- **jail-task-contract 1.6.0:** same question rounds (frontier, multiple choice, add-context option, new context earns a round).
+- `scripts/new-skill.sh` and `sync-marketplace.sh` are executable again.
+
 ## [plugin 0.28.1] — 2026-11-12
 
 - **jail-prompt 2.13.0:** multiple-choice questions with a recommended default and an always-present "add more context" option; new context always allows another round; 97% comprehension and 99% readiness gates restored. Untested.

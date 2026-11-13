@@ -1,7 +1,7 @@
 ---
 name: jail-task-contract
 metadata:
-  version: 1.5.0
+  version: 1.6.0
 description: >-
   Turn an ambiguous, multithreaded, or high-stakes request into a 14-field TASK
   CONTRACT with testable acceptance criteria before work starts, and guard scope
@@ -26,18 +26,17 @@ Non-goals · testable Completion criteria · Approval-required actions. Full 14
 fields for client, cross-team, spend or high-stakes work; say which you used.
 
 ## Step 1 — Cross-examine (staged, not an interrogation)
-**Look up facts; ask only decisions.** Anything discoverable from the
-environment (files, tools, prior artifacts) gets looked up, never asked —
-the human's attention is spent exclusively on decisions that are theirs.
-Default lane: **3–5 related questions per round, maximum two rounds.**
-**Grill mode (high-stakes):** when a wrong guess is expensive, switch to an
-exhaustive branch-walk — ONE question at a time, each with your recommended
-answer, walking every branch of the decision tree until shared
-understanding is reached; the two-round cap lifts. Say which mode you're in.
-Force the WHY before optimizing the HOW. Challenge vague or conflicting
-answers directly — "fast and comprehensive" is a conflict to resolve, not
-transcribe. A vague goal ("fix marketing", "make it better") is never defined
-silently: record it as an assumption or a blocking question. Then split
+**Look up facts; ask only decisions.** Anything in files, tools or prior
+artifacts gets looked up, never asked.
+Default lane: **3–5 related questions per round, maximum two rounds**,
+unless the user adds new context, which always earns another round. Ask
+only the **frontier**: questions whose prerequisites are settled. Make each
+one multiple choice, recommended option first and worded so "yes" accepts
+it, with a last option to add context in the user's own words.
+**Grill mode (high-stakes):** walk every branch of the decision tree, round
+by round, until shared understanding; the round cap lifts. Say the mode.
+Force the WHY before the HOW; "fast and comprehensive" is a conflict to
+resolve. A vague goal ("fix marketing") is never defined silently: record it as an assumption or a blocking question. Then split
 remaining ambiguity into two piles:
 - **Resolvable** → make the reasonable assumption, mark it, proceed.
 - **Blocking** → genuinely prevents execution (wrong guess = wasted work or

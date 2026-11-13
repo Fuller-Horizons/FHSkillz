@@ -1,5 +1,8 @@
 # Changelog — jail-task-contract
 
+## 1.6.0 — 2026-11-13
+- Question rounds: frontier only, multiple choice with the recommended option first and worded so "yes" accepts it, a last add-context option; new context always earns another round. From Matt Pocock's grilling skill (MIT).
+
 ## 1.5.0 — 2026-11-12
 - QUICK CONTRACT: 5 fields (objective, deliverables, non-goals, testable completion criteria, approval-required actions) for clear, low-stakes internal tasks; full 14 fields for client, cross-team, spend or high-stakes work. Untested.
 

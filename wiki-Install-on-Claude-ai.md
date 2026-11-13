@@ -31,7 +31,7 @@ Skills won't run without this, so don't skip it.
 /plugin install fh-skillz@fh-skillz
 ```
 
-That's it — all 25 skills come in together: the JAIL reasoning kernel (jail-prompt, jail-task-contract, jail-research, jail-verify, jail-decide, jail-red-team, jail-council, jail-diagnose, jail-prototype, jail-handoff, jail-plan, jail-orchestrate, jail-approval-gate, jail-quarantine, jail-memory, jail-lab, jail-skill-miner), the workflow layer (jail-rate, jail-plan, jail-summarize, jail-rate-skill, jail-prospect), the frameworks pack (jail-strategy, jail-bmc, jail-cpr), and the optional runnable companion (jail-py-toolkit).
+That's it — all 26 skills come in together: the JAIL reasoning kernel (jail-prompt, jail-task-contract, jail-questionnaire, jail-research, jail-verify, jail-decide, jail-red-team, jail-council, jail-diagnose, jail-prototype, jail-handoff, jail-plan, jail-orchestrate, jail-approval-gate, jail-quarantine, jail-memory, jail-lab, jail-skill-miner), the workflow layer (jail-rate, jail-plan, jail-summarize, jail-rate-skill, jail-prospect), the frameworks pack (jail-strategy, jail-bmc, jail-cpr), and the optional runnable companion (jail-py-toolkit).
 
 ---
 

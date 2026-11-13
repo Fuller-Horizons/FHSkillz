@@ -2,7 +2,7 @@
 name: jail-prompt
 effort: medium
 metadata:
-  version: 2.13.0
+  version: 2.14.0
 description: Turn a vague goal into an engineered, verifiable prompt, a multi-agent prompt set (orchestrator + subagent briefs), or a STOP when AI is the wrong tool. Use when the user has an outcome but no real prompt, says "make this prompt better", "write me a prompt", "is AI the right tool", or wants prompts for subagents. Do NOT use to run a finished prompt, proofread, plain chat, do research (jail-research), or run a multi-agent job (jail-orchestrate).
 ---
 
@@ -33,7 +33,9 @@ Unsure: pick the lighter lane and escalate. Reused, at-volume, or client-decisio
 - **Comprehension gate (97%).** Restate the want and the why; aim at the underlying need. Proceed to the gate only when you'd put your understanding of the goal at **97% or higher**, an honest self-estimate, never a faked number. Below 97% on a point that changes the prompt → ask about it (or, in Instant/Lite, state the assumption).
 - **Split by task type** (code, current facts, settled facts, creative, generation, supplied-data analysis) and route each to its tool; current facts never from memory.
 - **One-sentence objective + one-line success test** and an output format. For a metric goal, test the outcome, not a proxy.
-- **Questions are multiple choice:** at most 3 per round, 2-4 options each, the recommended option first, and **always a last option to add more context** in the user's own words. Use clickable choices where the app has them, else lettered options in text. Unanswered questions take the recommended option as a stated assumption.
+- **Look up facts; ask only decisions.** Anything in files, tools, memory or the conversation gets looked up, never asked.
+- **Ask the frontier only:** a round holds only questions whose prerequisites are already settled; a question that depends on another open answer waits for a later round.
+- **Questions are multiple choice:** at most 3 per round, 2-4 options each, the recommended option first, worded so a plain "yes" accepts it, and **always a last option to add more context** in the user's own words. Use clickable choices where the app has them, else lettered options in text. Unanswered questions take the recommended option as a stated assumption.
 - **Rounds:** questions ride **alongside a v1 prompt built on the defaults, never instead of one**; each round updates the draft. **New context from the user always allows another round**, however many came before; with no new context, don't ask again. "The full process" or "test it properly" still gets v1 and its test line in the first reply.
 
 ## Phase 2: Viability gate (STOP on the first decisive failure)
