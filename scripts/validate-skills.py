@@ -211,7 +211,9 @@ def main():
 
     all_errors = {}
     if os.path.isdir(target):
-        for root, _, files in os.walk(target):
+        for root, dirs, files in os.walk(target):
+            # external/ holds third-party skills kept for reference (their own rules, not ours)
+            dirs[:] = [d for d in dirs if not (root == target and d == "external")]
             for file in files:
                 if file.endswith(".md"):
                     filepath = os.path.join(root, file)
