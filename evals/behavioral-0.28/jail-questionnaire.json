@@ -1,0 +1,33 @@
+{
+ "suite": "0.29 jail-questionnaire",
+ "cases": [
+  {
+   "id": "jail-questionnaire-0290-1",
+   "skill": "jail-questionnaire",
+   "scenario": "discovery intake",
+   "prompt": "Make me a discovery intake questionnaire I can send to a new client before our first diagnostic meeting. The client owns a 20-person HVAC company on Long Island. I need to understand their goals, where money leaks, and how ready they are for change. They'll fill it in on their own.",
+   "assertions": [
+    "[O] produces a questionnaire document (not just a list of topics)",
+    "[O] has at most 15 questions in the required part (or clearly splits required vs optional)",
+    "[O] each question asks one thing (no compound questions joined by 'and' asking for two different facts)",
+    "[O] covers all three needs: goals, where money leaks, readiness for change",
+    "[O] uses plain English suitable for a business owner",
+    "[O] asks for no passwords, account numbers or ID numbers",
+    "[O] ends with an open 'anything else' question"
+   ]
+  },
+  {
+   "id": "jail-questionnaire-0290-2",
+   "skill": "jail-questionnaire",
+   "scenario": "decision questionnaire with known fact",
+   "prompt": "I'm deciding whether to take on listing a bakery for sale at $2.1M. The owner, Maria, has the numbers I don't. I already know they have 14 employees and two locations. What should I send her to fill in before I decide?",
+   "assertions": [
+    "[O] produces a questionnaire addressed to the owner",
+    "[O] does not ask her how many employees or locations there are as open questions (they may appear only as items to confirm)",
+    "[O] questions target what's needed for a listing decision (e.g. revenue, profit/SDE, add-backs, lease, reason for selling)",
+    "[O] orders questions with the most important first or says it does",
+    "[O] asks for no passwords, account numbers or ID numbers"
+   ]
+  }
+ ]
+}
