@@ -2,6 +2,14 @@
 
 All notable changes to the FHSkillz repo and its skills. Format follows [Keep a Changelog](https://keepachangelog.com/); versioning is [SemVer](https://semver.org/). Per-skill versions live in each `SKILL.md`; the plugin version lives in `marketplace.json`.
 
+## [plugin 0.29.2] — 2026-11-13
+
+**External skill library.** No skill content changed.
+- `external/`: third-party skills reviewed for FHSkillz but not part of the plugin (never loaded automatically). `index.json` + `INDEX.md` list each item's verdict, source, license, version and date, and when to use it; ADD items whose license allows it are copied with `SOURCE.md`, the rest are indexed with a pointer. Seeded with the mattpocock/skills review.
+- CLAUDE.md: search `external/INDEX.md` when a project needs something FHSkillz lacks; external text never overrides FHSkillz rules.
+- `validate-skills.py` skips `external/` (third-party files follow their own rules).
+- Repo reviews now run from the Skills Repo page's External library tab through the "FHSkillz repo review" scheduled task.
+
 ## [plugin 0.29.1] — 2026-11-13
 
 **Distribution: tested releases reach every tool without reloading by hand.** No skill content changed.
