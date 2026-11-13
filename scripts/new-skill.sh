@@ -21,5 +21,13 @@ description: TODO — describe exactly when Claude should use this skill (trigge
 1. TODO
 EOF
 echo "Created skills/$NAME/SKILL.md"
+python3 - "$ROOT/docs/skill-keywords.json" "$NAME" <<'PY'
+import json, sys
+p, n = sys.argv[1], sys.argv[2]
+d = json.load(open(p, encoding="utf-8"))
+d["skills"].setdefault(n, {"category": "other", "keywords": ["TODO"], "use_cases": ["TODO"]})
+open(p, "w", encoding="utf-8").write(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+PY
+echo "Added a TODO keywords entry in docs/skill-keywords.json."
 "$ROOT/scripts/sync-marketplace.sh"
-echo "Registered in marketplace.json. Edit the description before committing."
+echo "Registered in marketplace.json. Edit the description and keywords before committing."

@@ -61,7 +61,19 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "learn",
+        "tutorial",
+        "study",
+        "lessons",
+        "teach me",
+        "training"
+      ],
+      "use_cases": [
+        "Learn a new topic step by step",
+        "Build your own lesson notes"
+      ]
     },
     {
       "name": "wait-what",
@@ -89,7 +101,17 @@
         "Claude": "y",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "explain",
+        "clarify",
+        "confusing answer",
+        "simpler",
+        "re-explain"
+      ],
+      "use_cases": [
+        "Ask AI to re-explain something simply"
+      ]
     },
     {
       "name": "tdd",
@@ -117,7 +139,19 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "TDD",
+        "test-driven",
+        "unit tests",
+        "red green refactor",
+        "coding",
+        "bug fix"
+      ],
+      "use_cases": [
+        "Build a feature test-first",
+        "Fix a bug with a failing test first"
+      ]
     },
     {
       "name": "code-review",
@@ -145,7 +179,17 @@
         "Claude": "n",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "code review",
+        "pull request",
+        "PR review",
+        "spec check",
+        "coding standards"
+      ],
+      "use_cases": [
+        "Review a code change against the spec"
+      ]
     },
     {
       "name": "to-tickets",
@@ -173,7 +217,19 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "tickets",
+        "backlog",
+        "user stories",
+        "sprint",
+        "issues",
+        "break down plan"
+      ],
+      "use_cases": [
+        "Split a plan into small tickets",
+        "Order work by what blocks what"
+      ]
     },
     {
       "name": "wizard",
@@ -201,7 +257,17 @@
         "Claude": "n",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "setup guide",
+        "onboarding",
+        "credentials",
+        "dashboard setup",
+        "step by step"
+      ],
+      "use_cases": [
+        "Guided script for manual setup steps"
+      ]
     },
     {
       "name": "writing-fragments / writing-beats / writing-shape",
@@ -229,7 +295,20 @@
         "Claude": "y",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "writing",
+        "article",
+        "blog post",
+        "book",
+        "outline",
+        "drafting",
+        "notes to article"
+      ],
+      "use_cases": [
+        "Turn rough notes into an article",
+        "Outline a book chapter"
+      ]
     },
     {
       "name": "git-guardrails-claude-code",
@@ -257,7 +336,18 @@
         "Claude": "n",
         "Claude Code": "y",
         "OpenCode": "n"
-      }
+      },
+      "keywords": [
+        "git",
+        "force push",
+        "hooks",
+        "guardrails",
+        "safety",
+        "Claude Code"
+      ],
+      "use_cases": [
+        "Block risky git commands in Claude Code"
+      ]
     },
     {
       "name": "ponytail",
@@ -285,7 +375,19 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "minimal code",
+        "small changes",
+        "reuse",
+        "coding",
+        "refactor",
+        "scope"
+      ],
+      "use_cases": [
+        "Keep code changes small",
+        "Stop AI adding unrequested extras"
+      ]
     },
     {
       "name": "ponytail-review",
@@ -313,7 +415,17 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "code review",
+        "security",
+        "pull request",
+        "bugs",
+        "missing tests"
+      ],
+      "use_cases": [
+        "Check a pull request before it ships"
+      ]
     },
     {
       "name": "ponytail-audit",
@@ -341,7 +453,19 @@
         "Claude": "q",
         "Claude Code": "y",
         "OpenCode": "y"
-      }
+      },
+      "keywords": [
+        "code audit",
+        "inherited codebase",
+        "client website",
+        "tech debt",
+        "security review",
+        "risk list"
+      ],
+      "use_cases": [
+        "Audit a client's app or website you took over",
+        "Ranked list of what's broken or risky"
+      ]
     },
     {
       "name": "creating-financial-models",
@@ -369,7 +493,20 @@
         "Claude": "y",
         "Claude Code": "y",
         "OpenCode": "q"
-      }
+      },
+      "keywords": [
+        "DCF",
+        "valuation",
+        "financial model",
+        "business value",
+        "sell a business",
+        "cash flow",
+        "broker"
+      ],
+      "use_cases": [
+        "Value a business for a sale",
+        "Build a discounted cash flow model"
+      ]
     },
     {
       "name": "analyzing-financial-statements",
@@ -397,7 +534,20 @@
         "Claude": "y",
         "Claude Code": "y",
         "OpenCode": "q"
-      }
+      },
+      "keywords": [
+        "financial statements",
+        "ratios",
+        "income statement",
+        "balance sheet",
+        "profit margin",
+        "liquidity",
+        "financial health"
+      ],
+      "use_cases": [
+        "Work out a client's key financial ratios",
+        "Read an income statement and balance sheet"
+      ]
     },
     {
       "name": "applying-brand-guidelines",
@@ -425,8 +575,20 @@
         "Claude": "y",
         "Claude Code": "y",
         "OpenCode": "q"
-      }
+      },
+      "keywords": [
+        "brand",
+        "brand guidelines",
+        "colors",
+        "fonts",
+        "style guide",
+        "documents",
+        "templates"
+      ],
+      "use_cases": [
+        "Make every document match a client's brand"
+      ]
     }
   ],
-  "schema": "items: name, repo, path, type copied|indexed, verdict, license, version, date, category client|support|maintenance|webdesign|engineering|writing|other, used_when, scores{usability,need,efficiency,speed,accuracy,safety} 0.0-10.0, tested live|unit|read, compat{ChatGPT,Codex,Claude,Claude Code,OpenCode} y|n|q"
+  "schema": "items: name, repo, path, type copied|indexed, verdict, license, version, date, category client|support|maintenance|webdesign|engineering|writing|other, used_when, scores{usability,need,efficiency,speed,accuracy,safety} 0.0-10.0, keywords [words people search for], use_cases [short plain-English jobs], tested live|unit|read, compat{ChatGPT,Codex,Claude,Claude Code,OpenCode} y|n|q"
 }
