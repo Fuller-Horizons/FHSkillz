@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install validator dependency
+        run: pip install pyyaml
       - name: Read plugin version
         id: v
         run: echo "version=$(python3 -c "import json;print(json.load(open('.claude-plugin/marketplace.json'))['plugins'][0]['version'])")" >> "$GITHUB_OUTPUT"
