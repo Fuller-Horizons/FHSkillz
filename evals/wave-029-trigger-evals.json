@@ -1,0 +1,32 @@
+{
+ "suite": "0.29 triggering \u2014 jail-questionnaire; authored 2026-11-13",
+ "should_trigger": [
+  {
+   "id": "q1",
+   "prompt": "Build me an intake form I can send a new client before our first diagnostic call.",
+   "expect": "jail-questionnaire"
+  },
+  {
+   "id": "q2",
+   "prompt": "I need to know the owner's real numbers before I agree to list his shop. What should I send him to fill in?",
+   "expect": "jail-questionnaire"
+  },
+  {
+   "id": "q3",
+   "prompt": "Write the discovery questions I should send to the CFO so I can scope this engagement.",
+   "expect": "jail-questionnaire"
+  }
+ ],
+ "near_misses": [
+  {
+   "id": "q4",
+   "prompt": "Before you start on this rebrand project, ask me whatever you need so we're aligned on scope.",
+   "expect": "jail-task-contract"
+  },
+  {
+   "id": "q5",
+   "prompt": "Put together the agenda for Tuesday's kickoff meeting with the new client.",
+   "expect": "jail-cpr"
+  }
+ ]
+}
