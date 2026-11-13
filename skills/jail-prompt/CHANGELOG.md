@@ -2,6 +2,13 @@
 
 All notable changes to this skill. Versions track `metadata.version` in SKILL.md.
 
+## Unreleased — pending test (added 2026-11-13)
+- Added five per-platform prompting reference packs (Anthropic, Google, OpenAI,
+  Perplexity, xAI), recovered from local uncommitted work dated 2026-09-14, linked
+  from Phase 3. Each is self-dated and tells the reader to re-verify its "current
+  model/doc" claims before relying on them. Not run through the lane-card testing
+  discipline yet; `metadata.version` stays at 2.13.0 until a blind A/B shows it wins.
+
 ## 2.13.0 — 2026-11-12
 - Questions are multiple choice (at most 3 per round, 2-4 options, recommended first), always with a last option to add more context; clickable where the app supports it, lettered text otherwise.
 - New context from the user always allows another questioning round, regardless of how many came before; no new context, no new round. Each round updates the v1 draft.
