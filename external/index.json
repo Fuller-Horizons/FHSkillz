@@ -2,6 +2,14 @@
   "updated": "2026-11-13",
   "reviews": [
     {
+      "repo": "dietrichgebert/ponytail",
+      "url": "https://github.com/dietrichgebert/ponytail",
+      "commit": "96608e0",
+      "license": "MIT",
+      "reviewed": "2026-11-13",
+      "verdict": "No FHSkillz changes; copied ponytail, ponytail-review and ponytail-audit to the external library (engineering); debt, gain and help not useful"
+    },
+    {
       "repo": "mattpocock/skills",
       "url": "https://github.com/mattpocock/skills",
       "commit": "5863806",
@@ -241,6 +249,90 @@
         "Claude": "n",
         "Claude Code": "y",
         "OpenCode": "n"
+      }
+    },
+    {
+      "name": "ponytail",
+      "repo": "dietrichgebert/ponytail",
+      "path": "skills/ponytail",
+      "type": "copied",
+      "verdict": "EXTERNAL",
+      "license": "MIT",
+      "version": "96608e0",
+      "date": "2026-11-13",
+      "used_when": "Use it while writing or fixing code to keep changes as small as possible. It makes the AI reuse what already exists, skip extras nobody asked for, and say what it left out.",
+      "category": "engineering",
+      "scores": {
+        "usability": 8.0,
+        "need": 5.0,
+        "efficiency": 8.5,
+        "speed": 8.0,
+        "accuracy": 7.5,
+        "safety": 8.0
+      },
+      "tested": "read",
+      "compat": {
+        "ChatGPT": "q",
+        "Codex": "y",
+        "Claude": "q",
+        "Claude Code": "y",
+        "OpenCode": "y"
+      }
+    },
+    {
+      "name": "ponytail-review",
+      "repo": "dietrichgebert/ponytail",
+      "path": "skills/ponytail-review",
+      "type": "copied",
+      "verdict": "EXTERNAL",
+      "license": "MIT",
+      "version": "96608e0",
+      "date": "2026-11-13",
+      "used_when": "Use it to check a code change or pull request before it ships. It finds bugs, security holes, missing tests and extra code, and explains each problem in plain English with a fix.",
+      "category": "engineering",
+      "scores": {
+        "usability": 8.0,
+        "need": 6.0,
+        "efficiency": 7.5,
+        "speed": 7.0,
+        "accuracy": 8.0,
+        "safety": 8.5
+      },
+      "tested": "read",
+      "compat": {
+        "ChatGPT": "q",
+        "Codex": "y",
+        "Claude": "q",
+        "Claude Code": "y",
+        "OpenCode": "y"
+      }
+    },
+    {
+      "name": "ponytail-audit",
+      "repo": "dietrichgebert/ponytail",
+      "path": "skills/ponytail-audit",
+      "type": "copied",
+      "verdict": "EXTERNAL",
+      "license": "MIT",
+      "version": "96608e0",
+      "date": "2026-11-13",
+      "used_when": "Use it when you take over a codebase, like a client's website or app. It reads the whole project and gives a ranked list of what is broken, risky or can be deleted, without changing anything.",
+      "category": "engineering",
+      "scores": {
+        "usability": 8.0,
+        "need": 6.5,
+        "efficiency": 7.0,
+        "speed": 6.0,
+        "accuracy": 8.0,
+        "safety": 8.5
+      },
+      "tested": "read",
+      "compat": {
+        "ChatGPT": "q",
+        "Codex": "y",
+        "Claude": "q",
+        "Claude Code": "y",
+        "OpenCode": "y"
       }
     }
   ],
